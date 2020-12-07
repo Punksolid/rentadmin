@@ -1,0 +1,259 @@
+.navbar{
+    background-color: #F01B21;
+}
+.drop{
+    color: #ffffff;
+}
+#barra{
+    color: #E5E5E5;
+}
+a{
+    color: #000000;
+}
+.treeview-menu{
+    background-color: #E5E5E5;
+}
+.treeview{
+    background-color: #E5E5E5;
+}
+a:hover,
+a:active,
+a:focus{
+    outline: none;
+    text-decoration: none;
+    color: #582c31;
+}
+#navusr{
+    background-color: #F01B21;
+}
+.linea{
+    width: auto;
+}
+.posicion{
+    position: fixed;
+    width: 100%;
+}
+@media only screen and (max-width: 768px){
+    #logo{
+        display: none;
+    }
+    .logo-menu{
+        display: block;
+        text-align: center;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .logo-menu{
+        display: none;
+    }
+    #logo{
+        display: block;
+        margin: auto;
+        padding-top: 15px;
+
+    }
+    .sidebar-mini.sidebar-collapse .main-header .logo > #logo {
+        display: none;
+    }
+}
+#desc{
+    width: 100px !important;
+}
+#cc{
+    margin-top: 5px;
+}
+#seg{
+    margin-top: 20px;
+}
+#agg{
+    height: 38px;
+    margin-bottom: 4px;
+    width: 31px;
+    padding-top: 6px;
+    padding-left: 10px;
+    padding-right: 13px;
+}
+.tipo-propiedad{
+    width: calc(100% - 35px) !important;
+    display: inline-block;
+}
+
+.recibo-input{
+    width: calc(100% - 550px) !important;
+    display: inline-block;
+}
+
+.buscar-btn{
+    width: 31px;
+    height: 38px;
+    display: inline-block;
+    padding-top: 7px;
+    margin-top: -4px;
+}
+.imagen-inicio{
+    position: absolute;
+}
+.fondo-inicio{
+    margin-top: -40px;
+    margin-left: -16px;
+    height: 1000px;
+}
+@media (max-width: 767px) {
+    .iconos-res {
+        margin-left: -326px;
+        margin-top: 110px;
+    }
+    .logo-inicio{
+        margin-left: 125px !important;
+    }
+    .arrendador{
+        margin-left: -15px !important;
+        margin-top: 420px;
+    }
+    .arrendatario{
+        margin-left: -25px !important;
+        margin-top: 620px;
+    }
+    .contrato{
+        margin-top: 420px;
+        margin-left: 185px !important;
+    }
+    .inmuebles{
+        margin-top: 620px;
+        margin-left: 170px !important;
+    }
+    .liquidacion{
+        margin-top: 420px;
+        margin-left: 380px !important;
+    }
+    .recibo{
+        margin-top: 620px;
+        margin-left: 360px !important;
+    }
+
+    .imagen-arrendador{
+        margin-left: -28px !important;
+        margin-top: 20px;
+    }
+    .imagen-arrendatario{
+        margin-left: -32px !important;
+        margin-top: 215px;
+    }
+    .imagen-contrato{
+        margin-top: 218px;
+        margin-left: 156px !important;
+    }
+    .imagen-inmuebles{
+        margin-top: 220px;
+        margin-left: 156px !important;
+    }
+    .imagen-liquidacion{
+        margin-top: 220px;
+        margin-left: 330px !important;
+    }
+    .imagen-recibo{
+        margin-top: 218px;
+        margin-left: 339px !important;
+    }
+
+}
+.imagen-arrendador{
+    margin-left: 297px;
+    margin-top: 50px;
+}
+.imagen-arrendatario{
+    margin-left: 293px;
+    margin-top: 245px;
+}
+.imagen-contrato{
+    margin-top: 47px;
+    margin-left: 481px;
+}
+.imagen-inmuebles{
+    margin-top: 250px;
+    margin-left: 481px;
+}
+.imagen-liquidacion{
+    margin-top: 52px;
+    margin-left: 655px;
+}
+.imagen-recibo{
+    margin-top: 248px;
+    margin-left: 664px;
+}
+.iconos-res{
+    margin-top: 170px;
+}
+.logo-inicio{
+    width: 250px;
+    margin-top: 25px;
+    margin-left: 450px;
+}
+.arrendador{
+    margin-left: 310px;
+    margin-top: 215px;
+}
+.arrendatario{
+    margin-left: 300px;
+    margin-top: 415px;
+}
+.contrato{
+    margin-top: 215px;
+    margin-left: 510px;
+}
+.inmuebles{
+    margin-top: 415px;
+    margin-left: 495px;
+}
+.liquidacion{
+    margin-top: 215px;
+    margin-left: 705px;
+}
+.recibo{
+    margin-top: 415px;
+    margin-left: 685px;
+}
+.url{
+    z-index: 1000;
+}
+.contenedor{
+    position: absolute;
+    margin-left: 537px;
+    margin-top: -318px;
+}
+.segundo-cont{
+    width: 561px;
+    height: 331px;
+}
+
+.mayuscula{
+    text-transform: uppercase !important;
+}
+
+.formulario-tres{
+    width: 32%;
+    display: inline-block;
+    margin-left: 1%;
+    margin-bottom: 15px;
+}
+
+.formulario-cuatro{
+    width: 23.5%;
+    display: inline-block;
+    margin-left: 1%;
+    margin-bottom: 15px;
+}
+
+.formulario-dos{
+    width: 48%;
+    display: inline-block;
+    margin-left: 1%;
+    margin-bottom: 15px;
+}
+
+.formulario-liq{
+    width: 10%;
+    display: inline-block;
+    margin-left: 1%;
+    margin-bottom: 15px;
+}

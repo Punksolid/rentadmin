@@ -1,0 +1,112 @@
+@extends ('layouts.admin')
+@section ('contenido')
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <h3>Nuevo Contrato</h3>
+            @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            {!! Form::open(array('url' => 'contrato', 'method' => 'POST', 'autocomplete' => 'on')) !!}
+            {{Form::token()}}
+            <div class="form-group">
+                <label>Arrendador</label>
+                <input type="text" class="form-control tipo-propiedad" id="arrendadornombre" placeholder="Arrendador..." disabled required>
+                <button type="button" onclick="limpiar()" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador-contrato"><i class="fa fa-search"></i></button>
+                <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="" required>
+            </div>
+
+            <div class="form-group">
+                <label>Inmueble</label>
+                <input type="text" class="form-control tipo-propiedad" id="propiedadnombre" placeholder="Inmueble..." disabled required>
+                <button type="button" class="btn buscar-btn btn-sm btn-primary" onclick="filtrado()" data-toggle="modal" data-target="#modal-propiedad-contrato"><i class="fa fa-search"></i></button>
+                <input type="hidden" id="id_propiedad_contrato" name="id_finca" value="" required>
+            </div>
+            <div class="form-group">
+                <label>Arrendatario</label>
+                <input type="text" class="form-control tipo-propiedad" id="arrendatarionombre" placeholder="Arrendatario..." disabled required>
+                <button type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendatario-contrato"><i class="fa fa-search"></i></button>
+                <input type="hidden" id="id_arrendatario_contrato" name="id_arrendatario" value="" required>
+            </div>
+
+            <div class="form-group">
+                <label for="duracion_contrato">Duracion del Contrato(Años)</label>
+                <input id="duracion_c" min="1" onkeyup="mostrar()" onchange="mostrar()" type="number" name="duracion_contrato" class="form-control" placeholder="Duracion..." required>
+            </div>
+            <div class="form-group">
+                <label for="fecha_inicio">Fechas de Contrato</label>
+                <div class="hola" style="display: flex; height: 37px">
+                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Inicio</label>
+                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Terminacion</label>
+                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Cantidad</label>
+                </div>
+                <div id="fechas_con">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="bonificacion">Bonificacion</label>
+                <input id="moneda" onclick="this.value = null" type="text" name="bonificacion" data-type="currency" class="form-control" placeholder="Bonificacion..." required>
+            </div>
+            <div class="form-group">
+                <label for="deposito">Deposito En Garantia</label>
+                <input id="monedadep" onclick="this.value = null" type="text" name="deposito" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Deposito..." required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Guardar</button>
+                <a class="btn btn-danger" href="./">Cancelar</a>
+            </div>
+
+            {!! Form::close() !!}
+            @include("contrato.modal")
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function limpiar() {
+            document.getElementById('id_propiedad_contrato').value = null;
+            document.getElementById('propiedadnombre').value = null;
+        }
+
+        function filtrado() {
+            var id_arrendador = document.getElementById('id_arrendador_contrato').value;
+            var fincas = document.getElementsByClassName('fincafiltro');
+            if (id_arrendador !== '') {
+                $.each(fincas, function (i, cont) {
+                    var id_finca = document.getElementById(cont.getAttribute('id'));
+                    if (cont.getAttribute('href') === id_arrendador) {
+                        id_finca.style.display = "block";
+                    }else{
+                        id_finca.style.display = "none";
+                    }
+                })
+            }
+        }
+
+        document.getElementById("moneda").onblur =function (){
+            this.value = '$'+parseFloat(this.value.replace(/,/g, ""))
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        }
+        document.getElementById("monedadep").onblur =function (){
+            this.value = '$'+parseFloat(this.value.replace(/,/g, ""))
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        }
+    </script>
+
+
+
+@endsection
