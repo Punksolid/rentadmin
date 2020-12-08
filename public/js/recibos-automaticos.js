@@ -484,7 +484,7 @@ function busquedaRecibos() {
                     '<td class="id_arrenda" style="display: none">'+ recibo.id_arrendador +'</td>'+
                     '<td class="id_propie" style="display: none">'+ recibo.id_finca +'</td>'+
                     '<td class="id_arretario" style="display: none">'+ recibo.id_arrendatario +'</td>'+
-                    '<td class="text-center">'+'<a href="'+ urlreciboimp+"/"+ recibo.id_registro_recibos +'"><button class="btn btn-danger btn-sm">PDF</button></a> '+'<a href="'+ urlrecibo+"/"+ recibo.id_registro_recibos +'"><button type="button" class="btn btn-primary btn-sm"><i class="far fa-eye"></i></button></a>'+'</td>'+
+                    '<td class="text-center">'+'<a href="/"><button class="btn btn-danger btn-sm">PDF<'+ urlreciboimp+"/"+ recibo.id_registro_recibos +'button></a> '+'<a href="/"><button type="button" class="btn btn-primary btn-sm"><i class="far fa-eye"><'+ urlrecibo+"/"+ recibo.id_registro_recibos +'i></button></a>'+'</td>'+
                     '</tr>';
                 $('#tablados tbody').append(htmlTags);
                 var estado = document.getElementById('estatus_pago'+index).innerHTML;
