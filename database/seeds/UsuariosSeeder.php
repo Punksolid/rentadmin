@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,9 +13,8 @@ class UsuariosSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('usuarios')->insert([
-            'nombre' => 'Administrador',
-            'id_tipo_usuario' => '1',
+        User::create([
+            'name' => 'Administrador',
             'email' => 'admin@diazmezayasociados.com',
             'password' => bcrypt('Diaz1234'),
         ]);

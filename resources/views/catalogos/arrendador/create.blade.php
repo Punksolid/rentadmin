@@ -71,7 +71,7 @@
                 <label for="telefono">Telefono &nbsp;&nbsp;<button id="add_field" class="btn-sm btn-success">Añadir</button></label><br>
                 <div id="listas">
                     <div class="formulario-dos" style="display: inline-flex">
-                        <input id="masc-tel" type="text" data-mask="(000) 000 0000" name="telefono1" onkeypress="return justNumbers(event)" placeholder="Telefono..." class="form-control" required>&nbsp;<input id="desc" class="form-control" type="text" name="descripcion1" placeholder="Descripcion..." required>
+                        <input id="masc-tel" type="text" data-mask="(000) 000 0000" name="phone_number[0][telefono]" onkeypress="return justNumbers(event)" placeholder="Telefono..." class="form-control" required>&nbsp;<input id="desc" class="form-control" type="text" name="phone_number[0][descripcion]" placeholder="Descripcion..." required>
                     </div>
                     <br>
                 </div>
@@ -80,7 +80,7 @@
                 <label for="email">Correo Electronico &nbsp;&nbsp;<button id="add_f" class="btn-sm btn-success">Añadir</button></label><br>
                 <div id="lista">
                     <div class="formulario-tres" style="display: inline-flex">
-                        <input type="email" name="email1" class="form-control" placeholder="Correo Electronico..." required>
+                        <input type="email" name="email[]" class="form-control" placeholder="Correo Electronico..." required>
                     </div>
                     <br>
                 </div>
@@ -124,10 +124,10 @@
                     <label for="entre_calles_facturacion">Entre Calles</label>
                     <input type="text" name="entre_calles_facturacion" onkeyup="this.value = this.value.toUpperCase();" class="form-control factura-check" placeholder="Entre Calles...">
                 </div>
-            </div>
-            <div class="formulario-dos">
-                <label for="rfc">RFC</label>
-                <input type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="RFC..." required><br>
+                <div class="formulario-dos">
+                    <label for="rfc">RFC</label>
+                    <input type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="RFC..."><br>
+                </div>
             </div>
             <hr>
 
@@ -136,10 +136,10 @@
                 <div id="datosbanco">
                     <div id="banc" class="formulario-dos">
                         <div id="basebanco" class="form-group" style="display: inline-flex; align-items: baseline">
-                            <input class="form-control" style="margin-bottom: 4px" type="text" name="banco1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Banco..." required>&nbsp;
-                            <input class="form-control" id="cc" type="text" onkeypress="return justNumbers(event)" name="cuenta1" placeholder="Cuenta..." required>&nbsp;
-                            <input class="form-control" id="cc" type="text" maxlength="16" onkeypress="return justNumbers(event);" name="clabe1" placeholder="Clabe..." required>&nbsp;
-                            <input class="form-control" id="cc" type="text" name="nombre_titular1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre del Titular..." required>
+                            <input class="form-control" style="margin-bottom: 4px" type="text" name="banco1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Banco...">&nbsp;
+                            <input class="form-control" id="cc" type="text" onkeypress="return justNumbers(event)" name="cuenta1" placeholder="Cuenta...">&nbsp;
+                            <input class="form-control" id="cc" type="text" maxlength="16" onkeypress="return justNumbers(event);" name="clabe1" placeholder="Clabe...">&nbsp;
+                            <input class="form-control" id="cc" type="text" name="nombre_titular1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre del Titular...">
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
+use App\Models\Lessor;
+
+
 use App\Models\CatArrendatario;
+
+
+
 use App\Models\CatContrato;
 use App\Models\CatFinca;
 use App\Models\Configuracion;
@@ -16,7 +21,7 @@ use Illuminate\Http\Request;
 class LiquidacionController extends Controller
 {
     public function index(){
-        $arrendador = CatArrendador::all();
+        $arrendador = Lessor::all();
         $comision = Configuracion::findOrFail(4)->cantidad;
         $retiva = Configuracion::findOrFail(2)->cantidad;
         $retisr = Configuracion::findOrFail(3)->cantidad;

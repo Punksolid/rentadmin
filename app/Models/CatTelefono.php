@@ -9,7 +9,7 @@ class CatTelefono extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'cat_telefono';
+    protected $table = 'phone_numbers';
 
     protected $primaryKey = 'id_telefono';
 
@@ -18,6 +18,22 @@ class CatTelefono extends Model
     ];
 
     protected $hidden = [
-        'created_at','updated_at', 'deleted_at'
+        'created_at', 'updated_at', 'deleted_at'
     ];
+
+    #Relationship
+    public function phoneable(): \Illuminate\Database\Eloquent\Relations\MorphTo
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * @param $query
+     *
+     * @return mixed
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('estatus',1);
+    }
 }

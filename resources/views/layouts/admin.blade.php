@@ -56,9 +56,7 @@
                     <li class="dropdown user user-menu">
                         <a id="navusr" href="#" class="dropdown-toggle drop" data-toggle="dropdown">
                             <i class="fa fa-user"></i>
-                            @php($id = auth()->user())
-                            @php($usuario = \App\Models\User::where('id_usuarios',$id->id_usuarios)->first())
-                            <span class="hidden-xs">{{ $usuario['nombre'] }}</span>
+                            <span class="hidden-xs">{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->

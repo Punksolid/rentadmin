@@ -3,23 +3,28 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
 use App\Models\CatBanco;
 use App\Models\CatEmail;
 use App\Models\CatTelefono;
+use App\Models\Lessor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-class CatArrendadorController extends Controller
+class LessorController extends Controller
 {
     public function index(Request $request){
-        $arrendador = CatArrendador::select('id_cat_arrendador', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono', 'email', 'rfc', 'cat_arrendador.estatus')
-            ->groupBy('id_cat_arrendador')
-            ->joinSubCat()
+        $lessors_query = Lessor::query();
+        if ($request->has('full_name')) {
+            $lessors_query = $lessors_query->where('nombre','LIKE', "%".$request->get('full_name')."%");
+            $lessors_query = $lessors_query->orWhere('apellido_paterno','LIKE', "%".$request->get('full_name')."%");
+            $lessors_query = $lessors_query->orWhere('apellido_materno','LIKE', "%".$request->get('full_name')."%");
+        }
+        $lessors = $lessors_query->with('defaultPhoneNumber')
             ->orderBy('nombre', 'asc')
             ->paginate(15);
-        return view('catalogos.arrendador.index', ["arrendador" => $arrendador]);
+
+        return view('catalogos.arrendador.index', ["lessors" => $lessors]);
 
     }
 
@@ -30,14 +35,16 @@ class CatArrendadorController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
         $data['id_usuario'] = Auth::user()->getAuthIdentifier();;
-        $arrendador = CatArrendador::create($data);
+        /** @var Lessor $lessor */
+        $lessor = Lessor::create($data);
 
         for ($k = 1; $k <= 5; $k++) {
             $ban = isset($data['banco' . $k]);
             if ($ban == null) {
             } else {
-                $banco['id_arrendador'] = $arrendador['id_cat_arrendador'];
+                $banco['id_arrendador'] = $lessor->id;
                 $banco['banco'] = $data['banco' . $k];
                 $banco['cuenta'] = $data['cuenta' . $k];
                 $banco['clabe'] = $data['clabe' . $k];
@@ -46,46 +53,59 @@ class CatArrendadorController extends Controller
             }
         }
 
-        for ($i = 1; $i <= 10; $i++) {
-            $variable = isset($data['telefono' . $i]);
-            if ($variable == null) {
-            } else {
-                $telefono['id_arrendador'] = $arrendador['id_cat_arrendador'];
-                $telefono['telefono'] = $data['telefono' . $i];
-                $telefono['descripcion'] = $data['descripcion' . $i];
-                CatTelefono::create($telefono);
+        if ($request->has('phone_number')) {
+            $this->addPhones($lessor, $request->get('phone_number'));
+        }
+//        for ($i = 1; $i <= 10; $i++) {
+//            $variable = isset($data['telefono' . $i]);
+//            if ($variable == null) {
+//            } else {
+//                $telefono['id_arrendador'] = $lessor['id_cat_arrendador'];
+//                $telefono['telefono'] = $data['telefono' . $i];
+//                $telefono['descripcion'] = $data['descripcion' . $i];
+//                CatTelefono::create($telefono);
+//            }
+//        }
+        if ($request->has('email')) {
+            foreach ($request->email as $email){
+//                $email['id_arrendador'] = $lessor->id;
+//                $email['email'] = $data['email' . $j];
+                CatEmail::create([
+                    'id_arrendador' => $lessor->id,
+                    'email' => $email
+                ]);
             }
         }
+//        for ($j = 1; $j <= 10; $j++) {
+//            $varia = isset($data['email' . $j]);
+//            if ($varia == null) {
+//            } else {
+//                $email['id_arrendador'] = $lessor['id_cat_arrendador'];
+//                $email['email'] = $data['email' . $j];
+//                CatEmail::create($email);
+//            }
+//        }
 
-        for ($j = 1; $j <= 10; $j++) {
-            $varia = isset($data['email' . $j]);
-            if ($varia == null) {
-            } else {
-                $email['id_arrendador'] = $arrendador['id_cat_arrendador'];
-                $email['email'] = $data['email' . $j];
-                CatEmail::create($email);
-            }
-        }
         return Redirect::to('catalogos/arrendador');
     }
 
     public function show($id){
-        $arrendador = CatArrendador::findOrFail($id);
+        $lessor = Lessor::findOrFail($id);
         $banco = CatBanco::where('id_arrendador', $id);
-        return view('catalogos.arrendador.show',["arrendador" => $arrendador, 'banco' => $banco]);
+        return view('catalogos.arrendador.show',["arrendador" => $lessor, 'banco' => $banco]);
     }
 
     public function edit($id){
-        $arrendador = CatArrendador::findOrFail($id);
+        $lessor = Lessor::findOrFail($id);
         $tel = CatTelefono::where('id_arrendador', $id)->get();
         $email = CatEmail::where('id_arrendador', $id)->get();
         $banco = CatBanco::where('id_arrendador', $id)->get();
-        return view('catalogos.arrendador.edit',["arrendador" => $arrendador, "tel" => $tel, "email" => $email, 'banco' => $banco]);
+        return view('catalogos.arrendador.edit',["arrendador" => $lessor, "tel" => $tel, "email" => $email, 'banco' => $banco]);
     }
 
     public function update(Request $request, $id){
         $data = $request->all();
-        CatArrendador::findOrFail($id)->update($data);
+        Lessor::findOrFail($id)->update($data);
         $contadorBanco = CatBanco::where('id_arrendador', $id)->get();
         $contadorTel = CatTelefono::where('id_arrendador', $id)->get();
         $contadorEmail = CatEmail::where('id_arrendador', $id)->get();
@@ -121,16 +141,16 @@ class CatArrendadorController extends Controller
     }
 
     public function destroy($id){
-        $arrendador = CatArrendador::findOrFail($id);
-        $arrendador->estatus = false;
-        $arrendador->update();
+        $lessor = Lessor::findOrFail($id);
+        $lessor->estatus = false;
+        $lessor->update();
         return Redirect::to('catalogos/arrendador');
     }
 
     public function activar($id){
-        $arrendador = CatArrendador::findOrFail($id);
-        $arrendador->estatus = true;
-        $arrendador->update();
+        $lessor = Lessor::findOrFail($id);
+        $lessor->estatus = true;
+        $lessor->update();
         return Redirect::to('catalogos/arrendador');
     }
 
@@ -168,5 +188,16 @@ class CatArrendadorController extends Controller
     public function deleteBanco($id){
         CatBanco::findOrFail($id)->delete();
         return Redirect::back();
+    }
+
+    /**
+     * @param Lessor $lessor
+     * @param array $phone_numbers
+     */
+    private function addPhones(Lessor $lessor, array $phone_numbers)
+    {
+        foreach ($phone_numbers as $phone_number) {
+            $lessor->addPhoneData($phone_number['telefono'], $phone_number['descripcion'], 1 );
+        }
     }
 }

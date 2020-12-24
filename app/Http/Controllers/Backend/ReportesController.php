@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
+use App\Models\Lessor;
 use App\Models\CatArrendatario;
 use App\Models\CatFinca;
 use App\Models\RegistroRecibo;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\View;
 class ReportesController extends Controller
 {
     public function index(){
-        $arrendador = CatArrendador::all();
+        $arrendador = Lessor::all();
         $arrendatario = CatArrendatario::all();
         $finca = CatFinca::all();
 
@@ -49,7 +49,7 @@ class ReportesController extends Controller
             $filtros['estatus_pago'] = 'Todos';
         }
         if ($data['arrendador'] != null){
-            $arrendador = CatArrendador::findOrFail($data['arrendador']);
+            $arrendador = Lessor::findOrFail($data['arrendador']);
             $filtros['arrendador'] = $arrendador->nombre.' '.$arrendador->apellido_paterno.' '.$arrendador->apellido_materno;
         }
         if ($data['propiedad'] != null){

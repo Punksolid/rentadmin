@@ -71,7 +71,8 @@
                 <hr>
                 @foreach($finca as $fin)
                     <div class="item">
-                        @php($arr = \App\Models\CatArrendador::where('id_cat_arrendador', $fin->id_arrendador)->first())
+                        @php($arr = \App\Models\
+Lessor::where('id_cat_arrendador', $fin->id_arrendador)->first())
                         <a id="{{$fin->id_cat_fincas}}" class="fincafiltroregistro" href="{{$fin->id_arrendador}}">
                             <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_recibo{{$fin->id_cat_fincas}}" onclick="propiedadRecibo('{{$fin->id_cat_fincas}}', '{{$arr->id_cat_arrendador.'-. '.$arr->nombre.' '.$arr->apellido_paterno}}', '{{$arr->id_cat_arrendador}}'); completarArrendatario()" class="nombrespropiedadrecibo btn btn-secondary form-control" value="{{$fin->id_cat_fincas}}">{{$fin->id_cat_fincas}}-. {{$fin->finca_arrendada}}</button>
                         </a>

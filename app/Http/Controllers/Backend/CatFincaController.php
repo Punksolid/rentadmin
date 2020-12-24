@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
 use App\Models\CatFinca;
+use App\Models\Lessor;
 use App\Models\TipoPropiedad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -12,17 +12,31 @@ use Illuminate\Support\Facades\Redirect;
 class CatFincaController extends Controller
 {
     public function index(Request $request){
-            $finca = CatFinca::select('id_cat_fincas', 'finca_arrendada', 'cat_arrendador.nombre AS arrendador', 'cat_arrendador.apellido_paterno AS arrendadora', 'servicio_luz', 'cta_japac', 'tipo_propiedad', 'estatus_renta', 'cat_fincas.recibo', 'cat_fincas.estatus')
-                ->joinSubCat()
-                ->orderBy('estatus_renta', 'asc')
+            $finca = CatFinca::
+                active()
+//            select('id_cat_fincas',
+//                'finca_arrendada',
+//                'cat_arrendador.nombre AS arrendador',
+//                'cat_arrendador.apellido_paterno AS arrendadora',
+//                'servicio_luz',
+//                'cta_japac',
+//                'tipo_propiedad',
+//                'estatus_renta',
+//                'cat_fincas.recibo',
+//                'cat_fincas.estatus')
+//                ->joinSubCat()
+                ->whereHas('lessor', function ($lessor_query) {
+                    $lessor_query->where('estatus', Lessor::ACTIVE_STATUS);
+                })->
+                orderBy('estatus_renta', 'asc')
                 ->paginate(15);
             return view('catalogos.finca.index', ["finca" => $finca]);
     }
 
     public function create(){
         $tp = TipoPropiedad::all();
-        $arr = CatArrendador::orderBy('apellido_paterno', 'asc')->get();
-        return view('catalogos.finca.create', ["propiedad" => $tp, "arrendador" => $arr]);
+        $lessors = Lessor::orderBy('apellido_paterno', 'asc')->get();
+        return view('catalogos.finca.create', ["propiedad" => $tp, "arrendador" => $lessors]);
     }
 
     public function store(Request $request){
@@ -46,8 +60,8 @@ class CatFincaController extends Controller
         $tp = TipoPropiedad::all();
         $finca = CatFinca::findOrFail($id);
         $tipo = TipoPropiedad::findOrFail($finca->id_tipo_propiedad);
-        $arr = CatArrendador::findOrFail($finca->id_arrendador);
-        $arre = CatArrendador::orderBy('apellido_paterno', 'asc')->get();;
+        $arr = Lessor::findOrFail($finca->id_arrendador);
+        $arre = Lessor::orderBy('apellido_paterno', 'asc')->get();;
         return view('catalogos.finca.edit', ["finca" => $finca, "propiedad" => $tp, "tipo" => $tipo, "arrendadores" => $arr, "arrendador" => $arre]);
     }
 

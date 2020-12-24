@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
 use App\Models\CatArrendatario;
 use App\Models\CatContrato;
 use App\Models\CatFinca;
 use App\Models\FechaContrato;
+use App\Models\Lessor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -25,7 +25,7 @@ class CatContratoController extends Controller
     }
 
     public function create(){
-        $arrendador = CatArrendador::orderBy('apellido_paterno', 'asc')->get();;
+        $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();;
         $arrendatario = CatArrendatario::orderBy('apellido_paterno', 'asc')->get();;
         $finca = CatFinca::all();
         return view('contrato.create', ["arrendador" => $arrendador, "arrendatario" => $arrendatario, "finca" => $finca]);

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
+use App\Models\Lessor;
+
+
 use App\Models\CatArrendatario;
+
+
+
 use App\Models\CatContrato;
-use App\Models\CatFinca;
-use App\Models\FechaContrato;
+use App\Models\CatFinca;use App\Models\FechaContrato;
 use App\Models\RegistroRecibo;
 use Carbon\Carbon;
 use iio\libmergepdf\Merger;
@@ -23,7 +27,7 @@ class RecibosAutomaticosController extends Controller
 {
     //Pantalla principal
     public function index(){
-        $arrendador = CatArrendador::orderBy('apellido_paterno', 'asc')->get();
+        $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();
         $arrendatario = CatArrendatario::orderBy('apellido_paterno', 'asc')->get();
         $finca = CatFinca::all();
         $fecha = Carbon::now()->format('m');
@@ -90,7 +94,7 @@ class RecibosAutomaticosController extends Controller
 
     public function reciboParcial(Request $request){
         $data = $request->all();
-        $arrendador = CatArrendador::findOrFail($data['id_arrendador']);
+        $arrendador = Lessor::findOrFail($data['id_arrendador']);
         $finca = CatFinca::findOrFail($data['id_finca']);
         $arrendatario = CatArrendatario::findOrFail($data['id_arrendatario']);
         $contrato = CatContrato::where('id_arrendador', $arrendador->id_cat_arrendador)->where('id_finca', $finca->id_cat_fincas)->where('id_arrendatario', $arrendatario->id_cat_arrendatario)->first();

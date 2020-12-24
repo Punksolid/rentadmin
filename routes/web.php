@@ -25,14 +25,14 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     //Catalogo Arrendador
-    Route::resource('catalogos/arrendador', 'Backend\CatArrendadorController');
-    Route::put('catalogos/arrendador/{arrendador}', 'Backend\CatArrendadorController@activar');
-    Route::post('catalogos/arrendador/telefono/{arrendador}', 'Backend\CatArrendadorController@addTelefono');
-    Route::post('catalogos/arrendador/email/{arrendador}', 'Backend\CatArrendadorController@addEmail');
-    Route::post('catalogos/arrendador/banco/{arrendador}', 'Backend\CatArrendadorController@addBanco');
-    Route::delete('catalogos/arrendador/telefono/{arrendador}', 'Backend\CatArrendadorController@deleteTelefono');
-    Route::delete('catalogos/arrendador/email/{arrendador}', 'Backend\CatArrendadorController@deleteEmail');
-    Route::delete('catalogos/arrendador/banco/{arrendador}', 'Backend\CatArrendadorController@deleteBanco');
+    Route::resource('catalogos/arrendador', 'Backend\LessorController');
+    Route::put('catalogos/arrendador/{arrendador}', 'Backend\LessorController@activar');
+    Route::post('catalogos/arrendador/telefono/{arrendador}', 'Backend\LessorController@addTelefono');
+    Route::post('catalogos/arrendador/email/{arrendador}', 'Backend\LessorController@addEmail');
+    Route::post('catalogos/arrendador/banco/{arrendador}', 'Backend\LessorController@addBanco');
+    Route::delete('catalogos/arrendador/telefono/{arrendador}', 'Backend\LessorController@deleteTelefono');
+    Route::delete('catalogos/arrendador/email/{arrendador}', 'Backend\LessorController@deleteEmail');
+    Route::delete('catalogos/arrendador/banco/{arrendador}', 'Backend\LessorController@deleteBanco');
 
     //Catalogo Arrendatarios
     Route::resource('catalogos/arrendatario', 'Backend\CatArrendatarioController');

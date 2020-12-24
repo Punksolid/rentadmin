@@ -35,25 +35,25 @@
                     <th>Opciones</th>
                     </thead>
 
-                    @foreach($finca as $a)
+                    @foreach($finca as $property)
                     <tr class="item">
-                        <td style="display: none" class="nombres">{{ $a->arrendador.' '.$a->arrendadora }}</td>
-                        <td>{{ $a->finca_arrendada }}</td>
-                        <td>{{ $a->arrendador }} {{$a->arrendadora}}</td>
-                        <td>{{ $a->servicio_luz }}</td>
-                        <td>{{ $a->cta_japac }}</td>
-                        <td>{{ $a->recibo }}</td>
-                        <td>{{$a->estatus_renta}}</td>
+                        <td style="display: none" class="nombres">{{ $property->arrendador.' '.$property->arrendadora }}</td>
+                        <td>{{ $property->finca_arrendada }}</td>
+                        <td>{{ $property->lessor->nombre }} {{$property->arrendadora}}</td>
+                        <td>{{ $property->servicio_luz }}</td>
+                        <td>{{ $property->cta_japac }}</td>
+                        <td>{{ $property->recibo }}</td>
+                        <td>{{ $property->estatus_renta}}</td>
 
                         <td>
-                            @if($a->estatus == 1)
-                                {!! Form::Open(array('action' => array('Backend\CatFincaController@destroy', $a->id_cat_fincas), 'method' => 'delete')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatFincaController@edit', $a->id_cat_fincas) }}"><i class="far fa-edit"></i></a>
+                            @if($property->estatus == 1)
+                                {!! Form::Open(array('action' => array('Backend\CatFincaController@destroy', $property->id_cat_fincas), 'method' => 'delete')) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatFincaController@edit', $property->id_cat_fincas) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-danger linea">Desactivar</button>
                                 {{ Form::Close() }}
                             @else
-                                {!! Form::Open(array('action' => array('Backend\CatFincaController@activar', $a->id_cat_fincas), 'method' => 'PUT')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatFincaController@edit', $a->id_cat_fincas) }}"><i class="far fa-edit"></i></a>
+                                {!! Form::Open(array('action' => array('Backend\CatFincaController@activar', $property->id_cat_fincas), 'method' => 'PUT')) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatFincaController@edit', $property->id_cat_fincas) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-success linea">Activar</button>
                                 {{ Form::Close() }}
                             @endif

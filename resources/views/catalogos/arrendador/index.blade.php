@@ -5,12 +5,15 @@
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <h3>Catalogo de Arrendadores</h3>
             <div class="form-group">
-                <div class="input-group">
-                    <input id="buscador" type="text" onkeyup="buscadorindex()" class="form-control" name="searchText" placeholder="Buscar..." value="">
-                    <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary">Buscar</button>
-        </span>
-                </div>
+                <form action="{{ route('arrendador.index') }}" method="GET">
+                    @csrf
+                    <div class="input-group">
+                        <input id="buscador" type="text" class="form-control" name="full_name" placeholder="Buscar..." value="">
+                        <span class="input-group-btn">
+                             <button type="submit" class="btn btn-primary">Buscar</button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -35,24 +38,24 @@
                     <th>Opciones</th>
                     </thead>
 
-                    @foreach($arrendador as $a)
+                    @foreach($lessors as $lessor)
                     <tr class="item">
-                        <td style="display: none" class="nombres">{{ $a->nombre.' '.$a->apellido_paterno.' '.$a->apellido_materno }}</td>
-                        <td>{{ $a->nombre }}</td>
-                        <td>{{ $a->apellido_paterno }}</td>
-                        <td>{{ $a->apellido_materno }}</td>
-                        <td>{{ $a->telefono }}</td>
-                        <td>{{ $a->email }}</td>
-                        <td>{{ $a->rfc }}</td>
+                        <td style="display: none" class="nombres">{{ $lessor->nombre.' '.$lessor->apellido_paterno.' '.$lessor->apellido_materno }}</td>
+                        <td>{{ $lessor->nombre }}</td>
+                        <td>{{ $lessor->apellido_paterno }}</td>
+                        <td>{{ $lessor->apellido_materno }}</td>
+                        <td>{{ optional($lessor->defaultPhoneNumber)->telefono}}</td>
+                        <td>{{ optional($lessor->defaultEmail())->email }}</td>
+                        <td>{{ $lessor->rfc }}</td>
                         <td>
-                            @if($a->estatus == 1)
-                                    {!! Form::Open(array('action' => array('Backend\CatArrendadorController@destroy', $a->id_cat_arrendador), 'method' => 'delete')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatArrendadorController@edit', $a->id_cat_arrendador) }}"><i class="far fa-edit"></i></a>
+                            @if($lessor->estatus == 1)
+                                    {!! Form::Open(['action' => ['Backend\LessorController@destroy', $lessor->id], 'method' => 'delete']) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LessorController@edit', $lessor->id) }}"><i class="far fa-edit"></i></a>
                                     <button type="submit" class="btn btn-danger linea">Desactivar</button>
                                     {{ Form::Close() }}
                             @else
-                                    {!! Form::Open(array('action' => array('Backend\CatArrendadorController@activar', $a->id_cat_arrendador), 'method' => 'PUT')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatArrendadorController@edit', $a->id_cat_arrendador) }}"><i class="far fa-edit"></i></a>
+                                    {!! Form::Open(['action' => ['Backend\LessorController@activar', $lessor->id], 'method' => 'PUT']) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LessorController@edit', $lessor->id) }}"><i class="far fa-edit"></i></a>
                                     <button type="submit" class="btn btn-success linea">Activar</button>
                                     {{ Form::Close() }}
                             @endif
@@ -61,7 +64,7 @@
                     @endforeach
                 </table>
             </div>
-            {{$arrendador->render()}}
+            {{$lessors->render()}}
         </div>
     </div>
 
