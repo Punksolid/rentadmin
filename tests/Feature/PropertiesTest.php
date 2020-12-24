@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class PropertiesTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
     /**
      * A basic feature test example.
      *
