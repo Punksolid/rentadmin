@@ -10,7 +10,7 @@ use App\Models\CatArrendatario;
 
 
 
-use App\Models\CatFinca;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class ControPagoController extends Controller
@@ -19,7 +19,7 @@ class ControPagoController extends Controller
     {
         $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();
         $arrendatario = CatArrendatario::orderBy('apellido_paterno', 'asc')->get();
-        $finca = CatFinca::all();
+        $finca = Property::all();
         return view('recibos.control', ["arrendador" => $arrendador, 'arrendatario' => $arrendatario, 'finca' => $finca]);
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\CatArrendatario;
 use App\Models\CatContrato;
-use App\Models\CatFinca;
+use App\Models\Property;
 use App\Models\FechaContrato;
 use App\Models\Lessor;
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class CatContratoController extends Controller
     public function create(){
         $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();;
         $arrendatario = CatArrendatario::orderBy('apellido_paterno', 'asc')->get();;
-        $finca = CatFinca::all();
+        $finca = Property::all();
         return view('contrato.create', ["arrendador" => $arrendador, "arrendatario" => $arrendatario, "finca" => $finca]);
     }
 
@@ -108,7 +108,7 @@ class CatContratoController extends Controller
         $contrato = CatContrato::all();
         foreach ($contrato as $con){
             $data = ['estatus_renta' => 'Rentada'];
-            $finca = CatFinca::findOrFail($con->id_finca)->update($data);
+            $finca = Property::findOrFail($con->id_finca)->update($data);
         }
     }
 }

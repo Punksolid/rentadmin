@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Lessor;
 use App\Models\CatArrendatario;
-use App\Models\CatFinca;
+use App\Models\Property;
 use App\Models\RegistroRecibo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class ReportesController extends Controller
     public function index(){
         $arrendador = Lessor::all();
         $arrendatario = CatArrendatario::all();
-        $finca = CatFinca::all();
+        $finca = Property::all();
 
         return view('reportes.index', ["arrendador" => $arrendador, 'arrendatario' => $arrendatario, 'finca' => $finca]);
     }
@@ -53,7 +53,7 @@ class ReportesController extends Controller
             $filtros['arrendador'] = $arrendador->nombre.' '.$arrendador->apellido_paterno.' '.$arrendador->apellido_materno;
         }
         if ($data['propiedad'] != null){
-            $inmueble = CatFinca::findOrFail($data['propiedad']);
+            $inmueble = Property::findOrFail($data['propiedad']);
             $filtros['propiedad'] = $inmueble->finca_arrendada;
         }
         if ($data['arrendatario'] != null){

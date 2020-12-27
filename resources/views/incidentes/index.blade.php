@@ -39,7 +39,7 @@
 
                     @foreach($incidentes as $a)
                     <tr class="item">
-                        @php($finca = \App\Models\CatFinca::findOrFail($a->id_finca))
+                        @php($finca = \App\Models\Property::findOrFail($a->id_finca))
                         <td class="nombres">{{ $finca->finca_arrendada }}</td>
                         <td>{{ $a->reporto }}</td>
                         <td>{{ $a->fecha_reporte }}</td>

@@ -39,7 +39,7 @@
 
                     @foreach($mantenimientos as $a)
                     <tr class="item">
-                        @php($finca = \App\Models\CatFinca::findOrFail($a->id_finca))
+                        @php($finca = \App\Models\Property::findOrFail($a->id_finca))
                         @php($user = \App\Models\User::findOrFail($a->id_usuario))
                         @php($tipo = \App\Models\TipoMantenimiento::findOrFail($a->id_tipo_mantenimiento))
                         <td class="nombres">{{ $finca->finca_arrendada }}</td>

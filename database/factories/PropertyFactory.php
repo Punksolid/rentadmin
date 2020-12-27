@@ -3,23 +3,24 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Model;
-use App\Models\CatFinca;
+use App\Models\Property;
 use Faker\Generator as Faker;
 
-$factory->define(CatFinca::class, function (Faker $faker) {
+$factory->define(Property::class, function (Faker $faker) {
     return [
-        'id_arrendador' => factory(\App\Models\Lessor::class)->create()->id,
-        'id_tipo_propiedad' => factory(\App\Models\TipoPropiedad::class)->create()->id_tipo_propiedad,
-        'id_estados' => 1,
-        'finca_arrendada' => $faker->words(4, true),
-        'servicio_luz' => $faker->word,
-        'cta_japac' => $faker->word,
-        'estatus' => $faker->boolean,
-        'descripcion' => $faker->word,
+        'lessor_id' => factory(\App\Models\Lessor::class)->create()->id,
+        'property_type_id' => factory(\App\Models\TipoPropiedad::class)->create()->id_tipo_propiedad,
+        'state_id' => 1,
+        'name' => $faker->words(4, true),
+        'energy_fee' => $faker->word,
+        'water_account_number' => $faker->word,
+        'status' => $faker->boolean,
+        'address' => $faker->address,
         'predial' => $faker->word,
-        'mantenimiento' => $faker->word,
+        'maintenance' => $faker->word,
         'recibo' => $faker->word,
-        'cuota_agua' => $faker->word,
-        'estatus_renta' => $faker->boolean
+        'water_fee' => $faker->word,
+        'rented' => $faker->boolean,
+        'geolocation' => $faker->url
     ];
 });

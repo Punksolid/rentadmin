@@ -14,35 +14,39 @@
             </div>
             @endif
 
-            {!! Form::open(array('url' => 'catalogos/finca', 'method' => 'POST', 'autocomplete' => 'off')) !!}
+            {!! Form::open(['url' => 'catalogos/finca', 'method' => 'POST', 'autocomplete' => 'off', 'files' => true]) !!}
             {{Form::token()}}
             <div class="form-group">
                 <label for="finca_arrendada">Inmueble</label>
-                <input type="text" name="finca_arrendada" class="verificar form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Inmueble..." required>
+                <input type="text" name="name" class="verificar form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Inmueble..." required>
             </div>
             <div class="form-group">
-                <label for="id_arrendador">Arrendador</label>
+                <label for="lessor_id">Arrendador</label>
                 <input type="text" class="form-control verificar tipo-propiedad" id="arrendadorname" placeholder="Arrendador..." disabled >
                 <button type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador"><i class="fa fa-search"></i></button>
-                <input type="hidden" id="id_arrendador" name="id_arrendador" value="" >
+                <input type="hidden" id="id_arrendador" name="lessor_id" value="" >
             </div>
 
             <div class="form-group">
                 <label for="id_tipo_propiedad">Tipo de Propiedad</label><br>
-                    <select class="form-control verificar tipo-propiedad" name="id_tipo_propiedad" required>
-                        <option name="id_tipo_propiedad" value="">Seleccione el Tipo de Propiedad</option>
-                        @foreach($propiedad as $p)
-                            @if($p->estatus == 0)
+                    <select class="form-control verificar tipo-propiedad" name="property_type_id" required>
+                        <option name="property_type_id" value="">Seleccione el Tipo de Propiedad</option>
+                        @foreach($property_types as $property_type)
+                            @if($property_type->estatus == 0)
                                 @else
-                                    <option name="id_tipo_propiedad" value="{{$p->id_tipo_propiedad}}">{{$p->tipo_propiedad}}</option>
+                                    <option name="property_type_id" value="{{$property_type->id_tipo_propiedad}}">{{$property_type->tipo_propiedad}}</option>
                             @endif
                         @endforeach
                 </select>
                 <a data-target="#modal-propiedad" data-toggle="modal"><button id="agg" class="btn btn-success">+</button></a>
             </div>
             <div class="form-group">
-                <label for="descripcion">Descripcion</label>
-                <input type="text" name="descripcion" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();"  required placeholder="Especificaciones..." >
+                <label for="descripcion">Direccion</label>
+                <input type="text" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();"  required placeholder="Direccion..." >
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Geolocalizacion</label>
+                <input type="text" name="geolocation" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();"  required placeholder="Geolocalizacion..." >
             </div>
 
 
@@ -62,22 +66,26 @@
             </div>
 
             <div class="form-group">
-                <label for="cuota_agua">Cuota de Agua</label>
-                <input id="currency-field" type="text" name="cuota_agua" value="$0.00" data-type="currency" required class="form-control verificar" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
+                <label for="water_fee">Cuota de Agua</label>
+                <input id="currency-field" type="text" name="water_fee" value="$0.00" data-type="currency" required class="form-control verificar" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
             </div>
 
             <div class="form-group">
-                <label for="servicio_luz">Servicio de Luz</label>
-                <input type="text" name="servicio_luz" class="form-control verificar" placeholder="XXX XXX XXX XXX" required>
+                <label for="energy_fee">Servicio de Luz</label>
+                <input type="text" name="energy_fee" class="form-control verificar" placeholder="XXX XXX XXX XXX" required>
             </div>
             <div class="form-group">
-                <label for="cta_japac">Cuenta Japac</label>
-                <input type="text" name="cta_japac" class="form-control verificar" placeholder="XXX XXX XXX" required>
+                <label for="water_account_number">Cuenta Japac</label>
+                <input type="text" name="water_account_number" class="form-control verificar" placeholder="XXX XXX XXX" required>
             </div>
 
             <div class="form-group">
                 <label for="predial">Numero de Predial</label>
-                <input type="text" name="predial" class="form-control verificar" placeholder="XXX XXX XX XXX" required>
+                <input type="text" name="predial" class="form-control verificar" placeholder="XXX XXX XXX XXX XXX XXX" required>
+            </div>
+            <div class="form-group">
+                <label for="predial">Foto</label>
+                <input type="file" name="photo" class="form-control verificar" >
             </div>
 
             <div class="form-group">
@@ -110,8 +118,8 @@
 
         jQuery(function ($) {
             $('input[name="servicio_luz"]').mask('000 000 000 000');
-            $('input[name="cta_japac"]').mask('000 000 000');
-            $('input[name="predial"]').mask('000 000 00 000');
+            $('input[name="water_account_number"]').mask('000 000 000');
+            $('input[name="predial"]').mask('000 000 000 000 000 000');
         });
     </script>
 

@@ -21,7 +21,7 @@
             <div style="margin-left: 10px;">
                 <div class="form-group">
                     <label>Inmueble:</label>
-                    @php($finca = \App\Models\CatFinca::findOrFail($incidente->id_finca))
+                    @php($finca = \App\Models\Property::findOrFail($incidente->id_finca))
                     <p>{{$finca->finca_arrendada}}</p>
                 </div>
                 <hr>

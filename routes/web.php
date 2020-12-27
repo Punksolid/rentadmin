@@ -45,10 +45,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\CatArrendatarioController@deleteTelefonoFiador');
 
     //Catalogo Propiedades(Fincas)
-    Route::resource('catalogos/finca', 'Backend\CatFincaController');
-    Route::put('catalogos/finca/{finca}', 'Backend\CatFincaController@activar');
-    Route::post('catalogos/finca/propiedad', 'Backend\CatFincaController@propiedad');
-    Route::get('catalogos/finca/arrendador', 'Backend\CatFincaController@arrendador');
+    Route::patch('catalogos/fincas/{finca}', 'Backend\PropertiesController@updatePatch')->name('finca.patch');
+    Route::resource('catalogos/finca', 'Backend\PropertiesController');
+    Route::put('catalogos/finca/{finca}', 'Backend\PropertiesController@activar');
+    Route::post('catalogos/finca/propiedad', 'Backend\PropertiesController@propiedad');
+    Route::get('catalogos/finca/arrendador', 'Backend\PropertiesController@arrendador');
 
     //Catalogo Tipo de Propiedad
     Route::resource('subcatalogos/tipo-propiedad', 'Backend\TipoPropiedadController');

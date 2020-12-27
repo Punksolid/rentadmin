@@ -11,7 +11,7 @@ use App\Models\CatArrendatario;
 
 
 use App\Models\CatContrato;
-use App\Models\CatFinca;
+use App\Models\Property;
 use App\Models\Configuracion;
 use App\Models\FechaContrato;
 use App\Models\RegistroRecibo;
@@ -124,7 +124,7 @@ class LiquidacionController extends Controller
     public function getFinca(Request $request){
         $data = $request->all();
 
-        $finca = CatFinca::where('id_arrendador', $data['id_arrendador'])->get();
+        $finca = Property::where('id_arrendador', $data['id_arrendador'])->get();
         $contrato = CatContrato::all();
         $fechasContrato = FechaContrato::all();
         $arrendatario = CatArrendatario::all();

@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.0",
+        "spatie/laravel-medialibrary": "^9.0.0",
         "wildbit/swiftmailer-postmark": "^3.1"
     },
     "require-dev": {

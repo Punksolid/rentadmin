@@ -11,7 +11,7 @@ use App\Models\CatArrendatario;
 
 
 use App\Models\CatContrato;
-use App\Models\CatFinca;use App\Models\FechaContrato;
+use App\Models\Property;use App\Models\FechaContrato;
 use App\Models\RegistroRecibo;
 use Carbon\Carbon;
 use iio\libmergepdf\Merger;
@@ -29,7 +29,7 @@ class RecibosAutomaticosController extends Controller
     public function index(){
         $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();
         $arrendatario = CatArrendatario::orderBy('apellido_paterno', 'asc')->get();
-        $finca = CatFinca::all();
+        $finca = Property::all();
         $fecha = Carbon::now()->format('m');
         if ($fecha>=12){
             $uno = $fecha-11;
@@ -95,7 +95,7 @@ class RecibosAutomaticosController extends Controller
     public function reciboParcial(Request $request){
         $data = $request->all();
         $arrendador = Lessor::findOrFail($data['id_arrendador']);
-        $finca = CatFinca::findOrFail($data['id_finca']);
+        $finca = Property::findOrFail($data['id_finca']);
         $arrendatario = CatArrendatario::findOrFail($data['id_arrendatario']);
         $contrato = CatContrato::where('id_arrendador', $arrendador->id_cat_arrendador)->where('id_finca', $finca->id_cat_fincas)->where('id_arrendatario', $arrendatario->id_cat_arrendatario)->first();
 
@@ -151,7 +151,7 @@ class RecibosAutomaticosController extends Controller
     public function controlImp($id){
         $registro = RegistroRecibo::findOrFail($id);
         $contrato = CatContrato::findOrFail($registro->id_contrato);
-        $finca = CatFinca::findOrFail($contrato->id_finca);
+        $finca = Property::findOrFail($contrato->id_finca);
         $arrendatario = CatArrendatario::findOrFail($contrato->id_arrendatario);
 
         if ($registro->deposito == 'true' || $registro->complemento == 'true'){
@@ -245,7 +245,7 @@ class RecibosAutomaticosController extends Controller
                 $contrato = CatContrato::findOrFail($data['id_contrato' . $i]);
                 $fechas = FechaContrato::where('id_contrato', $data['id_contrato' . $i])->get();
                 $arrendatario = CatArrendatario::where('id_cat_arrendatario', $contrato->id_arrendatario)->first();
-                $finca = CatFinca::where('id_cat_fincas', $contrato->id_finca)->first();
+                $finca = Property::where('id_cat_fincas', $contrato->id_finca)->first();
 
 
                 foreach ($fechas as $fec) {

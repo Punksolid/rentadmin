@@ -14,7 +14,7 @@
             @endif
             {!! Form::model($mant, ['method' => 'PATCH', 'route' =>['mantenimiento.update', $mant->id_mantenimiento]]) !!}
             {{Form::token()}}
-            @php($finca = \App\Models\CatFinca::findOrFail($mant->id_finca))
+            @php($finca = \App\Models\Property::findOrFail($mant->id_finca))
             @php($user = \App\Models\User::findOrFail($mant->id_usuario))
             @php($tipo = \App\Models\TipoMantenimiento::findOrFail($mant->id_tipo_mantenimiento))
             <div class="form-group">
