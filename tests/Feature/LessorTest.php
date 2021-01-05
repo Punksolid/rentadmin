@@ -25,4 +25,13 @@ class LessorTest extends TestCase
 
         $call->assertSuccessful();
     }
+
+    public function testCanHavePhones()
+    {
+        /** @var Lessor $lessor */
+        $lessor = factory(Lessor::class)->create();
+        $lessor->addPhoneData('789456123', 'casa', 1);
+
+        $this->assertEquals('789456123', $lessor->defaultPhoneNumber->telefono);
+    }
 }

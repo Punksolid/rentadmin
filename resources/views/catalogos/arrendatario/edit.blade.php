@@ -32,6 +32,7 @@
             <div class="form-group">
                 <label for="telefono">Telefono &nbsp;&nbsp;<a data-target="#modal-add-telefono" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
                 <div id="listas">
+{{--                    @var $tel is collection of phones of arrendatario(lessee) --}}
                     @foreach($tel as $te)
                         @if(count($tel) > 1)
                             <input type="text" data-mask="(000) 000 0000" onkeypress="return justNumbers(event)" class="mascara" name="telefonoid{{$te->id_telefono}}" value="{{$te->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" type="text" value="{{$te->descripcion}}" name="descripcionid{{$te->id_telefono}}" placeholder="Descripcion..." required>&nbsp;<a data-target="#modal-eliminar-telefono{{$te->id_telefono}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a><br>

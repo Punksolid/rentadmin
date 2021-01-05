@@ -13,8 +13,7 @@
                     </ul>
                 </div>
             @endif
-
-            {!! Form::model($arrendador, ['method' => 'PATCH', 'route' =>['arrendador.update', $arrendador->id_cat_arrendador]]) !!}
+            {!! Form::model($arrendador, ['method' => 'PATCH', 'route' =>['arrendador.update', $arrendador->id]]) !!}
             {{Form::token()}}
             <div class="formulario-tres">
                 <label for="nombre">Nombre</label>

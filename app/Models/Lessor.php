@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\CatTelefono as PhoneNumber;
 
-class Lessor extends Model
+/**
+ * Class Lessor aka ARRENDADOR
+ * @package App\Models
+ */
+class Lessor extends Model implements Phoneable
 {
     use SoftDeletes;
-
+    use HasPhones;
 
     const ACTIVE_STATUS = 1;
     const INACTIVE_STATUS = 0;
@@ -51,30 +55,6 @@ class Lessor extends Model
             ->join('cat_email', 'cat_arrendador.id_cat_arrendador', '=', 'cat_email.id_arrendador');
     }
 
-    public function addPhoneData(string $phone_number, string $description, bool $status): Model
-    {
-        return $this->phoneNumbers()->create([
-            'telefono' => $phone_number,
-            'descripcion' => $description,
-            'estatus' => $status
-        ]);
-    }
-
-    public function getPhoneData()
-    {
-        return $this->phoneNumbers()->active()->first();
-    }
-
-    public function phoneNumbers(): \Illuminate\Database\Eloquent\Relations\MorphMany
-    {
-        return $this->morphMany(PhoneNumber::class, 'phoneable');
-    }
-
-    public function defaultPhoneNumber(): MorphOne
-    {
-        return $this->morphOne(PhoneNumber::class,'phoneable')->where('estatus',1);
-    }
-
     public function emails()
     {
         return $this->hasMany(CatEmail::class,'id_arrendador');
@@ -85,4 +65,9 @@ class Lessor extends Model
         return $this->emails()->first();
     }
 
+    public function phones()
+    {
+        return $this->morphMany(CatTelefono::class, 'phoneable')
+            ->orWhere('id_arrendador',$this->id);
+    }
 }

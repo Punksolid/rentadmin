@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Redirect;
 class CatArrendatarioController extends Controller
 {
     public function index(Request $request){
-            $arrendatario = CatArrendatario::select('id_cat_arrendatario', 'nombre', 'apellido_paterno', 'apellido_materno', 'telefono', 'email', 'puesto', 'cat_arrendatario.estatus')
-                ->groupBy('id_cat_arrendatario')
-                ->joinSubCat()
-                ->orderBy('nombre', 'asc')
+            $arrendatarios = CatArrendatario::
+//                ->groupBy('id_cat_arrendatario')
+//                ->joinSubCat()
+                orderBy('nombre', 'asc')
                 ->paginate(15);
-            return view('catalogos.arrendatario.index', ["arrendatario" => $arrendatario]);
+            return view('catalogos.arrendatario.index', ["arrendatarios" => $arrendatarios]);
 
     }
 
@@ -90,12 +90,24 @@ class CatArrendatarioController extends Controller
     }
 
     public function edit($id){
+        /** @var CatArrendatario $arrendatario */
         $arrendatario = CatArrendatario::findOrFail($id);
-        $fiador = CatFiador::findOrFail($arrendatario['id_fiador']);
-        $tel = CatTelefono::where('id_arrendatario', $id)->get();
-        $tel_f = CatTelefono::where('id_fiador', $fiador['id_cat_fiadores'])->get();
-        $email = CatEmail::where('id_arrendatario', $id)->get();
-        return view('catalogos.arrendatario.edit', ["arrendatario" => $arrendatario, "fiador" => $fiador, "telf" => $tel_f, "tel" => $tel, "email" => $email]);
+//        /** @var CatFiador $fiador */
+        /** @var CatFiador $fiador */
+        $fiador = $arrendatario->guarantor;
+//        $tel = CatTelefono::where('id_arrendatario', $id)->get();
+        $tel = $arrendatario->phones()->get();
+//        $tel_f = CatTelefono::where('id_fiador', $fiador['id_cat_fiadores'])->get();
+        $tel_f = $fiador->phones()->get();
+//        $email = CatEmail::where('id_arrendatario', $id)->get();
+        $email = $arrendatario->emails()->get();
+        return view('catalogos.arrendatario.edit', [
+            "arrendatario" => $arrendatario,
+            "fiador" => $fiador,
+            "telf" => $tel_f, // phones of fiador (guarantor)
+            "tel" => $tel, //phones of arrendatario (lessee)
+            "email" => $email
+        ]);
     }
 
     public function update(Request $request, $id){
