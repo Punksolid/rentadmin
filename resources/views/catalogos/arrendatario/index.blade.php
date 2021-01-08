@@ -46,13 +46,13 @@
                         <td>{{$lessee->puesto}}</td>
                         <td>
                             @if($lessee->estatus == 1)
-                                {!! Form::Open(array('action' => array('Backend\CatArrendatarioController@destroy', $lessee->id_cat_arrendatario), 'method' => 'delete')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatArrendatarioController@edit', $lessee->id_cat_arrendatario) }}"><i class="far fa-edit"></i></a>
+                                {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_INACTIVE], 'method' => 'PATCH']) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-danger linea">Desactivar</button>
                                 {{ Form::Close() }}
                             @else
-                                {!! Form::Open(array('action' => array('Backend\CatArrendatarioController@activar', $lessee->id_cat_arrendatario), 'method' => 'PUT')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatArrendatarioController@edit', $lessee->id_cat_arrendatario) }}"><i class="far fa-edit"></i></a>
+                                {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_ACTIVE], 'method' => 'PATCH']) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-success linea">Activar</button>
                                 {{ Form::Close() }}
                             @endif
@@ -61,7 +61,12 @@
                     @endforeach
                 </table>
             </div>
-            {{$arrendatarios->render()}}
+            {{ $arrendatarios->links() }}
+            <a href="{{ route('arrendatario.index', [
+                    'status' => $status ? 0: 1
+                    ]) }}" >
+                <button class="btn  {{ $status? 'btn-secondary':'btn-primary' }}">Arrendatarios {{ $status? 'Inactivos': 'Activos'  }}</button>
+            </a>
         </div>
     </div>
 

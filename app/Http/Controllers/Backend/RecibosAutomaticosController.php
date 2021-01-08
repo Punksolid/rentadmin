@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Lessor;
 
 
-use App\Models\CatArrendatario;
+use App\Models\Lessee;
 
 
 
@@ -28,7 +28,7 @@ class RecibosAutomaticosController extends Controller
     //Pantalla principal
     public function index(){
         $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();
-        $arrendatario = CatArrendatario::orderBy('apellido_paterno', 'asc')->get();
+        $arrendatario = Lessee::orderBy('apellido_paterno', 'asc')->get();
         $finca = Property::all();
         $fecha = Carbon::now()->format('m');
         if ($fecha>=12){
@@ -96,7 +96,7 @@ class RecibosAutomaticosController extends Controller
         $data = $request->all();
         $arrendador = Lessor::findOrFail($data['id_arrendador']);
         $finca = Property::findOrFail($data['id_finca']);
-        $arrendatario = CatArrendatario::findOrFail($data['id_arrendatario']);
+        $arrendatario = Lessee::findOrFail($data['id_arrendatario']);
         $contrato = CatContrato::where('id_arrendador', $arrendador->id_cat_arrendador)->where('id_finca', $finca->id_cat_fincas)->where('id_arrendatario', $arrendatario->id_cat_arrendatario)->first();
 
         $cuota = str_replace(['$', ',', '.00'], '', $finca->cuota_agua);
@@ -152,7 +152,7 @@ class RecibosAutomaticosController extends Controller
         $registro = RegistroRecibo::findOrFail($id);
         $contrato = CatContrato::findOrFail($registro->id_contrato);
         $finca = Property::findOrFail($contrato->id_finca);
-        $arrendatario = CatArrendatario::findOrFail($contrato->id_arrendatario);
+        $arrendatario = Lessee::findOrFail($contrato->id_arrendatario);
 
         if ($registro->deposito == 'true' || $registro->complemento == 'true'){
             if ($registro->deposito == 'true'){
@@ -244,7 +244,7 @@ class RecibosAutomaticosController extends Controller
             if (isset($data['id_contrato' . $i])) {
                 $contrato = CatContrato::findOrFail($data['id_contrato' . $i]);
                 $fechas = FechaContrato::where('id_contrato', $data['id_contrato' . $i])->get();
-                $arrendatario = CatArrendatario::where('id_cat_arrendatario', $contrato->id_arrendatario)->first();
+                $arrendatario = Lessee::where('id_cat_arrendatario', $contrato->id_arrendatario)->first();
                 $finca = Property::where('id_cat_fincas', $contrato->id_finca)->first();
 
 
@@ -474,7 +474,7 @@ class RecibosAutomaticosController extends Controller
         $fecha = FechaContrato::where('id_contrato', $contrato->id_contratos)->first();
         if (isset($contrato)) {
         $id = $contrato->id_arrendatario;
-        $arrendatario = CatArrendatario::findOrFail($id);
+        $arrendatario = Lessee::findOrFail($id);
         $nombre['nombre'] = $arrendatario->id_cat_arrendatario.'-. '.$arrendatario->nombre.' '.$arrendatario->apellido_paterno.' '.$arrendatario->apellido_materno;
         $nombre['id'] = $id;
         $nombre['importe'] = $this->toMoney($fecha->cantidad);

@@ -20,11 +20,18 @@ class LessorController extends Controller
             $lessors_query = $lessors_query->orWhere('apellido_paterno','LIKE', "%".$request->get('full_name')."%");
             $lessors_query = $lessors_query->orWhere('apellido_materno','LIKE', "%".$request->get('full_name')."%");
         }
+        $status = $request->get('status', Lessor::ACTIVE_STATUS);
+        $lessors_query->where('estatus', $status);
+
         $lessors = $lessors_query->with('defaultPhoneNumber')
             ->orderBy('nombre', 'asc')
             ->paginate(15);
+        $lessors->appends(compact('status'));
 
-        return view('catalogos.arrendador.index', ["lessors" => $lessors]);
+        return view('catalogos.arrendador.index', [
+            "lessors" => $lessors,
+            'status' => $status
+        ]);
 
     }
 
@@ -42,7 +49,7 @@ class LessorController extends Controller
 
         for ($k = 1; $k <= 5; $k++) {
             $ban = isset($data['banco' . $k]);
-            if ($ban == null) {
+            if ($ban  == null) {
             } else {
                 $banco['id_arrendador'] = $lessor->id;
                 $banco['banco'] = $data['banco' . $k];

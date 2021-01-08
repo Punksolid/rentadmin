@@ -35,14 +35,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::delete('catalogos/arrendador/banco/{arrendador}', 'Backend\LessorController@deleteBanco');
 
     //Catalogo Arrendatarios
-    Route::resource('catalogos/arrendatario', 'Backend\CatArrendatarioController');
-    Route::put('catalogos/arrendatario/{arrendatario}', 'Backend\CatArrendatarioController@activar');
-    Route::post('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\CatArrendatarioController@addTelefono');
-    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\CatArrendatarioController@addTelefonoFiador');
-    Route::post('catalogos/arrendatario/email/{arrendatario}', 'Backend\CatArrendatarioController@addEmail');
-    Route::delete('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\CatArrendatarioController@deleteTelefono');
-    Route::delete('catalogos/arrendatario/email/{arrendatario}', 'Backend\CatArrendatarioController@deleteEmail');
-    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\CatArrendatarioController@deleteTelefonoFiador');
+    Route::resource('catalogos/arrendatario', 'Backend\LesseesController');
+    Route::patch('catalogos/arrendatario/{arrendatario}', 'Backend\LesseesController@toggleStatus')->name('arrendatario.toggle');
+    Route::post('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\LesseesController@addTelefono');
+    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\LesseesController@addTelefonoFiador');
+    Route::post('catalogos/arrendatario/email/{arrendatario}', 'Backend\LesseesController@addEmail');
+    Route::delete('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\LesseesController@deleteTelefono');
+    Route::delete('catalogos/arrendatario/email/{arrendatario}', 'Backend\LesseesController@deleteEmail');
+    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\LesseesController@deleteTelefonoFiador');
 
     //Catalogo Propiedades(Fincas)
     Route::patch('catalogos/fincas/{finca}', 'Backend\PropertiesController@updatePatch')->name('finca.patch');

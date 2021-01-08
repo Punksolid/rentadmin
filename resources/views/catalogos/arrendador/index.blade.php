@@ -64,7 +64,13 @@
                     @endforeach
                 </table>
             </div>
-            {{$lessors->render()}}
+            {{ $lessors->links() }}
+
+            <a href="{{ route('arrendador.index', [
+                    'status' => $status ? 0: 1
+                    ]) }}" >
+                <button class="btn  {{ $status? 'btn-secondary':'btn-primary' }}">Arrendadores {{ $status? 'Inactivos': 'Activos'  }}</button>
+            </a>
         </div>
     </div>
 

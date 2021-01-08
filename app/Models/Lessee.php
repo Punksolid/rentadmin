@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CatArrendatario extends Model implements Phoneable
+class Lessee extends Model implements Phoneable
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
     use SoftDeletes;
     use HasPhones;
-    protected $table = 'cat_arrendatario';
-
-    protected $primaryKey = 'id_cat_arrendatario';
 
     protected $fillable = [
         'nombre',
@@ -49,12 +49,20 @@ class CatArrendatario extends Model implements Phoneable
             ->join('cat_email', 'cat_arrendatario.id_cat_arrendatario', '=', 'cat_email.id_arrendatario');
     }
 
+    public function scopeActive($query)
+    {
+        return $query->where('estatus', self::STATUS_ACTIVE);
+    }
+
+    public function scopeInactive($query)
+    {
+        return $query->where('estatus', self::STATUS_INACTIVE);
+    }
+
     public function phones()
     {
-//        dump($this->id);
         return $this->morphMany(CatTelefono::class, 'phoneable')
-            ->orWhere('id_arrendatario', $this->id_cat_arrendatario);
-//        return $this->hasMany(CatTelefono::class, 'id_arrendatario')
+            ->orWhere('id_arrendatario', $this->id);
     }
 
     public function defaultPhoneNumber(): ?CatTelefono

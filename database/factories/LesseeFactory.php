@@ -3,11 +3,11 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Model;
-use App\Models\CatArrendatario;
+use App\Models\Lessee;
 use App\Models\CatFiador;
 use Faker\Generator as Faker;
 
-$factory->define(CatArrendatario::class, function (Faker $faker) {
+$factory->define(Lessee::class, function (Faker $faker) {
     return [
         'nombre' => $faker->firstName,
         'apellido_paterno' => $faker->lastName,

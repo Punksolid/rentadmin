@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendatario;
+use App\Models\Lessee;
 use App\Models\CatContrato;
 use App\Models\Property;
 use App\Models\FechaContrato;
@@ -26,7 +26,7 @@ class CatContratoController extends Controller
 
     public function create(){
         $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();;
-        $arrendatario = CatArrendatario::orderBy('apellido_paterno', 'asc')->get();;
+        $arrendatario = Lessee::orderBy('apellido_paterno', 'asc')->get();;
         $finca = Property::all();
         return view('contrato.create', ["arrendador" => $arrendador, "arrendatario" => $arrendatario, "finca" => $finca]);
     }

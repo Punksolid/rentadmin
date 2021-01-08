@@ -3,30 +3,39 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendatario;
+use App\Models\Lessee;
 use App\Models\CatEmail;
 use App\Models\CatFiador;
 use App\Models\CatTelefono;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class CatArrendatarioController extends Controller
+class LesseesController extends Controller
 {
-    public function index(Request $request){
-            $arrendatarios = CatArrendatario::
-//                ->groupBy('id_cat_arrendatario')
-//                ->joinSubCat()
-                orderBy('nombre', 'asc')
-                ->paginate(15);
-            return view('catalogos.arrendatario.index', ["arrendatarios" => $arrendatarios]);
+    public function index(Request $request)
+    {
+        $lessees_query = Lessee::query();
+        $status = $request->get('status', Lessee::STATUS_ACTIVE);
+        $lessees_query->where('estatus', $status);
+
+        $lessees = $lessees_query
+            ->orderBy('nombre', 'asc')
+            ->paginate();
+        $lessees->appends(compact('status'));
+        return view('catalogos.arrendatario.index', [
+            "arrendatarios" => $lessees,
+            'status' => $status
+        ]);
 
     }
 
-    public function create(){
+    public function create()
+    {
         return view('catalogos.arrendatario.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $data = $request->all();
         $fiador['nombre'] = $data['nombre_fiador'];
         $fiador['apellido_paterno'] = $data['apellido_paterno_fiador'];
@@ -50,11 +59,12 @@ class CatArrendatarioController extends Controller
         $f = CatFiador::create($fiador);
 
         $data['id_fiador'] = $f['id_cat_fiadores'];
-        $arrendatario = CatArrendatario::create($data);
+        $arrendatario = Lessee::create($data);
 
         for ($k = 1; $k <= 10; $k++) {
-            $variable = isset($data['telefono_fiador'.$k]);
-            if ($variable == null){ }else {
+            $variable = isset($data['telefono_fiador' . $k]);
+            if ($variable == null) {
+            } else {
                 $tel['id_fiador'] = $f['id_cat_fiadores'];
                 $tel['telefono'] = $data['telefono_fiador' . $k];
                 $tel['descripcion'] = $data['descripcion_fiador' . $k];
@@ -63,8 +73,9 @@ class CatArrendatarioController extends Controller
         }
 
         for ($i = 1; $i <= 10; $i++) {
-            $variable = isset($data['telefono'.$i]);
-            if ($variable == null){ }else {
+            $variable = isset($data['telefono' . $i]);
+            if ($variable == null) {
+            } else {
                 $telefono['id_arrendatario'] = $arrendatario['id_cat_arrendatario'];
                 $telefono['telefono'] = $data['telefono' . $i];
                 $telefono['descripcion'] = $data['descripcion' . $i];
@@ -73,8 +84,9 @@ class CatArrendatarioController extends Controller
         }
 
         for ($j = 1; $j <= 10; $j++) {
-            $varia = isset($data['email'.$j]);
-            if ($varia == null){ }else {
+            $varia = isset($data['email' . $j]);
+            if ($varia == null) {
+            } else {
                 $email['id_arrendatario'] = $arrendatario['id_cat_arrendatario'];
                 $email['email'] = $data['email' . $j];
                 CatEmail::create($email);
@@ -83,15 +95,17 @@ class CatArrendatarioController extends Controller
         return Redirect::to('catalogos/arrendatario');
     }
 
-    public function show($id){
-        $arrendatario = CatArrendatario::findOrFail($id);
+    public function show($id)
+    {
+        $arrendatario = Lessee::findOrFail($id);
         $fiador = CatFiador::findOrFail($arrendatario['id_fiador']);
         return view('catalogos.arrendatario.show', ["arrendatario" => $arrendatario, "fiador" => $fiador]);
     }
 
-    public function edit($id){
-        /** @var CatArrendatario $arrendatario */
-        $arrendatario = CatArrendatario::findOrFail($id);
+    public function edit($id)
+    {
+        /** @var Lessee $arrendatario */
+        $arrendatario = Lessee::findOrFail($id);
 //        /** @var CatFiador $fiador */
         /** @var CatFiador $fiador */
         $fiador = $arrendatario->guarantor;
@@ -110,7 +124,8 @@ class CatArrendatarioController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $data = $request->all();
         $fiador['nombre'] = $data['nombre_fiador'];
         $fiador['apellido_paterno'] = $data['apellido_paterno_fiador'];
@@ -131,7 +146,7 @@ class CatArrendatarioController extends Controller
         $fiador['ciudad_trabajo'] = $data['ciudad_fiador_trabajo'];
         $fiador['codigo_postal_trabajo'] = $data['codigo_postal_fiador_trabajo'];
         $fiador['entre_calles_trabajo'] = $data['entre_calles_fiador_trabajo'];
-        $arre = CatArrendatario::findOrFail($id);
+        $arre = Lessee::findOrFail($id);
         CatFiador::findOrFail($arre['id_fiador'])->update($fiador);
         $arre->update($data);
         $contadorTel = CatTelefono::where('id_arrendatario', $id)->get();
@@ -166,52 +181,59 @@ class CatArrendatarioController extends Controller
         return Redirect::to('catalogos/arrendatario');
     }
 
-    public function destroy($id){
-        $arrendatario = CatArrendatario::findOrFail($id);
+    public function destroy($id)
+    {
+        $arrendatario = Lessee::findOrFail($id);
         $arrendatario->estatus = false;
         $arrendatario->update();
         return Redirect::to('catalogos/arrendatario');
     }
 
-    public function activar($id){
-        $arrendatario = CatArrendatario::findOrFail($id);
-        $arrendatario->estatus = true;
-        $arrendatario->update();
+    public function toggleStatus(Lessee $arrendatario, Request $request)
+    {
+        $arrendatario->estatus = $request->status;
+        $arrendatario->save();
         return Redirect::to('catalogos/arrendatario');
     }
 
-    public function addTelefono(Request $request, $id){
+    public function addTelefono(Request $request, $id)
+    {
         $data = $request->all();
         $data['id_arrendatario'] = $id;
         CatTelefono::create($data);
         return Redirect::back();
     }
 
-    public function addTelefonoFiador(Request $request, $id){
+    public function addTelefonoFiador(Request $request, $id)
+    {
         $data = $request->all();
         $data['id_fiador'] = $id;
         CatTelefono::create($data);
         return Redirect::back();
     }
 
-    public function addEmail(Request $request, $id){
+    public function addEmail(Request $request, $id)
+    {
         $data = $request->all();
         $data['id_arrendatario'] = $id;
         CatEmail::create($data);
         return Redirect::back();
     }
 
-    public function deleteTelefono($id){
+    public function deleteTelefono($id)
+    {
         CatTelefono::findOrFail($id)->delete();
         return Redirect::back();
     }
 
-    public function deleteEmail($id){
+    public function deleteEmail($id)
+    {
         CatEmail::findOrFail($id)->delete();
         return Redirect::back();
     }
 
-    public function deleteTelefonoFiador($id){
+    public function deleteTelefonoFiador($id)
+    {
         CatTelefono::findOrFail($id)->delete();
         return Redirect::back();
     }

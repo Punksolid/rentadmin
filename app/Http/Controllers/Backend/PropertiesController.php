@@ -14,30 +14,23 @@ class PropertiesController extends Controller
     public function index(Request $request)
     {
         $properties_query = Property::query();
-        if ($request->inactive) {
-            $properties_query = $properties_query->inactive();
-        } else {
-            $properties_query = $properties_query->active();
-        }
-            $properties = $properties_query
-//            select('id_cat_fincas',
-//                'finca_arrendada',
-//                'cat_arrendador.nombre AS arrendador',
-//                'cat_arrendador.apellido_paterno AS arrendadora',
-//                'servicio_luz',
-//                'cta_japac',
-//                'tipo_propiedad',
-//                'estatus_renta',
-//                'cat_fincas.recibo',
-//                'cat_fincas.estatus')
-//                ->joinSubCat()
+        $status = $request->get('status', 1);
+        $properties_query->where('status', $status);
+
+        $properties = $properties_query
                 ->whereHas('lessor', function ($lessor_query) {
                     $lessor_query->where('estatus', Lessor::ACTIVE_STATUS);
                 })
                 ->orderBy('rented', 'asc')
                 ->paginate(15);
-
-            return view('catalogos.finca.index', ["finca" => $properties, 'properties' =>  $properties ]);
+            $properties->append([
+                'status' => $status
+            ]);
+            return view('catalogos.finca.index', [
+                "finca" => $properties,
+                'properties' =>  $properties,
+                'status' => $status
+            ]);
     }
 
     public function create(){

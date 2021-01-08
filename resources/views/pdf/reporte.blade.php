@@ -67,7 +67,7 @@ Lessor::findOrFail($reg->id_arrendador))
                         <td style="font-size: smaller; text-align: center">{{$arrendador->nombre}} {{$arrendador->apellido_paterno}} {{$arrendador->apellido_materno}}</td>
                         <td style="font-size: smaller; text-align: center">{{$reg->finca_arrendada}}</td>
                         @php($arrendatario = \App\Models\
-CatArrendatario::findOrFail($reg->id_arrendatario))
+Lessee::findOrFail($reg->id_arrendatario))
                         <td style="font-size: smaller; text-align: center">{{$arrendatario->nombre}} {{$arrendatario->apellido_paterno}} {{$arrendatario->apellido_materno}}</td>
                         <td style="font-size: smaller; text-align: center">{{$reg->total}}</td>
                         @if($reg->estatus_pago == 0)

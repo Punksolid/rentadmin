@@ -63,7 +63,12 @@
                     @endforeach
                 </table>
             </div>
-            {{ $properties->links() }} <a href="{{ route('finca.index',['inactive' => true]) }}"><button>Ver Registros Desactivados</button></a>
+            {{ $properties->links() }}
+            <a href="{{ route('finca.index', [
+                    'status' => $status ? 0: 1
+                    ]) }}" >
+                <button class="btn  {{ $status? 'btn-secondary':'btn-primary' }}">Inmuebles {{ $status? 'Inactivos': 'Activos'  }}</button>
+            </a>
         </div>
     </div>
 

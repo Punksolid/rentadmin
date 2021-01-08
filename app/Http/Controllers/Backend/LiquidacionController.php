@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Lessor;
 
 
-use App\Models\CatArrendatario;
+use App\Models\Lessee;
 
 
 
@@ -127,7 +127,7 @@ class LiquidacionController extends Controller
         $finca = Property::where('id_arrendador', $data['id_arrendador'])->get();
         $contrato = CatContrato::all();
         $fechasContrato = FechaContrato::all();
-        $arrendatario = CatArrendatario::all();
+        $arrendatario = Lessee::all();
         $iva = Configuracion::findOrFail(5)->cantidad;
         $recibos = RegistroRecibo::where('deposito', 'true')->get();
         return response()->json(['finca' => $finca, 'contrato' => $contrato, 'ivacon' => $iva, 'fecha' => $fechasContrato, 'arrendatario' => $arrendatario, 'recibos' => $recibos], 200);
