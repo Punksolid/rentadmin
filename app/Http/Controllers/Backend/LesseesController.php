@@ -59,8 +59,11 @@ class LesseesController extends Controller
         $f = CatFiador::create($fiador);
 
         $data['id_fiador'] = $f['id_cat_fiadores'];
+        /** @var Lessee $arrendatario */
         $arrendatario = Lessee::create($data);
-
+        if ($request->hasFile('identity')) {
+            $arrendatario->addMediaFromRequest('identity')->toMediaCollection();
+        }
         for ($k = 1; $k <= 10; $k++) {
             $variable = isset($data['telefono_fiador' . $k]);
             if ($variable == null) {
@@ -92,6 +95,7 @@ class LesseesController extends Controller
                 CatEmail::create($email);
             }
         }
+
         return Redirect::to('catalogos/arrendatario');
     }
 
@@ -149,6 +153,9 @@ class LesseesController extends Controller
         $arre = Lessee::findOrFail($id);
         CatFiador::findOrFail($arre['id_fiador'])->update($fiador);
         $arre->update($data);
+        if ($request->hasFile('identity')) {
+            $arre->addMediaFromRequest('identity')->toMediaCollection();
+        }
         $contadorTel = CatTelefono::where('id_arrendatario', $id)->get();
         $contadorTelFiador = CatTelefono::where('id_fiador', $arre['id_fiador'])->get();
         $contadorEmail = CatEmail::where('id_arrendatario', $id)->get();

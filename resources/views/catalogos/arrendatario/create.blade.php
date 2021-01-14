@@ -14,7 +14,7 @@
             </div>
             @endif
 
-            {!! Form::open(array('url' => 'catalogos/arrendatario', 'method' => 'POST', 'autocomplete' => 'off')) !!}
+            {!! Form::open(array('url' => 'catalogos/arrendatario', 'method' => 'POST', 'autocomplete' => 'off', 'files' => true)) !!}
             {{Form::token()}}
             <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -38,6 +38,12 @@
                 <label for="email">Correo Electronico &nbsp;&nbsp;<button id="add_f" class="btn-sm btn-success">Añadir</button></label><br>
                 <div id="lista">
                     <input type="email" name="email1" placeholder="Correo Electronico..." required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="identity">Documento de Identidad</label>
+                <div id="identity">
+                    <input type="file" name="identity">
                 </div>
             </div>
             <div class="form-group">

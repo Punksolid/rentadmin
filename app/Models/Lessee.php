@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Lessee extends Model implements Phoneable
+class Lessee extends Model implements Phoneable, HasMedia
 {
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
 
     use SoftDeletes;
     use HasPhones;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'nombre',

@@ -45,6 +45,7 @@
                         <td>{{ optional($lessee->defaultEmail())->email }}</td>
                         <td>{{$lessee->puesto}}</td>
                         <td>
+                            <a href="{{ $lessee->getFirstMediaUrl() }}"> <button class="btn btn-file btn-primary">Imagen</button></a>
                             @if($lessee->estatus == 1)
                                 {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_INACTIVE], 'method' => 'PATCH']) !!}
                                 <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>

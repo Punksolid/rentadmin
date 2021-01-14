@@ -14,7 +14,7 @@
                 </div>
             @endif
 
-            {!! Form::model($arrendatario, ['method' => 'PATCH', 'route' =>['arrendatario.update', $arrendatario->id_cat_arrendatario]]) !!}
+            {!! Form::model($arrendatario, ['method' => 'PATCH', 'files' => true, 'route' =>['arrendatario.update', $arrendatario->id_cat_arrendatario]]) !!}
             {{Form::token()}}
             <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -54,7 +54,12 @@
                     @endforeach
                 </div>
             </div>
-
+            <div class="form-group">
+                <label for="identity">Documento de Identidad</label>
+                <div id="identity">
+                    <input type="file" name="identity">
+                </div>
+            </div>
             <div class="form-group">
                 <h4><strong>Domicilio</strong></h4>
             </div>
