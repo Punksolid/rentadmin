@@ -14,21 +14,33 @@ use Illuminate\Support\Facades\Redirect;
 class CatContratoController extends Controller
 {
     public function index(Request $request){
-            $contrato = CatContrato::select('cat_contratos.id_contratos', 'cat_arrendador.nombre AS arrendador_nombre', 'cat_arrendador.apellido_paterno AS arrendador_apellido', 'cat_arrendatario.nombre AS arrendatario_nombre',
-                'cat_arrendatario.apellido_paterno AS arrendatario_apellido', 'cat_fincas.finca_arrendada AS propiedad', 'cat_telefono.telefono AS telefono', 'cat_contratos.estatus AS estatus')
+            $contrato = CatContrato::select(
+                'cat_contratos.id_contratos',
+                'lessors.nombre AS arrendador_nombre',
+                'lessors.apellido_paterno AS arrendador_apellido',
+                'lessees.nombre AS arrendatario_nombre',
+                'lessees.apellido_paterno AS arrendatario_apellido',
+                'properties.name AS propiedad',
+                'phone_numbers.telefono AS telefono',
+                'cat_contratos.estatus AS estatus')
                 ->joinfechas()
                 ->groupBy('id_contratos')
                 ->orderBy('id_contratos', 'asc')
                 ->paginate(15);
-            $this->desactivar();
+//            $this->desactivar();
             return view('contrato.index', ["contrato" => $contrato]);
     }
 
     public function create(){
         $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();;
         $arrendatario = Lessee::orderBy('apellido_paterno', 'asc')->get();;
-        $finca = Property::all();
-        return view('contrato.create', ["arrendador" => $arrendador, "arrendatario" => $arrendatario, "finca" => $finca]);
+        $properties = Property::where('rented','<>','Rentada')->where('status',1)->get();
+
+        return view('contrato.create', [
+            "arrendador" => $arrendador,
+            "arrendatario" => $arrendatario,
+            "finca" => $properties
+        ]);
     }
 
     public function store(Request $request){
@@ -52,13 +64,15 @@ class CatContratoController extends Controller
     }
 
     public function edit($id){
-        $co = CatContrato::select('cat_contratos.id_contratos', 'cat_arrendador.id_cat_arrendador AS id_arrendador', 'cat_arrendatario.id_cat_arrendatario AS id_arrendatario', 'cat_arrendador.nombre AS arrendador_nombre', 'cat_arrendador.apellido_paterno AS arrendador_apellido',
-            'cat_arrendatario.nombre AS arrendatario_nombre', 'cat_arrendatario.apellido_paterno AS arrendatario_apellido', 'cat_contratos.duracion_contrato', 'cat_contratos.bonificacion',
-            'cat_contratos.deposito', 'cat_fincas.finca_arrendada AS finca_arrendada', 'cat_fincas.id_cat_fincas AS id_finca')
+        $contract = CatContrato::select('cat_contratos.id_contratos', 'lessors.id AS id_arrendador', 'lessees.id AS id_arrendatario', 'lessors.nombre AS arrendador_nombre', 'lessors.apellido_paterno AS arrendador_apellido',
+            'lessees.nombre AS arrendatario_nombre', 'lessees.apellido_paterno AS arrendatario_apellido', 'cat_contratos.duracion_contrato', 'cat_contratos.bonificacion',
+            'cat_contratos.deposito', 'properties.name AS finca_arrendada', 'properties.id AS id_finca')
             ->joinfechas()
             ->findOrFail($id);
-        $fe = FechaContrato::where('id_contrato', $id)->get();
-        return view('contrato.edit', ['contrato' => $co, 'fechas' => $fe]);
+
+        $dates = FechaContrato::where('id_contrato', $id)->get();
+
+        return view('contrato.edit', ['contrato' => $contract, 'fechas' => $dates]);
     }
 
     public function update(Request $request, $id){
@@ -105,10 +119,10 @@ class CatContratoController extends Controller
     }
 
     public function desactivar(){
-        $contrato = CatContrato::all();
-        foreach ($contrato as $con){
+        $contracts = CatContrato::all();
+        foreach ($contracts as $contract){
             $data = ['estatus_renta' => 'Rentada'];
-            $finca = Property::findOrFail($con->id_finca)->update($data);
+            $finca = Property::findOrFail($contract->id_finca)->update($data);
         }
     }
 }

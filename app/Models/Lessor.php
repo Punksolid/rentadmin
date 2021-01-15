@@ -51,8 +51,10 @@ class Lessor extends Model implements Phoneable
 
     public function scopeJoinSubCat($query)
     {
-        return $query->join('cat_telefono', 'cat_arrendador.id_cat_arrendador', '=', 'cat_telefono.id_arrendador')
-            ->join('cat_email', 'cat_arrendador.id_cat_arrendador', '=', 'cat_email.id_arrendador');
+        return $query->join('cat_telefono', 'lessors.id', '=', 'cat_telefono.id_arrendador')
+            ->join('cat
+
+            _email', 'lessors.id', '=', 'cat_email.id_arrendador');
     }
 
     public function emails()

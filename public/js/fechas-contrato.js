@@ -14,11 +14,19 @@ function mostrar() {
 }
 
 function agregar(num) {
-    $("#fechas_con").append('\<div class="hola" style="display: flex">\<input class="form-control" type="date" name="fecha_inicio'+(num)+'"><input class="form-control" type="date" name="fecha_fin'+(num)+'"><input id="currency-field" data-type="currency" class="form-control" type="text" name="cantidad'+(num)+'" placeholder="Cantidad...">\</div>');
+    $("#fechas_con").append(`
+<div class="hola" style="display: flex">
+<input class="form-control" type="date" name="fecha_inicio${num}">
+<input class="form-control" type="date" name="fecha_fin${num}">
+<input id="currency-field" data-type="currency" class="form-control" type="text" name="cantidad${num}" placeholder="Cantidad...">
+<!--<input id="increase_percentage" class="increase-percentage form-control " type="number" name="increase_percentage[]" placeholder="Porcentaje de Aumento...">-->
+</div>`
+    );
 }
 function eliminar() {
     $('#fechas_con').empty();
 }
+
 
 function editar() {
     var z = $('#duracion_c').val();

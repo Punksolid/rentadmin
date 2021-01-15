@@ -48,8 +48,8 @@ class Lessee extends Model implements Phoneable, HasMedia
 
     public function scopeJoinSubCat($query)
     {
-        return $query->join('cat_telefono', 'cat_arrendatario.id_cat_arrendatario', '=', 'cat_telefono.id_arrendatario')
-            ->join('cat_email', 'cat_arrendatario.id_cat_arrendatario', '=', 'cat_email.id_arrendatario');
+        return $query->join('cat_telefono', 'lessees.id', '=', 'phone_numbers.id_arrendatario')
+            ->join('cat_email', 'lessees.id', '=', 'cat_email.id_arrendatario');
     }
 
     public function scopeActive($query)
