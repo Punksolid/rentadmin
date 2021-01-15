@@ -7,6 +7,7 @@ use App\Models\CatBanco;
 use App\Models\CatEmail;
 use App\Models\CatTelefono;
 use App\Models\Lessor;
+use App\Models\Phoneable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;

@@ -11,6 +11,8 @@ use Tests\TestCase;
 class LessorTest extends TestCase
 {
 
+    use WithFaker;
+
     public function testALessorCanBeRegisteredWithoutInvoiceData()
     {
         $lessor = factory(Lessor::class)->raw();
@@ -18,6 +20,27 @@ class LessorTest extends TestCase
         $call = $this->call('POST', route('arrendador.store'), $lessor);
 
         $call->assertRedirect(route('arrendador.index'));
+        $this->assertDatabaseHas('lessors', [
+            'nombre' => $lessor['nombre']
+        ]);
+    }
+
+    public function testALessorCanBeRegisteredWithPhoneData()
+    {
+
+        $this->withoutExceptionHandling();
+        /** @var Lessor $lessor */
+        $lessor = factory(Lessor::class)->raw();
+        $lessor['phone_number'][] = [
+            'telefono' => $this->faker->randomNumber(8),
+            'descripcion' => $this->faker->sentence
+        ];
+        $call = $this->call('POST', route('arrendador.store'), $lessor);
+
+        $call->assertRedirect(route('arrendador.index'));
+        $this->assertDatabaseHas('lessors', [
+            'nombre' => $lessor['nombre']
+        ]);
     }
 
     public function testListsLessorsActiveByDefault()
@@ -33,6 +56,7 @@ class LessorTest extends TestCase
         $call->assertDontSee($lessor_inactive->nombre);
     }
 
+    /** Unit test */
     public function testCanHavePhones()
     {
         /** @var Lessor $lessor */
