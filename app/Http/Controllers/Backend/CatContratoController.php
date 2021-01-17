@@ -63,14 +63,10 @@ class CatContratoController extends Controller
         return view('contrato.show', ['contrato' => $co]);
     }
 
-    public function edit($id){
-        $contract = CatContrato::select('cat_contratos.id_contratos', 'lessors.id AS id_arrendador', 'lessees.id AS id_arrendatario', 'lessors.nombre AS arrendador_nombre', 'lessors.apellido_paterno AS arrendador_apellido',
-            'lessees.nombre AS arrendatario_nombre', 'lessees.apellido_paterno AS arrendatario_apellido', 'cat_contratos.duracion_contrato', 'cat_contratos.bonificacion',
-            'cat_contratos.deposito', 'properties.name AS finca_arrendada', 'properties.id AS id_finca')
-            ->joinfechas()
-            ->findOrFail($id);
+    public function edit(CatContrato $contrato){
+        $contract = $contrato;
 
-        $dates = FechaContrato::where('id_contrato', $id)->get();
+        $dates = FechaContrato::where('id_contrato', $contract->id)->get();
 
         return view('contrato.edit', ['contrato' => $contract, 'fechas' => $dates]);
     }

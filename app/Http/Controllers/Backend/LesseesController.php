@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LesseeRequest;
 use App\Models\Lessee;
 use App\Models\CatEmail;
 use App\Models\CatFiador;
@@ -34,29 +35,10 @@ class LesseesController extends Controller
         return view('catalogos.arrendatario.create');
     }
 
-    public function store(Request $request)
+    public function store(LesseeRequest $request)
     {
         $data = $request->all();
-        $fiador['nombre'] = $data['nombre_fiador'];
-        $fiador['apellido_paterno'] = $data['apellido_paterno_fiador'];
-        $fiador['apellido_materno'] = $data['apellido_materno_fiador'];
-        $fiador['calle'] = $data['calle_fiador'];
-        $fiador['colonia'] = $data['colonia_fiador'];
-        $fiador['numero_ext'] = $data['numero_ext_fiador'];
-        $fiador['numero_int'] = $data['numero_int_fiador'];
-        $fiador['estado'] = $data['estado_fiador'];
-        $fiador['ciudad'] = $data['ciudad_fiador'];
-        $fiador['codigo_postal'] = $data['codigo_postal_fiador'];
-        $fiador['entre_calles'] = $data['entre_calles_fiador'];
-        $fiador['calle_trabajo'] = $data['calle_fiador_trabajo'];
-        $fiador['colonia_trabajo'] = $data['colonia_fiador_trabajo'];
-        $fiador['numero_ext_trabajo'] = $data['numero_ext_fiador_trabajo'];
-        $fiador['numero_int_trabajo'] = $data['numero_int_fiador_trabajo'];
-        $fiador['estado_trabajo'] = $data['estado_fiador_trabajo'];
-        $fiador['ciudad_trabajo'] = $data['ciudad_fiador_trabajo'];
-        $fiador['codigo_postal_trabajo'] = $data['codigo_postal_fiador_trabajo'];
-        $fiador['entre_calles_trabajo'] = $data['entre_calles_fiador_trabajo'];
-        $f = CatFiador::create($fiador);
+        $f = $this->registerGuarantor($request);
 
         $data['id_fiador'] = $f['id_cat_fiadores'];
         /** @var Lessee $arrendatario */
@@ -243,5 +225,30 @@ class LesseesController extends Controller
     {
         CatTelefono::findOrFail($id)->delete();
         return Redirect::back();
+    }
+
+    public function registerGuarantor(Request $request)
+    {
+        $fiador['nombre'] = $request->get('nombre_fiador');
+        $fiador['apellido_paterno'] = $request->get('apellido_paterno_fiador');
+        $fiador['apellido_materno'] = $request->get('apellido_materno_fiador');
+        $fiador['calle'] = $request->get('calle_fiador');
+        $fiador['colonia'] = $request->get('colonia_fiador');
+        $fiador['numero_ext'] = $request->get('numero_ext_fiador');
+        $fiador['numero_int'] = $request->get('numero_int_fiador');
+        $fiador['estado'] = $request->get('estado_fiador');
+        $fiador['ciudad'] = $request->get('ciudad_fiador');
+        $fiador['codigo_postal'] = $request->get('codigo_postal_fiador');
+        $fiador['entre_calles'] = $request->get('entre_calles_fiador');
+        $fiador['calle_trabajo'] = $request->get('calle_fiador_trabajo');
+        $fiador['colonia_trabajo'] = $request->get('colonia_fiador_trabajo');
+        $fiador['numero_ext_trabajo'] = $request->get('numero_ext_fiador_trabajo');
+        $fiador['numero_int_trabajo'] = $request->get('numero_int_fiador_trabajo');
+        $fiador['estado_trabajo'] = $request->get('estado_fiador_trabajo');
+        $fiador['ciudad_trabajo'] = $request->get('ciudad_fiador_trabajo');
+        $fiador['codigo_postal_trabajo'] = $request->get('codigo_postal_fiador_trabajo');
+        $fiador['entre_calles_trabajo'] = $request->get('entre_calles_fiador_trabajo');
+
+        return CatFiador::create($fiador);
     }
 }

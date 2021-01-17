@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/** Arrendatario */
 class Lessee extends Model implements Phoneable, HasMedia
 {
     const STATUS_ACTIVE = 1;

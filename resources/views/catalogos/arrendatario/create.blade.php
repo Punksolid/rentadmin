@@ -59,7 +59,7 @@
             </div>
             <div class="form-group">
                 <label for="numero_int">Numero Interior</label>
-                <input type="text" name="numero_int" onkeypress="return justNumbers(event)" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
+                <input type="text" name="numero_int" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia">Colonia</label>
@@ -95,7 +95,7 @@
             </div>
             <div class="form-group">
                 <label for="numero_int_trabajo">Numero Interior</label>
-                <input type="text" name="numero_int_trabajo" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                <input type="text" name="numero_int_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia_trabajo">Colonia</label>
@@ -161,7 +161,7 @@
             </div>
             <div class="form-group">
                 <label for="numero_int_fiador">Numero Interior</label>
-                <input type="text" name="numero_int_fiador" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                <input type="text" name="numero_int_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia_fiador">Colonia</label>
@@ -197,7 +197,7 @@
             </div>
             <div class="form-group">
                 <label for="numero_int_fiador_trabajo">Numero Interior</label>
-                <input type="text" name="numero_int_fiador_trabajo" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                <input type="text" name="numero_int_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia_fiador_trabajo">Colonia</label>

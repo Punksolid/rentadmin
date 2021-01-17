@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+/** Arrendatario */
 class LesseeTest extends TestCase
 {
     use DatabaseTransactions;
@@ -101,6 +102,42 @@ class LesseeTest extends TestCase
 
         $call->assertRedirect(route('arrendatario.index'));
 
+    }
+
+    public function test_register_lessee_with_minimum_information()
+    {
+        $this->withoutExceptionHandling();
+        /** should not as for
+        NÚMERO INTERIOR-
+        ENTRE CALLES-
+        NÚMERO INTERIOR (DIRECCIÓN DE TRABAJO)-
+        ENTRE CALLES (DIRECCIÓN DE TRABAJO)-
+        NÚMERO INTERIOR (DOMICILIO FIADOR)
+        ENTRE CALLES (DOMICILIO FIADOR)
+        NÚMERO INTERIOR (TRABAJO FIADOR)
+        ENTRE CALLES (TRABAJO FIADOR)
+         */
+
+        $lessee = factory(Lessee::class)->raw([
+            'nombre_fiador' => $this->faker->name,
+            'apellido_paterno_fiador' => $this->faker->name,
+            'apellido_materno_fiador' => $this->faker->name,
+            'calle_fiador' => $this->faker->streetName,
+            'colonia_fiador' => $this->faker->word,
+            'numero_ext_fiador' => $this->faker->lexify('?????'),
+            'estado_fiador' => $this->faker->state,
+            'ciudad_fiador' => $this->faker->city,
+            'codigo_postal_fiador' => $this->faker->postcode,
+            'colonia_fiador_trabajo' => $this->faker->word,
+            'numero_ext_fiador_trabajo' => $this->faker->word,
+            'estado_fiador_trabajo' => $this->faker->state,
+            'ciudad_fiador_trabajo' => $this->faker->city,
+            'codigo_postal_fiador_trabajo' => $this->faker->postcode
+        ]);
+
+        $call = $this->post(route('arrendatario.store'), $lessee);
+
+        $call->assertRedirect(route('arrendatario.index'));
     }
 
     public function testLesseeCanHavePhones()
