@@ -43,7 +43,7 @@
             </div>
             <div class="formulario-tres">
                 <label for="numero_int">Numero Interior</label>
-                <input type="text" name="numero_int" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_int }}" placeholder="Numero Interior...">
+                <input type="text" name="numero_int" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_int }}" placeholder="Numero Interior...">
             </div>
             <div class="formulario-tres">
                 <label for="colonia">Colonia</label>

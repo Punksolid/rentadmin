@@ -44,7 +44,7 @@
             </div>
             <div class="formulario-tres">
                 <label for="numero_int">Numero Interior</label>
-                <input type="text" name="numero_int" onkeypress="return justNumbers(event)" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
+                <input type="text" name="numero_int" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
             </div>
             <div class="formulario-tres">
                 <label for="colonia">Colonia</label>

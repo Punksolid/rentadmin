@@ -17,11 +17,9 @@ $factory->define(Lessor::class, function (Faker $faker) {
         'calle' => $faker->address,
         'colonia' => $faker->word,
         'numero_ext' => $faker->numberBetween(1,1111),
-        'numero_int' => $faker->word,
         'estado' => $faker->state,
         'ciudad' => $faker->city,
         'codigo_postal' => $faker->postcode,
-        'entre_calles' => $faker->address,
         'rfc' => $faker->randomLetter,
         'estatus' => $faker->boolean
     ];

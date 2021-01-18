@@ -4,14 +4,17 @@ namespace Tests\Feature;
 
 use App\Models\Lessee;
 use App\Models\Lessor;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+/** Arrendador */
 class LessorTest extends TestCase
 {
 
     use WithFaker;
+    use DatabaseTransactions;
 
     public function testALessorCanBeRegisteredWithoutInvoiceData()
     {
@@ -23,6 +26,22 @@ class LessorTest extends TestCase
         $this->assertDatabaseHas('lessors', [
             'nombre' => $lessor['nombre']
         ]);
+    }
+
+    public function testRegisterBasicLessor()
+    {
+        $this->withoutExceptionHandling();
+        $lessor = factory(Lessor::class)->raw([
+            'entre_calles' => ''
+        ]);
+
+        $call = $this->call('POST', route('arrendador.store'), $lessor);
+
+        $call->assertRedirect(route('arrendador.index'));
+        $this->assertDatabaseHas('lessors', [
+            'nombre' => $lessor['nombre']
+        ]);
+
     }
 
     public function testALessorCanBeRegisteredWithPhoneData()
