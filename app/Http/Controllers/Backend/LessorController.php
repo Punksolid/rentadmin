@@ -104,11 +104,23 @@ class LessorController extends Controller
     }
 
     public function edit($id){
-        $lessor = Lessor::findOrFail($id);
-        $tel = CatTelefono::where('id_arrendador', $id)->get();
-        $email = CatEmail::where('id_arrendador', $id)->get();
-        $banco = CatBanco::where('id_arrendador', $id)->get();
-        return view('catalogos.arrendador.edit',["arrendador" => $lessor, "tel" => $tel, "email" => $email, 'banco' => $banco]);
+        /** @var Lessor $lessor */
+        $lessor = Lessor::with([
+            'phones',
+            'emails',
+            'bankAccounts'
+        ])->findOrFail($id);
+
+        $phones = $lessor->phones;
+        $emails = $lessor->emails;
+        $banco = $lessor->bankAccounts;
+
+        return view('catalogos.arrendador.edit',[
+            "arrendador" => $lessor,
+            "phones" => $phones,
+            "emails" => $emails,
+            'banco' => $banco
+        ]);
     }
 
     public function update(Request $request, $id){

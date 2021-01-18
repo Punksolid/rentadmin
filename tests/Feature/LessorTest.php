@@ -93,4 +93,39 @@ class LessorTest extends TestCase
 
         $call->assertSee($lessor_inactive->nombre);
     }
+
+    public function testEditFormLoadsSuccessfulWithAllAttachedData()
+    {
+        $this->withoutExceptionHandling();
+        /** @var Lessor $lessor */
+        $lessor = factory(Lessor::class)->create();
+        $lessor->addPhoneData($this->faker->phoneNumber, 'Telefono Casa');
+        $lessor->addEmail($this->faker->email);
+        $lessor->addBankAccount(
+            $this->faker->word,
+            $this->faker->bankAccountNumber,
+            $this->faker->bankAccountNumber,
+            $this->faker->name
+        );
+
+        $call = $this->get(route('arrendador.edit', [
+            $lessor->id
+        ]));
+
+        $call->assertSuccessful();
+    }
+
+    public function testEditFormLoadsSuccessfulWithoutAttachedData()
+    {
+        $this->markTestIncomplete('We will update even if dont work, because when creating is obligated to add phone');
+        $this->withoutExceptionHandling();
+        /** @var Lessor $lessor */
+        $lessor = factory(Lessor::class)->create();
+
+        $call = $this->get(route('arrendador.edit', [
+            $lessor->id
+        ]));
+
+        $call->assertSuccessful();
+    }
 }

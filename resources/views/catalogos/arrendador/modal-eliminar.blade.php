@@ -1,5 +1,5 @@
-<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-eliminar-telefono{{$te->id_telefono}}">
-    {{Form::Open(array('url'=>array('catalogos/arrendador/telefono',$te->id_telefono),'method'=>'delete'))}}
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-eliminar-telefono{{optional($phone)->id_telefono}}">
+    {{Form::Open(['url'=>['catalogos/arrendador/telefono',optional($phone)->id_telefono],'method'=>'delete'])}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,8 +18,8 @@
     {{Form::Close()}}
 </div>
 
-<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-eliminar-email{{$em->id_email}}">
-    {{Form::Open(array('url'=>array('catalogos/arrendador/email',$em->id_email),'method'=>'delete'))}}
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-eliminar-email{{$email->id_email}}">
+    {{Form::Open(array('url'=>array('catalogos/arrendador/email', $email->id_email),'method'=>'delete'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,8 +38,8 @@
     {{Form::Close()}}
 </div>
 
-<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-eliminar-banco{{$ba->id_banco}}">
-    {{Form::Open(array('url'=>array('catalogos/arrendador/banco',$ba->id_banco),'method'=>'delete'))}}
+<div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-eliminar-banco{{$bank_account->id_banco}}">
+    {{Form::Open(array('url'=>array('catalogos/arrendador/banco',$bank_account->id_banco),'method'=>'delete'))}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

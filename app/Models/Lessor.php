@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,6 +17,7 @@ class Lessor extends Model implements Phoneable
 {
     use SoftDeletes;
     use HasPhones;
+
 
     const ACTIVE_STATUS = 1;
     const INACTIVE_STATUS = 0;
@@ -57,9 +59,20 @@ class Lessor extends Model implements Phoneable
             _email', 'lessors.id', '=', 'cat_email.id_arrendador');
     }
 
+    /**
+     * @return HasMany
+     */
     public function emails()
     {
         return $this->hasMany(CatEmail::class,'id_arrendador');
+    }
+    public function addEmail($email, $status = 1)
+    {
+        return $this->emails()->create([
+            'id_arrendador' => $this->id,
+            'email' =>  $email,
+            'status' => $status
+        ]);
     }
 
     public function defaultEmail()
@@ -69,7 +82,25 @@ class Lessor extends Model implements Phoneable
 
     public function phones()
     {
-        return $this->morphMany(CatTelefono::class, 'phoneable')
+        return $this
+            ->morphMany(CatTelefono::class, 'phoneable')
             ->orWhere('id_arrendador',$this->id);
     }
+
+    public function bankAccounts()
+    {
+        return $this->hasMany(CatBanco::class,'id_arrendador');
+    }
+
+    public function addBankAccount(string $bank, $account, $clabe, $owner_name, $status = 1)
+    {
+        return $this->bankAccounts()->create([
+            'banco' => $bank,
+            'cuenta' => $account,
+            'clabe' => $clabe,
+            'nombre_titular' => $owner_name,
+            'estatus' => $status
+        ]);
+    }
+
 }
