@@ -64,8 +64,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('subcatalogos/tipo-mantenimiento{mantenimiento}', 'Backend\TipoMantenimientoController@activar');
 
     //Contrato o Convenio
-    Route::resource('contrato', 'Backend\CatContratoController');
-    Route::put('contrato/{contrato}', 'Backend\CatContratoController@activar');
+    Route::resource('contrato', 'Backend\ContractsController');
+    Route::put('contrato/{contrato}', 'Backend\ContractsController@activar');
 
     //Recibos Automaticos
     Route::get('recibos-automaticos', 'Backend\RecibosAutomaticosController@index');//Devuelve la vista

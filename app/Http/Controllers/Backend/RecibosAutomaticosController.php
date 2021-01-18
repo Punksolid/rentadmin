@@ -10,7 +10,7 @@ use App\Models\Lessee;
 
 
 
-use App\Models\CatContrato;
+use App\Models\Contract;
 use App\Models\Property;use App\Models\FechaContrato;
 use App\Models\RegistroRecibo;
 use Carbon\Carbon;
@@ -97,7 +97,7 @@ class RecibosAutomaticosController extends Controller
         $arrendador = Lessor::findOrFail($data['id_arrendador']);
         $finca = Property::findOrFail($data['id_finca']);
         $arrendatario = Lessee::findOrFail($data['id_arrendatario']);
-        $contrato = CatContrato::where('id_arrendador', $arrendador->id_cat_arrendador)->where('id_finca', $finca->id_cat_fincas)->where('id_arrendatario', $arrendatario->id_cat_arrendatario)->first();
+        $contrato = Contract::where('id_arrendador', $arrendador->id_cat_arrendador)->where('id_finca', $finca->id_cat_fincas)->where('id_arrendatario', $arrendatario->id_cat_arrendatario)->first();
 
         $cuota = str_replace(['$', ',', '.00'], '', $finca->cuota_agua);
         $mante = str_replace(['$', ',', '.00'], '', $finca->mantenimiento);
@@ -150,7 +150,7 @@ class RecibosAutomaticosController extends Controller
 
     public function controlImp($id){
         $registro = RegistroRecibo::findOrFail($id);
-        $contrato = CatContrato::findOrFail($registro->id_contrato);
+        $contrato = Contract::findOrFail($registro->id_contrato);
         $finca = Property::findOrFail($contrato->id_finca);
         $arrendatario = Lessee::findOrFail($contrato->id_arrendatario);
 
@@ -242,7 +242,7 @@ class RecibosAutomaticosController extends Controller
 
         for ($i = 0; $i <= $data['contador']; $i++) {
             if (isset($data['id_contrato' . $i])) {
-                $contrato = CatContrato::findOrFail($data['id_contrato' . $i]);
+                $contrato = Contract::findOrFail($data['id_contrato' . $i]);
                 $fechas = FechaContrato::where('id_contrato', $data['id_contrato' . $i])->get();
                 $arrendatario = Lessee::where('id_cat_arrendatario', $contrato->id_arrendatario)->first();
                 $finca = Property::where('id_cat_fincas', $contrato->id_finca)->first();
@@ -277,7 +277,7 @@ class RecibosAutomaticosController extends Controller
                 //Actualizar deposito al completar el año y si no es fiscal imprimir en el mismo
                 if (Carbon::createFromFormat('Y-m-d', $fecha_inicio)->monthName == Carbon::now()->monthName && Carbon::now()->monthName == strtolower($data['mes'])) {
                     $fechadif = FechaContrato::where('fecha_fin', $fecha_inicio)->where('id_contrato', $data['id_contrato' . $i])->first();
-                    $contratodif = CatContrato::findOrFail($fechadif->id_contrato);
+                    $contratodif = Contract::findOrFail($fechadif->id_contrato);
                     $valorUno = str_replace(['$', ',', '.00'], '', $fechadif->cantidad);
                     $valorDos = str_replace(['$', ',', '.00'], '', $contratodif->deposito);
                     $diferencia = $valorUno - $valorDos;
@@ -470,7 +470,7 @@ class RecibosAutomaticosController extends Controller
     //Muestra el arrendatario en filtro. Peticion AJAX
     public function filtroArrendatario(Request $request){
         $data = $request->all();
-        $contrato = CatContrato::where('id_arrendador', $data['id_arrendador'])->where('id_finca', $data['id_propiedad'])->first();
+        $contrato = Contract::where('id_arrendador', $data['id_arrendador'])->where('id_finca', $data['id_propiedad'])->first();
         $fecha = FechaContrato::where('id_contrato', $contrato->id_contratos)->first();
         if (isset($contrato)) {
         $id = $contrato->id_arrendatario;
@@ -487,7 +487,7 @@ class RecibosAutomaticosController extends Controller
 
     //Muestra todos los contratos. Peticion AJAX
     public function contrato($id){
-        $contrato = CatContrato::select('cat_contratos.id_contratos', 'cat_arrendatario.nombre', 'cat_arrendatario.apellido_paterno', 'cat_arrendatario.apellido_materno', 'cat_fincas.finca_arrendada')
+        $contrato = Contract::select('cat_contratos.id_contratos', 'cat_arrendatario.nombre', 'cat_arrendatario.apellido_paterno', 'cat_arrendatario.apellido_materno', 'cat_fincas.finca_arrendada')
             ->join('cat_arrendatario', 'id_cat_arrendatario', '=', 'id_arrendatario')
             ->join('cat_fincas', 'id_cat_fincas', '=', 'id_finca')
             ->where('cat_contratos.id_arrendador', $id)

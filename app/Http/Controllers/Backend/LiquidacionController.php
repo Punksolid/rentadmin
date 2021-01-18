@@ -10,7 +10,7 @@ use App\Models\Lessee;
 
 
 
-use App\Models\CatContrato;
+use App\Models\Contract;
 use App\Models\Property;
 use App\Models\Configuracion;
 use App\Models\FechaContrato;
@@ -125,7 +125,7 @@ class LiquidacionController extends Controller
         $data = $request->all();
 
         $finca = Property::where('id_arrendador', $data['id_arrendador'])->get();
-        $contrato = CatContrato::all();
+        $contrato = Contract::all();
         $fechasContrato = FechaContrato::all();
         $arrendatario = Lessee::all();
         $iva = Configuracion::findOrFail(5)->cantidad;

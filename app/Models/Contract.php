@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CatContrato extends Model
+class Contract extends Model
 {
     use SoftDeletes;
-
-    protected $table = 'cat_contratos';
-
-    protected $primaryKey = 'id_contratos';
 
     protected $fillable = [
         'id_arrendador',
@@ -35,5 +31,20 @@ class CatContrato extends Model
             ->join('lessees', 'cat_contratos.id_arrendatario', '=', 'lessees.id')
             ->join('properties', 'cat_contratos.id_finca', '=', 'properties.id')
             ->join('phone_numbers', 'lessees.id', '=', 'phone_numbers.id_arrendatario');
+    }
+
+    public function lessor()
+    {
+        return $this->belongsTo(Lessor::class,'id_arrendador','id');
+    }
+
+    public function lessee()
+    {
+        return $this->belongsTo(Lessee::class,'id_arrendatario','id');
+    }
+
+    public function property()
+    {
+        return $this->belongsTo(Property::class,'id_finca','id');
     }
 }

@@ -4,31 +4,20 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lessee;
-use App\Models\CatContrato;
+use App\Models\Contract;
 use App\Models\Property;
 use App\Models\FechaContrato;
 use App\Models\Lessor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class CatContratoController extends Controller
+class ContractsController extends Controller
 {
     public function index(Request $request){
-            $contrato = CatContrato::select(
-                'cat_contratos.id_contratos',
-                'lessors.nombre AS arrendador_nombre',
-                'lessors.apellido_paterno AS arrendador_apellido',
-                'lessees.nombre AS arrendatario_nombre',
-                'lessees.apellido_paterno AS arrendatario_apellido',
-                'properties.name AS propiedad',
-                'phone_numbers.telefono AS telefono',
-                'cat_contratos.estatus AS estatus')
-                ->joinfechas()
-                ->groupBy('id_contratos')
-                ->orderBy('id_contratos', 'asc')
-                ->paginate(15);
-//            $this->desactivar();
-            return view('contrato.index', ["contrato" => $contrato]);
+
+        $contracts = Contract::paginate();
+
+        return view('contrato.index', ["contracts" => $contracts ]);
     }
 
     public function create(){
@@ -46,7 +35,7 @@ class CatContratoController extends Controller
     public function store(Request $request){
         $data = $request->all();
         $duracion = $data['duracion_contrato'];
-        $contrato = CatContrato::create($data);
+        $contrato = Contract::create($data);
 
          for ($i = 1; $i<=$duracion; $i++){
              $fecha['id_contrato'] = $contrato['id_contratos'];
@@ -59,11 +48,11 @@ class CatContratoController extends Controller
     }
 
     public function show($id){
-        $co = CatContrato::findOrFail($id);
+        $co = Contract::findOrFail($id);
         return view('contrato.show', ['contrato' => $co]);
     }
 
-    public function edit(CatContrato $contrato){
+    public function edit(Contract $contrato){
         $contract = $contrato;
 
         $dates = FechaContrato::where('id_contrato', $contract->id)->get();
@@ -74,7 +63,7 @@ class CatContratoController extends Controller
     public function update(Request $request, $id){
         $data = $request->all();
         $x = $data['duracion_contrato'];
-        CatContrato::findOrFail($id)->update($data);
+        Contract::findOrFail($id)->update($data);
         $contador = FechaContrato::where('id_contrato', $id)->get();
         $num_fechas = count($contador);
         $duracion = ($x-$num_fechas);
@@ -101,21 +90,21 @@ class CatContratoController extends Controller
     }
 
     public function destroy($id){
-        $c = CatContrato::findOrFail($id);
+        $c = Contract::findOrFail($id);
         $c->estatus = false;
         $c->update();
         return Redirect::to('contrato');
     }
 
     public function activar($id){
-        $c = CatContrato::findOrFail($id);
+        $c = Contract::findOrFail($id);
         $c->estatus = true;
         $c->update();
         return Redirect::to('contrato');
     }
 
     public function desactivar(){
-        $contracts = CatContrato::all();
+        $contracts = Contract::all();
         foreach ($contracts as $contract){
             $data = ['estatus_renta' => 'Rentada'];
             $finca = Property::findOrFail($contract->id_finca)->update($data);
