@@ -107,16 +107,7 @@ class LesseeTest extends TestCase
     public function test_register_lessee_with_minimum_information()
     {
         $this->withoutExceptionHandling();
-        /** should not as for
-        NÚMERO INTERIOR-
-        ENTRE CALLES-
-        NÚMERO INTERIOR (DIRECCIÓN DE TRABAJO)-
-        ENTRE CALLES (DIRECCIÓN DE TRABAJO)-
-        NÚMERO INTERIOR (DOMICILIO FIADOR)
-        ENTRE CALLES (DOMICILIO FIADOR)
-        NÚMERO INTERIOR (TRABAJO FIADOR)
-        ENTRE CALLES (TRABAJO FIADOR)
-         */
+
 
         $lessee = factory(Lessee::class)->raw([
             'nombre_fiador' => $this->faker->name,
@@ -137,6 +128,19 @@ class LesseeTest extends TestCase
 
         $call = $this->post(route('arrendatario.store'), $lessee);
 
+        $call->assertRedirect(route('arrendatario.index'));
+    }
+
+    public function testRegisterLesseeWithoutGuarantor()
+    {
+        $this->withoutExceptionHandling();
+
+        $lessee = factory(Lessee::class)->raw();
+
+        $call = $this->post(route('arrendatario.store'), $lessee);
+        $this->assertDatabaseHas('lessees', [
+            'nombre' => $lessee['nombre']
+        ]);
         $call->assertRedirect(route('arrendatario.index'));
     }
 

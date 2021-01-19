@@ -24,18 +24,18 @@ class LesseeRequest extends FormRequest
     public function rules()
     {
         return [
-            'apellido_paterno_fiador' => 'required',
-            'apellido_materno_fiador' => 'required',
-            'calle_fiador' => 'required',
-            'colonia_fiador' => 'required',
-            'numero_ext_fiador' => 'required',
-            'estado_fiador' => 'required',
-            'ciudad_fiador' => 'required',
-            'codigo_postal_fiador' => 'required',
-            'colonia_fiador_trabajo' => 'required',
-            'estado_fiador_trabajo' => 'required',
-            'ciudad_fiador_trabajo' => 'required',
-            'codigo_postal_fiador_trabajo' => 'required'
+//            'apellido_paterno_fiador' => 'required',
+//            'apellido_materno_fiador' => 'required',
+//            'calle_fiador' => 'required',
+//            'colonia_fiador' => 'required',
+//            'numero_ext_fiador' => 'required',
+//            'estado_fiador' => 'required',
+//            'ciudad_fiador' => 'required',
+//            'codigo_postal_fiador' => 'required',
+//            'colonia_fiador_trabajo' => 'required',
+//            'estado_fiador_trabajo' => 'required',
+//            'ciudad_fiador_trabajo' => 'required',
+//            'codigo_postal_fiador_trabajo' => 'required'
         ];
     }
 }

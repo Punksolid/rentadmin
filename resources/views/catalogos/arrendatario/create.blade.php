@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label for="telefono">Telefono &nbsp;&nbsp;<button id="add_field" class="btn-sm btn-success">Añadir</button></label><br>
                 <div id="listas">
-                    <input type="text" id="masc-tel" data-mask="(000) 000 0000" name="telefono1" class="mascara" onkeypress="return justNumbers(event)" placeholder="Telefono..." required>&nbsp;<input id="desc" type="text" name="descripcion1" placeholder="Descripcion..." required>
+                    <input type="text" id="masc-tel" data-mask="(000) 000 0000" name="telefono1" class="mascara" onkeypress="return justNumbers(event)" placeholder="Telefono..." >&nbsp;<input id="desc" type="text" name="descripcion1" placeholder="Descripcion..." >
                 </div>
             </div>
             <div class="form-group">
@@ -127,99 +127,100 @@
 
             <!-- Fiador -->
             <div class="form-group">
-                <h4><strong>Fiador</strong></h4>
+                <h4><strong>Fiador</strong>  <input type="checkbox" checked onclick="document.getElementById('guarantor-block').hidden=!this.checked; checknull(this.checked)"></h4></h4>
             </div>
-            <div class="form-group">
-                <label for="nombre_fiador">Nombre</label>
-                <input type="text" name="nombre_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre..." required>
-            </div>
-            <div class="form-group">
-                <label for="apellido_paterno_fiador">Apellido Paterno</label>
-                <input type="text" name="apellido_paterno_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno..." required>
-            </div>
-            <div class="form-group">
-                <label for="apellido_materno_fiador">Apellido Materno</label>
-                <input type="text" name="apellido_materno_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." required>
-            </div>
-            <div class="form-group">
-                <label for="telefono_fiador">Telefono &nbsp;&nbsp;<button id="field_add" class="btn-sm btn-success">Añadir</button></label><br>
-                <div id="list">
-                    <input type="text" id="masc-tel" data-mask="(000) 000 0000" class="mascara" name="telefono_fiador1" onkeypress="return justNumbers(event)" placeholder="Telefono..." required>&nbsp;<input id="desc" type="text" name="descripcion_fiador1" placeholder="Descripcion..." required>
+            <div id="guarantor-block">
+                <div class="form-group">
+                    <label for="nombre_fiador">Nombre</label>
+                    <input type="text" name="nombre_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre..." >
+                </div>
+                <div class="form-group">
+                    <label for="apellido_paterno_fiador">Apellido Paterno</label>
+                    <input type="text" name="apellido_paterno_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno..." >
+                </div>
+                <div class="form-group">
+                    <label for="apellido_materno_fiador">Apellido Materno</label>
+                    <input type="text" name="apellido_materno_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." >
+                </div>
+                <div class="form-group">
+                    <label for="telefono_fiador">Telefono &nbsp;&nbsp;<button id="field_add" class="btn-sm btn-success">Añadir</button></label><br>
+                    <div id="list">
+                        <input type="text" id="masc-tel" data-mask="(000) 000 0000" class="mascara" name="telefono_fiador1" onkeypress="return justNumbers(event)" placeholder="Telefono..." >&nbsp;<input id="desc" type="text" name="descripcion_fiador1" placeholder="Descripcion..." >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h4><strong>Domicilio Fiador</strong></h4>
+                </div>
+                <div class="form-group">
+                    <label for="calle_fiador">Calle</label>
+                    <input type="text" name="calle_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." >
+                </div>
+                <div class="form-group">
+                    <label for="numero_ext_fiador">Numero Exterior</label>
+                    <input type="text" name="numero_ext_fiador" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." >
+                </div>
+                <div class="form-group">
+                    <label for="numero_int_fiador">Numero Interior</label>
+                    <input type="text" name="numero_int_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                </div>
+                <div class="form-group">
+                    <label for="colonia_fiador">Colonia</label>
+                    <input type="text" name="colonia_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." >
+                </div>
+                <div class="form-group">
+                    <label for="estado_fiador">Estado</label>
+                    <input type="text" name="estado_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." >
+                </div>
+                <div class="form-group">
+                    <label for="ciudad_fiador">Ciudad</label>
+                    <input type="text" name="ciudad_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." >
+                </div>
+                <div class="form-group">
+                    <label for="codigo_postal_fiador">Codigo Postal</label>
+                    <input type="number" name="codigo_postal_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Codigo Postal..." >
+                </div>
+                <div class="form-group">
+                    <label for="entre_calles_fiador">Entre Calles</label>
+                    <input type="text" name="entre_calles_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                </div>
+
+                <div class="form-group">
+                    <h4><strong>Direccion de Trabajo Fiador</strong></h4>
+                </div>
+                <div class="form-group">
+                    <label for="calle_fiador_trabajo">Calle</label>
+                    <input type="text" name="calle_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." >
+                </div>
+                <div class="form-group">
+                    <label for="numero_ext_fiador_trabajo">Numero Exterior</label>
+                    <input type="text" name="numero_ext_fiador_trabajo" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." >
+                </div>
+                <div class="form-group">
+                    <label for="numero_int_fiador_trabajo">Numero Interior</label>
+                    <input type="text" name="numero_int_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                </div>
+                <div class="form-group">
+                    <label for="colonia_fiador_trabajo">Colonia</label>
+                    <input type="text" name="colonia_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." >
+                </div>
+                <div class="form-group">
+                    <label for="estado_fiador_trabajo">Estado</label>
+                    <input type="text" name="estado_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." >
+                </div>
+                <div class="form-group">
+                    <label for="ciudad_fiador_trabajo">Ciudad</label>
+                    <input type="text" name="ciudad_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." >
+                </div>
+                <div class="form-group">
+                    <label for="codigo_postal_fiador_trabajo">Codigo Postal</label>
+                    <input type="number" name="codigo_postal_fiador_trabajo" class="form-control" placeholder="Codigo Postal..." >
+                </div>
+                <div class="form-group">
+                    <label for="entre_calles_fiador_trabajo">Entre Calles</label>
+                    <input type="text" name="entre_calles_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
                 </div>
             </div>
-
-            <div class="form-group">
-                <h4><strong>Domicilio Fiador</strong></h4>
-            </div>
-            <div class="form-group">
-                <label for="calle_fiador">Calle</label>
-                <input type="text" name="calle_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." required>
-            </div>
-            <div class="form-group">
-                <label for="numero_ext_fiador">Numero Exterior</label>
-                <input type="text" name="numero_ext_fiador" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." required>
-            </div>
-            <div class="form-group">
-                <label for="numero_int_fiador">Numero Interior</label>
-                <input type="text" name="numero_int_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
-            </div>
-            <div class="form-group">
-                <label for="colonia_fiador">Colonia</label>
-                <input type="text" name="colonia_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." required>
-            </div>
-            <div class="form-group">
-                <label for="estado_fiador">Estado</label>
-                <input type="text" name="estado_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." required>
-            </div>
-            <div class="form-group">
-                <label for="ciudad_fiador">Ciudad</label>
-                <input type="text" name="ciudad_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." required>
-            </div>
-            <div class="form-group">
-                <label for="codigo_postal_fiador">Codigo Postal</label>
-                <input type="number" name="codigo_postal_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Codigo Postal..." required>
-            </div>
-            <div class="form-group">
-                <label for="entre_calles_fiador">Entre Calles</label>
-                <input type="text" name="entre_calles_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
-            </div>
-
-            <div class="form-group">
-                <h4><strong>Direccion de Trabajo Fiador</strong></h4>
-            </div>
-            <div class="form-group">
-                <label for="calle_fiador_trabajo">Calle</label>
-                <input type="text" name="calle_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." required>
-            </div>
-            <div class="form-group">
-                <label for="numero_ext_fiador_trabajo">Numero Exterior</label>
-                <input type="text" name="numero_ext_fiador_trabajo" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." required>
-            </div>
-            <div class="form-group">
-                <label for="numero_int_fiador_trabajo">Numero Interior</label>
-                <input type="text" name="numero_int_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
-            </div>
-            <div class="form-group">
-                <label for="colonia_fiador_trabajo">Colonia</label>
-                <input type="text" name="colonia_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." required>
-            </div>
-            <div class="form-group">
-                <label for="estado_fiador_trabajo">Estado</label>
-                <input type="text" name="estado_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." required>
-            </div>
-            <div class="form-group">
-                <label for="ciudad_fiador_trabajo">Ciudad</label>
-                <input type="text" name="ciudad_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." required>
-            </div>
-            <div class="form-group">
-                <label for="codigo_postal_fiador_trabajo">Codigo Postal</label>
-                <input type="number" name="codigo_postal_fiador_trabajo" class="form-control" placeholder="Codigo Postal..." required>
-            </div>
-            <div class="form-group">
-                <label for="entre_calles_fiador_trabajo">Entre Calles</label>
-                <input type="text" name="entre_calles_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
-            </div>
-
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Guardar</button>
                 <a class="btn btn-danger" href="./">Cancelar</a>

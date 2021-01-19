@@ -38,24 +38,27 @@ class LesseesController extends Controller
     public function store(LesseeRequest $request)
     {
         $data = $request->all();
-        $f = $this->registerGuarantor($request);
+        if ($request->filled(['nombre_fiador', 'apellido_paterno_fiador'] ) ) {
+            $guarantor = $this->registerGuarantor($request);
+            $data['id_fiador'] = $guarantor['id_cat_fiadores'];
+            for ($k = 1; $k <= 10; $k++) {
+                $variable = isset($data['telefono_fiador' . $k]);
+                if ($variable == null) {
+                } else {
+                    $tel['id_fiador'] = $guarantor['id_cat_fiadores'];
+                    $tel['telefono'] = $data['telefono_fiador' . $k];
+                    $tel['descripcion'] = $data['descripcion_fiador' . $k];
+                    CatTelefono::create($tel);
+                }
+            }
+        }
 
-        $data['id_fiador'] = $f['id_cat_fiadores'];
         /** @var Lessee $arrendatario */
         $arrendatario = Lessee::create($data);
         if ($request->hasFile('identity')) {
             $arrendatario->addMediaFromRequest('identity')->toMediaCollection();
         }
-        for ($k = 1; $k <= 10; $k++) {
-            $variable = isset($data['telefono_fiador' . $k]);
-            if ($variable == null) {
-            } else {
-                $tel['id_fiador'] = $f['id_cat_fiadores'];
-                $tel['telefono'] = $data['telefono_fiador' . $k];
-                $tel['descripcion'] = $data['descripcion_fiador' . $k];
-                CatTelefono::create($tel);
-            }
-        }
+
 
         for ($i = 1; $i <= 10; $i++) {
             $variable = isset($data['telefono' . $i]);
