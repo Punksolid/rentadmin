@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('contrato/{contrato}', 'Backend\ContractsController@activar');
 
     //Recibos Automaticos
-    Route::get('recibos-automaticos', 'Backend\RecibosAutomaticosController@index');//Devuelve la vista
+    Route::get('recibos-automaticos', 'Backend\RecibosAutomaticosController@index')->name('tickets.index');//Devuelve la vista
     Route::get('recibos-automaticos/pdf', 'Backend\RecibosAutomaticosController@generar');//Genera PDF
     Route::post('recibos-automaticos/registro', 'Backend\RecibosAutomaticosController@registroRecibo');//Registro de Recibos
     Route::get('control-pago/recibo/{contrato}', 'Backend\RecibosAutomaticosController@vistaRecibo');//Vista de Recibos

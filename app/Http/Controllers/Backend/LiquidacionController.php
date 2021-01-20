@@ -21,7 +21,7 @@ use Illuminate\Http\Request;
 class LiquidacionController extends Controller
 {
     public function index(){
-        $arrendador = Lessor::all();
+        $lessors = Lessor::all();
         $comision = Configuracion::findOrFail(4)->cantidad;
         $retiva = Configuracion::findOrFail(2)->cantidad;
         $retisr = Configuracion::findOrFail(3)->cantidad;
@@ -118,7 +118,18 @@ class LiquidacionController extends Controller
         if ($dos <10){
             $dos = '0'.$dos;
         }
-        return view('liquidaciones.index', ['comision' => $comision, 'retiva' => $retiva, 'retisr' => $retisr ,'arrendador' => $arrendador, "mesuno" => $mes, 'num_mes_uno' => $fecha, "mesdos" => $mes_dos, 'num_mes_dos' => $uno, "mestres" => $mes_tres,'num_mes_tres' => $dos]);
+        return view('liquidaciones.index', [
+            'comision' => $comision,
+            'retiva' => $retiva,
+            'retisr' => $retisr,
+            'arrendador' => $lessors,
+            "mesuno" => $mes,
+            'num_mes_uno' => $fecha,
+            "mesdos" => $mes_dos,
+            'num_mes_dos' => $uno,
+            "mestres" => $mes_tres ??'',
+            'num_mes_tres' => $dos
+        ]);
     }
 
     public function getFinca(Request $request){
@@ -130,6 +141,7 @@ class LiquidacionController extends Controller
         $arrendatario = Lessee::all();
         $iva = Configuracion::findOrFail(5)->cantidad;
         $recibos = RegistroRecibo::where('deposito', 'true')->get();
+
         return response()->json(['finca' => $finca, 'contrato' => $contrato, 'ivacon' => $iva, 'fecha' => $fechasContrato, 'arrendatario' => $arrendatario, 'recibos' => $recibos], 200);
     }
 }
