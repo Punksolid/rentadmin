@@ -36,9 +36,10 @@ Route::group(['middleware' => 'auth'], function() {
 
     //Catalogo Arrendatarios
     Route::resource('catalogos/arrendatario', 'Backend\LesseesController');
-    Route::patch('catalogos/arrendatario/{arrendatario}', 'Backend\LesseesController@toggleStatus')->name('arrendatario.toggle');
+    // @todo Is it possible to keep it working without an specific url
+    Route::patch('catalogos/arrendatario/{arrendatario}/toggle', 'Backend\LesseesController@toggleStatus')->name('arrendatario.toggle');
     Route::post('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\LesseesController@addTelefono');
-    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\LesseesController@addTelefonoFiador');
+    Route::post('catalogos/arrendatario/telefonofiador/{guarantor}', 'Backend\LesseesController@addTelefonoFiador');
     Route::post('catalogos/arrendatario/email/{arrendatario}', 'Backend\LesseesController@addEmail');
     Route::delete('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\LesseesController@deleteTelefono');
     Route::delete('catalogos/arrendatario/email/{arrendatario}', 'Backend\LesseesController@deleteEmail');
@@ -103,6 +104,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     //Configuración
     Route::resource('configuracion', 'Backend\ConfiguracionController');
+
+    //Phones
+    Route::resource('phones', 'PhonesController')->only(['destroy']);
 });
 
 use Illuminate\Support\Facades\Mail;

@@ -93,19 +93,20 @@ class LesseesController extends Controller
 
     public function edit($id)
     {
-        /** @var Lessee $arrendatario */
-        $arrendatario = Lessee::findOrFail($id);
+        /** @var Lessee $lessee */
+        $lessee = Lessee::findOrFail($id);
 //        /** @var CatFiador $fiador */
         /** @var CatFiador $fiador */
-        $fiador = $arrendatario->guarantor;
+        $fiador = $lessee->guarantor;
 //        $tel = CatTelefono::where('id_arrendatario', $id)->get();
-        $tel = $arrendatario->phones()->get();
+        $tel = $lessee->phones()->get();
 //        $tel_f = CatTelefono::where('id_fiador', $fiador['id_cat_fiadores'])->get();
         $tel_f = $fiador->phones()->get();
 //        $email = CatEmail::where('id_arrendatario', $id)->get();
-        $email = $arrendatario->emails()->get();
+        $email = $lessee->emails()->get();
         return view('catalogos.arrendatario.edit', [
-            "arrendatario" => $arrendatario,
+            "arrendatario" => $lessee, //@todo deprecate
+            "lessee" => $lessee,
             "fiador" => $fiador,
             "telf" => $tel_f, // phones of fiador (guarantor)
             "tel" => $tel, //phones of arrendatario (lessee)
@@ -193,6 +194,7 @@ class LesseesController extends Controller
         $data = $request->all();
         $data['id_arrendatario'] = $id;
         CatTelefono::create($data);
+
         return Redirect::back();
     }
 
@@ -200,7 +202,8 @@ class LesseesController extends Controller
     {
         $data = $request->all();
         $data['id_fiador'] = $id;
-        CatTelefono::create($data);
+        $phone = CatTelefono::create($data);
+
         return Redirect::back();
     }
 

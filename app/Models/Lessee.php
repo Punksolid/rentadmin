@@ -79,6 +79,11 @@ class Lessee extends Model implements Phoneable, HasMedia
         return $this->hasMany(CatEmail::class,'id_arrendatario');
     }
 
+    public function addEmail($email, $description = '')
+    {
+        return $this->emails()->create(['email' => $email, 'descripcion' => $description]);
+    }
+
     public function defaultEmail()
     {
         return $this->emails()->first();

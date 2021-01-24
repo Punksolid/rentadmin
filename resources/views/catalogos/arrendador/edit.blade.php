@@ -68,16 +68,7 @@
             <hr>
 
             <div class="formulario-dos">
-                <label for="telefono">Telefono &nbsp;&nbsp;<a data-target="#modal-add-telefono" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
-                    @foreach($phones as $phone)
-                    <div id="listas" style="display: inline-flex">
-                        @if(count($phones) > 1)
-                            <input id="masc-tel" data-mask="(000) 000 0000" type="text" onkeypress="return justNumbers(event)" class="form-control" name="telefonoid{{$phone->id_telefono}}" value="{{$phone->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" class="form-control" type="text" value="{{ $phone->descripcion }}" name="descripcion{{ $phone->id_telefono}}" placeholder="Descripcion..." required>&nbsp;<a data-target="#modal-eliminar-telefono{{$phone->id_telefono}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a><br>
-                        @else
-                            <input id="masc-tel" data-mask="(000) 000 0000" type="text" onkeypress="return justNumbers(event)" class="form-control" name="telefonoid{{$phone->id_telefono}}" value="{{$phone->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" class="form-control" type="text" value="{{ $phone->descripcion }}" name="descripcion{{ $phone->id_telefono}}" placeholder="Descripcion..." required>
-                        @endif
-                    </div>
-                    @endforeach
+                @include('partials.phones', ['type' => \App\Models\Lessor::class, 'id' =>  $arrendador->id, 'phones' => $phones])
             </div>
             <div class="formulario-dos">
                 <label for="email">Correo Electronico &nbsp;&nbsp;<a data-target="#modal-add-email" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
@@ -173,7 +164,7 @@
             </div>
 
             {!! Form::close() !!}
-            @include('catalogos.arrendador.modal-añadir')
+            @include('catalogos.arrendador.modal-add-to-arrendador')
             @include('catalogos.arrendador.modal-eliminar')
 
         </div>

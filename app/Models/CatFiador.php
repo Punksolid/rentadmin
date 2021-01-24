@@ -42,7 +42,8 @@ class CatFiador extends Model implements Phoneable
 
     public function phones()
     {
-        return $this->morphMany(CatTelefono::class, 'phoneable')
-        ->orWhere('id_fiador',$this->id);
+        return $this
+            ->morphMany(CatTelefono::class, 'phoneable')
+            ->orWhere('id_fiador',$this->id_cat_fiadores);
     }
 }

@@ -117,7 +117,6 @@ class LessorTest extends TestCase
 
     public function testEditFormLoadsSuccessfulWithoutAttachedData()
     {
-        $this->markTestIncomplete('We will update even if dont work, because when creating is obligated to add phone');
         $this->withoutExceptionHandling();
         /** @var Lessor $lessor */
         $lessor = factory(Lessor::class)->create();

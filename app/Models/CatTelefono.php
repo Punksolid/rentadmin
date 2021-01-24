@@ -9,12 +9,20 @@ class CatTelefono extends Model
 {
     use SoftDeletes;
 
+    const ACTIVE_STATUS = 1;
+    const INACTIVE_STATUS = 0;
+
     protected $table = 'phone_numbers';
 
     protected $primaryKey = 'id_telefono';
 
     protected $fillable = [
-        'id_arrendador', 'id_arrendatario', 'id_fiador', 'telefono', 'estatus', 'descripcion'
+        'id_arrendador',
+        'id_arrendatario',
+        'id_fiador',
+        'telefono',
+        'estatus',
+        'descripcion'
     ];
 
     protected $hidden = [

@@ -105,11 +105,7 @@ class LessorController extends Controller
 
     public function edit($id){
         /** @var Lessor $lessor */
-        $lessor = Lessor::with([
-            'phones',
-            'emails',
-            'bankAccounts'
-        ])->findOrFail($id);
+        $lessor = Lessor::findOrFail($id);
 
         $phones = $lessor->phones;
         $emails = $lessor->emails;
@@ -125,9 +121,9 @@ class LessorController extends Controller
 
     public function update(Request $request, $id){
         $data = $request->all();
+
         Lessor::findOrFail($id)->update($data);
         $contadorBanco = CatBanco::where('id_arrendador', $id)->get();
-        $contadorTel = CatTelefono::where('id_arrendador', $id)->get();
         $contadorEmail = CatEmail::where('id_arrendador', $id)->get();
 
         foreach ($contadorBanco as $cb) {
@@ -141,14 +137,7 @@ class LessorController extends Controller
             $b->update($banco);
         }
 
-        foreach ($contadorTel as $ct) {
-            $id_tel = $ct->id_telefono;
-            $u = CatTelefono::findOrFail($id_tel);
-            $telefono['id_arrendador'] = $id;
-            $telefono['telefono'] = $data['telefonoid' . $id_tel];
-            $telefono['descripcion'] = $data['descripcion' . $id_tel];
-            $u->update($telefono);
-        }
+        $this->updatePhones($request->get('phones'));
 
         foreach ($contadorEmail as $ce) {
             $id_email = $ce->id_email;
@@ -157,6 +146,7 @@ class LessorController extends Controller
             $email['email'] = $data['emailid' . $id_email];
             $l->update($email);
         }
+
         return Redirect::to('catalogos/arrendador');
     }
 
@@ -176,8 +166,14 @@ class LessorController extends Controller
 
     public function addTelefono(Request $request, $id){
         $data = $request->all();
+
         $data['id_arrendador'] = $id;
-        CatTelefono::create($data);
+
+        /** @var Lessor $lessor */
+        $lessor = Lessor::findOrFail($id);
+
+        $phone = $lessor->phones()->create($data);
+
         return Redirect::back();
     }
 
@@ -218,6 +214,23 @@ class LessorController extends Controller
     {
         foreach ($phone_numbers as $phone_number) {
             $lessor->addPhoneData($phone_number['telefono'], $phone_number['descripcion'], 1 );
+        }
+    }
+
+    /**
+     * @param $contadorTel
+     * @param $id
+     * @param $telefono
+     * @param array $data
+     */
+    private function updatePhones(array $phones): void
+    {
+        foreach ($phones as $id => $phone_input) {
+            $phone = CatTelefono::find($id);
+
+            $phone->telefono = $phone_input['number'];
+            $phone->descripcion = $phone_input['description'];
+            $phone->save();
         }
     }
 }

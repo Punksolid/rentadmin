@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{asset('css/broker.css')}}">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
-    <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <script src="https://kit.fontawesome.com/73137342dd.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -192,6 +192,8 @@
 
 <!-- /.content -->
 </div>
+@yield('after-content')
+
 <!-- /.content-wrapper -->
 <!--Fin-Contenido-->
 <footer class="main-footer">
@@ -202,17 +204,24 @@
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+<script type="text/javascript">
+    @yield('javascript')
+</script>
+{{--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>--}}
 <script src="{{asset('js/jquery.js')}}"></script>
+
 <script src="{{asset('js/app.min.js')}}"></script>
-<script src="{{asset('js/telefono.js')}}"></script>
-<script src="{{asset('js/email.js')}}"></script>
-<script src="{{asset('js/telfiador.js')}}"></script>
-<script src="{{asset('js/banco.js')}}"></script>
-<script src="{{asset('js/fechas-contrato.js')}}"></script>
-<script src="{{asset('js/propiedad.js')}}"></script>
-<script src="{{asset('js/contrato.js')}}"></script>
-<script src="{{asset('js/usuario.js')}}"></script>
-<script src="{{asset('js/recibos-automaticos.js')}}"></script>
+
+{{--<script src="{{asset('js/telefono.js')}}"></script>--}}
+{{--<script src="{{asset('js/email.js')}}"></script>--}}
+{{--<script src="{{asset('js/telfiador.js')}}"></script>--}}
+{{--<script src="{{asset('js/banco.js')}}"></script>--}}
+{{--<script src="{{asset('js/fechas-contrato.js')}}"></script>--}}
+{{--<script src="{{asset('js/propiedad.js')}}"></script>--}}
+{{--<script src="{{asset('js/contrato.js')}}"></script>--}}
+{{--<script src="{{asset('js/usuario.js')}}"></script>--}}
+{{--<script src="{{asset('js/recibos-automaticos.js')}}"></script>--}}
+
 </body>
 
 </html>
