@@ -15,10 +15,13 @@ class UsuarioController extends Controller
     public function index(Request $request){
         if ($request) {
             $query = trim($request->get('searchText'));
-            $usuario = User::where('nombre', 'LIKE', '%' . $query . '%')
-                ->orderBy('nombre', 'asc')
+            $usuario = User::where('name', 'LIKE', '%' . $query . '%')
+                ->orderBy('name', 'asc')
                 ->paginate(15);
-            return view('seguridad.usuarios.index', ["usuario" => $usuario, "searchText" => $query]);
+            return view('seguridad.usuarios.index', [
+                "usuario" => $usuario,
+                "searchText" => $query
+            ]);
         }
     }
 

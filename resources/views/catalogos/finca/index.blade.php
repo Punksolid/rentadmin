@@ -34,35 +34,41 @@
                     <th>Estatus</th>
                     <th>Opciones</th>
                     </thead>
-
-                    @foreach($finca as $a)
+                    <?php /** @var \App\Models\Property[] $properties */ ?>
+                    @foreach($properties as $property)
                     <tr class="item">
-                        <td style="display: none" class="nombres">{{ $a->arrendador.' '.$a->arrendadora }}</td>
-                        <td>{{ $a->finca_arrendada }}</td>
-                        <td>{{ $a->arrendador }} {{$a->arrendadora}}</td>
-                        <td>{{ $a->servicio_luz }}</td>
-                        <td>{{ $a->cta_japac }}</td>
-                        <td>{{ $a->recibo }}</td>
-                        <td>{{$a->estatus_renta}}</td>
+                        <td style="display: none" class="nombres">{{ $property->arrendador.' '.$property->arrendadora }}</td>
+                        <td>{{ $property->name }}</td>
+                        <td>{{ $property->lessor->nombre }} {{$property->arrendadora}}</td>
+                        <td>{{ $property->energy_fee }}</td>
+                        <td>{{ $property->water_account_number }}</td>
+                        <td>{{ $property->recibo }}</td>
+                        <td>{{ $property->status}}</td>
 
                         <td>
-                            @if($a->estatus == 1)
-                                {!! Form::Open(array('action' => array('Backend\CatFincaController@destroy', $a->id_cat_fincas), 'method' => 'delete')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatFincaController@edit', $a->id_cat_fincas) }}"><i class="far fa-edit"></i></a>
-                                <button type="submit" class="btn btn-danger linea">Desactivar</button>
+                            <a href="{{  $property->getFirstMediaUrl() }}"><button class="btn btn-success linea" {{ $property->hasMedia() ?: 'disabled' }}>Foto</button></a>
+                            @if($property->status == 1)
+                                {!! Form::Open(['route' => ['finca.patch', $property->id], 'method' => 'PATCH']) !!}
+                                    <input type="hidden" name="status" value="0"/>
+                                    <button type="submit" class="btn btn-danger linea">Desactivar</button>
                                 {{ Form::Close() }}
                             @else
-                                {!! Form::Open(array('action' => array('Backend\CatFincaController@activar', $a->id_cat_fincas), 'method' => 'PUT')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatFincaController@edit', $a->id_cat_fincas) }}"><i class="far fa-edit"></i></a>
+                                {!! Form::Open(array('action' => array('Backend\PropertiesController@activar', $property->id), 'method' => 'PUT')) !!}
                                 <button type="submit" class="btn btn-success linea">Activar</button>
                                 {{ Form::Close() }}
                             @endif
+                            <a class="linea btn btn-info" href="{{ URL::action('Backend\PropertiesController@edit', $property->id) }}"><i class="far fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach
                 </table>
             </div>
-            {{$finca->render()}}
+            {{ $properties->links() }}
+            <a href="{{ route('finca.index', [
+                    'status' => $status ? 0: 1
+                    ]) }}" >
+                <button class="btn  {{ $status? 'btn-secondary':'btn-primary' }}">Inmuebles {{ $status? 'Inactivos': 'Activos'  }}</button>
+            </a>
         </div>
     </div>
 

@@ -13,8 +13,7 @@
                     </ul>
                 </div>
             @endif
-
-            {!! Form::model($arrendador, ['method' => 'PATCH', 'route' =>['arrendador.update', $arrendador->id_cat_arrendador]]) !!}
+            {!! Form::model($arrendador, ['method' => 'PATCH', 'route' =>['arrendador.update', $arrendador->id]]) !!}
             {{Form::token()}}
             <div class="formulario-tres">
                 <label for="nombre">Nombre</label>
@@ -44,7 +43,7 @@
             </div>
             <div class="formulario-tres">
                 <label for="numero_int">Numero Interior</label>
-                <input type="text" name="numero_int" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_int }}" placeholder="Numero Interior...">
+                <input type="text" name="numero_int" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_int }}" placeholder="Numero Interior...">
             </div>
             <div class="formulario-tres">
                 <label for="colonia">Colonia</label>
@@ -69,25 +68,16 @@
             <hr>
 
             <div class="formulario-dos">
-                <label for="telefono">Telefono &nbsp;&nbsp;<a data-target="#modal-add-telefono" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
-                    @foreach($tel as $te)
-                    <div id="listas" style="display: inline-flex">
-                        @if(count($tel) > 1)
-                            <input id="masc-tel" data-mask="(000) 000 0000" type="text" onkeypress="return justNumbers(event)" class="form-control" name="telefonoid{{$te->id_telefono}}" value="{{$te->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" class="form-control" type="text" value="{{$te->descripcion}}" name="descripcion{{$te->id_telefono}}" placeholder="Descripcion..." required>&nbsp;<a data-target="#modal-eliminar-telefono{{$te->id_telefono}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a><br>
-                        @else
-                            <input id="masc-tel" data-mask="(000) 000 0000" type="text" onkeypress="return justNumbers(event)" class="form-control" name="telefonoid{{$te->id_telefono}}" value="{{$te->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" class="form-control" type="text" value="{{$te->descripcion}}" name="descripcion{{$te->id_telefono}}" placeholder="Descripcion..." required>
-                        @endif
-                    </div>
-                    @endforeach
+                @include('partials.phones', ['type' => \App\Models\Lessor::class, 'id' =>  $arrendador->id, 'phones' => $phones])
             </div>
             <div class="formulario-dos">
                 <label for="email">Correo Electronico &nbsp;&nbsp;<a data-target="#modal-add-email" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
-                    @foreach($email as $em)
+                    @foreach($emails as $email)
                     <div id="lista" style="display: inline-flex">
-                        @if(count($email) > 1)
-                            <input type="email" name="emailid{{$em->id_email}}" value="{{$em->email}}" class="form-control" placeholder="Correo Electronico..." required>&nbsp;<a data-target="#modal-eliminar-email{{$em->id_email}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a><br>
+                        @if(count($emails) > 1)
+                            <input type="email" name="emailid{{$email->id_email}}" value="{{$email->email}}" class="form-control" placeholder="Correo Electronico..." required>&nbsp;<a data-target="#modal-eliminar-email{{$email->id_email}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a><br>
                         @else
-                            <input type="email" name="emailid{{$em->id_email}}" value="{{$em->email}}" class="form-control" placeholder="Correo Electronico..." required><br>
+                            <input type="email" name="emailid{{$email->id_email}}" value="{{$email->email}}" class="form-control" placeholder="Correo Electronico..." required><br>
                         @endif
                     </div>
                         <br>
@@ -142,18 +132,18 @@
             <div class="form-group">
                 <label for="banco">Datos Bancarios &nbsp;&nbsp; <input id="bancocheck" checked type="checkbox"> &nbsp;&nbsp;<a id="ad_banco" data-target="#modal-add-banco" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
                 <div id="datosbanco">
-                    @foreach($banco as $ba)
+                    @foreach($banco as $bank_account)
                     <div id="banc" class="form-group" style="display: inline-flex; align-items: baseline">
                         @if(count($banco) > 1)
-                            <input class="form-control bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bancoid{{$ba->id_banco}}" value="{{$ba->banco}}" placeholder="Banco...">
-                            <input class="form-control bancoin" id="cc" type="text" name="cuentaid{{$ba->id_banco}}" value="{{$ba->cuenta}}" placeholder="Cuenta...">
-                            <input class="form-control  bancoin" id="cc" type="text" onkeypress="return justNumbers(event)" name="clabeid{{$ba->id_banco}}" value="{{$ba->clabe}}" placeholder="Clabe...">
-                            <input class="form-control  bancoin" id="cc" type="text" name="nombre_titularid{{$ba->id_banco}}" onkeyup="this.value = this.value.toUpperCase();" value="{{$ba->nombre_titular}}" placeholder="Nombre del Titular...">&nbsp;<a data-target="#modal-eliminar-banco{{$ba->id_banco}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a>
+                            <input class="form-control bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bancoid{{$bank_account->id_banco}}" value="{{$bank_account->banco}}" placeholder="Banco...">
+                            <input class="form-control bancoin" id="cc" type="text" name="cuentaid{{$bank_account->id_banco}}" value="{{ $bank_account->cuenta }}" placeholder="Cuenta...">
+                            <input class="form-control  bancoin" id="cc" type="text" onkeypress="return justNumbers(event)" name="clabeid{{$bank_account->id_banco}}" value="{{$bank_account->clabe}}" placeholder="Clabe...">
+                            <input class="form-control  bancoin" id="cc" type="text" name="nombre_titularid{{$bank_account->id_banco}}" onkeyup="this.value = this.value.toUpperCase();" value="{{$bank_account->nombre_titular}}" placeholder="Nombre del Titular...">&nbsp;<a data-target="#modal-eliminar-banco{{$bank_account->id_banco}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a>
                         @else
-                            <input class="form-control  bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bancoid{{$ba->id_banco}}" value="{{$ba->banco}}" placeholder="Banco...">
-                            <input class="form-control  bancoin" id="cc" type="text" name="cuentaid{{$ba->id_banco}}" value="{{$ba->cuenta}}" placeholder="Cuenta...">
-                            <input class="form-control  bancoin" id="cc" type="text" onkeypress="return justNumbers(event)" name="clabeid{{$ba->id_banco}}" value="{{$ba->clabe}}" placeholder="Clabe...">
-                            <input class="form-control  bancoin" id="cc" type="text" name="nombre_titularid{{$ba->id_banco}}" onkeyup="this.value = this.value.toUpperCase();" value="{{$ba->nombre_titular}}" placeholder="Nombre del Titular...">
+                            <input class="form-control  bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bancoid{{$bank_account->id_banco}}" value="{{$bank_account->banco}}" placeholder="Banco...">
+                            <input class="form-control  bancoin" id="cc" type="text" name="cuentaid{{$bank_account->id_banco}}" value="{{$bank_account->cuenta}}" placeholder="Cuenta...">
+                            <input class="form-control  bancoin" id="cc" type="text" onkeypress="return justNumbers(event)" name="clabeid{{$bank_account->id_banco}}" value="{{$bank_account->clabe}}" placeholder="Clabe...">
+                            <input class="form-control  bancoin" id="cc" type="text" name="nombre_titularid{{$bank_account->id_banco}}" onkeyup="this.value = this.value.toUpperCase();" value="{{$bank_account->nombre_titular}}" placeholder="Nombre del Titular...">
                         @endif
                     </div>
                         <br>
@@ -174,7 +164,7 @@
             </div>
 
             {!! Form::close() !!}
-            @include('catalogos.arrendador.modal-añadir')
+            @include('catalogos.arrendador.modal-add-to-arrendador')
             @include('catalogos.arrendador.modal-eliminar')
 
         </div>

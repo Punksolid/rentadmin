@@ -13,19 +13,22 @@
                     </ul>
                 </div>
             @endif
-
-            {!! Form::model($finca, ['method' => 'PATCH', 'route' =>['finca.update', $finca->id_cat_fincas]]) !!}
+            {!! Form::model($finca, [
+                    'method' => 'PATCH',
+                    'files' => true,
+                    'route' =>['finca.update', $finca->id]
+            ]) !!}
             {{Form::token()}}
             <div class="form-group">
-                <label for="finca_arrendada">Inmueble</label>
-                <input type="text" name="finca_arrendada" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->finca_arrendada }}" placeholder="Inmueble..." required>
+                <label for="name">Inmueble</label>
+                <input type="text" name="name" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->name }}" placeholder="Inmueble..." required>
             </div>
 
             <div class="form-group">
                 <label for="id_arrendador">Arrendador</label>
-                <input type="text" class="form-control verificar tipo-propiedad" id="arrendadorname" placeholder="Arrendador..." value="{{$arrendadores->id_cat_arrendador}}-. {{$arrendadores->nombre}} {{$arrendadores->apellido_paterno}}" disabled required>
+                <input type="text" class="form-control verificar tipo-propiedad" id="arrendadorname" placeholder="Arrendador..." value="{{$arrendadores->id}}-. {{$arrendadores->nombre}} {{$arrendadores->apellido_paterno}}" disabled required>
                 <button class="btn buscar-btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#modal-arrendador"><i class="fa fa-search"></i></button>
-                <input type="hidden" id="id_arrendador" name="id_arrendador" value="{{$arrendadores->id_cat_arrendador}}" required>
+                <input type="hidden" id="id_arrendador" name="lessor_id" value="{{$arrendadores->id}}" required>
             </div>
 
             <div class="form-group">
@@ -46,8 +49,12 @@
             </div>
 
             <div class="form-group">
-                <label for="descripcion">Descripcion</label>
-                <input type="text" name="descripcion" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->descripcion }}" placeholder="Especificaciones..." required>
+                <label for="descripcion">Direccion</label>
+                <input type="text" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->address }}" placeholder="Direccion..." required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Geolocalizacion</label>
+                <input type="text" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
             </div>
 
             <div class="form-group">
@@ -76,27 +83,30 @@
             </div>
             <div class="form-group">
                 <label for="mantenimiento">Mantenimiento</label>
-                <input id="currency-field" type="text" name="mantenimiento verificar" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->mantenimiento}}" placeholder="Mantenimiento..." required>
+                <input id="currency-field" type="text" name="maintenance" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->maintenance }}" placeholder="Mantenimiento..." required>
             </div>
             <div class="form-group">
                 <label for="cuota_agua">Cuota de Agua</label>
-                <input id="currency-field" type="text" name="cuota_agua verificar" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->cuota_agua}}" placeholder="Cuota de Agua..." required>
+                <input id="currency-field" type="text" name="water_fee" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->water_fee }}" placeholder="Cuota de Agua..." required>
             </div>
 
             <div class="form-group">
-                <label for="servicio_luz">Servicio de Luz</label>
-                <input type="text" name="servicio_luz" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->servicio_luz }}" placeholder="XXXXXXXXXXXX" required>
+                <label for="energy_fee">Servicio de Luz</label>
+                <input type="text" name="energy_fee" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->energy_fee }}" placeholder="XXXXXXXXXXXX" required>
             </div>
             <div class="form-group">
                 <label for="cta_japac">Cuenta Japac</label>
-                <input type="text" name="cta_japac" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->cta_japac }}" placeholder="XXXXXXXXX" required>
+                <input type="text" name="water_account_number" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->water_account_number }}" placeholder="XXXXXXXXX" required>
             </div>
 
             <div class="form-group">
                 <label for="predial">Numero de Predial</label>
                 <input type="text" name="predial" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->predial }}" placeholder="XXX-XXX-XX-XXX" required>
             </div>
-
+            <div class="form-group">
+                <label for="predial">Foto</label>
+                <input type="file" name="photo" class="form-control verificar" >
+            </div>
             <div class="form-group">
                 <button id="verificar" class="btn btn-primary" type="submit">Guardar</button>
                 <a class="btn btn-danger" href="../">Cancelar</a>

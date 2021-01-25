@@ -13,9 +13,9 @@
                     <input id="buscador" type="text" class="form-control" onkeyup="buscador()" name="searchText" placeholder="Buscar Arrendador...">
                 </div>
                 <hr>
-                @foreach($arrendador as $ar)
+                @foreach($arrendador as $lessor)
                     <div class="item">
-                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_contrato{{$ar->id_cat_arrendador}}" onclick="arrendadorContrato({{$ar->id_cat_arrendador}})" class="nombres btn btn-secondary form-control" value="{{$ar->id_cat_arrendador}}">{{$ar->id_cat_arrendador}}-. {{$ar->nombre}} {{$ar->apellido_paterno}}</button>
+                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_contrato{{$lessor->id}}" onclick="arrendadorContrato({{$lessor->id}})" class="nombres btn btn-secondary form-control" value="{{$lessor->id}}">{{$lessor->id}}-. {{$lessor->nombre}} {{$lessor->apellido_paterno}}</button>
                     </div>
                 @endforeach
             </div>
@@ -42,9 +42,9 @@
                     <input id="buscadorarrendatario" type="text" class="form-control" onkeyup="buscadorArrendatario()" name="searchText" placeholder="Buscar Arrendatario...">
                 </div>
                 <hr>
-                @foreach($arrendatario as $arr)
+                @foreach($arrendatario as $lessee)
                     <div class="item">
-                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendatario_contrato{{$arr->id_cat_arrendatario}}" onclick="arrendatarioContrato({{$arr->id_cat_arrendatario}})" class="nombresarrendatario btn btn-secondary form-control" value="{{$arr->id_cat_arrendatario}}">{{$arr->id_cat_arrendatario}}-. {{$arr->nombre}} {{$arr->apellido_paterno}}</button>
+                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendatario_contrato{{$lessee->id}}" onclick="arrendatarioContrato({{$lessee->id}})" class="nombresarrendatario btn btn-secondary form-control" value="{{$lessee->id}}">{{$lessee->id}}-. {{$lessee->nombre}} {{$lessee->apellido_paterno}}</button>
                     </div>
                 @endforeach
             </div>
@@ -71,16 +71,12 @@
                     <input id="buscadorpropiedad" type="text" class="form-control" onkeyup="buscadorPropiedad()" name="searchText" placeholder="Buscar Propiedad...">
                 </div>
                 <hr>
-                @foreach($finca as $f)
-                    @if($f->estatus_renta == 'Rentada' || $f->estatus == 0)
-                    @else
+                @foreach($finca as $property)
                         <div class="item">
-                            @php($arr = \App\Models\CatArrendador::where('id_cat_arrendador', $f->id_arrendador)->first())
-                            <a id="{{$f->id_cat_fincas}}" class="fincafiltro" href="{{$f->id_arrendador}}">
-                                <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_modal{{$f->id_cat_fincas}}" onclick="propiedadContrato('{{$f->id_cat_fincas}}', '{{$arr->id_cat_arrendador.'-. '.$arr->nombre.' '.$arr->apellido_paterno}}', '{{$arr->id_cat_arrendador}}')" class="nombrespropiedad btn btn-secondary form-control" value="{{$f->id_cat_fincas}}">{{$f->id_cat_fincas}}-. {{$f->finca_arrendada}}</button>
+                            <a id="{{$property->id}}" class="fincafiltro" href="{{$property->id_arrendador}}">
+                                <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_modal{{$property->id}}" onclick="propiedadContrato('{{$property->id}}', '{{$property->lessor->id.'-. '.$property->lessor->nombre.' '.$property->lessor->apellido_paterno}}', '{{$property->lessor->id}}')" class="nombrespropiedad btn btn-secondary form-control" value="{{$property->id}}">{{$property->id}}-. {{$property->name}}</button>
                             </a>
                         </div>
-                    @endif
                 @endforeach
             </div>
             <div class="modal-footer">

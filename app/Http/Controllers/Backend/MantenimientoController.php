@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Models\Mantenimiento;
-use App\Models\CatFinca;
+use App\Models\Property;
 use App\Models\User;
 use App\Models\TipoMantenimiento;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class MantenimientoController extends Controller
     }
 
     public function create(){
-        $tp = CatFinca::all();
+        $tp = Property::all();
         $ti = TipoMantenimiento::all();
         return view('mantenimiento.create', ["fincas" => $tp, "tipo" => $ti]);
     }
@@ -37,7 +37,7 @@ class MantenimientoController extends Controller
     public function edit($id){
         $mant = Mantenimiento::findOrFail($id);
         $ti = TipoMantenimiento::all();
-        $tp = CatFinca::all();
+        $tp = Property::all();
         return view('mantenimiento.edit', ['mant' => $mant, "tipos" => $ti, "fincas" => $tp]);
     }
 

@@ -38,9 +38,9 @@
                     <input id="buscador" type="text" class="form-control" onkeyup="buscador()" name="searchText" placeholder="Buscar Arrendador...">
                 </div>
                 <hr>
-                @foreach($arrendador as $ar)
+                @foreach($arrendador as $lessor)
                     <div class="item">
-                    <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendadorse{{$ar->id_cat_arrendador}}" onclick="arrendador({{$ar->id_cat_arrendador}})" class="nombres btn btn-secondary form-control" value="{{$ar->id_cat_arrendador}}">{{$ar->id_cat_arrendador}}-. {{$ar->nombre}} {{$ar->apellido_paterno}}</button>
+                    <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendadorse{{$lessor->id}}" onclick="arrendador({{$lessor->id}})" class="nombres btn btn-secondary form-control" value="{{$lessor->id}}">{{$lessor->id}}-. {{$lessor->nombre}} {{$lessor->apellido_paterno}}</button>
                     </div>
                 @endforeach
             </div>

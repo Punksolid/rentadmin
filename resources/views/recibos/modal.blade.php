@@ -13,9 +13,9 @@
                     <input id="buscador" type="text" class="form-control" onkeyup="buscador()" name="searchText" placeholder="Buscar Arrendador...">
                 </div>
                 <hr>
-                @foreach($arrendador as $ar)
+                @foreach($arrendador as $lessor)
                     <div class="item">
-                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_contrato{{$ar->id_cat_arrendador}}" onclick="arrendadorContrato({{$ar->id_cat_arrendador}}); vista({{$ar->id_cat_arrendador}})" class="nombres btn btn-secondary form-control" value="{{$ar->id_cat_arrendador}}">{{$ar->id_cat_arrendador}}-. {{$ar->nombre}} {{$ar->apellido_paterno}}</button>
+                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_contrato{{$lessor->id}}" onclick="arrendadorContrato({{$lessor->id}}); vista({{$lessor->id}})" class="nombres btn btn-secondary form-control" value="{{$lessor->id}}">{{$lessor->id}}-. {{$lessor->nombre}} {{$lessor->apellido_paterno}}</button>
                     </div>
                 @endforeach
             </div>
@@ -41,9 +41,9 @@
                     <input id="buscadorarrendadorrecibo" type="text" class="form-control" onkeyup="buscadorArrendadorRecibo()" name="searchText" placeholder="Buscar Arrendador...">
                 </div>
                 <hr>
-                @foreach($arrendador as $ar)
+                @foreach($arrendador as $lessor)
                     <div class="item">
-                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_recibo{{$ar->id_cat_arrendador}}" onclick="arrendadorRecibo({{$ar->id_cat_arrendador}})" class="nombresarrendadorrecibo nombres btn btn-secondary form-control" value="{{$ar->id_cat_arrendador}}">{{$ar->id_cat_arrendador}}-. {{$ar->nombre}} {{$ar->apellido_paterno}}</button>
+                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_recibo{{$lessor->id}}" onclick="arrendadorRecibo({{$lessor->id}})" class="nombresarrendadorrecibo nombres btn btn-secondary form-control" value="{{$lessor->id}}">{{$lessor->id}}-. {{$lessor->nombre}} {{$lessor->apellido_paterno}}</button>
                     </div>
                 @endforeach
             </div>
@@ -97,12 +97,12 @@
                     <input id="buscadorpropiedadrecibo" type="text" class="form-control" onkeyup="buscadorPropiedadRecibo()" name="searchText" placeholder="Buscar Inmueble...">
                 </div>
                 <hr>
-                @foreach($finca as $fin)
+                @foreach($finca as $property)
                     <div class="item">
-                        @php($arr = \App\Models\CatArrendador::where('id_cat_arrendador', $fin->id_arrendador)->first())
-                        <a id="{{$fin->id_cat_fincas}}" class="fincafiltroregistro" href="{{$fin->id_arrendador}}">
-                        <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_recibo{{$fin->id_cat_fincas}}" onclick="propiedadRecibo('{{$fin->id_cat_fincas}}', '{{$arr->id_cat_arrendador.'-. '.$arr->nombre.' '.$arr->apellido_paterno}}', '{{$arr->id_cat_arrendador}}'); completarArrendatario()" class="nombrespropiedadrecibo btn btn-secondary form-control" value="{{$fin->id_cat_fincas}}">{{$fin->id_cat_fincas}}-. {{$fin->finca_arrendada}}</button>
-                        </a>
+                        @php($lessor = \App\Models\Lessor::where('id', $property->id_arrendador)->first())
+{{--                        <a id="{{$property->id_cat_fincas}}" class="fincafiltroregistro" href="{{$property->id_arrendador}}">--}}
+{{--                        <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_recibo{{ $property->id }}" onclick="propiedadRecibo('{{$property->id_cat_fincas }}', '{{$lessor->id.'-. '.$lessor->nombre.' '.$lessor->apellido_paterno}}', '{{$lessor->id}}'); completarArrendatario()" class="nombrespropiedadrecibo btn btn-secondary form-control" value="{{$property->id_cat_fincas}}">{{$property->id_cat_fincas}}-. {{$property->finca_arrendada}}</button>--}}
+{{--                        </a>--}}
                     </div>
                 @endforeach
             </div>
@@ -128,11 +128,10 @@
                     <input id="buscadorpropiedadparcial" type="text" class="form-control" onkeyup="buscadorPropiedadParcial()" name="searchText" placeholder="Buscar Inmueble...">
                 </div>
                 <hr>
-                @foreach($finca as $fin)
+                @foreach($finca as $property)
                     <div class="item">
-                        @php($arr = \App\Models\CatArrendador::where('id_cat_arrendador', $fin->id_arrendador)->first())
-                        <a id="{{$fin->id_cat_fincas}}" class="fincaparcial" href="{{$fin->id_arrendador}}">
-                            <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_parcial{{$fin->id_cat_fincas}}" onclick="propiedadParcial('{{$fin->id_cat_fincas}}', '{{$arr->id_cat_arrendador.'-. '.$arr->nombre.' '.$arr->apellido_paterno}}', '{{$arr->id_cat_arrendador}}'); completarArrendatarioParcial()" class="nombrespropiedadparcial btn btn-secondary form-control" value="{{$fin->id_cat_fincas}}">{{$fin->id_cat_fincas}}-. {{$fin->finca_arrendada}}</button>
+                        <a id="{{$property->id_cat_fincas}}" class="fincaparcial" href="{{$property->id_arrendador}}">
+                            <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_parcial{{$property->id_cat_fincas}}" onclick="propiedadParcial('{{$property->id_cat_fincas}}', '{{$property->lessor->id.'-. '.$property->lessor->nombre.' '.$property->lessor->apellido_paterno}}', '{{$property->lessor->id}}'); completarArrendatarioParcial()" class="nombrespropiedadparcial btn btn-secondary form-control" value="{{$property->id}}">{{$property->id}}-. {{$property->name}}</button>
                         </a>
                     </div>
                 @endforeach
@@ -159,9 +158,9 @@
                     <input id="buscadorarrendadorparcial" type="text" class="form-control" onkeyup="buscadorArrendadorParcial()" name="searchText" placeholder="Buscar Arrendador...">
                 </div>
                 <hr>
-                @foreach($arrendador as $ar)
+                @foreach($arrendador as $lessor)
                     <div class="item">
-                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_parcial{{$ar->id_cat_arrendador}}" onclick="arrendadorParcial({{$ar->id_cat_arrendador}})" class="nombresarrendadorparcial nombres btn btn-secondary form-control" value="{{$ar->id_cat_arrendador}}">{{$ar->id_cat_arrendador}}-. {{$ar->nombre}} {{$ar->apellido_paterno}}</button>
+                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendador_parcial{{$lessor->id}}" onclick="arrendadorParcial({{$lessor->id}})" class="nombresarrendadorparcial nombres btn btn-secondary form-control" value="{{$lessor->id}}">{{$lessor->id}}-. {{$lessor->nombre}} {{$lessor->apellido_paterno}}</button>
                     </div>
                 @endforeach
             </div>

@@ -13,8 +13,7 @@
                     </ul>
                 </div>
             @endif
-
-            {!! Form::model($arrendatario, ['method' => 'PATCH', 'route' =>['arrendatario.update', $arrendatario->id_cat_arrendatario]]) !!}
+            {!! Form::model($arrendatario, ['method' => 'PATCH', 'files' => true, 'route' =>['arrendatario.update', $arrendatario->id]]) !!}
             {{Form::token()}}
             <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -30,16 +29,7 @@
             </div>
 
             <div class="form-group">
-                <label for="telefono">Telefono &nbsp;&nbsp;<a data-target="#modal-add-telefono" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
-                <div id="listas">
-                    @foreach($tel as $te)
-                        @if(count($tel) > 1)
-                            <input type="text" data-mask="(000) 000 0000" onkeypress="return justNumbers(event)" class="mascara" name="telefonoid{{$te->id_telefono}}" value="{{$te->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" type="text" value="{{$te->descripcion}}" name="descripcionid{{$te->id_telefono}}" placeholder="Descripcion..." required>&nbsp;<a data-target="#modal-eliminar-telefono{{$te->id_telefono}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a><br>
-                        @else
-                            <input type="text" data-mask="(000) 000 0000" onkeypress="return justNumbers(event)" class="mascara" name="telefonoid{{$te->id_telefono}}" value="{{$te->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" type="text" value="{{$te->descripcion}}" name="descripcionid{{$te->id_telefono}}" placeholder="Descripcion..." required>
-                        @endif
-                    @endforeach
-                </div>
+            @include('partials.phones', ['phones' => $lessee->phones, 'type' => \App\Models\Lessee::class, 'id' => $lessee->id])
             </div>
             <div class="form-group">
                 <label for="email">Correo Electronico &nbsp;&nbsp;<a data-target="#modal-add-email" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
@@ -53,7 +43,12 @@
                     @endforeach
                 </div>
             </div>
-
+            <div class="form-group">
+                <label for="identity">Documento de Identidad</label>
+                <div id="identity">
+                    <input type="file" name="identity">
+                </div>
+            </div>
             <div class="form-group">
                 <h4><strong>Domicilio</strong></h4>
             </div>
@@ -147,16 +142,7 @@
                 <input type="text" name="apellido_materno_fiador" class="form-control" value="{{$fiador->apellido_materno}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." required>
             </div>
             <div class="form-group">
-                <label for="telefono_fiador">Telefono &nbsp;&nbsp;<a data-target="#modal-add-telefonofiador" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
-                <div id="list">
-                    @foreach($telf as $tf)
-                        @if(count($tel) > 1)
-                            <input type="text" data-mask="(000) 000 0000" id="masc-tel" onkeypress="return justNumbers(event)" class="mascara" name="telefonoid{{$tf->id_telefono}}" value="{{$tf->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" type="text" value="{{$tf->descripcion}}" name="descripcionid{{$tf->id_telefono}}" placeholder="Descripcion..." required>&nbsp;<a data-target="#modal-eliminar-telefonofiador{{$tf->id_telefono}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a><br>
-                        @else
-                            <input type="text" data-mask="(000) 000 0000" id="masc-tel" onkeypress="return justNumbers(event)" class="mascara" name="telefonoid{{$tf->id_telefono}}" value="{{$tf->telefono}}" placeholder="Telefono..." required>&nbsp;<input id="desc" type="text" value="{{$tf->descripcion}}" name="descripcionid{{$tf->id_telefono}}" placeholder="Descripcion..." required>
-                        @endif
-                    @endforeach
-                </div>
+                   @include('partials.phones', ['type' => \App\Models\CatFiador::class,'id' => $fiador->id_cat_fiadores, 'phones' => $fiador->phones])
             </div>
 
             <div class="form-group">
@@ -239,10 +225,12 @@
             </div>
 
             {!! Form::close() !!}
-            @include('catalogos.arrendatario.modal-añadir')
-            @include('catalogos.arrendatario.modal-eliminar')
+            @include('catalogos.arrendatario.add-modal')
+{{--            @include('catalogos.arrendatario.modal-eliminar')--}}
 
-        </div>
+
+
     </div>
+
 
 @endsection

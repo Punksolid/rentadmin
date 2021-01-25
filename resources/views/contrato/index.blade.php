@@ -37,18 +37,18 @@
                     <th>Opciones</th>
                     </thead>
 
-                    @foreach($contrato as $a)
+                    @foreach($contracts as $contract)
                     <tr class="item">
-                        <td style="display: none" class="nombres">{{ $a->arrendador_nombre.' '.$a->arrendador_apellido }}</td>
-                        <td>{{$a->id_contratos}}</td>
-                        <td>{{$a->arrendador_nombre}} {{$a->arrendador_apellido}}</td>
-                        <td>{{$a->arrendatario_nombre}} {{$a->arrendatario_apellido}}</td>
-                        <td>{{$a->propiedad}}</td>
-                        <td>{{$a->telefono}}</td>
+                        <td style="display: none" class="nombres">{{ $contract->arrendador_nombre.' '.$contract->arrendador_apellido }}</td>
+                        <td>{{ $contract->id}}</td>
+                        <td>{{ $contract->lessor->nombre }} {{ $contract->lessor->apellido_paterno}}</td>
+                        <td>{{ $contract->lessee->nombre }} {{ $contract->lessee->apellido_paterno }}</td>
+                        <td>{{ $contract->property->name}}</td>
+                        <td>{{ optional($contract->lessee->defaultPhoneNumber())->telefono }}</td>
                         @php($fecha_inicio = \Carbon\Carbon::create(9999)->format('Y/m/d'))
                         @php($fecha_fin = \Carbon\Carbon::create()->format('Y/m/d'))
 
-                        @foreach($fechas = \App\Models\FechaContrato::where('id_contrato', $a->id_contratos)->get() as $fc)
+                        @foreach($fechas = \App\Models\FechaContrato::where('id_contrato', $contract->id)->get() as $fc)
                             @if($fecha_inicio >= $fc->fecha_inicio)
                                 @php($fecha_inicio = $fc->fecha_inicio)
                             @endif
@@ -61,14 +61,14 @@
                         <td>{{\Carbon\Carbon::create($fecha_fin)->format('d/m/Y')}}</td>
 
                         <td>
-                            @if($a->estatus == 1)
-                                {!! Form::Open(array('action' => array('Backend\CatContratoController@destroy', $a->id_contratos), 'method' => 'delete')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatContratoController@edit', $a->id_contratos) }}"><i class="far fa-edit"></i></a>
+                            @if($contract->estatus == 1)
+                                {!! Form::Open(array('action' => array('Backend\ContractsController@destroy', $contract->id), 'method' => 'delete')) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\ContractsController@edit', $contract->id) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-danger linea">Desactivar</button>
                                 {{ Form::Close() }}
                             @else
-                                {!! Form::Open(array('action' => array('Backend\CatContratoController@activar', $a->id_contratos), 'method' => 'PUT')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatContratoController@edit', $a->id_contratos) }}"><i class="far fa-edit"></i></a>
+                                {!! Form::Open(array('action' => array('Backend\ContractsController@activar', $contract->id), 'method' => 'PUT')) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\ContractsController@edit', $contract->id) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-success linea">Activar</button>
                                 {{ Form::Close() }}
                             @endif
@@ -77,7 +77,7 @@
                     @endforeach
                 </table>
             </div>
-            {{$contrato->render()}}
+            {{$contracts->render()}}
         </div>
     </div>
 

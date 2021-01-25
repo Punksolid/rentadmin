@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
-use App\Models\CatArrendatario;
-use App\Models\CatFinca;
+use App\Models\Lessor;
+use App\Models\Lessee;
+use App\Models\Property;
 use App\Models\RegistroRecibo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\View;
 class ReportesController extends Controller
 {
     public function index(){
-        $arrendador = CatArrendador::all();
-        $arrendatario = CatArrendatario::all();
-        $finca = CatFinca::all();
+        $arrendador = Lessor::all();
+        $arrendatario = Lessee::all();
+        $finca = Property::all();
 
         return view('reportes.index', ["arrendador" => $arrendador, 'arrendatario' => $arrendatario, 'finca' => $finca]);
     }
@@ -49,15 +49,15 @@ class ReportesController extends Controller
             $filtros['estatus_pago'] = 'Todos';
         }
         if ($data['arrendador'] != null){
-            $arrendador = CatArrendador::findOrFail($data['arrendador']);
+            $arrendador = Lessor::findOrFail($data['arrendador']);
             $filtros['arrendador'] = $arrendador->nombre.' '.$arrendador->apellido_paterno.' '.$arrendador->apellido_materno;
         }
         if ($data['propiedad'] != null){
-            $inmueble = CatFinca::findOrFail($data['propiedad']);
+            $inmueble = Property::findOrFail($data['propiedad']);
             $filtros['propiedad'] = $inmueble->finca_arrendada;
         }
         if ($data['arrendatario'] != null){
-            $arrendatario = CatArrendatario::findOrFail($data['arrendatario']);
+            $arrendatario = Lessee::findOrFail($data['arrendatario']);
             $filtros['arrendatario'] = $arrendatario->nombre.' '.$arrendatario->apellido_paterno.' '.$arrendatario->apellido_materno;
         }
 

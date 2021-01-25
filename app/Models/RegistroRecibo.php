@@ -24,9 +24,9 @@ class RegistroRecibo extends Model
 
     public function scopeJoinContrato($query){
         return $query->join('cat_contratos', 'registro_recibos.id_contrato', '=', 'cat_contratos.id_contratos')
-                     ->join('cat_fincas', 'cat_contratos.id_finca', '=', 'cat_fincas.id_cat_fincas')
-                     ->join('cat_arrendatario', 'cat_contratos.id_arrendatario', '=', 'cat_arrendatario.id_cat_arrendatario')
-                     ->join('cat_arrendador', 'cat_contratos.id_arrendador', '=', 'cat_arrendador.id_cat_arrendador')
+                     ->join('cat_fincas', 'cat_contratos.id_finca', '=', 'properties.id')
+                     ->join('cat_arrendatario', 'cat_contratos.id_arrendatario', '=', 'lessees.id')
+                     ->join('lessor', 'cat_contratos.id_arrendador', '=', 'lessors.id_cat_arrendador')
                      ->join('usuarios', 'registro_recibos.id_usuario', '=', 'usuarios.id_usuarios');
     }
 }

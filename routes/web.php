@@ -25,30 +25,32 @@ Route::group(['middleware' => 'auth'], function() {
     });
 
     //Catalogo Arrendador
-    Route::resource('catalogos/arrendador', 'Backend\CatArrendadorController');
-    Route::put('catalogos/arrendador/{arrendador}', 'Backend\CatArrendadorController@activar');
-    Route::post('catalogos/arrendador/telefono/{arrendador}', 'Backend\CatArrendadorController@addTelefono');
-    Route::post('catalogos/arrendador/email/{arrendador}', 'Backend\CatArrendadorController@addEmail');
-    Route::post('catalogos/arrendador/banco/{arrendador}', 'Backend\CatArrendadorController@addBanco');
-    Route::delete('catalogos/arrendador/telefono/{arrendador}', 'Backend\CatArrendadorController@deleteTelefono');
-    Route::delete('catalogos/arrendador/email/{arrendador}', 'Backend\CatArrendadorController@deleteEmail');
-    Route::delete('catalogos/arrendador/banco/{arrendador}', 'Backend\CatArrendadorController@deleteBanco');
+    Route::resource('catalogos/arrendador', 'Backend\LessorController');
+    Route::put('catalogos/arrendador/{arrendador}', 'Backend\LessorController@activar');
+    Route::post('catalogos/arrendador/telefono/{arrendador}', 'Backend\LessorController@addTelefono');
+    Route::post('catalogos/arrendador/email/{arrendador}', 'Backend\LessorController@addEmail');
+    Route::post('catalogos/arrendador/banco/{arrendador}', 'Backend\LessorController@addBanco');
+    Route::delete('catalogos/arrendador/telefono/{arrendador}', 'Backend\LessorController@deleteTelefono');
+    Route::delete('catalogos/arrendador/email/{arrendador}', 'Backend\LessorController@deleteEmail');
+    Route::delete('catalogos/arrendador/banco/{arrendador}', 'Backend\LessorController@deleteBanco');
 
     //Catalogo Arrendatarios
-    Route::resource('catalogos/arrendatario', 'Backend\CatArrendatarioController');
-    Route::put('catalogos/arrendatario/{arrendatario}', 'Backend\CatArrendatarioController@activar');
-    Route::post('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\CatArrendatarioController@addTelefono');
-    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\CatArrendatarioController@addTelefonoFiador');
-    Route::post('catalogos/arrendatario/email/{arrendatario}', 'Backend\CatArrendatarioController@addEmail');
-    Route::delete('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\CatArrendatarioController@deleteTelefono');
-    Route::delete('catalogos/arrendatario/email/{arrendatario}', 'Backend\CatArrendatarioController@deleteEmail');
-    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\CatArrendatarioController@deleteTelefonoFiador');
+    Route::resource('catalogos/arrendatario', 'Backend\LesseesController');
+    // @todo Is it possible to keep it working without an specific url
+    Route::patch('catalogos/arrendatario/{arrendatario}/toggle', 'Backend\LesseesController@toggleStatus')->name('arrendatario.toggle');
+    Route::post('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\LesseesController@addTelefono');
+    Route::post('catalogos/arrendatario/telefonofiador/{guarantor}', 'Backend\LesseesController@addTelefonoFiador');
+    Route::post('catalogos/arrendatario/email/{arrendatario}', 'Backend\LesseesController@addEmail');
+    Route::delete('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\LesseesController@deleteTelefono');
+    Route::delete('catalogos/arrendatario/email/{arrendatario}', 'Backend\LesseesController@deleteEmail');
+    Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\LesseesController@deleteTelefonoFiador');
 
     //Catalogo Propiedades(Fincas)
-    Route::resource('catalogos/finca', 'Backend\CatFincaController');
-    Route::put('catalogos/finca/{finca}', 'Backend\CatFincaController@activar');
-    Route::post('catalogos/finca/propiedad', 'Backend\CatFincaController@propiedad');
-    Route::get('catalogos/finca/arrendador', 'Backend\CatFincaController@arrendador');
+    Route::patch('catalogos/fincas/{finca}', 'Backend\PropertiesController@updatePatch')->name('finca.patch');
+    Route::resource('catalogos/finca', 'Backend\PropertiesController');
+    Route::put('catalogos/finca/{finca}', 'Backend\PropertiesController@activar');
+    Route::post('catalogos/finca/propiedad', 'Backend\PropertiesController@propiedad');
+    Route::get('catalogos/finca/arrendador', 'Backend\PropertiesController@arrendador');
 
     //Catalogo Tipo de Propiedad
     Route::resource('subcatalogos/tipo-propiedad', 'Backend\TipoPropiedadController');
@@ -63,11 +65,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('subcatalogos/tipo-mantenimiento{mantenimiento}', 'Backend\TipoMantenimientoController@activar');
 
     //Contrato o Convenio
-    Route::resource('contrato', 'Backend\CatContratoController');
-    Route::put('contrato/{contrato}', 'Backend\CatContratoController@activar');
+    Route::resource('contrato', 'Backend\ContractsController');
+    Route::put('contrato/{contrato}', 'Backend\ContractsController@activar');
 
     //Recibos Automaticos
-    Route::get('recibos-automaticos', 'Backend\RecibosAutomaticosController@index');//Devuelve la vista
+    Route::get('recibos-automaticos', 'Backend\RecibosAutomaticosController@index')->name('tickets.index');//Devuelve la vista
     Route::get('recibos-automaticos/pdf', 'Backend\RecibosAutomaticosController@generar');//Genera PDF
     Route::post('recibos-automaticos/registro', 'Backend\RecibosAutomaticosController@registroRecibo');//Registro de Recibos
     Route::get('control-pago/recibo/{contrato}', 'Backend\RecibosAutomaticosController@vistaRecibo');//Vista de Recibos
@@ -102,6 +104,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     //Configuración
     Route::resource('configuracion', 'Backend\ConfiguracionController');
+
+    //Phones
+    Route::resource('phones', 'PhonesController')->only(['destroy']);
 });
 
 use Illuminate\Support\Facades\Mail;

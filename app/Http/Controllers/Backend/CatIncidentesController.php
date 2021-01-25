@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\CatArrendador;
-use App\Models\CatFinca;
+use App\Models\Lessor;
+use App\Models\Property;
 use App\Models\CatIncidente;
 use App\Models\TipoIncidente;
 use Illuminate\Http\Request;
@@ -19,8 +19,8 @@ class CatIncidentesController extends Controller
     }
 
     public function create(){
-        $tp = CatFinca::all();
-        $arr = CatArrendador::all();
+        $tp = Property::all();
+        $arr = Lessor::all();
         $ti = TipoIncidente::all();
         return view('incidentes.create', ["propiedad" => $tp, "arrendador" => $arr, "incidente" => $ti]);
     }

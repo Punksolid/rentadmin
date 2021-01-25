@@ -14,7 +14,7 @@
                 </div>
             @endif
 
-            {!! Form::model($contrato, ['method' => 'PATCH', 'route' =>['contrato.update', $contrato->id_contratos]]) !!}
+            {!! Form::model($contrato, ['method' => 'PATCH', 'route' =>['contrato.update', $contrato->id]]) !!}
             {{Form::token()}}
             <div class="form-group">
                 <label>Arrendador</label>

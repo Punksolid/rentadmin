@@ -43,7 +43,8 @@
                 <hr>
                 @foreach($propiedad as $f)
                         <div class="item">
-                            @php($arr = \App\Models\CatArrendador::where('id_cat_arrendador', $f->id_arrendador)->first())
+                            @php($arr = \App\Models\
+Lessor::where('id_cat_arrendador', $f->id_arrendador)->first())
                             <a id="{{$f->id_cat_fincas}}" class="fincafiltro" href="{{$f->id_arrendador}}">
                                 <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_modal{{$f->id_cat_fincas}}" onclick="propiedadIncidente('{{$f->id_cat_fincas}}', '{{$arr->id_cat_arrendador.'-. '.$arr->nombre.' '.$arr->apellido_paterno}}', '{{$arr->id_cat_arrendador}}')" class="nombrespropiedad btn btn-secondary form-control" value="{{$f->id_cat_fincas}}">{{$f->id_cat_fincas}}-. {{$f->finca_arrendada}}</button>
                             </a>

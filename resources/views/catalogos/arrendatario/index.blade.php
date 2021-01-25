@@ -35,24 +35,25 @@
                     <th>Opciones</th>
                     </thead>
 
-                    @foreach($arrendatario as $a)
+                    @foreach($arrendatarios as $lessee)
                     <tr class="item">
-                        <td style="display: none" class="nombres">{{ $a->nombre.' '.$a->apellido_paterno.' '.$a->apellido_materno }}</td>
-                        <td>{{ $a->nombre }}</td>
-                        <td>{{ $a->apellido_paterno }}</td>
-                        <td>{{ $a->apellido_materno }}</td>
-                        <td>{{ $a->telefono }}</td>
-                        <td>{{ $a->email }}</td>
-                        <td>{{$a->puesto}}</td>
+                        <td style="display: none" class="nombres">{{ $lessee->nombre.' '.$lessee->apellido_paterno.' '.$lessee->apellido_materno }}</td>
+                        <td>{{ $lessee->nombre }}</td>
+                        <td>{{ $lessee->apellido_paterno }}</td>
+                        <td>{{ $lessee->apellido_materno }}</td>
+                        <td>{{ optional($lessee->defaultPhoneNumber())->telefono }}</td>
+                        <td>{{ optional($lessee->defaultEmail())->email }}</td>
+                        <td>{{$lessee->puesto}}</td>
                         <td>
-                            @if($a->estatus == 1)
-                                {!! Form::Open(array('action' => array('Backend\CatArrendatarioController@destroy', $a->id_cat_arrendatario), 'method' => 'delete')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatArrendatarioController@edit', $a->id_cat_arrendatario) }}"><i class="far fa-edit"></i></a>
+                            <a href="{{ $lessee->getFirstMediaUrl() }}"> <button class="btn btn-file btn-primary">Imagen</button></a>
+                            @if($lessee->estatus == 1)
+                                {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_INACTIVE], 'method' => 'PATCH']) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-danger linea">Desactivar</button>
                                 {{ Form::Close() }}
                             @else
-                                {!! Form::Open(array('action' => array('Backend\CatArrendatarioController@activar', $a->id_cat_arrendatario), 'method' => 'PUT')) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\CatArrendatarioController@edit', $a->id_cat_arrendatario) }}"><i class="far fa-edit"></i></a>
+                                {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_ACTIVE], 'method' => 'PATCH']) !!}
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
                                 <button type="submit" class="btn btn-success linea">Activar</button>
                                 {{ Form::Close() }}
                             @endif
@@ -61,7 +62,12 @@
                     @endforeach
                 </table>
             </div>
-            {{$arrendatario->render()}}
+            {{ $arrendatarios->links() }}
+            <a href="{{ route('arrendatario.index', [
+                    'status' => $status ? 0: 1
+                    ]) }}" >
+                <button class="btn  {{ $status? 'btn-secondary':'btn-primary' }}">Arrendatarios {{ $status? 'Inactivos': 'Activos'  }}</button>
+            </a>
         </div>
     </div>
 

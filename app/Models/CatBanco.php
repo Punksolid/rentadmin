@@ -14,7 +14,12 @@ class CatBanco extends Model
     protected $primaryKey = 'id_banco';
 
     protected $fillable = [
-        'id_arrendador', 'banco', 'cuenta', 'clabe', 'estatus', 'nombre_titular'
+        'id_arrendador',
+        'banco',
+        'cuenta',
+        'clabe',
+        'estatus',
+        'nombre_titular'
     ];
 
     protected $hidden = [

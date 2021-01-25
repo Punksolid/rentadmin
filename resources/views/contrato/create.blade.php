@@ -46,17 +46,18 @@
                     <label style="background-color: #F01B21; color: white" class="form-control text-center">Inicio</label>
                     <label style="background-color: #F01B21; color: white" class="form-control text-center">Terminacion</label>
                     <label style="background-color: #F01B21; color: white" class="form-control text-center">Cantidad</label>
+{{--                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Porcentaje de Aumento</label>--}}
                 </div>
                 <div id="fechas_con">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="bonificacion">Bonificacion</label>
+                <label for="moneda">Bonificacion</label>
                 <input id="moneda" onclick="this.value = null" type="text" name="bonificacion" data-type="currency" class="form-control" placeholder="Bonificacion..." required>
             </div>
             <div class="form-group">
-                <label for="deposito">Deposito En Garantia</label>
+                <label for="monedadep">Deposito En Garantia</label>
                 <input id="monedadep" onclick="this.value = null" type="text" name="deposito" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Deposito..." required>
             </div>
             <div class="form-group">
