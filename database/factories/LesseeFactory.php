@@ -17,19 +17,14 @@ $factory->define(Lessee::class, function (Faker $faker) {
         'estatus' => $faker->boolean,
         'calle' => $faker->streetName,
         'colonia' => $faker->word,
-        'numero_ext' => $faker->lexify('????'),
-//        'numero_int' => $faker->randomNumber(5),
+        'numero_ext' => $faker->numerify('####'),
         'estado' => $faker->state,
         'ciudad' => $faker->city,
-        'codigo_postal' => $faker->postcode,
-//        'entre_calles' => $faker->streetName,
-//        'calle_trabajo' => $faker->streetName,
+        'codigo_postal' => $faker->numerify('#####'),
         'colonia_trabajo' => $faker->word,
         'numero_ext_trabajo' => $faker->randomNumber(4),
-//        'numero_int_trabajo' => $faker->randomNumber(4),
         'estado_trabajo' => $faker->state,
         'ciudad_trabajo' => $faker->city,
         'codigo_postal_trabajo' => $faker->postcode,
-//        'entre_calles_trabajo' => $faker->streetName
     ];
 });

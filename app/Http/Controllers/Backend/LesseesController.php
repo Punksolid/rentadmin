@@ -55,29 +55,21 @@ class LesseesController extends Controller
 
         /** @var Lessee $arrendatario */
         $arrendatario = Lessee::create($data);
+        $lessee = &$arrendatario;
         if ($request->hasFile('identity')) {
             $arrendatario->addMediaFromRequest('identity')->toMediaCollection();
         }
 
+        if ($request->filled('phone_number')) {
 
-        for ($i = 1; $i <= 10; $i++) {
-            $variable = isset($data['telefono' . $i]);
-            if ($variable == null) {
-            } else {
-                $telefono['id_arrendatario'] = $arrendatario['id_cat_arrendatario'];
-                $telefono['telefono'] = $data['telefono' . $i];
-                $telefono['descripcion'] = $data['descripcion' . $i];
-                CatTelefono::create($telefono);
+            foreach ($request->get('phone_number') as $phone){
+                $lessee->addPhoneData((string) $phone['telefono'], (string)$phone['descripcion'] );
             }
         }
 
-        for ($j = 1; $j <= 10; $j++) {
-            $varia = isset($data['email' . $j]);
-            if ($varia == null) {
-            } else {
-                $email['id_arrendatario'] = $arrendatario['id_cat_arrendatario'];
-                $email['email'] = $data['email' . $j];
-                CatEmail::create($email);
+        if ($request->filled('email')) {
+            foreach ($request->get('email') as $email){
+                $lessee->addEmail($email);
             }
         }
 
@@ -95,15 +87,12 @@ class LesseesController extends Controller
     {
         /** @var Lessee $lessee */
         $lessee = Lessee::findOrFail($id);
-//        /** @var CatFiador $fiador */
         /** @var CatFiador $fiador */
         $fiador = $lessee->guarantor;
-//        $tel = CatTelefono::where('id_arrendatario', $id)->get();
         $tel = $lessee->phones()->get();
-//        $tel_f = CatTelefono::where('id_fiador', $fiador['id_cat_fiadores'])->get();
         $tel_f = $fiador->phones()->get();
-//        $email = CatEmail::where('id_arrendatario', $id)->get();
         $email = $lessee->emails()->get();
+        
         return view('catalogos.arrendatario.edit', [
             "arrendatario" => $lessee, //@todo deprecate
             "lessee" => $lessee,
