@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class PropertiesTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
     /**
      * A basic feature test example.
      *
@@ -110,6 +110,14 @@ class PropertiesTest extends TestCase
             'maintenance' => $property_form['maintenance'],
             'geolocation' => $property_form['geolocation']
         ]);
+    }
+    public function testItShowsEditForm()
+    {
+        $property = factory(Property::class)->create();
+
+        $call = $this->get(route('finca.edit', ['finca' => $property->id]));
+
+        $call->assertSuccessful();
     }
 
     public function test_edit_existing_property()

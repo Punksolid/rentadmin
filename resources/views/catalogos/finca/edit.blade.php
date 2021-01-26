@@ -87,7 +87,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="currency-field" type="text" name="maintenance" data-type="currency" class="form-control currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->maintenance }}" placeholder="Mantenimiento..." required>
+                    <input id="currency-field" type="text" name="maintenance" data-type="currency" class="form-control currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->maintenance }}" placeholder="Mantenimiento..." required>
                 </div>
             </div>
             <div class="form-group">
@@ -96,7 +96,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="currency-field" type="text" name="water_fee" data-type="currency" class="form-control currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->water_fee }}" placeholder="Cuota de Agua..." required>
+                    <input id="currency-field" type="text" name="water_fee" data-type="currency" class="form-control currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->water_fee }}" placeholder="Cuota de Agua..." required>
                 </div>
             </div>
 
@@ -115,7 +115,12 @@
             </div>
             <div class="form-group">
                 <label for="predial">Foto</label>
-                <input type="file" name="photo" class="form-control verificar" >
+                <input type="file" name="photo" class="form-control" >
+                @if ($property->hasMedia())
+                    <img src="{{ $property->getFirstMediaUrl() }}" alt="..." class="img-thumbnail" style="width: 200px; height: 200px;">
+                    <a class="btn-sm btn-danger" href="{{ route('finca.image.destroy', $property->id) }}">Eliminar Imagen</a>
+
+                @endif
             </div>
             <div class="form-group">
                 <button id="verificar" class="btn btn-primary" type="submit">Guardar</button>

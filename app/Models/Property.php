@@ -40,12 +40,6 @@ class Property extends Model implements HasMedia
         'created_at', 'updated_at', 'deleted_at'
     ];
 
-//    public function scopeJoinSubCat($query)
-//    {
-//        return $query->join('tipo_propiedad', 'cat_fincas.id_tipo_propiedad', '=', 'tipo_propiedad.id_tipo_propiedad')
-//            ->join('cat_arrendador', 'cat_fincas.id_arrendador', '=', 'cat_arrendador.id_cat_arrendador');
-//    }
-
     /**
      * One property belongs to a lessor
      * @return BelongsTo

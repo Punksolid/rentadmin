@@ -63,15 +63,24 @@ class PropertiesController extends Controller
         return view('catalogos.finca.show', ["finca" => $finca]);
     }
 
-    public function edit($id){
-//        dd($property_id);
+    public function edit($id) {
+
         $property_types = TipoPropiedad::all();
-        $finca = Property::findOrFail($id);
-        $tipo = TipoPropiedad::findOrFail($finca->property_type_id);
-        $arr = Lessor::findOrFail($finca->lessor_id);
+
+        $property = Property::findOrFail($id);
+
+        $tipo = TipoPropiedad::findOrFail($property->property_type_id);
+        $arr = Lessor::findOrFail($property->lessor_id);
         $arre = Lessor::orderBy('apellido_paterno', 'asc')->get();
 
-        return view('catalogos.finca.edit', ["finca" => $finca, "propiedad" => $property_types, "tipo" => $tipo, "arrendadores" => $arr, "arrendador" => $arre]);
+        return view('catalogos.finca.edit', [
+            "finca" => $property, // @todo Deprecar, eliminar
+            "propiedad" => $property_types,
+            "tipo" => $tipo,
+            "arrendadores" => $arr,
+            "arrendador" => $arre,
+            "property" => $property
+        ]);
     }
 
     public function update(Request $request, $id){
@@ -134,5 +143,18 @@ class PropertiesController extends Controller
         }
 
         return \redirect(route('finca.index'));
+    }
+
+    /**
+     * @param Property $finca
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function imageDestroy(Property $finca): \Illuminate\Http\RedirectResponse
+    {
+        $finca->getFirstMedia()->delete();
+
+        return Redirect::route('finca.edit', $finca->id);
     }
 }
