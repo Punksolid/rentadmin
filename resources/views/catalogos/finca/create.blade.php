@@ -62,12 +62,22 @@
 
             <div class="form-group">
                 <label for="mantenimiento">Mantenimiento</label>
-                <input id="currency-field" type="text" name="mantenimiento" value="$0.00" data-type="currency" required class="form-control verificar" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Mantenimiento..." >
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    <input id="currency-field" type="text" name="mantenimiento" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Mantenimiento..." >
+                </div>
             </div>
 
             <div class="form-group">
                 <label for="water_fee">Cuota de Agua</label>
-                <input id="currency-field" type="text" name="water_fee" value="$0.00" data-type="currency" required class="form-control verificar" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    <input id="currency-field" type="text" name="water_fee" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
+                </div>
             </div>
 
             <div class="form-group">
@@ -117,6 +127,7 @@
         })
 
         jQuery(function ($) {
+            $('.currency-field').mask("###,###,##0.00", {reverse: true});
             $('input[name="servicio_luz"]').mask('000 000 000 000');
             $('input[name="water_account_number"]').mask('000 000 000');
             $('input[name="predial"]').mask('000 000 000 000 000 000');
