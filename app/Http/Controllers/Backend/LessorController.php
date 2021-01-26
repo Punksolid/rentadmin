@@ -137,7 +137,9 @@ class LessorController extends Controller
             $b->update($banco);
         }
 
-        $this->updatePhones($request->get('phones'));
+        if ($request->filled('phones')) {
+            $this->updatePhones($request->get('phones'));
+        }
 
         foreach ($contadorEmail as $ce) {
             $id_email = $ce->id_email;

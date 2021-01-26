@@ -20,7 +20,7 @@ $factory->define(Lessor::class, function (Faker $faker) {
         'estado' => $faker->state,
         'ciudad' => $faker->city,
         'codigo_postal' => $faker->postcode,
-        'rfc' => $faker->randomLetter,
+        'rfc' => $faker->lexify('??????????????'),
         'estatus' => $faker->boolean
     ];
 });
