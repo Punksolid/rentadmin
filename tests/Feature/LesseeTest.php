@@ -60,32 +60,6 @@ class LesseeTest extends TestCase
         $call->assertSuccessful();
     }
 
-    public function test_see_lessee_edit_form_with_one_phone_and_email()
-    {
-        $this->withoutExceptionHandling();
-        /** @var Lessee $lessee */
-        $lessee = factory(Lessee::class)->create();
-        $lessee->addPhoneData($this->faker->phoneNumber, 'Whatever');
-        $lessee->addEmail($this->faker->email);
-
-        $call = $this->get(route('arrendatario.edit', [$lessee->id]));
-
-        $call->assertSuccessful();
-    }
-
-    public function test_see_minimum_lessee_edit_form()
-    {
-        $this->withoutExceptionHandling();
-        /** @var Lessee $lessee */
-        $lessee = factory(Lessee::class)->create();
-//        $lessee->addPhoneData($this->faker->phoneNumber, 'Whatever');
-//        $lessee->addEmail($this->faker->email);
-
-        $call = $this->get(route('arrendatario.edit', [$lessee->id]));
-
-        $call->assertSuccessful();
-    }
-
     public function test_registry_new_lessee()
     {
         $this->withoutExceptionHandling();
