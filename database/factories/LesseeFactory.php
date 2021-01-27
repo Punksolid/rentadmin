@@ -9,10 +9,10 @@ use Faker\Generator as Faker;
 
 $factory->define(Lessee::class, function (Faker $faker) {
     return [
+        'id_fiador' => factory(CatFiador::class)->create()->id_cat_fiadores,
         'nombre' => $faker->firstName,
         'apellido_paterno' => $faker->lastName,
         'apellido_materno' => $faker->lastName,
-        'id_fiador' => factory(CatFiador::class)->create()->id_cat_fiadores,
         'puesto' => $faker->jobTitle,
         'estatus' => $faker->boolean,
         'calle' => $faker->streetName,

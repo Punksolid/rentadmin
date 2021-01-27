@@ -46,7 +46,7 @@
                         <td>{{ $property->status}}</td>
 
                         <td>
-                            <div class="btn-group"">
+                            <div class="btn-group">
                                 <a href="{{  $property->getFirstMediaUrl() }}"><button class="btn btn-success linea" {{ $property->hasMedia() ?: 'disabled' }}><i class="far fa-image"></i></button></a>
                                 <a class="linea btn btn-info" href="{{ URL::action('Backend\PropertiesController@edit', $property->id) }}"><i class="far fa-edit"></i></a>
                                 @if($property->status == 1)

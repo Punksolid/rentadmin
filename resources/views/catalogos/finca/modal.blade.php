@@ -40,7 +40,7 @@
                 <hr>
                 @foreach($arrendador as $lessor)
                     <div class="item">
-                    <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendadorse{{$lessor->id}}" onclick="arrendador({{$lessor->id}})" class="nombres btn btn-secondary form-control" value="{{$lessor->id}}">{{$lessor->id}}-. {{$lessor->nombre}} {{$lessor->apellido_paterno}}</button>
+                        <button style="margin-bottom: 4px" data-dismiss="modal" id="arrendadorse{{$lessor->id}}" onclick="arrendador({{$lessor->id}})" class="nombres btn btn-secondary form-control" value="{{$lessor->id}}">{{$lessor->id}}-. {{$lessor->nombre}} {{$lessor->apellido_paterno}}</button>
                     </div>
                 @endforeach
             </div>

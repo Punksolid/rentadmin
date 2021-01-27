@@ -64,35 +64,16 @@ class LessorController extends Controller
         if ($request->has('phone_number')) {
             $this->addPhones($lessor, $request->get('phone_number'));
         }
-//        for ($i = 1; $i <= 10; $i++) {
-//            $variable = isset($data['telefono' . $i]);
-//            if ($variable == null) {
-//            } else {
-//                $telefono['id_arrendador'] = $lessor['id_cat_arrendador'];
-//                $telefono['telefono'] = $data['telefono' . $i];
-//                $telefono['descripcion'] = $data['descripcion' . $i];
-//                CatTelefono::create($telefono);
-//            }
-//        }
+
         if ($request->has('email')) {
             foreach ($request->email as $email){
-//                $email['id_arrendador'] = $lessor->id;
-//                $email['email'] = $data['email' . $j];
+
                 CatEmail::create([
                     'id_arrendador' => $lessor->id,
                     'email' => $email
                 ]);
             }
         }
-//        for ($j = 1; $j <= 10; $j++) {
-//            $varia = isset($data['email' . $j]);
-//            if ($varia == null) {
-//            } else {
-//                $email['id_arrendador'] = $lessor['id_cat_arrendador'];
-//                $email['email'] = $data['email' . $j];
-//                CatEmail::create($email);
-//            }
-//        }
 
         return Redirect::to('catalogos/arrendador');
     }

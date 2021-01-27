@@ -127,7 +127,7 @@
 
             <!-- Fiador -->
             <div class="form-group">
-                <h4><strong>Fiador</strong>  <input type="checkbox" checked onclick="document.getElementById('guarantor-block').hidden=!this.checked; checknull(this.checked)"></h4></h4>
+                <h4><strong>Fiador</strong>  <input type="checkbox" checked onclick="document.getElementById('guarantor-block').hidden=!this.checked; checknull(this.checked)"></h4>
             </div>
             <div id="guarantor-block">
                 <div class="form-group">

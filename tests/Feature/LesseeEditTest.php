@@ -15,26 +15,51 @@ class LesseeEditTest extends TestCase
 
     public function test_see_lessee_edit_form_with_one_phone_and_email()
     {
-        $this->withoutExceptionHandling();
         /** @var Lessee $lessee */
         $lessee = factory(Lessee::class)->create();
+
         $lessee->addPhoneData($this->faker->phoneNumber, 'Whatever');
         $lessee->addEmail($this->faker->email);
 
         $call = $this->get(route('arrendatario.edit', [$lessee->id]));
 
         $call->assertSuccessful();
+        $call->assertSee($lessee->nombre);
     }
 
     public function test_see_minimum_lessee_edit_form()
     {
-        $this->withoutExceptionHandling();
         /** @var Lessee $lessee */
         $lessee = factory(Lessee::class)->create();
-
         $call = $this->get(route('arrendatario.edit', [$lessee->id]));
 
         $call->assertSuccessful();
+    }
+
+    public function testItCanSeeEditFormWithoutGuarantor()
+    {
+        $this->withoutExceptionHandling();
+        /** @var Lessee $lessee */
+        $lessee = factory(Lessee::class)->create(['id_fiador' => null]);
+        $call = $this->get(route('arrendatario.edit', [$lessee->id]));
+
+        $call->assertSuccessful();
+    }
+
+    public function testItCanUpdateWithoutHavingGuarantorAndNotAddingOne()
+    {
+        $this->withoutExceptionHandling();
+        /** @var Lessee $lessee */
+        $lessee = factory(Lessee::class)->create(['id_fiador' => null]);
+        $form_lessee = factory(Lessee::class)->raw(['id_fiador' => null]);
+        $call = $this->put(route('arrendatario.update', [$lessee->id]),
+            $form_lessee
+        );
+
+        $call->assertRedirect(route('arrendatario.index'));
+        $this->assertDatabaseHas('lessees', [
+            'nombre' => $form_lessee['nombre']
+        ]);
     }
 
     public function test_update_without_phones()

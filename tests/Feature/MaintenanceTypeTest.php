@@ -19,4 +19,11 @@ class MaintenanceTypeTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function testItShowsRegisterNewForm()
+    {
+        $call = $this->get(route('tipo-mantenimiento.create'));
+
+        $call->assertSuccessful();
+    }
 }
