@@ -94,6 +94,13 @@ class LessorTest extends TestCase
         $call->assertSee($lessor_inactive->nombre);
     }
 
+    public function testItShowsLessorCreateForm()
+    {
+        $call = $this->get(route('arrendador.create'));
+
+        $call->assertSuccessful();
+    }
+
     public function testEditFormLoadsSuccessfulWithAllAttachedData()
     {
         $this->withoutExceptionHandling();

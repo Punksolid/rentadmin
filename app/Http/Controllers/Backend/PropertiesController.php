@@ -34,9 +34,12 @@ class PropertiesController extends Controller
     }
 
     public function create(){
-        $property_types = TipoPropiedad::all();
+        $property_types = TipoPropiedad::active()->get();
         $lessors = Lessor::orderBy('apellido_paterno', 'asc')->get();
-        return view('catalogos.finca.create', ["property_types" => $property_types, "arrendador" => $lessors]);
+        return view('catalogos.finca.create', [
+            "property_types" => $property_types,
+            "arrendador" => $lessors
+        ]);
     }
 
     public function store(Request $request){

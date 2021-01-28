@@ -32,10 +32,7 @@
                     <select class="form-control verificar tipo-propiedad" name="property_type_id" required>
                         <option name="property_type_id" value="">Seleccione el Tipo de Propiedad</option>
                         @foreach($property_types as $property_type)
-                            @if($property_type->estatus == 0)
-                                @else
-                                    <option name="property_type_id" value="{{$property_type->id_tipo_propiedad}}">{{$property_type->tipo_propiedad}}</option>
-                            @endif
+                            <option name="property_type_id" value="{{$property_type->id_tipo_propiedad}}">{{$property_type->tipo_propiedad}}</option>
                         @endforeach
                 </select>
                 <a data-target="#modal-propiedad" data-toggle="modal"><button id="agg" class="btn btn-success">+</button></a>
@@ -66,7 +63,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="currency-field" type="text" name="mantenimiento" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Mantenimiento..." >
+                    <input id="currency-field" type="text" name="mantenimiento" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Mantenimiento..." >
                 </div>
             </div>
 
@@ -76,7 +73,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="currency-field" type="text" name="water_fee" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
+                    <input id="currency-field" type="text" name="water_fee" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
                 </div>
             </div>
 
@@ -110,21 +107,6 @@
     </div>
 
     <script>
-        $('#verificar').click(function () {
-            let i = 0;
-            let veri = $('.verificar');
-            $.each(veri, function (index, ver) {
-                if (ver.value == ''){
-                    i++;
-                }
-            })
-            if (i>=1){
-                alert('Llene todos los campos');
-                return false;
-            }else{
-                return true;
-            }
-        })
 
         jQuery(function ($) {
             $('.currency-field').mask("###,###,##0.00", {reverse: true});
