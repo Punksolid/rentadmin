@@ -130,7 +130,10 @@
             <hr>
 
             <div class="form-group">
-                <label for="banco">Datos Bancarios &nbsp;&nbsp; <input id="bancocheck" checked type="checkbox"> &nbsp;&nbsp;<a id="ad_banco" data-target="#modal-add-banco" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
+                <label for="banco">Datos Bancarios &nbsp;&nbsp; <input id="bancocheck" checked type="checkbox"> &nbsp;&nbsp;
+                    <a id="ad_banco" data-target="#modal-add-banco" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a>
+                </label>
+                <br>
                 <div id="datosbanco">
                     @foreach($banco as $bank_account)
                     <div id="banc" class="form-group" style="display: inline-flex; align-items: baseline">

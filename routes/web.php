@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     //Catalogo Arrendador
     Route::resource('catalogos/arrendador', 'Backend\LessorController');
-    Route::put('catalogos/arrendador/{arrendador}', 'Backend\LessorController@activar');
+    Route::put('catalogos/arrendador/{arrendador}/toggle', 'Backend\LessorController@activar');
     Route::post('catalogos/arrendador/telefono/{arrendador}', 'Backend\LessorController@addTelefono');
     Route::post('catalogos/arrendador/email/{arrendador}', 'Backend\LessorController@addEmail');
     Route::post('catalogos/arrendador/banco/{arrendador}', 'Backend\LessorController@addBanco');

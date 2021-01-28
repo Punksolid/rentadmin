@@ -24,7 +24,7 @@
 {{--</div>--}}
 
 <div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-add-email">
-{{--    {!! Form::model($arrendador, ['method' => 'POST', 'url' =>['catalogos/arrendador/email', $arrendador->id]]) !!}--}}
+    {!! Form::model($arrendador, ['method' => 'POST', 'url' =>['catalogos/arrendador/email', $arrendador->id]]) !!}
     {{Form::token()}}
     <div class="modal-dialog">
         <div class="modal-content">
@@ -48,7 +48,7 @@
 </div>
 
 <div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-add-banco">
-{{--    {!! Form::model($arrendador, ['method' => 'POST', 'url' =>['catalogos/arrendador/banco', $arrendador->id]]) !!}--}}
+    {!! Form::model($arrendador, ['method' => 'POST', 'url' =>['catalogos/arrendador/banco', $arrendador->id]]) !!}
     {{Form::token()}}
     <div class="modal-dialog">
         <div class="modal-content">

@@ -17,6 +17,7 @@
         "igorescobar/jquery-mask-plugin": "^1.14",
         "iio/libmergepdf": "4.0",
         "laravel/framework": "^7.0",
+        "laravel/telescope": "3.5.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "laravelcollective/html": "^6.0",

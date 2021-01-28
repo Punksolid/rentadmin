@@ -134,4 +134,18 @@ class LessorTest extends TestCase
 
         $call->assertSuccessful();
     }
+
+    public function testItCanUpdateLessor()
+    {
+        $this->withoutExceptionHandling();
+        $lessor = factory(Lessor::class)->create();
+        $new_lessor = factory(Lessor::class)->raw();
+        $call = $this->call('PUT',route('arrendador.update', [$lessor->id]), $new_lessor);
+
+        $call->assertRedirect(route('arrendador.index'));
+        $this->assertDatabaseHas('lessors', [
+            'nombre' => $new_lessor['nombre']
+        ]);
+
+    }
 }
