@@ -23,7 +23,7 @@ class PropertiesController extends Controller
                 })
                 ->orderBy('rented', 'asc')
                 ->paginate(15);
-            $properties->append([
+            $properties->appends([
                 'status' => $status
             ]);
             return view('catalogos.finca.index', [
