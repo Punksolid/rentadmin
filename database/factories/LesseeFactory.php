@@ -25,6 +25,7 @@ $factory->define(Lessee::class, function (Faker $faker) {
         'numero_ext_trabajo' => $faker->randomNumber(4),
         'estado_trabajo' => $faker->state,
         'ciudad_trabajo' => $faker->city,
+        'calle_trabajo' => $faker->streetAddress,
         'codigo_postal_trabajo' => $faker->postcode,
     ];
 });

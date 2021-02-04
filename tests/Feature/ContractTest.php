@@ -30,6 +30,7 @@ class ContractTest extends TestCase
 
     public function testContractForm()
     {
+        $this->withoutExceptionHandling();
         $call = $this->get(route('contrato.create'));
 
         $call->assertSuccessful();
@@ -44,5 +45,20 @@ class ContractTest extends TestCase
         ]));
 
         $call->assertSuccessful();
+    }
+
+    public function testStoreANewContract()
+    {
+        $this->withoutExceptionHandling();
+        $form = factory(Contract::class)->raw();
+
+        $call = $this->post(route('contrato.store'), $form);
+
+        $this->assertDatabaseHas('contracts', [
+            'bonificacion' => $form['bonificacion'],
+            'deposito' => $form['deposito'],
+            'estatus' => $form['estatus'],
+        ]);
+
     }
 }

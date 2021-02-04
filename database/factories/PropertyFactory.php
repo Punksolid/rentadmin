@@ -20,7 +20,7 @@ $factory->define(Property::class, function (Faker $faker) {
         'maintenance' => $faker->word,
         'recibo' => $faker->word,
         'water_fee' => $faker->word,
-        'rented' => $faker->boolean,
+        'rented' => $faker->date(),
         'geolocation' => $faker->url
     ];
 });

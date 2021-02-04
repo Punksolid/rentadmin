@@ -32,7 +32,7 @@ class Property extends Model implements HasMedia
         'maintenance',
         'recibo',
         'water_fee',
-        'estatus_renta',
+        'rented',
         'geolocation'
     ];
 
@@ -40,6 +40,10 @@ class Property extends Model implements HasMedia
         'created_at', 'updated_at', 'deleted_at'
     ];
 
+    public function getRentedAttribute($value)
+    {
+        return (bool)$value;
+    }
     /**
      * One property belongs to a lessor
      * @return BelongsTo

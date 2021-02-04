@@ -18,6 +18,7 @@ class LessorTest extends TestCase
 
     public function testALessorCanBeRegisteredWithoutInvoiceData()
     {
+        $this->withoutExceptionHandling();
         $lessor = factory(Lessor::class)->raw();
 
         $call = $this->call('POST', route('arrendador.store'), $lessor);

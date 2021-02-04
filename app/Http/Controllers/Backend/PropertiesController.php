@@ -93,10 +93,11 @@ class PropertiesController extends Controller
         }else{
             $data['recibo'] = 'No Fiscal';
         }
+
         if (isset($data['estatus_renta']) && $data['estatus_renta'] == 'on'){
-            $data['rented'] = 'Disponible';
+            $data['rented'] = null;
         }else{
-            $data['rented'] = 'Rentada';
+            $data['rented'] = now();
         }
         /** @var Property $property */
         $property = Property::findOrFail($id);

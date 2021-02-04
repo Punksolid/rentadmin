@@ -15,7 +15,7 @@ $factory->define(Contract::class, function (Faker $faker) {
         'id_arrendador' => factory(Lessor::class)->create()->id,
         'id_arrendatario' => factory(Lessee::class)->create()->id,
         'id_finca' => factory(Property::class)->create()->id,
-        'duracion_contrato' => $faker->dateTime,
+        'duracion_contrato' => random_int(1,5),
 //        'aumento' => $faker->randomNumber(3),
 //        'fecha_inicio',
 //        'fecha_fin',

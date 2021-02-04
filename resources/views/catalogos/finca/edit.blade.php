@@ -74,10 +74,10 @@
                     @endif
                 </div>
                 <div style="display: block; margin-left: 248px !important; margin-top: -38px;">
-                    @if($finca->estatus_renta === "Disponible")
-                        <input style="" type="checkbox" name="estatus_renta" checked data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
-                    @else
+                    @if($finca->rented)
                         <input style="" type="checkbox" name="estatus_renta" data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
+                    @else
+                        <input style="" type="checkbox" name="estatus_renta" checked data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
                     @endif
                 </div>
             </div>
