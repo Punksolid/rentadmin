@@ -124,7 +124,7 @@
                 </div>
                 <div class="formulario-tres">
                     <label for="rfc">RFC</label>
-                    <input type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->rfc }}" placeholder="RFC..." required>
+                    <input type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->rfc }}" placeholder="RFC..." >
                 </div>
             </div>
             <hr>

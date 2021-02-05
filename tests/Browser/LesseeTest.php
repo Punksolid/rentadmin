@@ -65,4 +65,6 @@ class LesseeTest extends DuskTestCase
         $this->assertEquals($email, $lessee->defaultEmail()->email);
         $this->assertEquals($phone, $lessee->defaultPhoneNumber()->telefono);
     }
+
+
 }
