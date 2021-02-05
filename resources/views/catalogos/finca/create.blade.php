@@ -18,12 +18,12 @@
             {{Form::token()}}
             <div class="form-group">
                 <label for="finca_arrendada">Inmueble</label>
-                <input type="text" name="name" class="verificar form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Inmueble..." required>
+                <input type="text" name="name" value="{{ old('name') }}" class="verificar form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Inmueble..." required>
             </div>
             <div class="form-group">
                 <label for="lessor_id">Arrendador</label>
                 <input type="text" class="form-control verificar tipo-propiedad" id="arrendadorname" placeholder="Arrendador..." disabled >
-                <button type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador"><i class="fa fa-search"></i></button>
+                <button id="search_lessor" type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_arrendador" name="lessor_id" value="" >
             </div>
 
@@ -32,18 +32,18 @@
                     <select class="form-control verificar tipo-propiedad" name="property_type_id" required>
                         <option name="property_type_id" value="">Seleccione el Tipo de Propiedad</option>
                         @foreach($property_types as $property_type)
-                            <option name="property_type_id" value="{{$property_type->id_tipo_propiedad}}">{{$property_type->tipo_propiedad}}</option>
+                            <option name="property_type_id" value="{{$property_type->id_tipo_propiedad}}" @if(old('property_type_id') == $property_type->id_tipo_propiedad) selected @endif>{{$property_type->tipo_propiedad}}</option>
                         @endforeach
                 </select>
                 <a data-target="#modal-propiedad" data-toggle="modal"><button id="agg" class="btn btn-success">+</button></a>
             </div>
             <div class="form-group">
                 <label for="descripcion">Direccion</label>
-                <input type="text" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();"  required placeholder="Direccion..." >
+                <input type="text" value="{{ old('address') }}" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();"  required placeholder="Direccion..." >
             </div>
             <div class="form-group">
                 <label for="descripcion">Geolocalizacion</label>
-                <input type="text" name="geolocation" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();"  required placeholder="Geolocalizacion..." >
+                <input type="text" value="{{ old("geolocation") }}" name="geolocation" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();"  required placeholder="Geolocalizacion..." >
             </div>
 
 
@@ -51,19 +51,19 @@
                 <label for="recibo">Recibo</label>
                 <div style="display:block;">
                     <label>Fiscal</label>
-                    <input style="margin-right: 20px" class="cb" onchange="cbChange(this)" type="radio" name="fiscal">
+                    <input style="margin-right: 20px" class="cb" onchange="cbChange(this)" type="radio" name="fiscal" @if(old('fiscal') == 'on') checked @endif>
                     <label>No Fiscal</label>
-                    <input type="radio" class="cb" onchange="cbChange(this)" name="nofiscal">
+                    <input type="radio" class="cb" onchange="cbChange(this)" name="nofiscal" @if(old('nofiscal') == 'on') checked @endif>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="mantenimiento">Mantenimiento</label>
+                <label for="maintenance">Mantenimiento</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="currency-field" type="text" name="mantenimiento" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Mantenimiento..." >
+                    <input id="currency-field" type="text" name="maintenance" value="{{ old('maintenance', '$0.00') }}" data-type="currency" required class="form-control verificar currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Mantenimiento..." >
                 </div>
             </div>
 
@@ -73,22 +73,22 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="currency-field" type="text" name="water_fee" value="$0.00" data-type="currency" required class="form-control verificar currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
+                    <input id="currency-field" type="text" name="water_fee" value="{{ old('water_fee', '$0.00') }}" data-type="currency" required class="form-control verificar currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua..." >
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="energy_fee">Servicio de Luz</label>
-                <input type="text" name="energy_fee" class="form-control verificar" placeholder="XXX XXX XXX XXX" required>
+                <input type="text" name="energy_fee" value="{{ old('energy_fee') }}" class="form-control verificar" placeholder="XXX XXX XXX XXX" required>
             </div>
             <div class="form-group">
                 <label for="water_account_number">Cuenta Japac</label>
-                <input type="text" name="water_account_number" class="form-control verificar" placeholder="XXX XXX XXX" required>
+                <input type="text" name="water_account_number" value="{{ old('water_account_number') }}" class="form-control verificar" placeholder="XXX XXX XXX" required>
             </div>
 
             <div class="form-group">
                 <label for="predial">Numero de Predial</label>
-                <input type="text" name="predial" class="form-control verificar" placeholder="XXX XXX XXX XXX XXX XXX" required>
+                <input type="text" name="predial" class="form-control verificar" value="{{ old('predial') }}" placeholder="XXX XXX XXX XXX XXX XXX" required>
             </div>
             <div class="form-group">
                 <label for="predial">Foto</label>

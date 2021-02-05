@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label for="descripcion">Geolocalizacion</label>
-                <input type="text" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
+                <input type="text" name="geolocation" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
             </div>
 
             <div class="form-group">
@@ -63,21 +63,21 @@
                 <div style="display:block;">
                     @if($finca->recibo === "Fiscal")
                             <label>Fiscal</label>
-                            <input style="margin-right: 20px" class="cb" checked onchange="cbChange(this)" type="radio" name="fiscal">
+                            <input id="fiscal" style="margin-right: 20px" class="cb" checked onchange="cbChange(this)" type="radio" name="fiscal">
                             <label>No Fiscal</label>
-                            <input type="radio" class="cb" onchange="cbChange(this)" name="nofiscal">
+                            <input id="nofiscal" type="radio" class="cb" onchange="cbChange(this)" name="nofiscal">
                     @else
                         <label>Fiscal</label>
-                        <input style="margin-right: 20px" class="cb" onchange="cbChange(this)" type="radio" name="fiscal">
+                        <input style="margin-right: 20px" class="cb" id="fiscal" onchange="cbChange(this)" type="radio" name="fiscal">
                         <label>No Fiscal</label>
-                        <input type="radio" class="cb" checked onchange="cbChange(this)" name="nofiscal">
+                        <input type="radio" class="cb" checked id="nofiscal" onchange="cbChange(this)" name="nofiscal">
                     @endif
                 </div>
                 <div style="display: block; margin-left: 248px !important; margin-top: -38px;">
                     @if($finca->rented)
-                        <input style="" type="checkbox" name="estatus_renta" data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
+                        <input id="estatus_renta_on" style="" type="checkbox" name="estatus_renta" data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
                     @else
-                        <input style="" type="checkbox" name="estatus_renta" checked data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
+                        <input id="estatus_renta_off" style="" type="checkbox" name="estatus_renta" checked data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
                     @endif
                 </div>
             </div>

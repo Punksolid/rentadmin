@@ -133,5 +133,7 @@ return [
         'subject'               => 'asunto',
         'message'               => 'mensaje',
         'required'              => 'Requerido',
+        // fields
+        'lessor_id'             => 'Arrendador'
     ],
 ];

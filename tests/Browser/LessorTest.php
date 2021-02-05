@@ -22,7 +22,6 @@ class LessorTest extends DuskTestCase
 
             $browser->loginAs(factory(User::class)->create());
             $browser->visit(route('arrendador.edit', $lessor->id));
-            $browser->screenshot('formshowed');
             $browser->type('codigo_postal', '80120');
             $browser->assertVisible("input[name='rfc']");
             $browser->screenshot('rfc exists');

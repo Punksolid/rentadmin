@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PropertyRequest;
 use App\Models\Property;
 use App\Models\Lessor;
 use App\Models\TipoPropiedad;
@@ -42,13 +43,13 @@ class PropertiesController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(PropertyRequest $request){
         $data = $request->all();
         $data['state_id'] = 25;
         if (isset($data['fiscal']) && $data['fiscal'] == "true"){
-            $data['recibo'] = 'Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE;
         }else{
-            $data['recibo'] = 'No Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
         }
 
         /** @var Property $property */
@@ -86,12 +87,12 @@ class PropertiesController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(PropertyRequest $request, $id){
         $data = $request->all();
         if (isset($data['fiscal']) && $data['fiscal'] == "on"){
-            $data['recibo'] = 'Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE;
         }else{
-            $data['recibo'] = 'No Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
         }
 
         if (isset($data['estatus_renta']) && $data['estatus_renta'] == 'on'){

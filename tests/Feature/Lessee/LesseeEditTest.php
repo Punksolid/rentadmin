@@ -100,4 +100,38 @@ class LesseeEditTest extends TestCase
             'nombre' => $new_lessee['nombre']
         ]);
     }
+
+    public function testEditWithGuarantor()
+    {
+        $this->withoutExceptionHandling();
+        $lessee = factory(Lessee::class)->create();
+
+        $form = [
+            'guarantor_block' => 'on',
+            'nombre_fiador' => $this->faker->name,
+            'apellido_paterno_fiador' => $this->faker->name,
+            'apellido_materno_fiador' => $this->faker->name,
+            'calle_fiador' => $this->faker->name,
+            'colonia_fiador' => $this->faker->name,
+            'numero_ext_fiador' => $this->faker->numerify('####'),
+            'numero_int_fiador' => $this->faker->numerify('####'),
+            'estado_fiador' => $this->faker->numerify('####'),
+            'ciudad_fiador' => $this->faker->numerify('####'),
+            'codigo_postal_fiador' => $this->faker->numerify('####'),
+            'entre_calles_fiador' => $this->faker->numerify('####'),
+
+            'calle_fiador_trabajo' => $this->faker->name,
+            'colonia_fiador_trabajo' => $this->faker->name,
+            'numero_ext_fiador_trabajo' => $this->faker->numerify('####'),
+            'numero_int_fiador_trabajo' => $this->faker->numerify('####'),
+            'estado_fiador_trabajo' => $this->faker->numerify('####'),
+            'ciudad_fiador_trabajo' => $this->faker->numerify('####'),
+            'codigo_postal_fiador_trabajo' => $this->faker->numerify('####'),
+            'entre_calles_fiador_trabajo' => $this->faker->numerify('####'),
+        ];
+        $form = array_merge($lessee->toArray(),$form);
+        $call = $this->patch(route('arrendatario.update', [$lessee->id]), $form);
+
+        $call->assertRedirect(route('arrendatario.index'));
+    }
 }

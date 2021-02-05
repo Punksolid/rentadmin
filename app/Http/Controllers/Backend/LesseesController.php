@@ -106,12 +106,11 @@ class LesseesController extends Controller
     {
 
         $data = $request->all();
-
         $arre = Lessee::findOrFail($id);
         $arre->update($data);
 
         if ($request->get('guarantor_block' ) == 'on') {
-            $guarantor = $this->updateOrCreateGuarantor($request,$arre);
+            $guarantor = $this->updateOrCreateGuarantor($request, $arre);
         }
 
         if ($request->hasFile('identity')) {
@@ -247,15 +246,20 @@ class LesseesController extends Controller
         $fiador['codigo_postal_trabajo'] = $request->get('codigo_postal_fiador_trabajo');
         $fiador['entre_calles_trabajo'] = $request->get('entre_calles_fiador_trabajo');
 
+        /** @var CatFiador $guarantor */
         $guarantor = $lessee->guarantor()->updateOrCreate($fiador);
-        $contadorTelFiador = CatTelefono::where('id_fiador', $arre['id_fiador'])->get();
-        foreach ($contadorTelFiador as $ctf) {
-            $id_tel_f = $ctf->id_telefono;
-            $uf = CatTelefono::find($id_tel_f);
-            $telefonof['id_fiador'] = $arre['id_fiador'];
-            $telefonof['telefono'] = $data['telefonoid' . $id_tel_f];
-            $telefonof['descripcion'] = $data['descripcionid' . $id_tel_f];
-            $uf->update($telefonof);
+
+        $contadorTelFiador = $guarantor->phones()->get();
+
+        if ($contadorTelFiador) {
+            foreach ($contadorTelFiador as $ctf) {
+                $id_tel_f = $ctf->id_telefono;
+                $uf = CatTelefono::find($id_tel_f);
+                $telefonof['id_fiador'] = $guarantor->id;
+                $telefonof['telefono'] = $request->get('telefonoid' . $id_tel_f);
+                $telefonof['descripcion'] = $request->get('descripcionid' . $id_tel_f);
+                $uf->update($telefonof);
+            }
         }
 
         return $guarantor;
