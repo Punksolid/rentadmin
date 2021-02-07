@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
                 <label for="descripcion">Geolocalizacion</label>
-                <input type="text" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
+                <input type="text" name="geolocation" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
             </div>
 
             <div class="form-group">
@@ -63,31 +63,41 @@
                 <div style="display:block;">
                     @if($finca->recibo === "Fiscal")
                             <label>Fiscal</label>
-                            <input style="margin-right: 20px" class="cb" checked onchange="cbChange(this)" type="radio" name="fiscal">
+                            <input id="fiscal" style="margin-right: 20px" class="cb" checked onchange="cbChange(this)" type="radio" name="fiscal">
                             <label>No Fiscal</label>
-                            <input type="radio" class="cb" onchange="cbChange(this)" name="nofiscal">
+                            <input id="nofiscal" type="radio" class="cb" onchange="cbChange(this)" name="nofiscal">
                     @else
                         <label>Fiscal</label>
-                        <input style="margin-right: 20px" class="cb" onchange="cbChange(this)" type="radio" name="fiscal">
+                        <input style="margin-right: 20px" class="cb" id="fiscal" onchange="cbChange(this)" type="radio" name="fiscal">
                         <label>No Fiscal</label>
-                        <input type="radio" class="cb" checked onchange="cbChange(this)" name="nofiscal">
+                        <input type="radio" class="cb" checked id="nofiscal" onchange="cbChange(this)" name="nofiscal">
                     @endif
                 </div>
                 <div style="display: block; margin-left: 248px !important; margin-top: -38px;">
-                    @if($finca->estatus_renta === "Disponible")
-                        <input style="" type="checkbox" name="estatus_renta" checked data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
+                    @if($finca->rented)
+                        <input id="estatus_renta_on" style="" type="checkbox" name="estatus_renta" data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
                     @else
-                        <input style="" type="checkbox" name="estatus_renta" data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
+                        <input id="estatus_renta_off" style="" type="checkbox" name="estatus_renta" checked data-toggle="toggle" data-on="Disponible" data-off="Rentada" data-onstyle="success" data-offstyle="danger">
                     @endif
                 </div>
             </div>
             <div class="form-group">
                 <label for="mantenimiento">Mantenimiento</label>
-                <input id="currency-field" type="text" name="maintenance" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->maintenance }}" placeholder="Mantenimiento..." required>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    <input id="currency-field" type="text" name="maintenance" data-type="currency" class="form-control currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->maintenance }}" placeholder="Mantenimiento..." required>
+                </div>
             </div>
             <div class="form-group">
                 <label for="cuota_agua">Cuota de Agua</label>
-                <input id="currency-field" type="text" name="water_fee" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->water_fee }}" placeholder="Cuota de Agua..." required>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    <input id="currency-field" type="text" name="water_fee" data-type="currency" class="form-control currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->water_fee }}" placeholder="Cuota de Agua..." required>
+                </div>
             </div>
 
             <div class="form-group">
@@ -105,7 +115,12 @@
             </div>
             <div class="form-group">
                 <label for="predial">Foto</label>
-                <input type="file" name="photo" class="form-control verificar" >
+                <input type="file" name="photo" class="form-control" >
+                @if ($property->hasMedia())
+                    <img src="{{ $property->getFirstMediaUrl() }}" alt="..." class="img-thumbnail" style="width: 200px; height: 200px;">
+                    <a class="btn-sm btn-danger" href="{{ route('finca.image.destroy', $property->id) }}">Eliminar Imagen</a>
+
+                @endif
             </div>
             <div class="form-group">
                 <button id="verificar" class="btn btn-primary" type="submit">Guardar</button>
@@ -135,6 +150,7 @@
         })
 
         jQuery(function ($) {
+            $('.currency-field').mask("###,###,##0.00", {reverse: true});
             $('input[name="servicio_luz"]').mask('000 000 000 000');
             $('input[name="cta_japac"]').mask('000 000 000');
             $('input[name="predial"]').mask('000 000 00 000');

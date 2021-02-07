@@ -16,11 +16,11 @@ $factory->define(Property::class, function (Faker $faker) {
         'water_account_number' => $faker->word,
         'status' => $faker->boolean,
         'address' => $faker->address,
-        'predial' => $faker->word,
-        'maintenance' => $faker->word,
-        'recibo' => $faker->word,
-        'water_fee' => $faker->word,
-        'rented' => $faker->boolean,
+        'predial' => $faker->numerify('##########'),
+        'maintenance' => $faker->numerify('####'),
+        'recibo' => $faker->boolean,
+        'water_fee' => $faker->numerify('####'),
+        'rented' => $faker->date(),
         'geolocation' => $faker->url
     ];
 });

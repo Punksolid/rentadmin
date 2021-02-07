@@ -87,7 +87,7 @@
 
             <!-- Direccion de Facturacion -->
             <div class="form-group">
-                <h4><strong>Direccion de Facturación</strong> &nbsp; <input type="checkbox" checked onclick="document.getElementById('facturacion-check').hidden=!this.checked; checknull(this.checked)"></h4>
+                <h4><strong>Direccion de Facturación</strong> &nbsp; <input id="show_invoice" name="show_invoice" type="checkbox" checked onclick="document.getElementById('facturacion-check').hidden=!this.checked; checknull(this.checked)"></h4>
             </div>
             <div id="facturacion-check">
                 <div class="formulario-tres">
@@ -122,15 +122,18 @@
                     <label for="entre_calles_facturacion">Entre Calles</label>
                     <input type="text" name="entre_calles_facturacion" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->entre_calles_facturacion }}" placeholder="Entre Calles...">
                 </div>
-            </div>
-            <div class="formulario-tres">
-                <label for="rfc">RFC</label>
-                <input type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->rfc }}" placeholder="RFC..." required>
+                <div class="formulario-tres">
+                    <label for="rfc">RFC</label>
+                    <input type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->rfc }}" placeholder="RFC..." >
+                </div>
             </div>
             <hr>
 
             <div class="form-group">
-                <label for="banco">Datos Bancarios &nbsp;&nbsp; <input id="bancocheck" checked type="checkbox"> &nbsp;&nbsp;<a id="ad_banco" data-target="#modal-add-banco" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a></label><br>
+                <label for="banco">Datos Bancarios &nbsp;&nbsp; <input id="bancocheck" checked type="checkbox"> &nbsp;&nbsp;
+                    <a id="ad_banco" data-target="#modal-add-banco" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a>
+                </label>
+                <br>
                 <div id="datosbanco">
                     @foreach($banco as $bank_account)
                     <div id="banc" class="form-group" style="display: inline-flex; align-items: baseline">

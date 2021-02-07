@@ -18,6 +18,7 @@ class LessorTest extends TestCase
 
     public function testALessorCanBeRegisteredWithoutInvoiceData()
     {
+        $this->withoutExceptionHandling();
         $lessor = factory(Lessor::class)->raw();
 
         $call = $this->call('POST', route('arrendador.store'), $lessor);
@@ -94,6 +95,13 @@ class LessorTest extends TestCase
         $call->assertSee($lessor_inactive->nombre);
     }
 
+    public function testItShowsLessorCreateForm()
+    {
+        $call = $this->get(route('arrendador.create'));
+
+        $call->assertSuccessful();
+    }
+
     public function testEditFormLoadsSuccessfulWithAllAttachedData()
     {
         $this->withoutExceptionHandling();
@@ -126,5 +134,19 @@ class LessorTest extends TestCase
         ]));
 
         $call->assertSuccessful();
+    }
+
+    public function testItCanUpdateLessor()
+    {
+        $this->withoutExceptionHandling();
+        $lessor = factory(Lessor::class)->create();
+        $new_lessor = factory(Lessor::class)->raw();
+        $call = $this->call('PUT',route('arrendador.update', [$lessor->id]), $new_lessor);
+
+        $call->assertRedirect(route('arrendador.index'));
+        $this->assertDatabaseHas('lessors', [
+            'nombre' => $new_lessor['nombre']
+        ]);
+
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PropertyRequest;
 use App\Models\Property;
 use App\Models\Lessor;
 use App\Models\TipoPropiedad;
@@ -23,7 +24,7 @@ class PropertiesController extends Controller
                 })
                 ->orderBy('rented', 'asc')
                 ->paginate(15);
-            $properties->append([
+            $properties->appends([
                 'status' => $status
             ]);
             return view('catalogos.finca.index', [
@@ -34,18 +35,21 @@ class PropertiesController extends Controller
     }
 
     public function create(){
-        $property_types = TipoPropiedad::all();
+        $property_types = TipoPropiedad::active()->get();
         $lessors = Lessor::orderBy('apellido_paterno', 'asc')->get();
-        return view('catalogos.finca.create', ["property_types" => $property_types, "arrendador" => $lessors]);
+        return view('catalogos.finca.create', [
+            "property_types" => $property_types,
+            "arrendador" => $lessors
+        ]);
     }
 
-    public function store(Request $request){
+    public function store(PropertyRequest $request){
         $data = $request->all();
         $data['state_id'] = 25;
         if (isset($data['fiscal']) && $data['fiscal'] == "true"){
-            $data['recibo'] = 'Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE;
         }else{
-            $data['recibo'] = 'No Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
         }
 
         /** @var Property $property */
@@ -63,28 +67,38 @@ class PropertiesController extends Controller
         return view('catalogos.finca.show', ["finca" => $finca]);
     }
 
-    public function edit($id){
-//        dd($property_id);
+    public function edit($id) {
+
         $property_types = TipoPropiedad::all();
-        $finca = Property::findOrFail($id);
-        $tipo = TipoPropiedad::findOrFail($finca->property_type_id);
-        $arr = Lessor::findOrFail($finca->lessor_id);
+
+        $property = Property::findOrFail($id);
+
+        $tipo = TipoPropiedad::findOrFail($property->property_type_id);
+        $arr = Lessor::findOrFail($property->lessor_id);
         $arre = Lessor::orderBy('apellido_paterno', 'asc')->get();
 
-        return view('catalogos.finca.edit', ["finca" => $finca, "propiedad" => $property_types, "tipo" => $tipo, "arrendadores" => $arr, "arrendador" => $arre]);
+        return view('catalogos.finca.edit', [
+            "finca" => $property, // @todo Deprecar, eliminar
+            "propiedad" => $property_types,
+            "tipo" => $tipo,
+            "arrendadores" => $arr,
+            "arrendador" => $arre,
+            "property" => $property
+        ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(PropertyRequest $request, $id){
         $data = $request->all();
         if (isset($data['fiscal']) && $data['fiscal'] == "on"){
-            $data['recibo'] = 'Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE;
         }else{
-            $data['recibo'] = 'No Fiscal';
+            $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
         }
+
         if (isset($data['estatus_renta']) && $data['estatus_renta'] == 'on'){
-            $data['rented'] = 'Disponible';
+            $data['rented'] = null;
         }else{
-            $data['rented'] = 'Rentada';
+            $data['rented'] = now();
         }
         /** @var Property $property */
         $property = Property::findOrFail($id);
@@ -134,5 +148,18 @@ class PropertiesController extends Controller
         }
 
         return \redirect(route('finca.index'));
+    }
+
+    /**
+     * @param Property $finca
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function imageDestroy(Property $finca): \Illuminate\Http\RedirectResponse
+    {
+        $finca->getFirstMedia()->delete();
+
+        return Redirect::route('finca.edit', $finca->id);
     }
 }

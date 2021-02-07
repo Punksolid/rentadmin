@@ -212,15 +212,15 @@
 
 <script src="{{asset('js/app.min.js')}}"></script>
 
-{{--<script src="{{asset('js/telefono.js')}}"></script>--}}
-{{--<script src="{{asset('js/email.js')}}"></script>--}}
-{{--<script src="{{asset('js/telfiador.js')}}"></script>--}}
-{{--<script src="{{asset('js/banco.js')}}"></script>--}}
-{{--<script src="{{asset('js/fechas-contrato.js')}}"></script>--}}
-{{--<script src="{{asset('js/propiedad.js')}}"></script>--}}
-{{--<script src="{{asset('js/contrato.js')}}"></script>--}}
-{{--<script src="{{asset('js/usuario.js')}}"></script>--}}
-{{--<script src="{{asset('js/recibos-automaticos.js')}}"></script>--}}
+<script src="{{asset('js/telefono.js')}}"></script>
+<script src="{{asset('js/email.js')}}"></script>
+<script src="{{asset('js/telfiador.js')}}"></script>
+<script src="{{asset('js/banco.js')}}"></script>
+<script src="{{asset('js/fechas-contrato.js')}}"></script>
+<script src="{{asset('js/propiedad.js')}}"></script>
+<script src="{{asset('js/contrato.js')}}"></script>
+<script src="{{asset('js/usuario.js')}}"></script>
+<script src="{{asset('js/recibos-automaticos.js')}}"></script>
 
 </body>
 

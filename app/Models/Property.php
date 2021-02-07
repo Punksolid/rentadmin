@@ -16,6 +16,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Property extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia;
+    const RECIBO_STRING_FISCAL_VALUE = 'Fiscal';
+    const RECIBO_STRING_NO_FISCAL_VALUE = 'No Fiscal';
 
     protected $table = 'properties';
 
@@ -32,7 +34,7 @@ class Property extends Model implements HasMedia
         'maintenance',
         'recibo',
         'water_fee',
-        'estatus_renta',
+        'rented',
         'geolocation'
     ];
 
@@ -40,12 +42,10 @@ class Property extends Model implements HasMedia
         'created_at', 'updated_at', 'deleted_at'
     ];
 
-//    public function scopeJoinSubCat($query)
-//    {
-//        return $query->join('tipo_propiedad', 'cat_fincas.id_tipo_propiedad', '=', 'tipo_propiedad.id_tipo_propiedad')
-//            ->join('cat_arrendador', 'cat_fincas.id_arrendador', '=', 'cat_arrendador.id_cat_arrendador');
-//    }
-
+    public function getRentedAttribute($value)
+    {
+        return (bool)$value;
+    }
     /**
      * One property belongs to a lessor
      * @return BelongsTo

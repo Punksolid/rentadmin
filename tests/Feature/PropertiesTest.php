@@ -64,7 +64,6 @@ class PropertiesTest extends TestCase
 
     public function testShowOnlyActiveProperties()
     {
-//        $this->withoutExceptionHandling();
         $active_lessor = factory(Lessor::class)->create(['estatus' => Lessor::ACTIVE_STATUS]);
         $active_property = factory(Property::class)->create(['status' => true]);
         $active_property->assignLessor($active_lessor);
@@ -111,16 +110,29 @@ class PropertiesTest extends TestCase
             'geolocation' => $property_form['geolocation']
         ]);
     }
+    public function testItShowsEditForm()
+    {
+        $property = factory(Property::class)->create();
+
+        $call = $this->get(route('finca.edit', ['finca' => $property->id]));
+
+        $call->assertSuccessful();
+    }
 
     public function test_edit_existing_property()
     {
         $this->withoutExceptionHandling();
-        $property_old = factory(Property::class)->create();
+        /** @var Property $property_old */
+        $property_old = factory(Property::class)->create(['rented' => null]);
 
-        $new_property_form = factory(Property::class)->raw();
+        $this->assertFalse($property_old->fresh()->rented);
+        $new_property_form = factory(Property::class)->raw(['rented' => now()]);
+
         $call = $this->call('PATCH', route('finca.update',[$property_old->id]), $new_property_form);
 
         $call->assertRedirect(route('finca.index'));
+
+        $this->assertTrue($property_old->fresh()->rented);
         $this->assertDatabaseHas(
             'properties', [
                 'name' => $new_property_form['name'],

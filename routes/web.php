@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     //Catalogo Arrendador
     Route::resource('catalogos/arrendador', 'Backend\LessorController');
-    Route::put('catalogos/arrendador/{arrendador}', 'Backend\LessorController@activar');
+    Route::put('catalogos/arrendador/{arrendador}/toggle', 'Backend\LessorController@activar');
     Route::post('catalogos/arrendador/telefono/{arrendador}', 'Backend\LessorController@addTelefono');
     Route::post('catalogos/arrendador/email/{arrendador}', 'Backend\LessorController@addEmail');
     Route::post('catalogos/arrendador/banco/{arrendador}', 'Backend\LessorController@addBanco');
@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('catalogos/arrendatario/telefonofiador/{arrendatario}', 'Backend\LesseesController@deleteTelefonoFiador');
 
     //Catalogo Propiedades(Fincas)
+    Route::get('catalogos/fincas/{finca}/image/destroy', 'Backend\PropertiesController@imageDestroy')->name('finca.image.destroy');
     Route::patch('catalogos/fincas/{finca}', 'Backend\PropertiesController@updatePatch')->name('finca.patch');
     Route::resource('catalogos/finca', 'Backend\PropertiesController');
     Route::put('catalogos/finca/{finca}', 'Backend\PropertiesController@activar');

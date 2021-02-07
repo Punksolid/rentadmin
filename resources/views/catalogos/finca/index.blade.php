@@ -46,18 +46,22 @@
                         <td>{{ $property->status}}</td>
 
                         <td>
-                            <a href="{{  $property->getFirstMediaUrl() }}"><button class="btn btn-success linea" {{ $property->hasMedia() ?: 'disabled' }}>Foto</button></a>
-                            @if($property->status == 1)
-                                {!! Form::Open(['route' => ['finca.patch', $property->id], 'method' => 'PATCH']) !!}
+                            <div class="btn-group">
+                                <a href="{{  $property->getFirstMediaUrl() }}"><button class="btn btn-success linea" {{ $property->hasMedia() ?: 'disabled' }}><i class="far fa-image"></i></button></a>
+                                <a class="linea btn btn-info" href="{{ URL::action('Backend\PropertiesController@edit', $property->id) }}"><i class="far fa-edit"></i></a>
+                                @if($property->status == 1)
+                                    {!! Form::Open(['route' => ['finca.patch', $property->id], 'method' => 'PATCH']) !!}
                                     <input type="hidden" name="status" value="0"/>
-                                    <button type="submit" class="btn btn-danger linea">Desactivar</button>
-                                {{ Form::Close() }}
-                            @else
-                                {!! Form::Open(array('action' => array('Backend\PropertiesController@activar', $property->id), 'method' => 'PUT')) !!}
-                                <button type="submit" class="btn btn-success linea">Activar</button>
-                                {{ Form::Close() }}
-                            @endif
-                            <a class="linea btn btn-info" href="{{ URL::action('Backend\PropertiesController@edit', $property->id) }}"><i class="far fa-edit"></i></a>
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Desactivar">
+                                        <button type="submit" class="btn btn-danger linea"><i class="fa fa-power-off"></i></button>
+                                    </span>
+                                    {{ Form::Close() }}
+                                @else
+                                    {!! Form::Open(array('action' => array('Backend\PropertiesController@activar', $property->id), 'method' => 'PUT')) !!}
+                                        <button type="submit" class="btn btn-success linea">Activar</button>
+                                    {{ Form::Close() }}
+                                @endif
+                            </div>
                         </td>
                     </tr>
                     @endforeach

@@ -45,18 +45,23 @@
                         <td>{{ optional($lessee->defaultEmail())->email }}</td>
                         <td>{{$lessee->puesto}}</td>
                         <td>
-                            <a href="{{ $lessee->getFirstMediaUrl() }}"> <button class="btn btn-file btn-primary">Imagen</button></a>
-                            @if($lessee->estatus == 1)
-                                {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_INACTIVE], 'method' => 'PATCH']) !!}
+                            <div class="btn-group">
+                                <a href="{{ $lessee->getFirstMediaUrl() }}"> <button class="btn btn-file btn-success" {{ $lessee->hasMedia() ?: 'disabled' }}><i class="far fa-image"></i></button></a>
                                 <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
-                                <button type="submit" class="btn btn-danger linea">Desactivar</button>
-                                {{ Form::Close() }}
+                            @if($lessee->estatus == 1)
+                                    {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_INACTIVE], 'method' => 'PATCH']) !!}
+                                    <input type="hidden" name="status" value="0"/>
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Desactivar">
+                                            <button type="submit" class="btn btn-danger linea"><i class="fa fa-power-off"></i></button>
+                                        </span>
+                                    {{ Form::Close() }}
                             @else
                                 {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_ACTIVE], 'method' => 'PATCH']) !!}
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
-                                <button type="submit" class="btn btn-success linea">Activar</button>
+                                  <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
+                                    <button type="submit" class="btn btn-success linea">Activar</button>
                                 {{ Form::Close() }}
                             @endif
+                            </div>
                         </td>
                     </tr>
                     @endforeach

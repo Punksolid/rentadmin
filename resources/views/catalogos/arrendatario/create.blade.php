@@ -31,13 +31,13 @@
             <div class="form-group">
                 <label for="telefono">Telefono &nbsp;&nbsp;<button id="add_field" class="btn-sm btn-success">Añadir</button></label><br>
                 <div id="listas">
-                    <input type="text" id="masc-tel" data-mask="(000) 000 0000" name="telefono1" class="mascara" onkeypress="return justNumbers(event)" placeholder="Telefono..." >&nbsp;<input id="desc" type="text" name="descripcion1" placeholder="Descripcion..." >
+                    <input type="text" id="masc-tel" data-mask="(000) 000 0000" name="phone_number[0][telefono]" class="mascara" onkeypress="return justNumbers(event)" placeholder="Telefono..." >&nbsp;<input id="desc" type="text" name="phone_number[0][descripcion]" placeholder="Descripcion..." >
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Correo Electronico &nbsp;&nbsp;<button id="add_f" class="btn-sm btn-success">Añadir</button></label><br>
                 <div id="lista">
-                    <input type="email" name="email1" placeholder="Correo Electronico..." required>
+                    <input type="email" name="email[]" placeholder="Correo Electronico..." required>
                 </div>
             </div>
             <div class="form-group">
@@ -127,7 +127,7 @@
 
             <!-- Fiador -->
             <div class="form-group">
-                <h4><strong>Fiador</strong>  <input type="checkbox" checked onclick="document.getElementById('guarantor-block').hidden=!this.checked; checknull(this.checked)"></h4></h4>
+                <h4><strong>Fiador</strong>  <input type="checkbox" checked onclick="document.getElementById('guarantor-block').hidden=!this.checked; checknull(this.checked)"></h4>
             </div>
             <div id="guarantor-block">
                 <div class="form-group">
@@ -222,7 +222,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-primary" type="submit" id="submit">Guardar</button>
                 <a class="btn btn-danger" href="./">Cancelar</a>
             </div>
 
