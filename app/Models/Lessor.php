@@ -66,6 +66,17 @@ class Lessor extends Model implements Phoneable
     {
         return $this->hasMany(CatEmail::class,'id_arrendador');
     }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
+
+    public function reassignProperty(Property $property)
+    {
+        $this->properties()->attach($property);
+    }
+
     public function addEmail($email, $status = 1)
     {
         return $this->emails()->create([
@@ -90,6 +101,13 @@ class Lessor extends Model implements Phoneable
     public function bankAccounts()
     {
         return $this->hasMany(CatBanco::class,'id_arrendador');
+    }
+
+    public function scopeActive($query)
+    {
+        return $query
+            ->where('estatus', SELF::ACTIVE_STATUS)
+            ->orderBy('apellido_paterno', 'asc');
     }
 
     public function addBankAccount(string $bank, $account, $clabe, $owner_name, $status = 1)

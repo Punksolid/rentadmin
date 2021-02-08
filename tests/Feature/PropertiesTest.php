@@ -79,10 +79,20 @@ class PropertiesTest extends TestCase
     public function testSeeRegistryPropertyForm()
     {
         $this->withoutExceptionHandling();
+        $inactive_lessor = factory(Lessor::class)->create(['estatus' => Lessor::INACTIVE_STATUS]);
+        $active_lessor = factory(Lessor::class)->create(['estatus' => Lessor::ACTIVE_STATUS]);
         $call = $this->get(route('finca.create'));
 
         $call->assertSuccessful()
             ->assertSee('Direccion');
+
+        $call->assertViewHas('arrendador', function ($lessors) use($active_lessor) {
+            return $lessors->contains($active_lessor);
+        });
+        $call->assertViewHas('arrendador', function ($lessors) use($inactive_lessor) {
+            return !$lessors->contains($inactive_lessor);
+        });
+
         $call->assertSee('name="name"', false);
         $call->assertSee('name="lessor_id"', false);
         $call->assertSee('name="address"', false);

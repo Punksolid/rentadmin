@@ -18,6 +18,9 @@ class Property extends Model implements HasMedia
     use SoftDeletes, InteractsWithMedia;
     const RECIBO_STRING_FISCAL_VALUE = 'Fiscal';
     const RECIBO_STRING_NO_FISCAL_VALUE = 'No Fiscal';
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
 
     protected $table = 'properties';
 
@@ -70,5 +73,15 @@ class Property extends Model implements HasMedia
     public function scopeInactive($query)
     {
         return $query->where('status', 0);
+    }
+
+    public function scopeAvailables($query)
+    {
+        return $query->active()->notRented();
+    }
+
+    public function scopeNotRented($query)
+    {
+        return $query->whereNull('rented');
     }
 }

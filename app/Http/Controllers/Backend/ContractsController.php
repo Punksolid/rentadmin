@@ -23,12 +23,12 @@ class ContractsController extends Controller
     public function create(){
         $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();;
         $arrendatario = Lessee::orderBy('apellido_paterno', 'asc')->get();;
-        $properties_availables = Property::whereNull('rented')->where('status',1)->get();
+        $properties_availables = Property::availables()->get();
 
         return view('contrato.create', [
             "arrendador" => $arrendador,
             "arrendatario" => $arrendatario,
-            "finca" => $properties_availables
+            "properties" => $properties_availables
         ]);
     }
 

@@ -14,25 +14,25 @@
             </div>
             @endif
 
-            {!! Form::open(array('url' => 'contrato', 'method' => 'POST', 'autocomplete' => 'on')) !!}
+            {!! Form::open(['url' => 'contrato', 'method' => 'POST', 'autocomplete' => 'on']) !!}
             {{Form::token()}}
             <div class="form-group">
                 <label>Arrendador</label>
                 <input type="text" class="form-control tipo-propiedad" id="arrendadornombre" placeholder="Arrendador..." disabled required>
-                <button type="button" onclick="limpiar()" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador-contrato"><i class="fa fa-search"></i></button>
+                <button id="lessor_modal" type="button" onclick="limpiar()" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador-contrato"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="" required>
             </div>
 
             <div class="form-group">
                 <label>Inmueble</label>
                 <input type="text" class="form-control tipo-propiedad" id="propiedadnombre" placeholder="Inmueble..." disabled required>
-                <button type="button" class="btn buscar-btn btn-sm btn-primary" onclick="filtrado()" data-toggle="modal" data-target="#modal-propiedad-contrato"><i class="fa fa-search"></i></button>
+                <button type="button" id="property_modal" class="btn buscar-btn btn-sm btn-primary" onclick="filtrado()" data-toggle="modal" data-target="#modal-propiedad-contrato"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_propiedad_contrato" name="id_finca" value="" required>
             </div>
             <div class="form-group">
                 <label>Arrendatario</label>
                 <input type="text" class="form-control tipo-propiedad" id="arrendatarionombre" placeholder="Arrendatario..." disabled required>
-                <button type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendatario-contrato"><i class="fa fa-search"></i></button>
+                <button type="button" id="lessee_modal" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendatario-contrato"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_arrendatario_contrato" name="id_arrendatario" value="" required>
             </div>
 
