@@ -66,6 +66,17 @@ class Lessor extends Model implements Phoneable
     {
         return $this->hasMany(CatEmail::class,'id_arrendador');
     }
+
+    public function properties()
+    {
+        return $this->hasMany(Property::class);
+    }
+
+    public function reassignProperty(Property $property)
+    {
+        $this->properties()->attach($property);
+    }
+
     public function addEmail($email, $status = 1)
     {
         return $this->emails()->create([

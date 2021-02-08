@@ -71,9 +71,9 @@
                     <input id="buscadorpropiedad" type="text" class="form-control" onkeyup="buscadorPropiedad()" name="searchText" placeholder="Buscar Propiedad...">
                 </div>
                 <hr>
-                @foreach($finca as $property)
+                @foreach($properties as $property)
                         <div class="item">
-                            <a id="{{$property->id}}" class="fincafiltro" href="{{$property->id_arrendador}}">
+                            <a id="{{$property->id}}" class="fincafiltro" href="{{$property->lessor->id}}">
                                 <button style="margin-bottom: 4px" data-dismiss="modal" id="propiedad_modal{{$property->id}}" onclick="propiedadContrato('{{$property->id}}', '{{$property->lessor->id.'-. '.$property->lessor->nombre.' '.$property->lessor->apellido_paterno}}', '{{$property->lessor->id}}')" class="nombrespropiedad btn btn-secondary form-control" value="{{$property->id}}">{{$property->id}}-. {{$property->name}}</button>
                             </a>
                         </div>
