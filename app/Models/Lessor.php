@@ -103,6 +103,13 @@ class Lessor extends Model implements Phoneable
         return $this->hasMany(CatBanco::class,'id_arrendador');
     }
 
+    public function scopeActive($query)
+    {
+        return $query
+            ->where('estatus', SELF::ACTIVE_STATUS)
+            ->orderBy('apellido_paterno', 'asc');
+    }
+
     public function addBankAccount(string $bank, $account, $clabe, $owner_name, $status = 1)
     {
         return $this->bankAccounts()->create([
