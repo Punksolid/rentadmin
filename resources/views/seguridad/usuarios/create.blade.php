@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label>Tipo de Usuario</label>
                 <input type="text" class="form-control tipo-propiedad" id="tipousuario" placeholder="Tipo de Usuario..." disabled required>
-                <button type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tipo-usuario"><i class="fa fa-search"></i></button>
+                <button  id="modal_user_type" type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tipo-usuario"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_tipo_usuario" name="id_tipo_usuario" value="" required>
             </div>
 

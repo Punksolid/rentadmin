@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\TipoUsuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
@@ -30,10 +32,21 @@ class UsuarioController extends Controller
         return view('seguridad.usuarios.create', ['tipousuario' => $tu]);
     }
 
-    public function store(Request $request){
-        $data = $request->all();
-        $data['password'] = bcrypt($data['password']);
-        User::create($data);
+    public function store(UserRequest $request)
+    {
+        DB::transaction(function () use($request){
+            $user = User::create([
+                'name' => $request->get('nombre'),
+                'password' => bcrypt($request->get('password')),
+                'email' => $request->get('email')
+            ]);
+            $profile = $request->toArray();
+            $profile['password'] = bcrypt($request->get('password'));
+            $user->profile()->create($profile);
+        });
+        /** @var User $user */
+
+
         return Redirect::to('seguridad/usuarios');
     }
 

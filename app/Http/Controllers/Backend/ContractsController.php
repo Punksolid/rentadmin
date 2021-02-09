@@ -37,7 +37,7 @@ class ContractsController extends Controller
         $duracion = $data['duracion_contrato'];
         $contrato = Contract::create($data);
 
-         for ($i = 1; $i<=$duracion; $i++){
+         for ($i = 1; $i<=$duracion; $i++){ // @todo refactor this hell
              $fecha['id_contrato'] = $contrato['id_contratos'];
              $fecha['fecha_inicio'] = $data['fecha_inicio'.$i];
              $fecha['fecha_fin'] = $data['fecha_fin'.$i];

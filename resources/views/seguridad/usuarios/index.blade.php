@@ -31,8 +31,8 @@
                         @php($tipo = \App\Models\TipoUsuario::where('id_tipo_usuario', $user->id_tipo_usuario)->first())
                         <tr>
                             <td>{{$user->name}}</td>
-                            <td>{{$user->apellido_paterno}}</td>
-                            <td>{{$user->apellido_materno}}</td>
+                            <td>{{optional($user->profile)->apellido_paterno}}</td>
+                            <td>{{optional($user->profile)->apellido_materno}}</td>
                             <td>{{$user->email}}</td>
 {{--                            <td>{{$tipo->nombre}}</td>--}}
                             <td>
