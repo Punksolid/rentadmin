@@ -90,7 +90,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::put('incidentes{incidente}', 'Backend\CatIncidentesController@activar');
     Route::post('incidentes/tipoincidente', 'Backend\CatIncidentesController@tipoIncidente');
 
-    //Usuarios
+    # Usuarios
     Route::resource('seguridad/usuarios', 'Backend\UsuarioController');
     Route::put('seguridad/usuarios{usuario}', 'Backend\UsuarioController@activar');
 

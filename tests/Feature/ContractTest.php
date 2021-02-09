@@ -50,7 +50,13 @@ class ContractTest extends TestCase
     public function testStoreANewContract()
     {
         $this->withoutExceptionHandling();
-        $form = factory(Contract::class)->raw();
+        $form = factory(Contract::class)->raw(['duracion_contrato' => 1]);
+        $form['fecha_inicio1'] = now();
+        $form['fecha_fin1'] = now()->addMonths(6);
+        $form['cantidad1'] = 1000;
+        $form['fecha_inicio2'] = now();
+        $form['fecha_fin2'] = now()->addMonths(6);
+        $form['cantidad2'] = 1000; // @todo refactor this hell to use html arrays
 
         $call = $this->post(route('contrato.store'), $form);
 
