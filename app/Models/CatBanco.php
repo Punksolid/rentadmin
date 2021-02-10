@@ -22,7 +22,9 @@ class CatBanco extends Model
         'nombre_titular'
     ];
 
-    protected $hidden = [
-        'created_at','updated_at', 'deleted_at'
-    ];
+
+    public function lessor()
+    {
+        return $this->belongsTo(Lessor::class,'id_arrendador');
+    }
 }

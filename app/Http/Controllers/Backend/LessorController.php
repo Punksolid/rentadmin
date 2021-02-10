@@ -101,33 +101,22 @@ class LessorController extends Controller
     }
 
     public function update(Request $request, $id){
-        $data = $request->all();
+        /** @var Lessor $lessor */
+        $lessor = tap(Lessor::findOrFail($id))->update($request->toArray());
+        $emails = $lessor->emails()->get();
 
-        Lessor::findOrFail($id)->update($data);
-        $contadorBanco = CatBanco::where('id_arrendador', $id)->get();
-        $contadorEmail = CatEmail::where('id_arrendador', $id)->get();
-
-        foreach ($contadorBanco as $cb) {
-            $id_banco = $cb->id_banco;
-            $b = CatBanco::findOrFail($id_banco);
-            $banco['id_arrendador'] = $id;
-            $banco['banco'] = $data['bancoid' . $id_banco];
-            $banco['cuenta'] = $data['cuentaid' . $id_banco];
-            $banco['clabe'] = $data['clabeid' . $id_banco];
-            $banco['nombre_titular'] = $data['nombre_titularid' . $id_banco];
-            $b->update($banco);
+        if ($request->filled('bank_accounts_section')) {
+            $this->updateBankAccounts($lessor, $request);
         }
 
         if ($request->filled('phones')) {
             $this->updatePhones($request->get('phones'));
         }
 
-        foreach ($contadorEmail as $ce) {
-            $id_email = $ce->id_email;
-            $l = CatEmail::findOrFail($id_email);
-            $email['id_arrendador'] = $id;
-            $email['email'] = $data['emailid' . $id_email];
-            $l->update($email);
+        foreach ($emails as $email) {
+            $email->update([
+                'email' => $request->get('emailid' . $email->id_email)
+            ]);
         }
 
         return Redirect::to('catalogos/arrendador');
@@ -214,6 +203,24 @@ class LessorController extends Controller
             $phone->telefono = $phone_input['number'];
             $phone->descripcion = $phone_input['description'];
             $phone->save();
+        }
+    }
+
+    /**
+     * @param Lessor $lessor
+     * @param Request $request
+     */
+    private function updateBankAccounts(Lessor $lessor, Request $request): void
+    {
+        $bank_accounts = $lessor->bankAccounts()->get();
+        foreach ($bank_accounts as $bank_account) {
+            $bank_account->update([
+                'id_arrendador' => $lessor->id,
+                'banco' => $request->get('bank_accounts')['bancoid' . $bank_account->id_banco],
+                'cuenta' => $request->get('bank_accounts')['cuentaid' . $bank_account->id_banco],
+                'clabe' => $request->get('bank_accounts')['clabeid' . $bank_account->id_banco],
+                'nombre_titular' => $request->get('bank_accounts')['nombre_titularid' . $bank_account->id_banco]
+            ]);
         }
     }
 }

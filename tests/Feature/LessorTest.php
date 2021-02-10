@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\CatBanco;
 use App\Models\Lessee;
 use App\Models\Lessor;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -139,14 +140,34 @@ class LessorTest extends TestCase
     public function testItCanUpdateLessor()
     {
         $this->withoutExceptionHandling();
+        /** @var Lessor $lessor */
         $lessor = factory(Lessor::class)->create();
+        $lessor->addBankAccount(
+            $this->faker->company,
+            $this->faker->numerify('#######'),
+            $this->faker->numerify('################'),
+            $lessor->name
+        );
         $new_lessor = factory(Lessor::class)->raw();
-        $call = $this->call('PUT',route('arrendador.update', [$lessor->id]), $new_lessor);
+        $bank_data = factory(CatBanco::class)->raw();
+
+        $form = $new_lessor;
+        $form['bank_accounts_section'] =  true;
+        $form['bank_accounts'] = [
+            'bancoid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['banco'],
+            'cuentaid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['cuenta'],
+            'clabeid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['clabe'],
+            'nombre_titularid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['nombre_titular'],
+        ] ;
+        $call = $this->call('PUT',route('arrendador.update', [$lessor->id]), $form);
 
         $call->assertRedirect(route('arrendador.index'));
         $this->assertDatabaseHas('lessors', [
             'nombre' => $new_lessor['nombre']
         ]);
 
+        $this->assertEquals($bank_data['banco'], $lessor->bankAccounts()->first()->banco);
+        $this->assertEquals($bank_data['cuenta'], $lessor->bankAccounts()->first()->cuenta);
+        $this->assertEquals($bank_data['clabe'], $lessor->bankAccounts()->first()->clabe);
     }
 }
