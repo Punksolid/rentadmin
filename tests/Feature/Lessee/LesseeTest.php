@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Lessee;
+namespace Tests\Feature;
 
 use App\Models\Lessee;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -56,6 +56,32 @@ class LesseeTest extends TestCase
     public function test_see_lessee_creation_form()
     {
         $call = $this->get(route('arrendatario.create'));
+
+        $call->assertSuccessful();
+    }
+
+    public function test_see_lessee_edit_form_with_one_phone_and_email()
+    {
+        $this->withoutExceptionHandling();
+        /** @var Lessee $lessee */
+        $lessee = factory(Lessee::class)->create();
+        $lessee->addPhoneData($this->faker->phoneNumber, 'Whatever');
+        $lessee->addEmail($this->faker->email);
+
+        $call = $this->get(route('arrendatario.edit', [$lessee->id]));
+
+        $call->assertSuccessful();
+    }
+
+    public function test_see_minimum_lessee_edit_form()
+    {
+        $this->withoutExceptionHandling();
+        /** @var Lessee $lessee */
+        $lessee = factory(Lessee::class)->create();
+//        $lessee->addPhoneData($this->faker->phoneNumber, 'Whatever');
+//        $lessee->addEmail($this->faker->email);
+
+        $call = $this->get(route('arrendatario.edit', [$lessee->id]));
 
         $call->assertSuccessful();
     }

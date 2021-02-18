@@ -130,7 +130,7 @@
             <hr>
 
             <div class="form-group">
-                <label for="banco">Datos Bancarios &nbsp;&nbsp; <input id="bancocheck" checked type="checkbox"> &nbsp;&nbsp;
+                <label for="banco">Datos Bancarios &nbsp;&nbsp; <input id="bancocheck" checked type="checkbox" name="bank_accounts_section"> &nbsp;&nbsp;
                     <a id="ad_banco" data-target="#modal-add-banco" data-toggle="modal"><button class="btn-sm btn-success">Añadir</button></a>
                 </label>
                 <br>
@@ -138,15 +138,23 @@
                     @foreach($banco as $bank_account)
                     <div id="banc" class="form-group" style="display: inline-flex; align-items: baseline">
                         @if(count($banco) > 1)
-                            <input class="form-control bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bancoid{{$bank_account->id_banco}}" value="{{$bank_account->banco}}" placeholder="Banco...">
-                            <input class="form-control bancoin" id="cc" type="text" name="cuentaid{{$bank_account->id_banco}}" value="{{ $bank_account->cuenta }}" placeholder="Cuenta...">
-                            <input class="form-control  bancoin" id="cc" type="text" onkeypress="return justNumbers(event)" name="clabeid{{$bank_account->id_banco}}" value="{{$bank_account->clabe}}" placeholder="Clabe...">
-                            <input class="form-control  bancoin" id="cc" type="text" name="nombre_titularid{{$bank_account->id_banco}}" onkeyup="this.value = this.value.toUpperCase();" value="{{$bank_account->nombre_titular}}" placeholder="Nombre del Titular...">&nbsp;<a data-target="#modal-eliminar-banco{{$bank_account->id_banco}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a>
+                            <input class="form-control bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bank_accounts[bancoid{{$bank_account->id_banco}}]" value="{{$bank_account->banco}}" placeholder="Banco...">
+                            <input class="form-control bancoin" id="cc" type="text" name="bank_accounts[cuentaid{{$bank_account->id_banco}}]" value="{{ $bank_account->cuenta }}" placeholder="Cuenta...">
+                            <input class="form-control  bancoin" id="cc" name="bank_accounts[clabeid{{$bank_account->id_banco}}]"
+                                   onkeypress="return justNumbers(event)"
+                                   placeholder="Clabe..."
+                                   type="text" value="{{$bank_account->clabe}}">
+                            <input class="form-control  bancoin" id="cc" name="bank_accounts[nombre_titularid{{$bank_account->id_banco}}]"
+                                   onkeyup="this.value = this.value.toUpperCase();"
+                                   placeholder="Nombre del Titular..."
+                                   type="text" value="{{$bank_account->nombre_titular}}">&nbsp;<a data-target="#modal-eliminar-banco{{$bank_account->id_banco}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a>
                         @else
-                            <input class="form-control  bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bancoid{{$bank_account->id_banco}}" value="{{$bank_account->banco}}" placeholder="Banco...">
-                            <input class="form-control  bancoin" id="cc" type="text" name="cuentaid{{$bank_account->id_banco}}" value="{{$bank_account->cuenta}}" placeholder="Cuenta...">
-                            <input class="form-control  bancoin" id="cc" type="text" onkeypress="return justNumbers(event)" name="clabeid{{$bank_account->id_banco}}" value="{{$bank_account->clabe}}" placeholder="Clabe...">
-                            <input class="form-control  bancoin" id="cc" type="text" name="nombre_titularid{{$bank_account->id_banco}}" onkeyup="this.value = this.value.toUpperCase();" value="{{$bank_account->nombre_titular}}" placeholder="Nombre del Titular...">
+                            <input class="form-control  bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bank_accounts[bancoid{{$bank_account->id_banco}}]" value="{{$bank_account->banco}}" placeholder="Banco...">
+                            <input class="form-control  bancoin" id="cc" type="text" name="bank_accounts[cuentaid{{$bank_account->id_banco}}]" value="{{$bank_account->cuenta}}" placeholder="Cuenta...">
+                            <input class="form-control  bancoin" id="cc" name="bank_accounts[clabeid{{$bank_account->id_banco}}]"
+                                   onkeypress="return justNumbers(event)" placeholder="Clabe..."
+                                   type="text" value="{{$bank_account->clabe}}">
+                            <input class="form-control  bancoin" id="cc" type="text" name="bank_accounts[nombre_titularid{{$bank_account->id_banco}}]" onkeyup="this.value = this.value.toUpperCase();" value="{{$bank_account->nombre_titular}}" placeholder="Nombre del Titular...">
                         @endif
                     </div>
                         <br>
