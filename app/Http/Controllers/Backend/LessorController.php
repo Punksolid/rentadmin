@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LessorRequest;
 use App\Models\CatBanco;
 use App\Models\CatEmail;
 use App\Models\CatTelefono;
@@ -11,6 +12,7 @@ use App\Models\Phoneable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\ValidationException;
 
 class LessorController extends Controller
 {
@@ -100,7 +102,7 @@ class LessorController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id){
+    public function update(LessorRequest $request, $id){
         /** @var Lessor $lessor */
         $lessor = tap(Lessor::findOrFail($id))->update($request->toArray());
         $emails = $lessor->emails()->get();
@@ -214,6 +216,11 @@ class LessorController extends Controller
     {
         $bank_accounts = $lessor->bankAccounts()->get();
         foreach ($bank_accounts as $bank_account) {
+            if (strlen($request->get('bank_accounts')[ 'clabeid' . $bank_account->id_banco]) != 18) {
+                throw  ValidationException::withMessages([
+                    'clabe' => ['La clabe no tiene el formato adecuado.']
+                ]);
+            }
             $bank_account->update([
                 'id_arrendador' => $lessor->id,
                 'banco' => $request->get('bank_accounts')['bancoid' . $bank_account->id_banco],

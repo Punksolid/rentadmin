@@ -138,7 +138,7 @@
                         <div id="basebanco" class="form-group" style="display: inline-flex; align-items: baseline">
                             <input class="form-control" style="margin-bottom: 4px" type="text" name="banco1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Banco...">&nbsp;
                             <input class="form-control" id="cc" type="text" onkeypress="return justNumbers(event)" name="cuenta1" placeholder="Cuenta...">&nbsp;
-                            <input class="form-control" id="cc" type="text" maxlength="16" onkeypress="return justNumbers(event);" name="clabe1" placeholder="Clabe...">&nbsp;
+                            <input class="form-control" id="cc" type="text" maxlength="18" onkeypress="return justNumbers(event);" name="clabe1" placeholder="Clabe...">&nbsp;
                             <input class="form-control" id="cc" type="text" name="nombre_titular1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre del Titular...">
                         </div>
                     </div>

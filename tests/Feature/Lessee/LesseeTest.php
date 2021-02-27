@@ -100,7 +100,7 @@ class LesseeTest extends TestCase
             'estado_fiador' => $this->faker->state,
             'ciudad_fiador' => $this->faker->city,
             'codigo_postal_fiador' => $this->faker->postcode,
-            'entre_calles_fiador' => $this->faker->sentence,
+            'entre_calles_fiador' => $this->faker->address,
             // work
             'calle_fiador_trabajo' => $this->faker->streetName,
             'colonia_fiador_trabajo' => $this->faker->word,
@@ -109,7 +109,7 @@ class LesseeTest extends TestCase
             'estado_fiador_trabajo' => $this->faker->state,
             'ciudad_fiador_trabajo' => $this->faker->city,
             'codigo_postal_fiador_trabajo' => $this->faker->postcode,
-            'entre_calles_fiador_trabajo' => $this->faker->sentence,
+            'entre_calles_fiador_trabajo' => $this->faker->address,
 
 
         ]);

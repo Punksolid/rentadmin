@@ -29,7 +29,7 @@ class LessorTest extends TestCase
     {
         $lessor = factory(Lessor::class)->create();
         $phone_number = $this->faker->phoneNumber;
-        $description = $this->faker->sentence;
+        $description = $this->faker->word;
         $lessor->addPhoneData($phone_number, $description, 1);
 
         $this->assertEquals($phone_number, $lessor->getPhoneData()->telefono);

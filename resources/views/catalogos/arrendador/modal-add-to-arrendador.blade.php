@@ -62,7 +62,7 @@
             <div class="modal-body">
                 <input class="input-group form-control" type="text" onkeyup="this.value = this.value.toUpperCase();" name="banco" placeholder="Banco..." required>
                 <input style="margin-top: 10px" class="input-group form-control" type="text" name="cuenta" placeholder="Cuenta..." required>
-                <input style="margin-top: 10px" class="input-group form-control" type="text" name="clabe" placeholder="Clabe..." required>
+                <input style="margin-top: 10px" class="input-group form-control" type="text" name="clabe" maxlength="18" placeholder="Clabe..." required>
                 <input style="margin-top: 10px" class="input-group form-control" type="text" name="nombre_titular" placeholder="Nombre del Titular..." required>
             </div>
             <div class="modal-footer">

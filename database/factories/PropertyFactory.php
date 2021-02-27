@@ -21,6 +21,6 @@ $factory->define(Property::class, function (Faker $faker) {
         'recibo' => $faker->boolean,
         'water_fee' => $faker->numerify('####'),
         'rented' => $faker->date(),
-        'geolocation' => $faker->url
+        'geolocation' => $faker->numerify('#######,######')
     ];
 });

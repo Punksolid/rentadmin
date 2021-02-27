@@ -54,7 +54,7 @@ class LessorTest extends TestCase
         $lessor = factory(Lessor::class)->raw();
         $lessor['phone_number'][] = [
             'telefono' => $this->faker->randomNumber(8),
-            'descripcion' => $this->faker->sentence
+            'descripcion' => $this->faker->word
         ];
         $call = $this->call('POST', route('arrendador.store'), $lessor);
 
@@ -112,8 +112,8 @@ class LessorTest extends TestCase
         $lessor->addEmail($this->faker->email);
         $lessor->addBankAccount(
             $this->faker->word,
-            $this->faker->bankAccountNumber,
-            $this->faker->bankAccountNumber,
+            $this->faker->numerify('#######'),
+            $this->faker->numerify('##################'),
             $this->faker->name
         );
 

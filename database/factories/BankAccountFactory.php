@@ -12,8 +12,8 @@ $factory->define(CatBanco::class, function (Faker $faker) {
     return [
         'id_arrendador' => factory(Lessor::class)->create()->id,
         'banco' => $faker->word,
-        'cuenta' => $faker->bankAccountNumber,
-        'clabe' => $faker->numerify('################'),
+        'cuenta' => $faker->numerify('#######'),
+        'clabe' => $faker->numerify('##################'),
         'estatus' => $faker->boolean,
         'nombre_titular' => $faker->name. ' '. $faker->lastName
     ];

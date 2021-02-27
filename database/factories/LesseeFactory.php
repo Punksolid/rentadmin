@@ -13,7 +13,7 @@ $factory->define(Lessee::class, function (Faker $faker) {
         'nombre' => $faker->firstName,
         'apellido_paterno' => $faker->lastName,
         'apellido_materno' => $faker->lastName,
-        'puesto' => $faker->jobTitle,
+        'puesto' => $faker->word,
         'estatus' => $faker->boolean,
         'calle' => $faker->streetName,
         'colonia' => $faker->word,
