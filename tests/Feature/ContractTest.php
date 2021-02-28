@@ -44,7 +44,9 @@ class ContractTest extends TestCase
             $contract->id
         ]));
 
-        $call->assertSuccessful();
+        $call->assertSuccessful()
+            ->assertSee($contract->bonificacion)
+            ->assertSee($contract->deposito);
     }
 
     public function testStoreANewContract()

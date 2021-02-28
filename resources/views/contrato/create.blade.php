@@ -54,11 +54,21 @@
 
             <div class="form-group">
                 <label for="moneda">Bonificacion</label>
-                <input id="moneda" onclick="this.value = null" type="text" name="bonificacion" data-type="currency" class="form-control" placeholder="Bonificacion..." required>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    <input id="moneda" onclick="this.value = null" type="text" name="bonificacion" data-type="currency" class="form-control currency-field" placeholder="Bonificacion..." required>
+                </div>
             </div>
             <div class="form-group">
                 <label for="monedadep">Deposito En Garantia</label>
-                <input id="monedadep" onclick="this.value = null" type="text" name="deposito" data-type="currency" class="form-control" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Deposito..." required>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">$</div>
+                    </div>
+                    <input id="monedadep" onclick="this.value = null" type="text" name="deposito" data-type="currency" class="form-control currency-field" placeholder="Deposito..." required>
+                </div>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="submit">Guardar</button>
@@ -72,6 +82,10 @@
     </div>
 
     <script type="text/javascript">
+
+        jQuery(function ($) {
+            $('.currency-field').mask("###,###,##0.00", {reverse: true});
+        });
         function limpiar() {
             document.getElementById('id_propiedad_contrato').value = null;
             document.getElementById('propiedadnombre').value = null;
@@ -90,21 +104,6 @@
                     }
                 })
             }
-        }
-
-        document.getElementById("moneda").onblur =function (){
-            this.value = '$'+parseFloat(this.value.replace(/,/g, ""))
-                .toFixed(2)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-        }
-        document.getElementById("monedadep").onblur =function (){
-            this.value = '$'+parseFloat(this.value.replace(/,/g, ""))
-                .toFixed(2)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
         }
     </script>
 
