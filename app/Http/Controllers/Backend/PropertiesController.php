@@ -23,10 +23,11 @@ class PropertiesController extends Controller
                     $lessor_query->where('estatus', Lessor::ACTIVE_STATUS);
                 })
                 ->orderBy('rented', 'asc')
-                ->paginate(15);
-            $properties->appends([
-                'status' => $status
-            ]);
+                ->paginate();
+        $properties->appends([
+            'status' => $status
+        ]);
+
             return view('catalogos.finca.index', [
                 "finca" => $properties,
                 'properties' =>  $properties,

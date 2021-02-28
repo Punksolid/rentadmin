@@ -31,7 +31,7 @@
                     <th>Servicio de Luz</th>
                     <th>Cuenta Japac</th>
                     <th>Recibo</th>
-                    <th>Estatus</th>
+                    <th>Estatus de Renta</th>
                     <th>Opciones</th>
                     </thead>
                     <?php /** @var \App\Models\Property[] $properties */ ?>
@@ -43,7 +43,7 @@
                         <td>{{ $property->energy_fee }}</td>
                         <td>{{ $property->water_account_number }}</td>
                         <td>{{ $property->recibo }}</td>
-                        <td>{{ $property->status}}</td>
+                        <td>{{ $property->rented ? trans('app.property.status.rented') : trans('app.property.status.available') }}</td>
 
                         <td>
                             <div class="btn-group">

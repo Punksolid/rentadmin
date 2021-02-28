@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class PropertiesTest extends TestCase
 {
-//    use DatabaseTransactions;
+    use DatabaseTransactions;
     /**
      * A basic feature test example.
      *
@@ -19,10 +19,24 @@ class PropertiesTest extends TestCase
      */
     public function testPropertiesPageCanBeSeen()
     {
+
         $this->withoutExceptionHandling();
+        $lessor = factory(Lessor::class)->create(['estatus' => Lessor::ACTIVE_STATUS]);
+        /** @var Property $property_available */
+        $property_available = factory(Property::class)->create([
+            'rented' => null,
+            'status' => true
+        ]);
+        $property_available->assignLessor($lessor);
+        /** @var Property $property_rented */
+        $property_rented = factory(Property::class)->create(['status' => true ]);
+        $property_rented->assignLessor($lessor);
+
         $response = $this->get(route('finca.index'));
 
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+            ->assertSee('Disponible')
+            ->assertSee('Rentada');
     }
 
     public function testLessorOfAPropertyIsShown()

@@ -49,6 +49,7 @@ class Property extends Model implements HasMedia
     {
         return (bool)$value;
     }
+
     /**
      * One property belongs to a lessor
      * @return BelongsTo
