@@ -91,6 +91,6 @@ class Lessee extends Model implements Phoneable, HasMedia
 
     public function guarantor()
     {
-        return $this->belongsTo(CatFiador::class, 'id_fiador', 'id_cat_fiadores');
+        return $this->belongsTo(Guarantor::class, 'id_fiador', 'id_cat_fiadores');
     }
 }

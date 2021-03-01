@@ -31,6 +31,7 @@ class LesseeEditTest extends TestCase
     {
         /** @var Lessee $lessee */
         $lessee = factory(Lessee::class)->create();
+
         $call = $this->get(route('arrendatario.edit', [$lessee->id]));
 
         $call->assertSuccessful();
@@ -41,6 +42,7 @@ class LesseeEditTest extends TestCase
         $this->withoutExceptionHandling();
         /** @var Lessee $lessee */
         $lessee = factory(Lessee::class)->create(['id_fiador' => null]);
+
         $call = $this->get(route('arrendatario.edit', [$lessee->id]));
 
         $call->assertSuccessful();
@@ -68,27 +70,29 @@ class LesseeEditTest extends TestCase
         /** @var Lessee $lessee */
         $lessee = factory(Lessee::class)->create();
         $new_lessee = factory(Lessee::class)->raw();
-        $new_lessee['nombre_fiador'] = $this->faker->name;
-        $new_lessee['apellido_paterno_fiador'] = $this->faker->name;
-        $new_lessee['apellido_materno_fiador'] = $this->faker->name;
-        $new_lessee['calle_fiador'] = $this->faker->name;
-        $new_lessee['colonia_fiador'] = $this->faker->name;
-        $new_lessee['numero_ext_fiador'] = $this->faker->numerify('####');
-        $new_lessee['numero_int_fiador'] = $this->faker->numerify('####');
-        $new_lessee['estado_fiador'] = $this->faker->numerify('####');
-        $new_lessee['ciudad_fiador'] = $this->faker->numerify('####');
-        $new_lessee['codigo_postal_fiador'] = $this->faker->numerify('####');
-        $new_lessee['entre_calles_fiador'] = $this->faker->numerify('####');
 
-        $new_lessee['calle_fiador_trabajo'] = $this->faker->name;
-        $new_lessee['colonia_fiador_trabajo'] = $this->faker->name;
-        $new_lessee['numero_ext_fiador_trabajo'] = $this->faker->numerify('####');
-        $new_lessee['numero_int_fiador_trabajo'] = $this->faker->numerify('####');
-        $new_lessee['estado_fiador_trabajo'] = $this->faker->numerify('####');
-        $new_lessee['ciudad_fiador_trabajo'] = $this->faker->numerify('####');
-        $new_lessee['codigo_postal_fiador_trabajo'] = $this->faker->numerify('####');
-        $new_lessee['entre_calles_fiador_trabajo'] = $this->faker->numerify('####');
+        $new_lessee['guarantor'] = [
+            'nombre_fiador' => $this->faker->name,
+            'apellido_paterno_fiador' => $this->faker->name,
+            'apellido_materno_fiador' => $this->faker->name,
+            'calle_fiador' => $this->faker->name,
+            'colonia_fiador' => $this->faker->name,
+            'numero_ext_fiador' => $this->faker->numerify('####'),
+            'numero_int_fiador' => $this->faker->numerify('####'),
+            'estado_fiador' => $this->faker->numerify('####'),
+            'ciudad_fiador' => $this->faker->numerify('####'),
+            'codigo_postal_fiador' => $this->faker->numerify('####'),
+            'entre_calles_fiador' => $this->faker->numerify('####'),
 
+            'calle_fiador_trabajo' => $this->faker->name,
+            'colonia_fiador_trabajo' => $this->faker->name,
+            'numero_ext_fiador_trabajo' => $this->faker->numerify('####'),
+            'numero_int_fiador_trabajo' => $this->faker->numerify('####'),
+            'estado_fiador_trabajo' => $this->faker->numerify('####'),
+            'ciudad_fiador_trabajo' => $this->faker->numerify('####'),
+            'codigo_postal_fiador_trabajo' => $this->faker->numerify('####'),
+            'entre_calles_fiador_trabajo' => $this->faker->numerify('####'),
+        ];
 
         $call = $this->put(
             route('arrendatario.update', [$lessee->id]),
@@ -147,26 +151,28 @@ class LesseeEditTest extends TestCase
 
         $form = [
             'guarantor_block' => 'on',
-            'nombre_fiador' => $this->faker->name,
-            'apellido_paterno_fiador' => $this->faker->name,
-            'apellido_materno_fiador' => $this->faker->name,
-            'calle_fiador' => $this->faker->name,
-            'colonia_fiador' => $this->faker->name,
-            'numero_ext_fiador' => $this->faker->numerify('####'),
-            'numero_int_fiador' => $this->faker->numerify('####'),
-            'estado_fiador' => $this->faker->numerify('####'),
-            'ciudad_fiador' => $this->faker->numerify('####'),
-            'codigo_postal_fiador' => $this->faker->numerify('####'),
-            'entre_calles_fiador' => $this->faker->numerify('####'),
+            'guarantor' => [
+                'nombre' => $this->faker->name,
+                'apellido_paterno' => $this->faker->name,
+                'apellido_materno' => $this->faker->name,
+                'calle' => $this->faker->name,
+                'colonia' => $this->faker->name,
+                'numero_ext' => $this->faker->numerify('####'),
+                'numero_int' => $this->faker->numerify('####'),
+                'estado' => $this->faker->numerify('####'),
+                'ciudad' => $this->faker->numerify('####'),
+                'codigo_postal' => $this->faker->numerify('####'),
+                'entre_calles' => $this->faker->numerify('####'),
 
-            'calle_fiador_trabajo' => $this->faker->name,
-            'colonia_fiador_trabajo' => $this->faker->name,
-            'numero_ext_fiador_trabajo' => $this->faker->numerify('####'),
-            'numero_int_fiador_trabajo' => $this->faker->numerify('####'),
-            'estado_fiador_trabajo' => $this->faker->numerify('####'),
-            'ciudad_fiador_trabajo' => $this->faker->numerify('####'),
-            'codigo_postal_fiador_trabajo' => $this->faker->numerify('####'),
-            'entre_calles_fiador_trabajo' => $this->faker->numerify('####'),
+                'calle_trabajo' => $this->faker->name,
+                'colonia_trabajo' => $this->faker->name,
+                'numero_ext_trabajo' => $this->faker->numerify('####'),
+                'numero_int_trabajo' => $this->faker->numerify('####'),
+                'estado_trabajo' => $this->faker->numerify('####'),
+                'ciudad_trabajo' => $this->faker->numerify('####'),
+                'codigo_postal_trabajo' => $this->faker->numerify('####'),
+                'entre_calles_trabajo' => $this->faker->numerify('####'),
+            ]
         ];
         $form = array_merge($lessee->toArray(),$form);
         $call = $this->patch(route('arrendatario.update', [$lessee->id]), $form);

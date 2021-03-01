@@ -49,7 +49,8 @@ class LesseeTest extends DuskTestCase
             $browser->type('ciudad_trabajo' , $lessee['ciudad_trabajo']);
             $browser->type('codigo_postal_trabajo' , $lessee['codigo_postal_trabajo']);
             $browser->type('puesto' , $lessee['puesto']);
-
+            // No guarantor
+            $browser->uncheck('guarantor_block');
             $browser->scrollTo('#submit');
             $browser->press('Guardar');
 

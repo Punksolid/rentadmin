@@ -36,6 +36,9 @@ class LesseeRequest extends FormRequest
 //            'estado_fiador_trabajo' => 'required',
 //            'ciudad_fiador_trabajo' => 'required',
 //            'codigo_postal_fiador_trabajo' => 'required'
+
+            'guarantor.nombre' => 'required_if:guarantor_block,on',
+            'guarantor.codigo_postal_trabajo' => 'required_if:guarantor_block,on',
         ];
     }
 }

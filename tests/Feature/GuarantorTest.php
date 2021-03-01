@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\CatFiador;
+use App\Models\Guarantor;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -16,8 +16,8 @@ class GuarantorTest extends TestCase
      */
     public function testGuarantorCanHavePhones()
     {
-        /** @var CatFiador $guarantor */
-        $guarantor = factory(CatFiador::class)->create();
+        /** @var Guarantor $guarantor */
+        $guarantor = factory(Guarantor::class)->create();
         $guarantor->addPhoneData('6672067464', 'celular', 1);
 
         $this->assertSame('6672067464', $guarantor->defaultPhoneNumber->telefono);

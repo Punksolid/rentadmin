@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\CatFiador;
+use App\Models\Guarantor;
 use Faker\Generator as Faker;
 
-$factory->define(CatFiador::class, function (Faker $faker) {
+$factory->define(Guarantor::class, function (Faker $faker) {
     return [
         'nombre' => $faker->firstName,
         'apellido_paterno' => $faker->lastName,

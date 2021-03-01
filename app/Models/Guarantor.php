@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-/** Guarantor */
-class CatFiador extends Model implements Phoneable
-{
-    use SoftDeletes, HasPhones;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-    protected $table = 'cat_fiadores';
+/** Guarantor */
+class Guarantor extends Model implements Phoneable, HasMedia
+{
+    use SoftDeletes, HasPhones, InteractsWithMedia;
+
+    protected $table = 'cat_fiadores'; // @TODO @Punksolid use specific table guarantoor
 
     protected $primaryKey = 'id_cat_fiadores';
 
@@ -45,5 +48,10 @@ class CatFiador extends Model implements Phoneable
         return $this
             ->morphMany(CatTelefono::class, 'phoneable')
             ->orWhere('id_fiador',$this->id_cat_fiadores);
+    }
+
+    public function lessee()
+    {
+        return $this->belongsTo(Lessee::class, 'id_cat_fiadores', 'id_fiador');
     }
 }

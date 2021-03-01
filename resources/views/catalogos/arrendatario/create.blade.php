@@ -127,25 +127,36 @@
 
             <!-- Fiador -->
             <div class="form-group">
-                <h4><strong>Fiador</strong>  <input type="checkbox" checked onclick="document.getElementById('guarantor-block').hidden=!this.checked; checknull(this.checked)"></h4>
+                <h4><strong>Fiador</strong>
+                    <input
+                    name="guarantor_block"
+                    type="checkbox"
+                    checked
+                    onclick="document.getElementById('guarantor-block').hidden=!this.checked; checknull(this.checked)"
+                    >
+                </h4>
             </div>
             <div id="guarantor-block">
                 <div class="form-group">
-                    <label for="nombre_fiador">Nombre</label>
-                    <input type="text" name="nombre_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre..." >
+                    <label for="guarantor[nombre]">Nombre</label>
+                    <input type="text" name="guarantor[nombre]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre..." >
                 </div>
                 <div class="form-group">
-                    <label for="apellido_paterno_fiador">Apellido Paterno</label>
-                    <input type="text" name="apellido_paterno_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno..." >
+                    <label for="guarantor[apellido_paterno]">Apellido Paterno</label>
+                    <input type="text" name="guarantor[apellido_paterno]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno..." >
                 </div>
                 <div class="form-group">
-                    <label for="apellido_materno_fiador">Apellido Materno</label>
-                    <input type="text" name="apellido_materno_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." >
+                    <label for="guarantor[apellido_materno]">Apellido Materno</label>
+                    <input type="text" name="guarantor[apellido_materno]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." >
                 </div>
                 <div class="form-group">
-                    <label for="telefono_fiador">Telefono &nbsp;&nbsp;<button id="field_add" class="btn-sm btn-success">Añadir</button></label><br>
+                    <label for="identity">Identificación</label>
+                    <input type="file" name="guarantor[identity]" class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="guarantor[telefono]">Telefono &nbsp;&nbsp;<button id="field_add" class="btn-sm btn-success">Añadir</button></label><br>
                     <div id="list">
-                        <input type="text" id="masc-tel" data-mask="(000) 000 0000" class="mascara" name="telefono_fiador1" onkeypress="return justNumbers(event)" placeholder="Telefono..." >&nbsp;<input id="desc" type="text" name="descripcion_fiador1" placeholder="Descripcion..." >
+                        <input type="text" id="masc-tel" data-mask="(000) 000 0000" class="mascara" name="guarantor[telefono1]" onkeypress="return justNumbers(event)" placeholder="Telefono..." >&nbsp;<input id="desc" type="text" name="guarantor[descripcion1]" placeholder="Descripcion..." >
                     </div>
                 </div>
 
@@ -153,72 +164,72 @@
                     <h4><strong>Domicilio Fiador</strong></h4>
                 </div>
                 <div class="form-group">
-                    <label for="calle_fiador">Calle</label>
-                    <input type="text" name="calle_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." >
+                    <label for="guarantor[calle]">Calle</label>
+                    <input type="text" name="guarantor[calle]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." >
                 </div>
                 <div class="form-group">
-                    <label for="numero_ext_fiador">Numero Exterior</label>
-                    <input type="text" name="numero_ext_fiador" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." >
+                    <label for="guarantor[numero_ext]">Numero Exterior</label>
+                    <input type="text" name="guarantor[numero_ext]" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." >
                 </div>
                 <div class="form-group">
-                    <label for="numero_int_fiador">Numero Interior</label>
-                    <input type="text" name="numero_int_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                    <label for="guarantor[numero_int]">Numero Interior</label>
+                    <input type="text" name="guarantor[numero_int]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
                 </div>
                 <div class="form-group">
-                    <label for="colonia_fiador">Colonia</label>
-                    <input type="text" name="colonia_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." >
+                    <label for="guarantor[colonia]">Colonia</label>
+                    <input type="text" name="guarantor[colonia]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." >
                 </div>
                 <div class="form-group">
-                    <label for="estado_fiador">Estado</label>
-                    <input type="text" name="estado_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." >
+                    <label for="guarantor[estado]">Estado</label>
+                    <input type="text" name="guarantor[estado]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." >
                 </div>
                 <div class="form-group">
-                    <label for="ciudad_fiador">Ciudad</label>
-                    <input type="text" name="ciudad_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." >
+                    <label for="guarantor[ciudad]">Ciudad</label>
+                    <input type="text" name="guarantor[ciudad]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." >
                 </div>
                 <div class="form-group">
-                    <label for="codigo_postal_fiador">Codigo Postal</label>
-                    <input type="number" name="codigo_postal_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Codigo Postal..." >
+                    <label for="guarantor[codigo_postal]">Codigo Postal</label>
+                    <input type="number" name="guarantor[codigo_postal]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Codigo Postal..." >
                 </div>
                 <div class="form-group">
-                    <label for="entre_calles_fiador">Entre Calles</label>
-                    <input type="text" name="entre_calles_fiador" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                    <label for="guarantor[entre_calles]">Entre Calles</label>
+                    <input type="text" name="guarantor[entre_calles]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
                 </div>
 
                 <div class="form-group">
                     <h4><strong>Direccion de Trabajo Fiador</strong></h4>
                 </div>
                 <div class="form-group">
-                    <label for="calle_fiador_trabajo">Calle</label>
-                    <input type="text" name="calle_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." >
+                    <label for="guarantor[calle_trabajo]">Calle</label>
+                    <input type="text" name="guarantor[calle_trabajo]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." >
                 </div>
                 <div class="form-group">
-                    <label for="numero_ext_fiador_trabajo">Numero Exterior</label>
-                    <input type="text" name="numero_ext_fiador_trabajo" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." >
+                    <label for="guarantor[numero_ext_trabajo]">Numero Exterior</label>
+                    <input type="text" name="guarantor[numero_ext_trabajo]" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." >
                 </div>
                 <div class="form-group">
-                    <label for="numero_int_fiador_trabajo">Numero Interior</label>
-                    <input type="text" name="numero_int_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                    <label for="guarantor[numero_int_trabajo]">Numero Interior</label>
+                    <input type="text" name="guarantor[numero_int_trabajo]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
                 </div>
                 <div class="form-group">
-                    <label for="colonia_fiador_trabajo">Colonia</label>
-                    <input type="text" name="colonia_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." >
+                    <label for="guarantor[colonia_trabajo]">Colonia</label>
+                    <input type="text" name="guarantor[colonia_trabajo]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." >
                 </div>
                 <div class="form-group">
-                    <label for="estado_fiador_trabajo">Estado</label>
-                    <input type="text" name="estado_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." >
+                    <label for="guarantor[estado_trabajo]">Estado</label>
+                    <input type="text" name="guarantor[estado_trabajo]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." >
                 </div>
                 <div class="form-group">
-                    <label for="ciudad_fiador_trabajo">Ciudad</label>
-                    <input type="text" name="ciudad_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." >
+                    <label for="guarantor[ciudad_trabajo]">Ciudad</label>
+                    <input type="text" name="guarantor[ciudad_trabajo]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." >
                 </div>
                 <div class="form-group">
-                    <label for="codigo_postal_fiador_trabajo">Codigo Postal</label>
-                    <input type="number" name="codigo_postal_fiador_trabajo" class="form-control" placeholder="Codigo Postal..." >
+                    <label for="guarantor[codigo_postal_trabajo]">Codigo Postal</label>
+                    <input type="number" name="guarantor[codigo_postal_trabajo]" class="form-control" placeholder="Codigo Postal..." >
                 </div>
                 <div class="form-group">
-                    <label for="entre_calles_fiador_trabajo">Entre Calles</label>
-                    <input type="text" name="entre_calles_fiador_trabajo" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                    <label for="guarantor[entre_calles_trabajo]">Entre Calles</label>
+                    <input type="text" name="guarantor[entre_calles_trabajo]" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
                 </div>
             </div>
             <div class="form-group">

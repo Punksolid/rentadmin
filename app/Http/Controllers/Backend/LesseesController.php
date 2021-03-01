@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LesseeRequest;
 use App\Models\Lessee;
 use App\Models\CatEmail;
-use App\Models\CatFiador;
+use App\Models\Guarantor;
 use App\Models\CatTelefono;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -37,8 +37,8 @@ class LesseesController extends Controller
 
     public function store(LesseeRequest $request)
     {
-        $data = $request->all();
-        if ($request->filled(['nombre_fiador', 'apellido_paterno_fiador'] ) ) {
+        $data = $request->all(); // @todo Drop this thing
+        if ($request->filled(['guarantor_block'] ) ) {
             $guarantor = $this->registerGuarantor($request);
             $data['id_fiador'] = $guarantor['id_cat_fiadores'];
             for ($k = 1; $k <= 10; $k++) {
@@ -79,7 +79,7 @@ class LesseesController extends Controller
     public function show($id)
     {
         $arrendatario = Lessee::findOrFail($id);
-        $fiador = CatFiador::findOrFail($arrendatario['id_fiador']);
+        $fiador = Guarantor::findOrFail($arrendatario['id_fiador']);
         return view('catalogos.arrendatario.show', ["arrendatario" => $arrendatario, "fiador" => $fiador]);
     }
 
@@ -87,7 +87,7 @@ class LesseesController extends Controller
     {
         /** @var Lessee $lessee */
         $lessee = Lessee::findOrFail($id);
-        /** @var CatFiador $fiador */
+        /** @var Guarantor $fiador */
         $fiador = $lessee->guarantor;
         $tel = $lessee->phones()->get();
 
@@ -97,12 +97,13 @@ class LesseesController extends Controller
             "arrendatario" => $lessee, //@todo deprecate
             "lessee" => $lessee,
             "fiador" => $fiador,
+            "guarantor" => $lessee->guarantor,
             "tel" => $tel, //phones of arrendatario (lessee)
             "email" => $email
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(LesseeRequest $request, $id)
     {
 
         $data = $request->all();
@@ -201,54 +202,30 @@ class LesseesController extends Controller
 
     public function registerGuarantor(Request $request)
     {
-        $fiador['nombre'] = $request->get('nombre_fiador');
-        $fiador['apellido_paterno'] = $request->get('apellido_paterno_fiador');
-        $fiador['apellido_materno'] = $request->get('apellido_materno_fiador');
-        $fiador['calle'] = $request->get('calle_fiador');
-        $fiador['colonia'] = $request->get('colonia_fiador');
-        $fiador['numero_ext'] = $request->get('numero_ext_fiador');
-        $fiador['numero_int'] = $request->get('numero_int_fiador');
-        $fiador['estado'] = $request->get('estado_fiador');
-        $fiador['ciudad'] = $request->get('ciudad_fiador');
-        $fiador['codigo_postal'] = $request->get('codigo_postal_fiador');
-        $fiador['entre_calles'] = $request->get('entre_calles_fiador');
-        $fiador['calle_trabajo'] = $request->get('calle_fiador_trabajo');
-        $fiador['colonia_trabajo'] = $request->get('colonia_fiador_trabajo');
-        $fiador['numero_ext_trabajo'] = $request->get('numero_ext_fiador_trabajo');
-        $fiador['numero_int_trabajo'] = $request->get('numero_int_fiador_trabajo');
-        $fiador['estado_trabajo'] = $request->get('estado_fiador_trabajo');
-        $fiador['ciudad_trabajo'] = $request->get('ciudad_fiador_trabajo');
-        $fiador['codigo_postal_trabajo'] = $request->get('codigo_postal_fiador_trabajo');
-        $fiador['entre_calles_trabajo'] = $request->get('entre_calles_fiador_trabajo');
+        /** var $guarantor Guarantor */
+        $guarantor = Guarantor::create($request->guarantor);
 
-        return CatFiador::create($fiador);
+        if($request->hasFile('guarantor.identity')) {
+            $guarantor->addMediaFromRequest('guarantor.identity')->toMediaCollection();
+        }
+
+        return $guarantor;
     }
 
     public function updateOrCreateGuarantor(Request $request,Lessee $lessee)
     {
-        $fiador['nombre'] = $request->get('nombre_fiador');
-        $fiador['apellido_paterno'] = $request->get('apellido_paterno_fiador');
-        $fiador['apellido_materno'] = $request->get('apellido_materno_fiador');
-        $fiador['calle'] = $request->get('calle_fiador');
-        $fiador['colonia'] = $request->get('colonia_fiador');
-        $fiador['numero_ext'] = $request->get('numero_ext_fiador');
-        $fiador['numero_int'] = $request->get('numero_int_fiador');
-        $fiador['estado'] = $request->get('estado_fiador');
-        $fiador['ciudad'] = $request->get('ciudad_fiador');
-        $fiador['codigo_postal'] = $request->get('codigo_postal_fiador');
-        $fiador['entre_calles'] = $request->get('entre_calles_fiador');
-        $fiador['calle_trabajo'] = $request->get('calle_fiador_trabajo');
-        $fiador['colonia_trabajo'] = $request->get('colonia_fiador_trabajo');
-        $fiador['numero_ext_trabajo'] = $request->get('numero_ext_fiador_trabajo');
-        $fiador['numero_int_trabajo'] = $request->get('numero_int_fiador_trabajo');
-        $fiador['estado_trabajo'] = $request->get('estado_fiador_trabajo');
-        $fiador['ciudad_trabajo'] = $request->get('ciudad_fiador_trabajo');
-        $fiador['codigo_postal_trabajo'] = $request->get('codigo_postal_fiador_trabajo');
-        $fiador['entre_calles_trabajo'] = $request->get('entre_calles_fiador_trabajo');
 
-        /** @var CatFiador $guarantor */
-        $guarantor = $lessee->guarantor()->updateOrCreate($fiador);
 
+        /** @var Guarantor $guarantor */
+        if($lessee->guarantor) {
+            $guarantor = tap($lessee->guarantor)->update($request->guarantor);
+        } else {
+            $guarantor = $lessee->guarantor()->create($request->guarantor);
+        }
+
+        if($request->hasFile('guarantor.identity')) {
+            $guarantor->addMediaFromRequest('guarantor.identity')->toMediaCollection();
+        }
         $contadorTelFiador = $guarantor->phones()->get();
 
         if ($contadorTelFiador) {
@@ -263,5 +240,18 @@ class LesseesController extends Controller
         }
 
         return $guarantor;
+    }
+
+    /**
+     * @param Guarantor $guarantor
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function guarantorImageDestroy(Guarantor $guarantor): \Illuminate\Http\RedirectResponse
+    {
+        $guarantor->getFirstMedia()->delete();
+
+        return Redirect::route('arrendatario.edit', $guarantor->lessee->id);
     }
 }

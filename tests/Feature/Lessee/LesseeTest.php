@@ -90,32 +90,38 @@ class LesseeTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $lessee = factory(Lessee::class)->raw([
-            'nombre_fiador' => $this->faker->name,
-            'apellido_paterno_fiador' => $this->faker->lastName,
-            'apellido_materno_fiador' => $this->faker->lastName,
-            'calle_fiador' => $this->faker->streetName,
-            'colonia_fiador' => $this->faker->word,
-            'numero_ext_fiador' => $this->faker->randomNumber(5),
-            'numero_int_fiador' => $this->faker->randomNumber(5),
-            'estado_fiador' => $this->faker->state,
-            'ciudad_fiador' => $this->faker->city,
-            'codigo_postal_fiador' => $this->faker->postcode,
-            'entre_calles_fiador' => $this->faker->address,
-            // work
-            'calle_fiador_trabajo' => $this->faker->streetName,
-            'colonia_fiador_trabajo' => $this->faker->word,
-            'numero_ext_fiador_trabajo' => $this->faker->randomNumber(5),
-            'numero_int_fiador_trabajo' => $this->faker->randomNumber(5),
-            'estado_fiador_trabajo' => $this->faker->state,
-            'ciudad_fiador_trabajo' => $this->faker->city,
-            'codigo_postal_fiador_trabajo' => $this->faker->postcode,
-            'entre_calles_fiador_trabajo' => $this->faker->address,
-
-
+            'guarantor_block' => true,
+            'guarantor' => [
+                'nombre' => $this->faker->name,
+                'apellido_paterno' => $this->faker->lastName,
+                'apellido_materno' => $this->faker->lastName,
+                'calle' => $this->faker->streetName,
+                'colonia' => $this->faker->word,
+                'numero_ext' => $this->faker->randomNumber(5),
+                'numero_int' => $this->faker->randomNumber(5),
+                'estado' => $this->faker->state,
+                'ciudad' => $this->faker->city,
+                'codigo_postal' => $this->faker->postcode,
+                'entre_calles' => $this->faker->address,
+                // work
+                'calle_trabajo' => $this->faker->streetName,
+                'colonia_trabajo' => $this->faker->word,
+                'numero_ext_trabajo' => $this->faker->randomNumber(5),
+                'numero_int_trabajo' => $this->faker->randomNumber(5),
+                'estado_trabajo' => $this->faker->state,
+                'ciudad_trabajo' => $this->faker->city,
+                'codigo_postal_trabajo' => $this->faker->postcode,
+                'entre_calles_trabajo' => $this->faker->address,
+            ]
         ]);
         $call = $this->post(route('arrendatario.store'), $lessee);
 
         $call->assertRedirect(route('arrendatario.index'));
+        $this->assertDatabaseHas('cat_fiadores', [
+            'nombre' => $lessee['guarantor']['nombre'],
+            'apellido_paterno' => $lessee['guarantor']['apellido_paterno'],
+            'apellido_materno' => $lessee['guarantor']['apellido_materno'],
+        ]);
 
     }
 
@@ -125,20 +131,22 @@ class LesseeTest extends TestCase
 
 
         $lessee = factory(Lessee::class)->raw([
-            'nombre_fiador' => $this->faker->name,
-            'apellido_paterno_fiador' => $this->faker->name,
-            'apellido_materno_fiador' => $this->faker->name,
-            'calle_fiador' => $this->faker->streetName,
-            'colonia_fiador' => $this->faker->word,
-            'numero_ext_fiador' => $this->faker->lexify('?????'),
-            'estado_fiador' => $this->faker->state,
-            'ciudad_fiador' => $this->faker->city,
-            'codigo_postal_fiador' => $this->faker->postcode,
-            'colonia_fiador_trabajo' => $this->faker->word,
-            'numero_ext_fiador_trabajo' => $this->faker->word,
-            'estado_fiador_trabajo' => $this->faker->state,
-            'ciudad_fiador_trabajo' => $this->faker->city,
-            'codigo_postal_fiador_trabajo' => $this->faker->postcode
+            'guarantor' => [
+                'nombre' => $this->faker->name,
+                'apellido_paterno' => $this->faker->name,
+                'apellido_materno' => $this->faker->name,
+                'calle' => $this->faker->streetName,
+                'colonia' => $this->faker->word,
+                'numero_ext' => $this->faker->lexify('?????'),
+                'estado' => $this->faker->state,
+                'ciudad' => $this->faker->city,
+                'codigo_postal' => $this->faker->postcode,
+                'colonia_trabajo' => $this->faker->word,
+                'numero_ext_trabajo' => $this->faker->word,
+                'estado_trabajo' => $this->faker->state,
+                'ciudad_trabajo' => $this->faker->city,
+                'codigo_postal_trabajo' => $this->faker->postcode
+            ]
         ]);
 
         $call = $this->post(route('arrendatario.store'), $lessee);

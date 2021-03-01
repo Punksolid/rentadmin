@@ -4,12 +4,12 @@
 
 use App\Model;
 use App\Models\Lessee;
-use App\Models\CatFiador;
+use App\Models\Guarantor;
 use Faker\Generator as Faker;
 
 $factory->define(Lessee::class, function (Faker $faker) {
     return [
-        'id_fiador' => factory(CatFiador::class)->create()->id_cat_fiadores,
+        'id_fiador' => factory(Guarantor::class)->create()->id_cat_fiadores,
         'nombre' => $faker->firstName,
         'apellido_paterno' => $faker->lastName,
         'apellido_materno' => $faker->lastName,
