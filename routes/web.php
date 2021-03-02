@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('catalogos/arrendatario', 'Backend\LesseesController');
     // @todo Is it possible to keep it working without an specific url
     Route::get('guarantor/{guarantor}/image/destroy', 'Backend\LesseesController@guarantorImageDestroy')->name('guarantor.image.destroy');
+    Route::get('arrendatario/{lessee}/image/destroy', 'Backend\LesseesController@imageDestroy')->name('arrendatario.image.destroy');
 
     Route::patch('catalogos/arrendatario/{arrendatario}/toggle', 'Backend\LesseesController@toggleStatus')->name('arrendatario.toggle');
     Route::post('catalogos/arrendatario/telefono/{arrendatario}', 'Backend\LesseesController@addTelefono');

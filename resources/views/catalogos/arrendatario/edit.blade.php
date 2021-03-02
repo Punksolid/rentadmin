@@ -13,7 +13,12 @@
                     </ul>
                 </div>
             @endif
-            {!! Form::model($arrendatario, ['method' => 'PATCH', 'files' => true, 'route' =>['arrendatario.update', $arrendatario->id]]) !!}
+            {!! Form::model($arrendatario, [
+                'method' => 'PATCH',
+                'files' => true,
+                'route' => ['arrendatario.update', $arrendatario->id],
+                 'class' => ''
+                ]) !!}
             {{Form::token()}}
             <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -47,6 +52,11 @@
                 <label for="identity">Documento de Identidad</label>
                 <div id="identity">
                     <input type="file" name="identity">
+                    @if ($lessee->hasMedia())
+                        <img src="{{ $lessee->getFirstMediaUrl() }}" alt="..." class="img-thumbnail" style="width: 200px; height: 200px;">
+                        <a class="btn-sm btn-danger" href="{{ route('arrendatario.image.destroy', ['lessee' => $lessee->id]) }}">Eliminar Imagen</a>
+
+                    @endif
                 </div>
             </div>
             <div class="form-group">

@@ -8,6 +8,7 @@ use App\Models\Lessee;
 use App\Models\CatEmail;
 use App\Models\Guarantor;
 use App\Models\CatTelefono;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -245,14 +246,27 @@ class LesseesController extends Controller
 
     /**
      * @param Guarantor $guarantor
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
      * @throws \Exception
      */
-    public function guarantorImageDestroy(Guarantor $guarantor): \Illuminate\Http\RedirectResponse
+    public function guarantorImageDestroy(Guarantor $guarantor): RedirectResponse
     {
         $guarantor->getFirstMedia()->delete();
 
         return Redirect::route('arrendatario.edit', $guarantor->lessee->id);
+    }
+
+    /**
+     * @param Lessee $lessee
+     * @return RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function imageDestroy(Lessee $lessee): RedirectResponse
+    {
+        $lessee->getFirstMedia()->delete();
+
+        return Redirect::route('arrendatario.edit', $lessee->id);
     }
 }
