@@ -107,6 +107,7 @@ class LesseesController extends Controller
     {
 
         $data = $request->all();
+        /** @var Lessee $arre */
         $arre = Lessee::findOrFail($id);
         $arre->update($data);
 
@@ -115,6 +116,7 @@ class LesseesController extends Controller
         }
 
         if ($request->hasFile('identity')) {
+            $arre->clearMediaCollection();
             $arre->addMediaFromRequest('identity')->toMediaCollection();
         }
         $contadorTel = CatTelefono::where('id_arrendatario', $id)->get();
@@ -214,8 +216,6 @@ class LesseesController extends Controller
 
     public function updateOrCreateGuarantor(Request $request,Lessee $lessee)
     {
-
-
         /** @var Guarantor $guarantor */
         if($lessee->guarantor) {
             $guarantor = tap($lessee->guarantor)->update($request->guarantor);
@@ -224,6 +224,7 @@ class LesseesController extends Controller
         }
 
         if($request->hasFile('guarantor.identity')) {
+            $guarantor->clearMediaCollection();
             $guarantor->addMediaFromRequest('guarantor.identity')->toMediaCollection();
         }
         $contadorTelFiador = $guarantor->phones()->get();

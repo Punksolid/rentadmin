@@ -146,7 +146,7 @@
                     <label for="identity">Foto</label>
                     <input type="file" name="guarantor[identity]" class="form-control" >
                     {{-- Usar ingles @todo refactorizar @Punksolid --}}
-                    @if ($arrendatario->fiador && $fiador->hasMedia())
+                    @if ($arrendatario->guarantor && $fiador->hasMedia())
                         <img src="{{ $fiador->getFirstMediaUrl() }}" alt="..." class="img-thumbnail" style="width: 200px; height: 200px;">
                         <a class="btn-sm btn-danger" href="{{ route('guarantor.image.destroy', ['guarantor' => $guarantor->id_cat_fiadores]) }}">Eliminar Imagen</a>
 
