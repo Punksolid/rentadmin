@@ -5,60 +5,134 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <h3>Nuevo Contrato</h3>
             @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
 
             {!! Form::open(['url' => 'contrato', 'method' => 'POST', 'autocomplete' => 'on']) !!}
-            {{Form::token()}}
+            {{ Form::token() }}
             <div class="form-group">
                 <label>Arrendador</label>
-                <input type="text" class="form-control tipo-propiedad" id="arrendadornombre" placeholder="Arrendador..." disabled required>
-                <button id="lessor_modal" type="button" onclick="limpiar()" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador-contrato"><i class="fa fa-search"></i></button>
-                <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="" required>
+                <input class="form-control tipo-propiedad"
+                       disabled
+                       id="arrendadornombre"
+                       placeholder="Arrendador..."
+                       required
+                       type="text">
+                <button class="btn buscar-btn btn-sm btn-primary"
+                        data-target="#modal-arrendador-contrato"
+                        data-toggle="modal"
+                        id="lessor_modal"
+                        onclick="limpiar()"
+                        type="button"><i class="fa fa-search"></i>
+                </button>
+                <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="{{ old('id_arrendador') }}" required>
             </div>
 
             <div class="form-group">
                 <label>Inmueble</label>
-                <input type="text" class="form-control tipo-propiedad" id="propiedadnombre" placeholder="Inmueble..." disabled required>
-                <button type="button" id="property_modal" class="btn buscar-btn btn-sm btn-primary" onclick="filtrado()" data-toggle="modal" data-target="#modal-propiedad-contrato"><i class="fa fa-search"></i></button>
+                <input type="text" class="form-control tipo-propiedad" id="propiedadnombre" placeholder="Inmueble..."
+                       disabled required>
+                <button type="button" id="property_modal" class="btn buscar-btn btn-sm btn-primary" onclick="filtrado()"
+                        data-toggle="modal" data-target="#modal-propiedad-contrato"><i class="fa fa-search"></i>
+                </button>
                 <input type="hidden" id="id_propiedad_contrato" name="id_finca" value="" required>
             </div>
             <div class="form-group">
                 <label>Arrendatario</label>
-                <input type="text" class="form-control tipo-propiedad" id="arrendatarionombre" placeholder="Arrendatario..." disabled required>
-                <button type="button" id="lessee_modal" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendatario-contrato"><i class="fa fa-search"></i></button>
+                <input type="text" class="form-control tipo-propiedad" id="arrendatarionombre"
+                       placeholder="Arrendatario..." disabled required>
+                <button type="button" id="lessee_modal" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal"
+                        data-target="#modal-arrendatario-contrato"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_arrendatario_contrato" name="id_arrendatario" value="" required>
             </div>
-
-            <div class="form-group">
-                <label for="duracion_contrato">Duracion del Contrato(Años)</label>
-                <input id="duracion_c" min="1" onkeyup="mostrar()" onchange="mostrar()" type="number" name="duracion_contrato" class="form-control" placeholder="Duracion..." required>
-            </div>
-            <div class="form-group">
-                <label for="fecha_inicio">Fechas de Contrato</label>
-                <div class="hola" style="display: flex; height: 37px">
-                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Inicio</label>
-                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Terminacion</label>
-                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Cantidad</label>
-{{--                    <label style="background-color: #F01B21; color: white" class="form-control text-center">Porcentaje de Aumento</label>--}}
+            <div id="app">
+                <div class="form-group">
+                    <label for="duracion_contrato">Duracion del Contrato(Años)</label>
+                    <input class="form-control" id="duracion_c" min="1"
+                           name="duracion_contrato"
+                           onchange="mostrar()"
+                           onkeyup="mostrar()"
+                           placeholder="Duracion..."
+                           required type="number"
+                           v-model.number="years"
+                           v-on:keyup="updatedYears($event.target.value)">
                 </div>
-                <div id="fechas_con">
+                <div class="form-group">
+                    <label for="fecha_inicio">Fechas de Contrato</label>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><label style="background-color: #F01B21; color: white" class="form-control text-center">Inicio</label></th>
+                                <th><label style="background-color: #F01B21; color: white" class="form-control text-center">Fin</label></th>
+                                <th><label style="background-color: #F01B21; color: white" class="form-control text-center">Cantidad</label></th>
+                                <th><label style="background-color: #F01B21; color: white" class="form-control text-center">Porcentaje</label></th>
+                            </tr>
+                        </thead>
+                        <div>
+                            <div>
+                                <tr v-for="(item, index) in tableData" :key="item.id">
+                                    <td><input
+                                            :id="'periods['+index+'][fecha_inicio]'"
+                                            :name="'periods['+index+'][fecha_inicio]'"
+                                            class="form-control"
+                                            type="date"></td>
+                                    <td><input :name="'periods['+index+'][fecha_fin]'"
+                                               class="form-control"
+                                               type="date"></td>
+                                    <td><input
+                                            class="form-control"
+                                            data-type="currency"
+                                            id="currency-field"
+                                            v-bind:key="index"
+                                            :name="'periods['+index+'][cantidad]'"
+                                            :data-index.number="index"
+                                            placeholder="Cantidad..."
+                                            type="text"
+                                            v-model.number="item.quantity"
+                                            v-on:change="recalculateTableQuantitiesFromQuantity( index, $event.target)"
+                                    >
+                                    </td>
+                                    <td><input
+                                            :data-index.number="index"
+                                            :name="'periods['+index+'][increase_percentage]'"
+                                            class="increase_percentage form-control"
+                                            id="increase_percentage"
+                                            placeholder="Porcentaje de Aumento..."
+                                            type="number"
+                                            v-model.number="item.increase_percentage"
+                                            v-on:change="recalculateTableQuantitiesFromPercentage( index, $event.target)"
+                                    ></td>
+                                </tr>
+                            </div>
+
+                        </div>
+
+                    </table>
+
+
                 </div>
             </div>
-
             <div class="form-group">
                 <label for="moneda">Bonificacion</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="moneda" onclick="this.value = null" type="text" name="bonificacion" data-type="currency" class="form-control currency-field" placeholder="Bonificacion..." required>
+                    <input class="form-control currency-field"
+                           data-type="currency"
+                           id="moneda"
+                           name="bonificacion"
+                           onclick="this.value = null"
+                           placeholder="Bonificacion..."
+                           required
+                           value="{{ old('bonificacion') }}"
+                           type="text">
                 </div>
             </div>
             <div class="form-group">
@@ -67,7 +141,15 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    <input id="monedadep" onclick="this.value = null" type="text" name="deposito" data-type="currency" class="form-control currency-field" placeholder="Deposito..." required>
+                    <input class="form-control currency-field"
+                           data-type="currency"
+                           id="monedadep"
+                           name="deposito"
+                           onclick="this.value = null"
+                           placeholder="Deposito..."
+                           required
+                           type="text"
+                           value="{{ old('deposito') }}">
                 </div>
             </div>
             <div class="form-group">
@@ -85,7 +167,18 @@
 
         jQuery(function ($) {
             $('.currency-field').mask("###,###,##0.00", {reverse: true});
+            $('.increase_percentage').change(function () {
+                alert('changed');
+            })
         });
+        $('.increase_percentage').change(function () {
+            alert('changed');
+        })
+        // function updateQuantities()
+        // {
+        //         alert('a');
+        // }
+
         function limpiar() {
             document.getElementById('id_propiedad_contrato').value = null;
             document.getElementById('propiedadnombre').value = null;
@@ -99,12 +192,103 @@
                     var id_finca = document.getElementById(cont.getAttribute('id'));
                     if (cont.getAttribute('href') === id_arrendador) {
                         id_finca.style.display = "block";
-                    }else{
+                    } else {
                         id_finca.style.display = "none";
                     }
                 })
             }
         }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                years: 0,
+                tableData: [
+
+                ],
+                transformedData:[]
+
+            },
+            methods: {
+                calculatePercentFromQuantities(original_number, new_number) {
+                    let difference = new_number - original_number;
+
+                    return (difference/original_number) * 100;
+                },
+                addRow() {
+                    var row = {
+                        fecha_inicio: this.fecha_inicio,
+                        fecha_fin: this.fecha_fin,
+                        quantity: this.quantity,
+                        increase_percentage: this.increase_percentage,
+                    }
+                    this.tableData.push(row)
+
+                    this.fecha_inicio = ''
+                    this.fecha_fin = ''
+                    this.quantity = 0
+                    this.increase_percentage = 0
+                },
+                recalculateTableQuantitiesFromQuantity: function (index, target) {
+                    if (index == 0) {
+                        return ;
+                    }
+
+                    let previousIndex = index - 1;
+
+                    let previousRow = {
+                        quantity: this.tableData[previousIndex].quantity,
+                        increase_percentage: this.tableData[previousIndex].increase_percentage
+                    }
+
+                    let percent = this.calculatePercentFromQuantities(previousRow.quantity, target.value);
+
+                    this.tableData[previousIndex].increase_percentage = percent;
+                    // this.tableData.map(function (row, key) {
+                    //     if (key === 0) {
+                    //         previousRow.quantity = row.quantity;
+                    //         previousRow.increase_percentage = row.increase_percentage;
+                    //
+                    //         return row;
+                    //     }
+                    //     row.quantity = previousRow.quantity + (previousRow.quantity * (previousRow.increase_percentage / 100));
+                    //     previousRow.quantity = row.quantity;
+                    //     previousRow.increase_percentage = row.increase_percentage;
+                    //
+                    //     return row;
+                    // });
+                },
+                recalculateTableQuantitiesFromPercentage(index, target) {
+                    let previousRow = {
+                        quantity: 0,
+                        increase_percentage: 0
+                    };
+
+                    this.tableData.map(function (row, key) {
+                        if (key === 0) {
+                            previousRow.quantity = row.quantity;
+                            previousRow.increase_percentage = row.increase_percentage;
+
+                            return row;
+                        }
+                        row.quantity = previousRow.quantity + (previousRow.quantity * (previousRow.increase_percentage / 100));
+                        previousRow.quantity = row.quantity;
+                        previousRow.increase_percentage = row.increase_percentage;
+
+                        return row;
+                    });
+                },
+                updatedYears(years) {
+                    this.tableData = [];
+                    for (let row = 0; row < this.years; row++) {
+                        this.addRow();
+                    }
+                }
+
+            },
+            computed: {
+            },
+        })
     </script>
 
 

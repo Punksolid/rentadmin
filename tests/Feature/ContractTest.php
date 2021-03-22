@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Contract;
+use App\Models\FechaContrato;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -10,7 +11,8 @@ use Tests\TestCase;
 
 class ContractTest extends TestCase
 {
-    use DatabaseTransactions;
+//    use DatabaseTransactions;
+
     /**
      * A basic feature test example.
      *
@@ -20,6 +22,7 @@ class ContractTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $contract = factory(Contract::class)->create();
+
         $response = $this->get(route('contrato.index'));
 
         $response->assertStatus(200);
@@ -51,17 +54,14 @@ class ContractTest extends TestCase
 
     public function testStoreANewContract()
     {
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
         $form = factory(Contract::class)->raw(['duracion_contrato' => 1]);
-        $form['fecha_inicio1'] = now();
-        $form['fecha_fin1'] = now()->addMonths(6);
-        $form['cantidad1'] = 1000;
-        $form['fecha_inicio2'] = now();
-        $form['fecha_fin2'] = now()->addMonths(6);
-        $form['cantidad2'] = 1000; // @todo refactor this hell to use html arrays
-
+        /** @var FechaContrato $period */
+        $period1 = factory(FechaContrato::class)->raw();
+        $form['periods'][] = $period1;
         $call = $this->post(route('contrato.store'), $form);
-
+        $call->dump();
+        $call->assertRedirect(route('contrato.index'));
         $this->assertDatabaseHas('contracts', [
             'bonificacion' => $form['bonificacion'],
             'deposito' => $form['deposito'],

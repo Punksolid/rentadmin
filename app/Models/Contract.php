@@ -22,8 +22,9 @@ class Contract extends Model
         'estatus'
     ];
 
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'
-    ];
+    protected $hidden = ['created_at',
+        'updated_at',
+        'deleted_at'];
 
     public function scopeJoinFechas($query)
     {
@@ -33,18 +34,23 @@ class Contract extends Model
             ->join('phone_numbers', 'lessees.id', '=', 'phone_numbers.id_arrendatario');
     }
 
-    public function lessor()
+    public function lessor(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Lessor::class,'id_arrendador','id');
     }
 
-    public function lessee()
+    public function lessee(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Lessee::class,'id_arrendatario','id');
     }
 
-    public function property()
+    public function property(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Property::class,'id_finca','id');
+    }
+
+    public function periods(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(FechaContrato::class);
     }
 }

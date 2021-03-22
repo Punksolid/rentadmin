@@ -19,7 +19,11 @@ function agregar(num) {
 <input class="form-control" type="date" name="fecha_inicio${num}">
 <input class="form-control" type="date" name="fecha_fin${num}">
 <input id="currency-field" data-type="currency" class="form-control" type="text" name="cantidad${num}" placeholder="Cantidad...">
-<!--<input id="increase_percentage" class="increase-percentage form-control " type="number" name="increase_percentage[]" placeholder="Porcentaje de Aumento...">-->
+<input id="increase_percentage"
+class="increase_percentage form-control"
+type="number"
+name="increase_percentage[]"
+placeholder="Porcentaje de Aumento...">
 </div>`
     );
 }

@@ -24,7 +24,7 @@ class CreatePropertyPage extends Page
      */
     public function assert(Browser $browser)
     {
-        $browser->assertPathIs($this->url());
+//        $browser->assertPathIs($this->url());
     }
 
     /**
@@ -35,7 +35,7 @@ class CreatePropertyPage extends Page
     public function elements()
     {
         return [
-            '@name' => "name"
+            '@name' => "name",
 //            '@geolocation' => 'input[name=geolocation]',
 //            '@fiscal' => 'input[name=fiscal]',
 //            '@nofiscal' => 'input[name=nofiscal]',
@@ -45,7 +45,17 @@ class CreatePropertyPage extends Page
 //            '@water_account_number' => 'input[name=water_account_number]',
 //            '@predial' => 'input[name=predial]',
 //            '@save' => '#verificar',
-
+            '@lessor_modal' => '#lessor_modal'
         ];
+    }
+
+    public function selectLessor(Browser $browser, $id): void
+    {
+        $browser->click('@lessor_modal');
+        $browser->pause(500);
+        $browser->assertSee('Seleccione el Arrendador');
+        $browser->click("button[id=arrendadorse$id]"); // @todo refactor name id
+
+        $browser->waitUntilMissingText('Seleccione el Arrendador',15);
     }
 }

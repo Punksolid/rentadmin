@@ -11,11 +11,21 @@ class FechaContrato extends Model
 
     protected $table = 'fechas_contrato';
 
-    protected $primaryKey = 'id_fechas_contrato';
+    protected $fillable = [
+        'id_contrato',
+        'fecha_inicio',
+        'fecha_fin',
+        'cantidad',
+        'anualidad',
+        'estatus'];
 
-    protected $fillable = [ 'id_fechas_contrato', 'id_contrato', 'fecha_inicio', 'fecha_fin', 'cantidad', 'anualidad', 'estatus'
+    protected $hidden = [
+        'created_at', 'updated_at', 'deleted_at'
     ];
 
-    protected $hidden = [ 'created_at', 'updated_at', 'deleted_at'
-    ];
+    public function contract(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Contract::class,'id_contrato', 'id');
+    }
+
 }

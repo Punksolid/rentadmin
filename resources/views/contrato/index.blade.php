@@ -41,24 +41,13 @@
                     <tr class="item">
                         <td style="display: none" class="nombres">{{ $contract->arrendador_nombre.' '.$contract->arrendador_apellido }}</td>
                         <td>{{ $contract->id}}</td>
-                        <td>{{ $contract->lessor->nombre }} {{ $contract->lessor->apellido_paterno}}</td>
+                        <td>{{ optional($contract->lessor)->nombre }} {{ optional($contract->lessor)->apellido_paterno}}</td>
                         <td>{{ optional($contract->lessee)->nombre }} {{ optional($contract->lessee)->apellido_paterno }}</td>
                         <td>{{ optional($contract->property)->name}}</td>
-                        <td>{{ optional($contract->lessee->defaultPhoneNumber())->telefono }}</td>
-                        @php($fecha_inicio = \Carbon\Carbon::create(9999)->format('Y/m/d'))
-                        @php($fecha_fin = \Carbon\Carbon::create()->format('Y/m/d'))
+                        <td>{{ optional(optional($contract->lessee)->defaultPhoneNumber())->telefono }}</td>
 
-                        @foreach($fechas = \App\Models\FechaContrato::where('id_contrato', $contract->id)->get() as $fc)
-                            @if($fecha_inicio >= $fc->fecha_inicio)
-                                @php($fecha_inicio = $fc->fecha_inicio)
-                            @endif
-                            @if($fecha_fin <= $fc->fecha_fin)
-                                @php($fecha_fin = $fc->fecha_fin)
-                            @endif
-                        @endforeach
-
-                        <td>{{\Carbon\Carbon::create($fecha_inicio)->format('d/m/Y')}}</td>
-                        <td>{{\Carbon\Carbon::create($fecha_fin)->format('d/m/Y')}}</td>
+                        <td>{{ $contract->start_date }}</td>
+                        <td>{{ $contract->end_date}}</td>
 
                         <td>
                             @if($contract->estatus == 1)

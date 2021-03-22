@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label for="lessor_id">Arrendador</label>
                 <input type="text" class="form-control verificar tipo-propiedad" id="arrendadorname" placeholder="Arrendador..." disabled >
-                <button id="search_lessor" type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador"><i class="fa fa-search"></i></button>
+                <button id="lessor_modal" type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_arrendador" name="lessor_id" value="" >
             </div>
 

@@ -24,22 +24,35 @@ class PropertyTest extends DuskTestCase
      */
     public function testItCanSaveANewProperty()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->loginAs(factory(User::class)->create());
+        $this->browse(function (Browser $browser){
+//            dd($browser->driver->manage()->window()->getSize());
+            $browser->pause(100);
+
+//            $browser->loginAs(factory(User::class)->create());
             $property_type = factory(TipoPropiedad::class)->create(['estatus' => 1]);
-            factory(Lessor::class)->create();
-            $browser->visit(route('finca.create'));
+            $lessor = factory(Lessor::class)->create();
+//            $browser->visit(route('finca.create'));
+            $browser->loginAs(factory(User::class)->create())
+                ->visit(route('finca.create'))
+                ->on(new CreatePropertyPage())
+                ->assertSee('Nuevo Inmueble');
+
+            $browser->pause(100);
 
             $browser->type('name', $this->faker->name);
             $browser->type('geolocation', $this->faker->name);
+            $browser->pause(100);
+            $browser->selectLessor($lessor->id);
+            $browser->scrollTo('input[name=fiscal]');
             $browser->click('input[name=fiscal]');
             $browser->select('property_type_id', (string) $property_type->id_tipo_propiedad);
-            $browser->click('#search_lessor');
-            $browser->pause(400);
-            $browser->waitFor('#modal-arrendador', 10);
-            $browser->click('.item');
-            $browser->waitFor('input[name=address]', 10);
-            $browser->pause(5500);
+
+//            $browser->click('#search_lessor');
+//            $browser->pause(400);
+//            $browser->waitFor('#modal-arrendador', 10);
+//            $browser->click('.item');
+//            $browser->waitFor('input[name=address]', 10);
+//            $browser->pause(5500);
 
             $browser->type('address', $this->faker->streetName);
             $browser->typeSlowly('maintenance', $this->faker->numerify('####'));
