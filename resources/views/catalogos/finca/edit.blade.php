@@ -61,17 +61,12 @@
                 <label for="recibo">Recibo</label>
                 <label style="margin-left: 200px !important;" for="estatus_renta">Estatus</label>
                 <div style="display:block;">
-                    @if($finca->recibo === "Fiscal")
-                            <label>Fiscal</label>
-                            <input id="fiscal" style="margin-right: 20px" class="cb" checked onchange="cbChange(this)" type="radio" name="fiscal">
-                            <label>No Fiscal</label>
-                            <input id="nofiscal" type="radio" class="cb" onchange="cbChange(this)" name="nofiscal">
-                    @else
+                    <div style="display:block;">
                         <label>Fiscal</label>
-                        <input style="margin-right: 20px" class="cb" id="fiscal" onchange="cbChange(this)" type="radio" name="fiscal">
+                        <input  style="margin-right: 20px" class="cb"  type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_FISCAL_VALUE }}" {!!  old('fiscal',$finca->recibo === \App\Models\Property::RECIBO_STRING_FISCAL_VALUE ? 'checked':'') !!} >
                         <label>No Fiscal</label>
-                        <input type="radio" class="cb" checked id="nofiscal" onchange="cbChange(this)" name="nofiscal">
-                    @endif
+                        <input  style="margin-right: 20px" class="cb"  type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE }}" {!!  old('fiscal',$finca->recibo === \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE ? 'checked':'') !!} >
+                    </div>
                 </div>
                 <div style="display: block; margin-left: 248px !important; margin-top: -38px;">
                     @if($finca->rented)

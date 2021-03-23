@@ -60,7 +60,6 @@ class ContractTest extends TestCase
         $period1 = factory(FechaContrato::class)->raw();
         $form['periods'][] = $period1;
         $call = $this->post(route('contrato.store'), $form);
-        $call->dump();
         $call->assertRedirect(route('contrato.index'));
         $this->assertDatabaseHas('contracts', [
             'bonificacion' => $form['bonificacion'],

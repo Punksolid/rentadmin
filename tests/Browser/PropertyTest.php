@@ -16,7 +16,6 @@ use Tests\DuskTestCase;
 class PropertyTest extends DuskTestCase
 {
     use WithFaker;
-//    use DatabaseTransactions;
     /**
      * A Dusk test example.
      *
@@ -30,7 +29,7 @@ class PropertyTest extends DuskTestCase
 
 //            $browser->loginAs(factory(User::class)->create());
             $property_type = factory(TipoPropiedad::class)->create(['estatus' => 1]);
-            $lessor = factory(Lessor::class)->create();
+            $lessor = factory(Lessor::class)->create(['estatus' => true]);
 //            $browser->visit(route('finca.create'));
             $browser->loginAs(factory(User::class)->create())
                 ->visit(route('finca.create'))
@@ -43,7 +42,7 @@ class PropertyTest extends DuskTestCase
             $browser->type('geolocation', $this->faker->name);
             $browser->pause(100);
             $browser->selectLessor($lessor->id);
-            $browser->scrollTo('input[name=fiscal]');
+//            $browser->scrollTo('input[name=fiscal]');
             $browser->click('input[name=fiscal]');
             $browser->select('property_type_id', (string) $property_type->id_tipo_propiedad);
 
@@ -85,11 +84,9 @@ class PropertyTest extends DuskTestCase
 //            $browser->assertInputValue('maintenance', $property->maintenance); // format detail
             // recibo
             $browser->pause(200);
-            $browser->assertRadioSelected('#fiscal','on');
+            $browser->assertRadioSelected('input[name="fiscal"]',Property::RECIBO_STRING_FISCAL_VALUE);
             $browser->scrollTo('button[type=submit]');
             $this->assertEquals($property->water_fee, str_replace('.','', $browser->value('input[name=water_fee]')));
-//            $browser->assertInputValue('water_fee', $property->water_fee);
-//            $browser->assertChecked('estatus_renta', $property->rented); // not visible
             $browser->assertInputValue('geolocation', $property->geolocation);
 
             $browser->scrollTo('button[type=submit]');

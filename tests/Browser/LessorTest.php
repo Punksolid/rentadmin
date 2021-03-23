@@ -11,7 +11,6 @@ use Tests\DuskTestCase;
 class LessorTest extends DuskTestCase
 {
     /**
-     * A Dusk test example.
      *
      * @return void
      */

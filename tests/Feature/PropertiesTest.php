@@ -110,7 +110,7 @@ class PropertiesTest extends TestCase
         $call->assertSee('name="name"', false);
         $call->assertSee('name="lessor_id"', false);
         $call->assertSee('name="address"', false);
-        $call->assertSee('name="nofiscal"', false);
+        $call->assertSee('name="fiscal"', false);
         $call->assertSee('name="water_fee"', false);
         $call->assertSee('name="water_account_number"', false);
         $call->assertSee('name="energy_fee"', false);

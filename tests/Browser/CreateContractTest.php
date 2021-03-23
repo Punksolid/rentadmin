@@ -8,13 +8,18 @@ use App\Models\Property;
 use App\Models\User;
 use Doctrine\DBAL\Cache\CacheException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Carbon;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\CreateContractPage;
+use Tests\CreatesApplication;
 use Tests\DuskTestCase;
 
 class CreateContractTest extends DuskTestCase
 {
+
+    use CreatesApplication;
+    use DatabaseMigrations;
     /**
      * A Dusk test example.
      *
@@ -23,7 +28,12 @@ class CreateContractTest extends DuskTestCase
     public function testRegisterNewContract()
     {
         $this->browse(function (Browser $browser) {
+            $browser->loginAs(factory(User::class)->create());
 
+            $browser
+                ->visit(route('contrato.create'))
+                ->on(new CreateContractPage())
+                ->assertSee('Nuevo Contrato');
             $property = factory(Property::class)->create([
                 'rented' => null,
                 'status' => Property::STATUS_ACTIVE
@@ -31,10 +41,7 @@ class CreateContractTest extends DuskTestCase
 
             $lessee = factory(Lessee::class)->create();
 
-            $browser->loginAs(factory(User::class)->create())
-                ->visit(route('contrato.create'))
-                ->on(new CreateContractPage())
-                ->assertSee('Nuevo Contrato');
+
 
             $browser->selectLessor($property->lessor->id);
             $browser->selectProperty($property->id);

@@ -51,9 +51,9 @@
                 <label for="recibo">Recibo</label>
                 <div style="display:block;">
                     <label>Fiscal</label>
-                    <input style="margin-right: 20px" class="cb" onchange="cbChange(this)" type="radio" name="fiscal" @if(old('fiscal') == 'on') checked @endif>
+                    <input  style="margin-right: 20px" class="cb"  type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_FISCAL_VALUE }}" @if(old('fiscal') === \App\Models\Property::RECIBO_STRING_FISCAL_VALUE) checked @endif>
                     <label>No Fiscal</label>
-                    <input type="radio" class="cb" onchange="cbChange(this)" name="nofiscal" @if(old('nofiscal') == 'on') checked @endif>
+                    <input  style="margin-right: 20px" class="cb"  type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE }}" @if(old('fiscal') === \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE) checked @endif>
                 </div>
             </div>
 

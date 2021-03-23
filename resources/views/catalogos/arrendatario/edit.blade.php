@@ -51,12 +51,21 @@
             <div class="form-group">
                 <label for="identity">Documento de Identidad</label>
                 <div id="identity">
-                    <input type="file" name="identity">
+                    @if (! $lessee->hasMedia())
+                        <div id="app">
+                            <input type="file" name="identity" @change="onFileChange"/>
+                            <div id="preview">
+                                <img width="400" height="250" v-if="url" :src="url"/>
+                            </div>
+                        </div>
+                    @endif
+
                     @if ($lessee->hasMedia())
+                            <input type="file" name="identity">
                         <img src="{{ $lessee->getFirstMediaUrl() }}" alt="..." class="img-thumbnail" style="width: 200px; height: 200px;">
                         <a class="btn-sm btn-danger" href="{{ route('arrendatario.image.destroy', ['lessee' => $lessee->id]) }}">Eliminar Imagen</a>
-
                     @endif
+
                 </div>
             </div>
             <div class="form-group">
@@ -154,9 +163,18 @@
                 </div>
                 <div class="form-group">
                     <label for="identity">Foto</label>
-                    <input type="file" name="guarantor[identity]" class="form-control" >
+                    <div id="appFiador">
+                        {{--                        <input type="file" name="identity" @change="onFileChange"/>--}}
+                        <input type="file" name="guarantor[identity]" @change="onFileChangeFiador" class="form-control">
+
+                        <div id="preview">
+                            <img width="400" height="250" v-if="url" :src="url"/>
+                        </div>
+                    </div>
                     {{-- Usar ingles @todo refactorizar @Punksolid --}}
                     @if ($arrendatario->guarantor && $fiador->hasMedia())
+
+
                         <img src="{{ $fiador->getFirstMediaUrl() }}" alt="..." class="img-thumbnail" style="width: 200px; height: 200px;">
                         <a class="btn-sm btn-danger" href="{{ route('guarantor.image.destroy', ['guarantor' => $guarantor->id_cat_fiadores]) }}">Eliminar Imagen</a>
 
@@ -254,4 +272,34 @@
     </div>
 
 
+@endsection
+@section('javascript')
+    const vm = new Vue({
+        el: '#app',
+    data() {
+    return {
+    url: null,
+    }
+    },
+    methods: {
+    onFileChange(e) {
+    const file = e.target.files[0];
+    this.url = URL.createObjectURL(file);
+    }
+    }
+    })
+    const vmFiador = new Vue({
+    el: '#appFiador',
+    data() {
+    return {
+    url: null,
+    }
+    },
+    methods: {
+    onFileChangeFiador(e) {
+    const file = e.target.files[0];
+    this.url = URL.createObjectURL(file);
+    }
+    }
+    })
 @endsection

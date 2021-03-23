@@ -48,7 +48,7 @@ class PropertiesController extends Controller
     public function store(PropertyRequest $request){
         $data = $request->all();
         $data['state_id'] = 25;
-        if (isset($data['fiscal']) && $data['fiscal'] == "true"){
+        if ($request->fiscal === Property::RECIBO_STRING_FISCAL_VALUE){
             $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE;
         }else{
             $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
@@ -91,8 +91,8 @@ class PropertiesController extends Controller
 
     public function update(PropertyRequest $request, $id){
         $data = $request->all();
-        if (isset($data['fiscal']) && $data['fiscal'] == "on"){
-            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE;
+        if ($request->fiscal === Property::RECIBO_STRING_FISCAL_VALUE){
+            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE; // @todo refactor this field to match recibo in the database
         }else{
             $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
         }
