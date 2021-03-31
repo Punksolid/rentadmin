@@ -1,4 +1,5 @@
 @extends ('layouts.layout-v2')
+@section('page_title', 'Liquidaciones')
 @section ('contenido')
     <style>
         .btn-circle {
@@ -12,93 +13,100 @@
         }
 
     </style>
-    <div class="row">
-        <div class="col-12">
-            <h3>Liquidaciones</h3>
-            <div>
-                <div class="formulario-dos">
-                    <label>Arrendador</label>
-                    <input type="text" class="form-control tipo-propiedad" id="arrendadornombre" placeholder="Arrendador..." disabled required>
-                    <button type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador-contrato"><i class="fa fa-search"></i></button>
-                    <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="" required>
+    <div>
+        <div class="form-group">
+            <label>Arrendador</label>
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       id="arrendadornombre"
+                       placeholder="Arrendador..."
+                       disabled
+                       required>
+                <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="" required>
+                <div class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-info btn-flat"
+                            data-toggle="modal"
+                            data-target="#modal-arrendador-contrato"><i class="fa fa-search"></i></button>
+                    <button onclick="peticionLiquidacion()" class="btn btn-primary btn-flat">Consultar</button>
                 </div>
-                <button style="margin-bottom: 5px" onclick="peticionLiquidacion()" class="btn btn-primary">Consultar</button>
-            </div>
-            <div>
-                <div class="formulario-dos">
-                    <label>Mes A Generar</label>
-                    <select id="mes" name="mes" class="form-control">
-                        <option value="" selected disabled>Seleccione mes para generar recibo</option>
-                        <option mes="{{$mestres}}" value="{{$num_mes_tres}}">{{$mestres}}</option>
-                        <option mes="{{$mesuno}}" value="{{$num_mes_uno}}">{{$mesuno}}</option>
-                        <option mes="{{$mesdos}}" value="{{$num_mes_dos}}">{{$mesdos}}</option>
-                    </select>
-                </div>
-                <div class="formulario-liq">
-                    <label>Retención IVA %</label>
-                    <input id="retiva" class="form-control" value="{{$retiva}}">
-                </div>
-                <div class="formulario-liq">
-                    <label>Retención ISR %</label>
-                    <input id="retisr" class="form-control" value="{{$retisr}}">
-                </div>
-            </div>
-            <table id="tablaprueba" class="table table-sm table-hover">
-                <thead>
-                    <th>Id</th>
-                    <th>Inmueble</th>
-                    <th>Arrendatario</th>
-                    <th style="width: 15%; text-align: center">Mes</th>
-                    <th style="text-align: center;">Importe</th>
-                    <th style="text-align: center">IVA</th>
-                </thead>
-                <tbody id="tbodyid">
-                <tr  id="comision">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="display: inline-flex"><input id="porcen" value="{{$comision}}" style="width: 25%; height: 25px" class="form-control">% COMISION</td>
-                    <td id="comisionvalor" style="text-align: center"></td>
-                </tr>
-                </tbody>
-            </table>
-
-            <!-- Tabla Gastos -->
-            <div class="formulario-dos">
-                <h5 style="text-align: center"><strong>Gastos</strong></h5>
-                <div style="display: flex">
-                    <table id="tablagastos" class="table table-sm table-striped table-hover">
-                        <thead>
-                        <th>Nombre</th>
-                        <th>Importe</th>
-                        </thead>
-                        <tbody>
-                        <tr id="gastostr">
-                            <td style="text-align: center; border-bottom: black 2px solid">SALDO A SU CARGO</td>
-                            <td id="totalgastos" style="border-bottom: black 2px solid"></td>
-                        </tr>
-
-                        </tbody>
-
-                    </table>
-                    <button id="botongasto" style="margin-left: 2px" class="btn btn-sm btn-success btn-circle"><i class="fa fa-plus"></i></button>
-                    <button id="botontotal" style="margin-left: 2px; height: 30px" class="btn btn-sm btn-primary">TOTAL</button>
-                </div>
-            </div>
-
-            <div class="formulario-dos">
-                <table id="tabladeposito" class="table table-sm table-hover">
-                    <thead>
-                    <th style="text-align: center; width: 250px">Depositos</th>
-                    <th style="text-align: center">Importe</th>
-                    </thead>
-
-                    <tbody>
-
-                    </tbody>
-                </table>
             </div>
         </div>
+    </div>
+    <div>
+        <div class="form-group">
+            <label>Mes A Generar</label>
+            <select id="mes" name="mes" class="form-control">
+                <option value="" selected disabled>Seleccione mes para generar recibo</option>
+                <option mes="{{$mestres}}" value="{{$num_mes_tres}}">{{$mestres}}</option>
+                <option mes="{{$mesuno}}" value="{{$num_mes_uno}}">{{$mesuno}}</option>
+                <option mes="{{$mesdos}}" value="{{$num_mes_dos}}">{{$mesdos}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Retención IVA %</label>
+            <input id="retiva" class="form-control" value="{{$retiva}}">
+        </div>
+        <div class="form-group">
+            <label>Retención ISR %</label>
+            <input id="retisr" class="form-control" value="{{$retisr}}">
+        </div>
+    </div>
+    <table id="tablaprueba" class="table table-sm table-hover with-border table-bordered">
+        <thead>
+        <th>Id</th>
+        <th>Inmueble</th>
+        <th>Arrendatario</th>
+        <th style="width: 15%; text-align: center">Mes</th>
+        <th style="text-align: center;">Importe</th>
+        <th style="text-align: center">IVA</th>
+        </thead>
+        <tbody id="tbodyid">
+        <tr  id="comision">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="display: inline-flex"><input id="porcen" value="{{$comision}}" style="width: 25%; height: 25px" class="form-control">% COMISION</td>
+            <td id="comisionvalor" style="text-align: center"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Tabla Gastos -->
+    <div class="formulario-dos">
+        <h5 style="text-align: center"><strong>Gastos</strong></h5>
+        <div style="display: flex">
+            <table id="tablagastos" class="table table-sm table-striped table-hover table-bordered">
+                <thead>
+                <th>Nombre</th>
+                <th>Importe</th>
+                </thead>
+                <tbody>
+                <tr id="gastostr">
+                    <td style="text-align: center; border-bottom: black 2px solid">SALDO A SU CARGO</td>
+                    <td id="totalgastos" style="border-bottom: black 2px solid"></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+            <button id="botongasto" style="margin-left: 2px" class="btn btn-sm btn-success btn-circle"><i class="fa fa-plus"></i></button>
+            <button id="botontotal" style="margin-left: 2px; height: 30px" class="btn btn-sm btn-primary">TOTAL</button>
+        </div>
+    </div>
+
+    <div class="formulario-dos">
+        <table id="tabladeposito" class="table table-sm table-hover">
+            <thead>
+            <th style="text-align: center; width: 250px">Depositos</th>
+            <th style="text-align: center">Importe</th>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+        </table>
     </div>
     @include('liquidaciones.modal')
     <div>
