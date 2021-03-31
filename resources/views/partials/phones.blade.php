@@ -89,38 +89,40 @@
     @parent
 @stop
 @section('javascript')
+<script>
+    $('#modal-delete-phone').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var phoneId = button.data('phone')
 
-$('#modal-delete-phone').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var phoneId = button.data('phone')
+        var url = "{{ url('phones') }}/" + phoneId;
 
-    var url = "{{ url('phones') }}/" + phoneId;
-
-    var modal = $(this);
-    modal.find('#phone_id').val(url);
-    $('#phone-form').attr('action', url);
-});
-$('#modal-add-phone').on('show.bs.modal', function (event) {
-    var link = $(event.relatedTarget); // Button that triggered the modal
-    var phoneableId = link.data('id');
-    var owner_type= link.data('owner-type');
-    var url = 'none';
-    if (owner_type == {!! json_encode(\App\Models\CatFiador::class) !!} ){
-        var url = '{{ url('catalogos/arrendatario/telefonofiador/') }}/'+ phoneableId;
-    }
-    if (owner_type == {!! json_encode(\App\Models\Lessee::class) !!} ){
-        var url = '{{ url('catalogos/arrendatario/telefono/') }}/'+ phoneableId;
-    }
-    if (owner_type == {!! json_encode(\App\Models\Lessor::class) !!} ){
-        var url = '{{ url('catalogos/arrendador/telefono/') }}/'+ phoneableId;
-    }
+        var modal = $(this);
+        modal.find('#phone_id').val(url);
+        $('#phone-form').attr('action', url);
+    });
+    $('#modal-add-phone').on('show.bs.modal', function (event) {
+        var link = $(event.relatedTarget); // Button that triggered the modal
+        var phoneableId = link.data('id');
+        var owner_type= link.data('owner-type');
+        var url = 'none';
+        if (owner_type == {!! json_encode(\App\Models\CatFiador::class) !!} ){
+            var url = '{{ url('catalogos/arrendatario/telefonofiador/') }}/'+ phoneableId;
+        }
+        if (owner_type == {!! json_encode(\App\Models\Lessee::class) !!} ){
+            var url = '{{ url('catalogos/arrendatario/telefono/') }}/'+ phoneableId;
+        }
+        if (owner_type == {!! json_encode(\App\Models\Lessor::class) !!} ){
+            var url = '{{ url('catalogos/arrendador/telefono/') }}/'+ phoneableId;
+        }
 
 
-    var modal = $(this);
-    // modal.find('#phone_id').val(url);
-    console.log(url);
-    $('#add-phone-form').attr('action', url);
-});
+        var modal = $(this);
+        // modal.find('#phone_id').val(url);
+        console.log(url);
+        $('#add-phone-form').attr('action', url);
+    });
+</script>
+
 
     @parent
 @stop

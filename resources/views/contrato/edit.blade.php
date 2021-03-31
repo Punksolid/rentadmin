@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.layout-v2')
 @section ('contenido')
 
     <div class="row">
@@ -62,7 +62,7 @@
             <div class="form-group">
                 <label for="moneda">Bonificacion</label>
                 <div class="input-group">
-                    <div class="input-group-prepend">
+                    <div class="input-group-addon">
                         <div class="input-group-text">$</div>
                     </div>
                     <input id="moneda" type="text" name="bonificacion" data-type="currency" class="form-control currency-field" placeholder="Bonificacion..." required value="{{ $contrato->bonificacion }}">
@@ -71,7 +71,7 @@
             <div class="form-group">
                 <label for="monedadep">Deposito En Garantia</label>
                 <div class="input-group">
-                    <div class="input-group-prepend">
+                    <div class="input-group-addon">
                         <div class="input-group-text">$</div>
                     </div>
                     <input id="monedadep" type="text" name="deposito" data-type="currency" class="form-control currency-field" placeholder="Deposito..." required value="{{ $contrato->deposito }}">

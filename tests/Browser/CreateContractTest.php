@@ -19,7 +19,6 @@ class CreateContractTest extends DuskTestCase
 {
 
     use CreatesApplication;
-    use DatabaseMigrations;
     /**
      * A Dusk test example.
      *
@@ -29,17 +28,18 @@ class CreateContractTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(factory(User::class)->create());
+            $property = factory(Property::class)->create([
+                'rented' => null,
+                'status' => Property::STATUS_ACTIVE
+            ]);
+            $lessee = factory(Lessee::class)->create();
 
             $browser
                 ->visit(route('contrato.create'))
                 ->on(new CreateContractPage())
                 ->assertSee('Nuevo Contrato');
-            $property = factory(Property::class)->create([
-                'rented' => null,
-                'status' => Property::STATUS_ACTIVE
-            ]);
 
-            $lessee = factory(Lessee::class)->create();
+
 
 
 

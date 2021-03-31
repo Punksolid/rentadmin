@@ -53,7 +53,8 @@ class CreatePropertyPage extends Page
     {
         $browser->click('@lessor_modal');
         $browser->pause(500);
-        $browser->assertSee('Seleccione el Arrendador');
+//        $browser->assertSee('Seleccione el Arrendador');
+        $browser->waitForText('Seleccione el Arrendador');
         $browser->click("button[id=arrendadorse$id]"); // @todo refactor name id
 
         $browser->waitUntilMissingText('Seleccione el Arrendador',15);

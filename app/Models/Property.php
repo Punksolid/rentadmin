@@ -16,10 +16,10 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Property extends Model implements HasMedia
 {
     use SoftDeletes, InteractsWithMedia;
-    const RECIBO_STRING_FISCAL_VALUE = 'Fiscal';
-    const RECIBO_STRING_NO_FISCAL_VALUE = 'No Fiscal';
-    const STATUS_ACTIVE = 1;
-    const STATUS_INACTIVE = 0;
+    public const RECIBO_STRING_FISCAL_VALUE = 'Fiscal';
+    public const RECIBO_STRING_NO_FISCAL_VALUE = 'No Fiscal';
+    public const STATUS_ACTIVE = 1;
+    public const STATUS_INACTIVE = 0;
 
 
     protected $table = 'properties';

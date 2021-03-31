@@ -43,7 +43,9 @@ class PropertyTest extends DuskTestCase
             $browser->pause(100);
             $browser->selectLessor($lessor->id);
 //            $browser->scrollTo('input[name=fiscal]');
-            $browser->click('input[name=fiscal]');
+//            $browser->click('input[name=fiscal]');
+            $browser->pause(100);
+            $browser->radio('fiscal', Property::RECIBO_STRING_NO_FISCAL_VALUE);
             $browser->select('property_type_id', (string) $property_type->id_tipo_propiedad);
 
 //            $browser->click('#search_lessor');

@@ -1,4 +1,5 @@
-@extends ('layouts.admin')
+@extends ('layouts.layout-v2')
+@section('page_title', 'Reportes')
 @section ('contenido')
 
     <div class="row">

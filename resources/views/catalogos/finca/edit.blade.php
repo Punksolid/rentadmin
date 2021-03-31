@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.layout-v2')
 @section ('contenido')
 
     <div class="row">
@@ -79,7 +79,7 @@
             <div class="form-group">
                 <label for="mantenimiento">Mantenimiento</label>
                 <div class="input-group">
-                    <div class="input-group-prepend">
+                    <div class="input-group-addon">
                         <div class="input-group-text">$</div>
                     </div>
                     <input id="currency-field" type="text" name="maintenance" data-type="currency" class="form-control currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->maintenance }}" placeholder="Mantenimiento..." required>
@@ -88,7 +88,7 @@
             <div class="form-group">
                 <label for="cuota_agua">Cuota de Agua</label>
                 <div class="input-group">
-                    <div class="input-group-prepend">
+                    <div class="input-group-addon">
                         <div class="input-group-text">$</div>
                     </div>
                     <input id="currency-field" type="text" name="water_fee" data-type="currency" class="form-control currency-field" pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" value="{{$finca->water_fee }}" placeholder="Cuota de Agua..." required>
@@ -127,8 +127,11 @@
         </div>
     </div>
 
+
+@endsection
+@section('javascript')
     <script>
-        $('#verificar').click(function () {
+        $('#verificar').click(function () { // @todo Delete this block, too cumberstone
             let i = 0;
             let veri = $('.verificar');
             $.each(veri, function (index, ver) {

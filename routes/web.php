@@ -20,9 +20,7 @@ Auth::routes();
 
 /*Rutas privadas solo para usuarios autenticados*/
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', function () {
-        return view('layouts/inicio');
-    });
+    Route::get('/', 'DashboardController@index');
 
     //Catalogo Arrendador
     Route::resource('catalogos/arrendador', 'Backend\LessorController');
@@ -80,12 +78,12 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('recibos-automaticos/{arrendador}', 'Backend\RecibosAutomaticosController@contrato');//Muestra los contratos
     Route::post('recibos-automaticos/revision', 'Backend\RecibosAutomaticosController@filtroArrendatario');//Filtro Arrendatario
     Route::put('control-pago/recibo/{registro}/actualizar', 'Backend\RecibosAutomaticosController@actualizarRecibo');//Actualiza el recibo
-    Route::get('control-pago', 'Backend\ControPagoController@index');
+    Route::get('control-pago', 'Backend\ControPagoController@index')->name('payments.index');
     Route::get('control-pago/recibo/imp/{contrato}', 'Backend\RecibosAutomaticosController@controlImp');//Imprimir control de pago
     Route::post('recibos-automaticos/parcial', 'Backend\RecibosAutomaticosController@reciboParcial');//Recibo Parcial
 
     //Reportes
-    Route::get('reportes', 'Backend\ReportesController@index');
+    Route::get('reportes', 'Backend\ReportesController@index')->name('reports.index');
     Route::post('reportes/pdf', 'Backend\ReportesController@generarReporte');
 
     //Incidentes

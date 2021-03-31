@@ -191,4 +191,5 @@ class LesseeTest extends TestCase
         $lessee->refresh();
         $this->assertEquals(Lessee::STATUS_INACTIVE, $lessee->estatus);
     }
+
 }

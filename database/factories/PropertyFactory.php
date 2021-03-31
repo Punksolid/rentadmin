@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Property::class, function (Faker $faker) {
     return [
-        'lessor_id' => factory(\App\Models\Lessor::class)->create()->id,
+        'lessor_id' => factory(\App\Models\Lessor::class)->create(['estatus' => \App\Models\Lessor::ACTIVE_STATUS])->id,
         'property_type_id' => factory(\App\Models\TipoPropiedad::class)->create()->id_tipo_propiedad,
         'state_id' => 1,
         'name' => $faker->words(4, true),

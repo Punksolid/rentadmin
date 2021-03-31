@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.layout-v2')
 @section ('contenido')
 
     <div class="row" xmlns="http://www.w3.org/1999/html">

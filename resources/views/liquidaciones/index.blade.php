@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.layout-v2')
 @section ('contenido')
     <style>
         .btn-circle {

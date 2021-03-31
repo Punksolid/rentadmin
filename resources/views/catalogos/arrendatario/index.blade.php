@@ -1,4 +1,4 @@
-@extends ('layouts.admin')
+@extends ('layouts.layout-v2')
 @section ('contenido')
 
     <div class="row">
@@ -45,22 +45,31 @@
                         <td>{{ optional($lessee->defaultEmail())->email }}</td>
                         <td>{{$lessee->puesto}}</td>
                         <td>
-                            <div class="btn-group">
-                                <a href="{{ $lessee->getFirstMediaUrl() }}"> <button class="btn btn-file btn-success" {{ $lessee->hasMedia() ?: 'disabled' }}><i class="far fa-image"></i></button></a>
-                                <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
-                            @if($lessee->estatus == 1)
-                                    {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_INACTIVE], 'method' => 'PATCH']) !!}
-                                    <input type="hidden" name="status" value="0"/>
-                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Desactivar">
-                                            <button type="submit" class="btn btn-danger linea"><i class="fa fa-power-off"></i></button>
-                                        </span>
-                                    {{ Form::Close() }}
-                            @else
-                                {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_ACTIVE], 'method' => 'PATCH']) !!}
-                                  <a class="linea btn btn-info" href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i class="far fa-edit"></i></a>
-                                    <button type="submit" class="btn btn-success linea">Activar</button>
-                                {{ Form::Close() }}
-                            @endif
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="btn-group">
+                                        <a href="{{ $lessee->getFirstMediaUrl() }}"
+                                           class="btn btn-file btn-success" {{ $lessee->hasMedia() ?: 'disabled' }}> <i
+                                                class="far fa-image"></i></a>
+                                        <a class="btn btn-info"
+                                           href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i
+                                                class="far fa-edit"></i></a>
+                                        @if($lessee->estatus == 1)
+                                            {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_INACTIVE], 'class' => 'form-inline','method' => 'PATCH' ]) !!}
+                                            <input type="hidden" name="status" value="0"/>
+                                            <button type="submit" class="btn btn-danger"><i class="fa fa-power-off"></i>
+                                            </button>
+                                            {{ Form::Close() }}
+                                        @else
+                                            {!! Form::Open(['route' => ['arrendatario.toggle', $lessee->id, 'status' => \App\Models\Lessee::STATUS_ACTIVE], 'method' => 'PATCH']) !!}
+                                            <a class="btn btn-info"
+                                               href="{{ URL::action('Backend\LesseesController@edit', $lessee->id) }}"><i
+                                                    class="far fa-edit"></i></a>
+                                            <button type="submit" class="btn btn-success linea">Activar</button>
+                                            {{ Form::Close() }}
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </td>
                     </tr>

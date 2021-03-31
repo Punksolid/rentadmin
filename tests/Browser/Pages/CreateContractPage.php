@@ -56,8 +56,8 @@ class CreateContractPage extends Page
     public function selectLessor(Browser $browser, $id)
     {
         $browser->click('@lessor_modal');
-        $browser->pause(500);
-        $browser->assertSee('Seleccione el Arrendador');
+        $browser->waitForText('Seleccione el Arrendador',1);
+        $browser->waitForText("$id-.");
         $browser->click("button[id=arrendador_contrato$id]");
 
         $browser->waitUntilMissingText('Seleccione el Arrendador',15);
