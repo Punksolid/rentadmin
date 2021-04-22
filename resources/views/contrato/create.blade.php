@@ -1,4 +1,5 @@
 @extends ('layouts.layout-v2')
+@section('page_title','Nuevo Contrato')
 @section ('contenido')
 
     <h3>Nuevo Contrato</h3>
@@ -35,8 +36,6 @@
                 </button>
             </div>
         </div>
-
-
     </div>
 
     <div class="form-group">
@@ -97,9 +96,11 @@
                                     :id="'periods['+index+'][fecha_inicio]'"
                                     :name="'periods['+index+'][fecha_inicio]'"
                                     class="form-control"
-                                    type="date"></td>
+                                    type="date"
+                                    v-model.value="item.fecha_inicio"></td>
                             <td><input :name="'periods['+index+'][fecha_fin]'"
                                        class="form-control"
+                                       v-model.value="item.fecha_fin"
                                        type="date"></td>
                             <td><input
                                     class="form-control"
@@ -176,11 +177,6 @@
     {!! Form::close() !!}
     @include("contrato.modal")
 
-
-
-
-
-
 @endsection
 @section('javascript')
     <script type="text/javascript">
@@ -194,10 +190,6 @@
         $('.increase_percentage').change(function () {
             alert('changed');
         })
-        // function updateQuantities()
-        // {
-        //         alert('a');
-        // }
 
         function limpiar() {
             document.getElementById('id_propiedad_contrato').value = null;

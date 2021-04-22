@@ -39,7 +39,7 @@ class ContractTest extends TestCase
         $call->assertSuccessful();
     }
 
-    public function testContractFormUpdate()
+    public function testContractFormUpdate(): void
     {
         $this->withoutExceptionHandling();
         $contract = factory(Contract::class)->create();
@@ -50,6 +50,17 @@ class ContractTest extends TestCase
         $call->assertSuccessful()
             ->assertSee($contract->bonificacion)
             ->assertSee($contract->deposito);
+    }
+
+    public function testUpdateAContract(): void
+    {
+        $this->withoutExceptionHandling();
+        $contract = factory(Contract::class)->create();
+        $new_form = factory(Contract::class)->raw();
+
+        $call = $this->call('PATCH', route('contrato.update',  $contract->id ), $new_form );
+
+        $call->assertRedirect(route('contrato.index'));
     }
 
     public function testStoreANewContract()

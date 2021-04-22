@@ -26,9 +26,18 @@
             <div id="reciboautomatico" class="togg1 collapse">
                 <div class="form-group">
                     <label>Arrendador</label>
-                    <input type="text" class="form-control tipo-propiedad" id="arrendadornombre" placeholder="Arrendador..." disabled required>
-                    <button type="button" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador-contrato"><i class="fa fa-search"></i></button>
-                    <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="" required>
+                    <div class="input-group">
+                        <input type="text" class="form-control tipo-propiedad" id="arrendadornombre" placeholder="Arrendador..." disabled required>
+                        <input type="hidden" id="id_arrendador_contrato" name="id_arrendador" value="" required>
+                        <div class="input-group-btn">
+                            <button type="button"
+                                    class="btn btn-info btn-flat"
+                                    data-toggle="modal"
+                                    data-target="#modal-arrendador-contrato">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <table id="tablaprueba" class="table table-sm table-striped table-bordered table-condensed table-hover">
                     <thead class="thead-light">
@@ -63,14 +72,33 @@
             <div id="reciboparcial" class="togg2 collapse">
                 <div class="form-group">
                     <div class="form-group" style="width: 200%">
-                        <input type="text" class="form-control recibo-input" id="arrendador_parcial" placeholder="Arrendador..." disabled required>
-                        <button type="button" onclick="limpiarpar()" class="btn buscar-btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-arrendador-parcial"><i class="fa fa-search"></i></button>
-                        <input type="hidden" id="id_arrendador_parcial" name="" value="" required>
+                        <div class="input-group">
+                            <input type="text" class="form-control recibo-input" id="arrendador_parcial" placeholder="Arrendador..." disabled required>
+                            <input type="hidden" id="id_arrendador_parcial" name="" value="" required>
+                            <div class="input-group-btn">
+                                <button
+                                    type="button"
+                                    onclick="limpiarpar()"
+                                    class="btn btn-info btn-flat"
+                                    data-toggle="modal"
+                                    data-target="#modal-arrendador-parcial">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div style="width: 200%" class="form-group">
+                        <div class="input-group">
                         <input type="text" class="form-control recibo-input" id="propiedad_parcial" placeholder="Inmueble..." disabled required>
-                        <button type="button" class="btn buscar-btn btn-sm btn-primary" onclick="filtradoParcial(); limpiarparcialArre()" data-toggle="modal" data-target="#modal-propiedad-parcial"><i class="fa fa-search"></i></button>
                         <input type="hidden" id="id_propiedad_parcial" name="id_finca" value="" required>
+                            <div class="input-group-btn">
+                                <button
+                                    class="btn btn-info btn-flat"
+                                    data-target="#modal-propiedad-parcial"
+                                    data-toggle="modal" onclick="filtradoParcial(); limpiarparcialArre()"
+                                    type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
                     </div>
                     <div style="width: 200%" class="form-group">
                         <input type="text" class="form-control recibo-input" id="arrendatario_parcial" placeholder="Arrendatario..." disabled required>

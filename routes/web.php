@@ -20,7 +20,7 @@ Auth::routes();
 
 /*Rutas privadas solo para usuarios autenticados*/
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', 'DashboardController@index');
+    Route::get('/', 'DashboardController@index')->name('dashboard');
 
     //Catalogo Arrendador
     Route::resource('catalogos/arrendador', 'Backend\LessorController');

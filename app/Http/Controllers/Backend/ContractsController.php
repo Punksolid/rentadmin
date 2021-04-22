@@ -27,8 +27,8 @@ class ContractsController extends Controller
     }
 
     public function create(){
-        $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();;
-        $arrendatario = Lessee::orderBy('apellido_paterno', 'asc')->get();;
+        $arrendador = Lessor::orderBy('apellido_paterno', 'asc')->get();
+        $arrendatario = Lessee::orderBy('apellido_paterno', 'asc')->get();
         $properties_availables = Property::availables()->get();
 
         return view('contrato.create', [
@@ -40,7 +40,6 @@ class ContractsController extends Controller
 
     public function store(ContractRequest $request){
         $data = $request->all();
-        $duracion = $data['duracion_contrato'];
         /** @var Contract $contrato */
         $contrato = Contract::create($data);
 
@@ -58,38 +57,35 @@ class ContractsController extends Controller
 
     public function edit(Contract $contrato){
         $contract = $contrato;
-
         $dates = FechaContrato::where('id', $contract->id)->get();
+        $periods = $contract->periods()->get(['fecha_inicio','fecha_fin','cantidad']);
 
-        return view('contrato.edit', ['contrato' => $contract, 'fechas' => $dates]);
+        $periods->transform(function($period) {
+            $period->quantity = $period->cantidad;
+            unset($period->cantidad);
+
+            return $period;
+        });
+
+        return view('contrato.edit', [
+            'contrato' => $contract,
+            'fechas' => $dates,
+            'periods' => $periods->toJson(),
+            'years' => $contract->periods->count()
+        ]);
     }
 
-    public function update(Request $request, $id){
-        $data = $request->all();
-        $x = $data['duracion_contrato'];
-        Contract::findOrFail($id)->update($data);
-        $contador = FechaContrato::where('id_contrato', $id)->get();
-        $num_fechas = count($contador);
-        $duracion = ($x-$num_fechas);
+    public function update(ContractRequest $request, $id){
+        /** @var Contract $contract */
+        $contract = tap(Contract::findOrFail($id))->update($request->all());
 
-        foreach ($contador as $c){
-            $id_fechas = $c->id_fechas_contrato;
-            $fecha_crear = FechaContrato::findOrFail($id_fechas);
-            $crear['fecha_inicio'] = $data['fec_ini'.$id_fechas];
-            $crear['fecha_fin'] = $data['fec_fin'.$id_fechas];
-            $crear['cantidad'] = $data['canti'.$id_fechas];
-            $fecha_crear->update($crear);
-        }
-
-        if (isset($data['fecha_inicio1'])){
-            for ($i = 1; $i<=$duracion; $i++){
-                $fecha['id_contrato'] = $id;
-                $fecha['fecha_inicio'] = $data['fecha_inicio'.$i];
-                $fecha['fecha_fin'] = $data['fecha_fin'.$i];
-                $fecha['cantidad'] = $data['cantidad'.$i];
-                FechaContrato::create($fecha);
+        $contract->periods()->delete();
+        if ($request->has('periods')) {
+            foreach ($request->get('periods') as $period) {
+                $contract->periods()->create($period);
             }
         }
+
         return Redirect::to('contrato');
     }
 

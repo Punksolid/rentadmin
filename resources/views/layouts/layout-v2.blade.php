@@ -103,38 +103,16 @@
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+{{--                            <li class="user-header">--}}
+{{--                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">--}}
 
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
+{{--                                <p>--}}
+{{--                                    Alexander Pierce - Web Developer--}}
+{{--                                    <small>Member since Nov. 2012</small>--}}
+{{--                                </p>--}}
+{{--                            </li>--}}
                             <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
                             <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
@@ -213,10 +191,10 @@
                 @yield('page_title')
                 <small>@yield('page_description')</small>
             </h1>
-{{--            <ol class="breadcrumb">--}}
-{{--                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>--}}
-{{--                <li class="active">Here</li>--}}
-{{--            </ol>--}}
+            <ol class="breadcrumb">
+                <li><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                @yield('breadcrumb')
+            </ol>
         </section>
 
         <!-- Main content -->
@@ -237,7 +215,7 @@
         <div class="pull-right hidden-xs">
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2020 <a href="{{ url('/') }}">{{ config('app.name') }}</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2021 <a href="{{ url('/') }}">{{ config('app.name') }}</a>.</strong> All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->
