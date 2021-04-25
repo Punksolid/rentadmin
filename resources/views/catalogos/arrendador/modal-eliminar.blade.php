@@ -1,5 +1,4 @@
 
-
 <div class="modal fade modal-slide-in-right" aria-hidden="true" role="dialog" tabindex="-1" id="modal-eliminar-email{{optional($email ?? null)->id_email}}">
     {{Form::Open(array('url'=>array('catalogos/arrendador/email', optional($email ?? null)->id_email),'method'=>'delete'))}}
     <div class="modal-dialog">

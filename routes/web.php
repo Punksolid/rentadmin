@@ -108,7 +108,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('configuracion', 'Backend\ConfiguracionController');
 
     //Phones
-    Route::resource('phones', 'PhonesController')->only(['destroy']);
+    Route::get('phones/{phone}/destroy', 'PhonesController@destroy')->name('phones.destroy'); //@todo it is wrong to use GET to destroy workaround
+//    Route::resource('phones', 'PhonesController')->only(['destroy']);
 });
 
 use Illuminate\Support\Facades\Mail;

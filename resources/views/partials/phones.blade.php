@@ -1,39 +1,44 @@
 <label for="telefono">Telefono &nbsp;&nbsp;
-    <a
-            data-target="#modal-add-phone"
-            data-toggle="modal"
-            data-owner-type="{{ $type }}"
-            data-id="{{ $id }}">
+    <a data-target="#modal-add-phone"
+       data-toggle="modal"
+       data-owner-type="{{ $type }}"
+       data-id="{{ $id }}">
         <button class="btn-sm btn-success">Añadir</button>
     </a>
-</label><br>
+</label>
 <div id="listas">
-    {{--                    @var $tel is collection of phones of arrendatario(lessee) --}}
     @forelse($phones as $phone)
-            <input type="text"
-                   data-mask="(000) 000 0000"
-                   onkeypress="return justNumbers(event)"
-                   class="mascara"
-                   name="phones[{{$phone->id_telefono}}][number]"
-                   value="{{$phone->telefono}}"
-                   placeholder="Telefono..."
-                   required>&nbsp;
-            <input id="desc" type="text"
-                     value="{{$phone->descripcion}}"
-                     name="phones[{{$phone->id_telefono}}][description]" placeholder="Descripcion..."
-                     required>&nbsp;
+{{--        <form action="{{ route('phones.destroy', [$phone->id_telefono]) }}" method="POST" class="form-inline">--}}
+{{--            @method('DELETE')--}}
+{{--            @csrf--}}
+            <div class="input-group">
+                <input type="text"
+                       data-mask="(000) 000 0000"
+                       onkeypress="return justNumbers(event)"
+                       class="mascara"
+                       name="phones[{{$phone->id_telefono}}][number]"
+                       value="{{$phone->telefono}}"
+                       placeholder="Telefono..."
+                       required>
+                <input id="desc" type="text"
+                       value="{{$phone->descripcion}}"
+                       name="phones[{{$phone->id_telefono}}][description]" placeholder="Descripcion..."
+                       required>
+                <a href="{{ route('phones.destroy', [$phone->id_telefono]) }}" >
+                    <button
+                        id="delete-phone"
+                        type="button"
+                        class="btn btn-danger"
+                        data-toggle="modal"
+                        data-target="#modal-delete-phone"
+                        data-phone="{{ $phone->id_telefono }}">
+                        Eliminar
+                    </button>
+                </a>
+            </div>
+{{--        </form>--}}
 
-            <button
-                id="delete-phone"
-                type="button"
-                class="btn btn-danger"
-                data-toggle="modal"
-                data-target="#modal-delete-phone"
-                data-phone="{{ $phone->id_telefono }}">
-                Eliminar
-            </button>
 
-            <br>
     @empty
         No hay telefonos registrados
     @endforelse

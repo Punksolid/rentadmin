@@ -9,8 +9,8 @@ class CatTelefono extends Model
 {
     use SoftDeletes;
 
-    const ACTIVE_STATUS = 1;
-    const INACTIVE_STATUS = 0;
+    public const ACTIVE_STATUS = 1;
+    public const INACTIVE_STATUS = 0;
 
     protected $table = 'phone_numbers';
 

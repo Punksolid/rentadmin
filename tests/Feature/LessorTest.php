@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\CatBanco;
 use App\Models\Lessee;
 use App\Models\Lessor;
+use Exception;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -46,22 +47,41 @@ class LessorTest extends TestCase
 
     }
 
-    public function testALessorCanBeRegisteredWithPhoneData()
+    /**
+     * @dataProvider phones
+     */
+    public function testALessorCanBeRegisteredWithPhoneData($phones): void
     {
-
         $this->withoutExceptionHandling();
         /** @var Lessor $lessor */
         $lessor = factory(Lessor::class)->raw();
-        $lessor['phone_number'][] = [
-            'telefono' => $this->faker->randomNumber(8),
-            'descripcion' => $this->faker->word
-        ];
+        $lessor['phone_number'] = $phones;
+
         $call = $this->call('POST', route('arrendador.store'), $lessor);
 
         $call->assertRedirect(route('arrendador.index'));
         $this->assertDatabaseHas('lessors', [
             'nombre' => $lessor['nombre']
         ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function phones()
+    {
+        return [
+            'with one phone and description' => [
+                [
+                    ['telefono' => random_int(11111111, 88888888), 'descripcion' => 'a description']
+                ]
+            ],
+            'with only phone' => [
+                [
+                    ['telefono' => random_int(22222222, 22222229)],
+                ]
+            ]
+        ];
     }
 
     public function testListsLessorsActiveByDefault()
@@ -152,14 +172,14 @@ class LessorTest extends TestCase
         $bank_data = factory(CatBanco::class)->raw();
 
         $form = $new_lessor;
-        $form['bank_accounts_section'] =  true;
+        $form['bank_accounts_section'] = true;
         $form['bank_accounts'] = [
-            'bancoid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['banco'],
-            'cuentaid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['cuenta'],
-            'clabeid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['clabe'],
-            'nombre_titularid'.$lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['nombre_titular'],
-        ] ;
-        $call = $this->call('PUT',route('arrendador.update', [$lessor->id]), $form);
+            'bancoid' . $lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['banco'],
+            'cuentaid' . $lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['cuenta'],
+            'clabeid' . $lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['clabe'],
+            'nombre_titularid' . $lessor->refresh()->bankAccounts->first()->id_banco => $bank_data['nombre_titular'],
+        ];
+        $call = $this->call('PUT', route('arrendador.update', [$lessor->id]), $form);
 
         $call->assertRedirect(route('arrendador.index'));
         $this->assertDatabaseHas('lessors', [

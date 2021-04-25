@@ -187,7 +187,7 @@ class LessorController extends Controller
     private function addPhones(Phoneable $lessor, array $phone_numbers)
     {
         foreach ($phone_numbers as $phone_number) {
-            $lessor->addPhoneData($phone_number['telefono'], $phone_number['descripcion'], 1 );
+            $lessor->addPhoneData($phone_number['telefono'], $phone_number['descripcion'] ?? '', 1 );
         }
     }
 

@@ -73,7 +73,10 @@
         <label for="telefono">Teléfono &nbsp;&nbsp;<button id="add_field" class="btn-sm btn-success">Añadir</button> </label><br>
         <div id="listas">
             <div class="formulario-dos" style="display: inline-flex">
-                <input id="masc-tel" type="text" data-mask="(000) 000 0000" name="phone_number[0][telefono]" onkeypress="return justNumbers(event)" placeholder="Telefono..." class="form-control" required>&nbsp;<input id="desc" class="form-control" type="text" name="phone_number[0][descripcion]" placeholder="Descripcion..." required>
+                <input class="form-control" data-mask="(000) 000 0000" id="masc-tel" name="phone_number[0][telefono]"
+                       onkeypress="return justNumbers(event)" placeholder="Telefono..." required type="text">&nbsp;
+                <input class="form-control" id="desc" name="phone_number[0][descripcion]" placeholder="Descripcion..."
+                       required type="text">
             </div>
             <br>
         </div>
