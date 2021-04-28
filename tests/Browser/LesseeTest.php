@@ -24,7 +24,7 @@ class LesseeTest extends DuskTestCase
         /** @var Lessee $lessee */
         $lessee = factory(Lessee::class)->raw();
         $email = $this->faker->email;
-        $phone = $this->faker->numerify('##########');
+        $phone = '6677149295';
 
         $this->browse(function (Browser $browser) use ($lessee, $email, $phone){
             $browser->loginAs(User::find(1));
@@ -34,6 +34,7 @@ class LesseeTest extends DuskTestCase
             $browser->type('apellido_paterno', $lessee['apellido_paterno']);
             $browser->type('apellido_materno', $lessee['apellido_materno']);
             $browser->typeSlowly('phone_number[0][telefono]', $phone);
+            $browser->assertInputValue('phone_number[0][telefono]', '(667) 714 9295');
             $browser->type('email[]', $email);
             $browser->type('calle' , $lessee['calle']);
             $browser->type('colonia' , $lessee['colonia']);
