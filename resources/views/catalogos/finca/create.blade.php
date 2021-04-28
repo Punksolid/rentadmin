@@ -19,7 +19,7 @@
             @csrf
             <div class="form-group">
                 <label for="finca_arrendada">Nombre</label>
-                <input class="verificar form-control" name="name" onkeyup="this.value = this.value.toUpperCase();"
+                <input class="verificar form-control" name="name" style="text-transform:uppercase"
                        placeholder="Inmueble..."
                        required type="text" value="{{ old('name') }}">
             </div>
@@ -68,13 +68,13 @@
             <div class="form-group">
                 <label for="descripcion">Direccion</label>
                 <input type="text" value="{{ old('address') }}" name="address" class="form-control verificar"
-                       onkeyup="this.value = this.value.toUpperCase();" required placeholder="Direccion...">
+                       style="text-transform:uppercase" required placeholder="Direccion...">
             </div>
             <div class="form-group">
                 <label for="descripcion">Geolocalizacion</label>
                 <input type="text" value="{{ old("geolocation") }}" name="geolocation"
                        class="form-control verificar"
-                       onkeyup="this.value = this.value.toUpperCase();" required
+                       style="text-transform:uppercase" required
                        placeholder="Geolocalizacion...">
             </div>
 

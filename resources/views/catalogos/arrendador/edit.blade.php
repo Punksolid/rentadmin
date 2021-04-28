@@ -15,15 +15,15 @@
     {{Form::token()}}
     <div class="formulario-tres">
         <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{$arrendador->nombre}}" placeholder="Nombre..." required>
+        <input type="text" name="nombre" class="form-control" style="text-transform:uppercase" value="{{$arrendador->nombre}}" placeholder="Nombre..." required>
     </div>
     <div class="formulario-tres">
         <label for="apellido_paterno">Apellido Paterno</label>
-        <input type="text" name="apellido_paterno" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->apellido_paterno }}" placeholder="Apellido Paterno..." required>
+        <input type="text" name="apellido_paterno" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->apellido_paterno }}" placeholder="Apellido Paterno..." required>
     </div>
     <div class="formulario-tres">
         <label for="apellido_materno">Apellido Materno</label>
-        <input type="text" name="apellido_materno" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->apellido_materno }}" placeholder="Apellido Materno..." required>
+        <input type="text" name="apellido_materno" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->apellido_materno }}" placeholder="Apellido Materno..." required>
     </div>
     <hr>
 
@@ -33,27 +33,27 @@
     </div>
     <div class="formulario-tres">
         <label for="calle">Calle</label>
-        <input type="text" name="calle" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->calle }}" placeholder="Calle..." required>
+        <input type="text" name="calle" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->calle }}" placeholder="Calle..." required>
     </div>
     <div class="formulario-tres">
         <label for="numero_ext">Numero Exterior</label>
-        <input type="text" name="numero_ext" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_ext }}" placeholder="Numero Exterior..." required>
+        <input type="text" name="numero_ext" onkeypress="return justNumbers(event)" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->numero_ext }}" placeholder="Numero Exterior..." required>
     </div>
     <div class="formulario-tres">
         <label for="numero_int">Numero Interior</label>
-        <input type="text" name="numero_int" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_int }}" placeholder="Numero Interior...">
+        <input type="text" name="numero_int" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->numero_int }}" placeholder="Numero Interior...">
     </div>
     <div class="formulario-tres">
         <label for="colonia">Colonia</label>
-        <input type="text" name="colonia" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->colonia }}" placeholder="Colonia..." required>
+        <input type="text" name="colonia" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->colonia }}" placeholder="Colonia..." required>
     </div>
     <div class="formulario-tres">
         <label for="estado">Estado</label>
-        <input type="text" name="estado" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->estado }}" placeholder="Estado..." required>
+        <input type="text" name="estado" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->estado }}" placeholder="Estado..." required>
     </div>
     <div class="formulario-tres">
         <label for="ciudad">Ciudad</label>
-        <input type="text" name="ciudad" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->ciudad }}" placeholder="Ciudad..." required>
+        <input type="text" name="ciudad" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->ciudad }}" placeholder="Ciudad..." required>
     </div>
     <div class="formulario-tres">
         <label for="codigo_postal">Codigo Postal</label>
@@ -90,27 +90,27 @@
     <div id="facturacion-check">
         <div class="formulario-tres">
             <label for="calle_facturacion">Calle</label>
-            <input type="text" name="calle_facturacion" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->calle_facturacion }}" placeholder="Calle...">
+            <input type="text" name="calle_facturacion" class="form-control factura-check" style="text-transform:uppercase" value="{{ $arrendador->calle_facturacion }}" placeholder="Calle...">
         </div>
         <div class="formulario-tres">
             <label for="numero_ext_facturacion">Numero Exterior</label>
-            <input type="text" name="numero_ext_facturacion" onkeypress="return justNumbers(event)" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_ext_facturacion }}" placeholder="Numero Exterior...">
+            <input type="text" name="numero_ext_facturacion" onkeypress="return justNumbers(event)" class="form-control factura-check" style="text-transform:uppercase" value="{{ $arrendador->numero_ext_facturacion }}" placeholder="Numero Exterior...">
         </div>
         <div class="formulario-tres">
             <label for="numero_int_facturacion">Numero Interior</label>
-            <input type="text" name="numero_int_facturacion" onkeypress="return justNumbers(event)" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->numero_int_facturacion }}" placeholder="Numero Interior...">
+            <input type="text" name="numero_int_facturacion" onkeypress="return justNumbers(event)" class="form-control factura-check" style="text-transform:uppercase" value="{{ $arrendador->numero_int_facturacion }}" placeholder="Numero Interior...">
         </div>
         <div class="formulario-tres">
             <label for="colonia_facturacion">Colonia</label>
-            <input type="text" name="colonia_facturacion" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->colonia_facturacion }}" placeholder="Colonia...">
+            <input type="text" name="colonia_facturacion" class="form-control factura-check" style="text-transform:uppercase" value="{{ $arrendador->colonia_facturacion }}" placeholder="Colonia...">
         </div>
         <div class="formulario-tres">
             <label for="estado_facturacion">Estado</label>
-            <input type="text" name="estado_facturacion" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->estado_facturacion }}" placeholder="Estado...">
+            <input type="text" name="estado_facturacion" class="form-control factura-check" style="text-transform:uppercase" value="{{ $arrendador->estado_facturacion }}" placeholder="Estado...">
         </div>
         <div class="formulario-tres">
             <label for="ciudad_facturacion">Ciudad</label>
-            <input type="text" name="ciudad_facturacion" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->ciudad_facturacion }}" placeholder="Ciudad...">
+            <input type="text" name="ciudad_facturacion" class="form-control factura-check" style="text-transform:uppercase" value="{{ $arrendador->ciudad_facturacion }}" placeholder="Ciudad...">
         </div>
         <div class="formulario-tres">
             <label for="codigo_postal_facturacion">Codigo Postal</label>
@@ -118,11 +118,11 @@
         </div>
         <div class="formulario-tres">
             <label for="entre_calles_facturacion">Entre Calles</label>
-            <input type="text" name="entre_calles_facturacion" class="form-control factura-check" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->entre_calles_facturacion }}" placeholder="Entre Calles...">
+            <input type="text" name="entre_calles_facturacion" class="form-control factura-check" style="text-transform:uppercase" value="{{ $arrendador->entre_calles_facturacion }}" placeholder="Entre Calles...">
         </div>
         <div class="formulario-tres">
             <label for="rfc">RFC</label>
-            <input type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->rfc }}" placeholder="RFC..." >
+            <input type="text" name="rfc" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->rfc }}" placeholder="RFC..." >
         </div>
     </div>
     <hr>
@@ -136,7 +136,7 @@
             @foreach($banco as $bank_account)
                 <div id="banc" class="form-group" style="display: inline-flex; align-items: baseline">
                     @if(count($banco) > 1)
-                        <input class="form-control bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bank_accounts[bancoid{{$bank_account->id_banco}}]" value="{{$bank_account->banco}}" placeholder="Banco...">
+                        <input class="form-control bancoin" style="margin-bottom: 4px" type="text" style="text-transform:uppercase" name="bank_accounts[bancoid{{$bank_account->id_banco}}]" value="{{$bank_account->banco}}" placeholder="Banco...">
                         <input class="form-control bancoin" id="cc" type="text" name="bank_accounts[cuentaid{{$bank_account->id_banco}}]" value="{{ $bank_account->cuenta }}" placeholder="Cuenta...">
                         <input class="form-control  bancoin"
                                id="cc"
@@ -147,11 +147,11 @@
                                type="text"
                                value="{{$bank_account->clabe}}">
                         <input class="form-control  bancoin" id="cc" name="bank_accounts[nombre_titularid{{$bank_account->id_banco}}]"
-                               onkeyup="this.value = this.value.toUpperCase();"
+                               style="text-transform:uppercase"
                                placeholder="Nombre del Titular..."
                                type="text" value="{{$bank_account->nombre_titular}}">&nbsp;<a data-target="#modal-eliminar-banco{{$bank_account->id_banco}}" data-toggle="modal"><button type="button" style="margin-bottom: 4px" class="btn btn-danger btn-sm">-</button></a>
                     @else
-                        <input class="form-control bancoin" style="margin-bottom: 4px" type="text" onkeyup="this.value = this.value.toUpperCase();" name="bank_accounts[bancoid{{$bank_account->id_banco}}]" value="{{$bank_account->banco}}" placeholder="Banco...">
+                        <input class="form-control bancoin" style="margin-bottom: 4px" type="text" style="text-transform:uppercase" name="bank_accounts[bancoid{{$bank_account->id_banco}}]" value="{{$bank_account->banco}}" placeholder="Banco...">
                         <input class="form-control bancoin" id="cc" type="text" name="bank_accounts[cuentaid{{$bank_account->id_banco}}]" value="{{$bank_account->cuenta}}" placeholder="Cuenta...">
                         <input class="form-control bancoin"
                                id="cc"
@@ -159,7 +159,7 @@
                                name="bank_accounts[clabeid{{$bank_account->id_banco}}]"
                                onkeypress="return justNumbers(event)" placeholder="Clabe..."
                                type="text" value="{{$bank_account->clabe}}">
-                        <input class="form-control bancoin" id="cc" type="text" name="bank_accounts[nombre_titularid{{$bank_account->id_banco}}]" onkeyup="this.value = this.value.toUpperCase();" value="{{$bank_account->nombre_titular}}" placeholder="Nombre del Titular...">
+                        <input class="form-control bancoin" id="cc" type="text" name="bank_accounts[nombre_titularid{{$bank_account->id_banco}}]" style="text-transform:uppercase" value="{{$bank_account->nombre_titular}}" placeholder="Nombre del Titular...">
                     @endif
                 </div>
                 <br>
@@ -170,7 +170,7 @@
 
     <div class="formulario-dos">
         <label for="admon">Admon</label>
-        <input type="text" name="admon" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendador->admon }}" placeholder="Admon..." required>
+        <input type="text" name="admon" class="form-control" style="text-transform:uppercase" value="{{ $arrendador->admon }}" placeholder="Admon..." required>
     </div>
     <hr>
 

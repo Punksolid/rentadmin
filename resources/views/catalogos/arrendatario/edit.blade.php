@@ -22,15 +22,15 @@
             {{Form::token()}}
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" class="form-control" value="{{$arrendatario->nombre}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre..." required>
+                <input type="text" name="nombre" class="form-control" value="{{$arrendatario->nombre}}" style="text-transform:uppercase" placeholder="Nombre..." required>
             </div>
             <div class="form-group">
                 <label for="apellido_paterno">Apellido Paterno</label>
-                <input type="text" name="apellido_paterno" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendatario->apellido_paterno }}" placeholder="Apellido Paterno..." required>
+                <input type="text" name="apellido_paterno" class="form-control" style="text-transform:uppercase" value="{{ $arrendatario->apellido_paterno }}" placeholder="Apellido Paterno..." required>
             </div>
             <div class="form-group">
                 <label for="apellido_materno">Apellido Materno</label>
-                <input type="text" name="apellido_materno" class="form-control" onkeyup="this.value = this.value.toUpperCase();" value="{{ $arrendatario->apellido_materno }}" placeholder="Apellido Materno..." required>
+                <input type="text" name="apellido_materno" class="form-control" style="text-transform:uppercase" value="{{ $arrendatario->apellido_materno }}" placeholder="Apellido Materno..." required>
             </div>
 
             <div class="form-group">
@@ -73,35 +73,35 @@
             </div>
             <div class="form-group">
                 <label for="calle">Calle</label>
-                <input type="text" name="calle" value="{{ $arrendatario->calle }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Calle..." required>
+                <input type="text" name="calle" value="{{ $arrendatario->calle }}" style="text-transform:uppercase" class="form-control" placeholder="Calle..." required>
             </div>
             <div class="form-group">
                 <label for="numero_ext">Numero Exterior</label>
-                <input type="text" name="numero_ext" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_ext }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Exterior..." required>
+                <input type="text" name="numero_ext" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_ext }}" style="text-transform:uppercase" class="form-control" placeholder="Numero Exterior..." required>
             </div>
             <div class="form-group">
                 <label for="numero_int">Numero Interior</label>
-                <input type="text" name="numero_int" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_int }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
+                <input type="text" name="numero_int" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_int }}" style="text-transform:uppercase" class="form-control" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia">Colonia</label>
-                <input type="text" name="colonia" value="{{ $arrendatario->colonia }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Colonia..." required>
+                <input type="text" name="colonia" value="{{ $arrendatario->colonia }}" style="text-transform:uppercase" class="form-control" placeholder="Colonia..." required>
             </div>
             <div class="form-group">
                 <label for="estado">Estado</label>
-                <input type="text" name="estado" value="{{ $arrendatario->estado }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Estado..." required>
+                <input type="text" name="estado" value="{{ $arrendatario->estado }}" style="text-transform:uppercase" class="form-control" placeholder="Estado..." required>
             </div>
             <div class="form-group">
                 <label for="ciudad">Ciudad</label>
-                <input type="text" name="ciudad" value="{{ $arrendatario->ciudad }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Ciudad..." required>
+                <input type="text" name="ciudad" value="{{ $arrendatario->ciudad }}" style="text-transform:uppercase" class="form-control" placeholder="Ciudad..." required>
             </div>
             <div class="form-group">
                 <label for="codigo_postal">Codigo Postal</label>
-                <input type="number" name="codigo_postal" value="{{ $arrendatario->codigo_postal }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Codigo Postal..." required>
+                <input type="number" name="codigo_postal" value="{{ $arrendatario->codigo_postal }}" style="text-transform:uppercase" class="form-control" placeholder="Codigo Postal..." required>
             </div>
             <div class="form-group">
                 <label for="entre_calles">Entre Calles</label>
-                <input type="text" name="entre_calles" value="{{ $arrendatario->entre_calles }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Entre Calles...">
+                <input type="text" name="entre_calles" value="{{ $arrendatario->entre_calles }}" style="text-transform:uppercase" class="form-control" placeholder="Entre Calles...">
             </div>
 
             <div class="form-group">
@@ -109,40 +109,40 @@
             </div>
             <div class="form-group">
                 <label for="calle_trabajo">Calle</label>
-                <input type="text" name="calle_trabajo" value="{{ $arrendatario->calle_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Calle..." required>
+                <input type="text" name="calle_trabajo" value="{{ $arrendatario->calle_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Calle..." required>
             </div>
             <div class="form-group">
                 <label for="numero_ext_trabajo">Numero Exterior</label>
-                <input type="text" name="numero_ext_trabajo" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_ext_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Exterior..." required>
+                <input type="text" name="numero_ext_trabajo" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_ext_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Numero Exterior..." required>
             </div>
             <div class="form-group">
                 <label for="numero_int_trabajo">Numero Interior</label>
-                <input type="text" name="numero_int_trabajo" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_int_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
+                <input type="text" name="numero_int_trabajo" onkeypress="return justNumbers(event)" value="{{ $arrendatario->numero_int_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia_trabajo">Colonia</label>
-                <input type="text" name="colonia_trabajo" value="{{ $arrendatario->colonia_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Colonia..." required>
+                <input type="text" name="colonia_trabajo" value="{{ $arrendatario->colonia_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Colonia..." required>
             </div>
             <div class="form-group">
                 <label for="estado_trabajo">Estado</label>
-                <input type="text" name="estado_trabajo" value="{{ $arrendatario->estado_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Estado..." required>
+                <input type="text" name="estado_trabajo" value="{{ $arrendatario->estado_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Estado..." required>
             </div>
             <div class="form-group">
                 <label for="ciudad_trabajo">Ciudad</label>
-                <input type="text" name="ciudad_trabajo" value="{{ $arrendatario->ciudad_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Ciudad..." required>
+                <input type="text" name="ciudad_trabajo" value="{{ $arrendatario->ciudad_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Ciudad..." required>
             </div>
             <div class="form-group">
                 <label for="codigo_postal_trabajo">Codigo Postal</label>
-                <input type="number" name="codigo_postal_trabajo" value="{{ $arrendatario->codigo_postal_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Codigo Postal..." required>
+                <input type="number" name="codigo_postal_trabajo" value="{{ $arrendatario->codigo_postal_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Codigo Postal..." required>
             </div>
             <div class="form-group">
                 <label for="entre_calles_trabajo">Entre Calles</label>
-                <input type="text" name="entre_calles_trabajo" value="{{ $arrendatario->entre_calles_trabajo }}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Entre Calles...">
+                <input type="text" name="entre_calles_trabajo" value="{{ $arrendatario->entre_calles_trabajo }}" style="text-transform:uppercase" class="form-control" placeholder="Entre Calles...">
             </div>
 
             <div class="form-group">
                 <label for="puesto">Puesto</label>
-                <input type="text" name="puesto" class="form-control" value="{{ $arrendatario->puesto }}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Puesto..." required>
+                <input type="text" name="puesto" class="form-control" value="{{ $arrendatario->puesto }}" style="text-transform:uppercase" placeholder="Puesto..." required>
             </div>
 
             <div class="form-group">
@@ -151,15 +151,15 @@
             <div id="guarantor-block">
                 <div class="form-group">
                     <label for="guarantor[nombre]">Nombre</label>
-                    <input type="text" name="guarantor[nombre]" class="form-control" value="{{ optional($fiador)->nombre}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre..." >
+                    <input type="text" name="guarantor[nombre]" class="form-control" value="{{ optional($fiador)->nombre}}" style="text-transform:uppercase" placeholder="Nombre..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[apellido_paterno]">Apellido Paterno</label>
-                    <input type="text" name="guarantor[apellido_paterno]" class="form-control" value="{{ optional($fiador)->apellido_paterno}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno..." >
+                    <input type="text" name="guarantor[apellido_paterno]" class="form-control" value="{{ optional($fiador)->apellido_paterno}}" style="text-transform:uppercase" placeholder="Apellido Paterno..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[apellido_materno]">Apellido Materno</label>
-                    <input type="text" name="guarantor[apellido_materno]" class="form-control" value="{{ optional($fiador)->apellido_materno}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." >
+                    <input type="text" name="guarantor[apellido_materno]" class="form-control" value="{{ optional($fiador)->apellido_materno}}" style="text-transform:uppercase" placeholder="Apellido Materno..." >
                 </div>
                 <div class="form-group">
                     <label for="identity">Foto</label>
@@ -189,35 +189,35 @@
                 </div>
                 <div class="form-group">
                     <label for="guarantor[calle]">Calle</label>
-                    <input type="text" name="guarantor[calle]" class="form-control" value="{{ optional($fiador)->calle}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." >
+                    <input type="text" name="guarantor[calle]" class="form-control" value="{{ optional($fiador)->calle}}" style="text-transform:uppercase" placeholder="Calle..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_ext]">Numero Exterior</label>
-                    <input type="text" name="guarantor[numero_ext]" class="form-control" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_ext}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." >
+                    <input type="text" name="guarantor[numero_ext]" class="form-control" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_ext}}" style="text-transform:uppercase" placeholder="Numero Exterior..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_int]">Numero Interior</label>
-                    <input type="text" name="guarantor[numero_int]" class="form-control" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_int}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                    <input type="text" name="guarantor[numero_int]" class="form-control" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_int}}" style="text-transform:uppercase" placeholder="Numero Interior...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[colonia]">Colonia</label>
-                    <input type="text" name="guarantor[colonia]" class="form-control" value="{{ optional($fiador)->colonia}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." >
+                    <input type="text" name="guarantor[colonia]" class="form-control" value="{{ optional($fiador)->colonia}}" style="text-transform:uppercase" placeholder="Colonia..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[estado]">Estado</label>
-                    <input type="text" name="guarantor[estado]" class="form-control" value="{{ optional($fiador)->estado}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." >
+                    <input type="text" name="guarantor[estado]" class="form-control" value="{{ optional($fiador)->estado}}" style="text-transform:uppercase" placeholder="Estado..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[ciudad]">Ciudad</label>
-                    <input type="text" name="guarantor[ciudad]" class="form-control" value="{{ optional($fiador)->ciudad}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." >
+                    <input type="text" name="guarantor[ciudad]" class="form-control" value="{{ optional($fiador)->ciudad}}" style="text-transform:uppercase" placeholder="Ciudad..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[codigo_postal]">Codigo Postal</label>
-                    <input type="number" name="guarantor[codigo_postal]" class="form-control" value="{{ optional($fiador)->codigo_postal}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Codigo Postal..." >
+                    <input type="number" name="guarantor[codigo_postal]" class="form-control" value="{{ optional($fiador)->codigo_postal}}" style="text-transform:uppercase" placeholder="Codigo Postal..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[entre_calles]">Entre Calles</label>
-                    <input type="text" name="guarantor[entre_calles]" class="form-control" value="{{ optional($fiador)->entre_calles}}" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                    <input type="text" name="guarantor[entre_calles]" class="form-control" value="{{ optional($fiador)->entre_calles}}" style="text-transform:uppercase" placeholder="Entre Calles...">
                 </div>
 
                 <div class="form-group">
@@ -225,35 +225,35 @@
                 </div>
                 <div class="form-group">
                     <label for="guarantor[calle_trabajo]">Calle</label>
-                    <input type="text" name="guarantor[calle_trabajo]" value="{{ optional($fiador)->calle_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Calle..." >
+                    <input type="text" name="guarantor[calle_trabajo]" value="{{ optional($fiador)->calle_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Calle..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_ext_trabajo]">Numero Exterior</label>
-                    <input type="text" name="guarantor[numero_ext_trabajo]" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_ext_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Exterior..." >
+                    <input type="text" name="guarantor[numero_ext_trabajo]" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_ext_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Numero Exterior..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_int_trabajo]">Numero Interior</label>
-                    <input type="text" name="guarantor[numero_int_trabajo]" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_int_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
+                    <input type="text" name="guarantor[numero_int_trabajo]" onkeypress="return justNumbers(event)" value="{{ optional($fiador)->numero_int_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Numero Interior...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[colonia_trabajo]">Colonia</label>
-                    <input type="text" name="guarantor[colonia_trabajo]" value="{{ optional($fiador)->colonia_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Colonia..." >
+                    <input type="text" name="guarantor[colonia_trabajo]" value="{{ optional($fiador)->colonia_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Colonia..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[estado_trabajo]">Estado</label>
-                    <input type="text" name="guarantor[estado_trabajo]" value="{{ optional($fiador)->estado_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Estado..." >
+                    <input type="text" name="guarantor[estado_trabajo]" value="{{ optional($fiador)->estado_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Estado..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[ciudad_trabajo]">Ciudad</label>
-                    <input type="text" name="guarantor[ciudad_trabajo]" value="{{ optional($fiador)->ciudad_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Ciudad..." >
+                    <input type="text" name="guarantor[ciudad_trabajo]" value="{{ optional($fiador)->ciudad_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Ciudad..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[codigo_postal_trabajo]">Codigo Postal</label>
-                    <input type="number" name="guarantor[codigo_postal_trabajo]" value="{{ optional($guarantor)->codigo_postal_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Codigo Postal..." >
+                    <input type="number" name="guarantor[codigo_postal_trabajo]" value="{{ optional($guarantor)->codigo_postal_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Codigo Postal..." >
                 </div>
                 <div class="form-group">
                     <label for="guarantor[entre_calles_trabajo]">Entre Calles</label>
-                    <input type="text" name="guarantor[entre_calles_trabajo]" value="{{ optional($fiador)->entre_calles_trabajo}}" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Entre Calles...">
+                    <input type="text" name="guarantor[entre_calles_trabajo]" value="{{ optional($fiador)->entre_calles_trabajo}}" style="text-transform:uppercase" class="form-control" placeholder="Entre Calles...">
                 </div>
             </div>
 

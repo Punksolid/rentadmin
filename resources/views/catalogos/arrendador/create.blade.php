@@ -19,18 +19,18 @@
     {{Form::token()}}
     <div class="form-group">
         <label for="nombre">Nombre: </label>
-        <input class="form-control" name="nombre" onkeyup="this.value = this.value.toUpperCase();"
+        <input class="form-control" name="nombre" style="text-transform:uppercase"
                placeholder="Nombre..." required type="text">
     </div>
     <div class="form-group">
         <label for="apellido_paterno">Apellido Paterno: </label>
         <input type="text" name="apellido_paterno" class="form-control"
-               onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno..." required>
+               style="text-transform:uppercase" placeholder="Apellido Paterno..." required>
     </div>
     <div class="form-group">
         <label for="apellido_materno">Apellido Materno: </label>
         <input type="text" name="apellido_materno" class="form-control"
-               onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." required>
+               style="text-transform:uppercase" placeholder="Apellido Materno..." required>
     </div>
     <hr>
 
@@ -38,27 +38,27 @@
     <div class="box-header with-border form-group"><h3 class="box-title">Domicilio</h3></div>
     <div class="form-group">
         <label for="calle">Calle: </label>
-        <input  type="text" name="calle" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." required>
+        <input  type="text" name="calle" class="form-control" style="text-transform:uppercase" placeholder="Calle..." required>
     </div>
     <div class="form-group">
         <label for="numero_ext">Numero Exterior: </label>
-        <input  type="text" name="numero_ext" onkeypress="return justNumbers(event)" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." required>
+        <input  type="text" name="numero_ext" onkeypress="return justNumbers(event)" class="form-control" style="text-transform:uppercase" placeholder="Numero Exterior..." required>
     </div>
     <div class="form-group">
         <label for="numero_int">Numero Interior: </label>
-        <input  type="text" name="numero_int" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
+        <input  type="text" name="numero_int" style="text-transform:uppercase" class="form-control" placeholder="Numero Interior...">
     </div>
     <div class="form-group">
         <label for="colonia">Colonia: </label>
-        <input  type="text" name="colonia" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Colonia..." required>
+        <input  type="text" name="colonia" style="text-transform:uppercase" class="form-control" placeholder="Colonia..." required>
     </div>
     <div class="form-group">
         <label for="estado">Estado: </label>
-        <input  type="text" name="estado" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Estado..." required>
+        <input  type="text" name="estado" style="text-transform:uppercase" class="form-control" placeholder="Estado..." required>
     </div>
     <div class="form-group">
         <label for="ciudad">Ciudad: </label>
-        <input  type="text" name="ciudad" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Ciudad..." required>
+        <input  type="text" name="ciudad" style="text-transform:uppercase" class="form-control" placeholder="Ciudad..." required>
     </div>
     <div class="form-group">
         <label for="codigo_postal">Codigo Postal: </label>
@@ -66,7 +66,7 @@
     </div>
     <div class="form-group">
         <label for="entre_calles">Entre Calles: </label>
-        <input  type="text" name="entre_calles" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+        <input  type="text" name="entre_calles" class="form-control" style="text-transform:uppercase" placeholder="Entre Calles...">
     </div>
     <hr>
     <div class="form-group">
@@ -99,27 +99,27 @@
     <div id="facturacion-check">
         <div class="form-group">
             <label for="calle_facturacion">Calle: </label>
-            <input  type="text" name="calle_facturacion" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Calle...">
+            <input  type="text" name="calle_facturacion" style="text-transform:uppercase" class="form-control" placeholder="Calle...">
         </div>
         <div class="form-group">
             <label for="numero_ext_facturacion">Numero Exterior: </label>
-            <input  type="text" name="numero_ext_facturacion" onkeypress="return justNumbers(event)" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Exterior...">
+            <input  type="text" name="numero_ext_facturacion" onkeypress="return justNumbers(event)" style="text-transform:uppercase" class="form-control" placeholder="Numero Exterior...">
         </div>
         <div class="form-group">
             <label for="numero_int_facturacion">Numero Interior: </label>
-            <input  type="text" name="numero_int_facturacion" onkeypress="return justNumbers(event)" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Numero Interior...">
+            <input  type="text" name="numero_int_facturacion" onkeypress="return justNumbers(event)" style="text-transform:uppercase" class="form-control" placeholder="Numero Interior...">
         </div>
         <div class="form-group">
             <label for="colonia_facturacion">Colonia: </label>
-            <input  type="text" name="colonia_facturacion" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Colonia...">
+            <input  type="text" name="colonia_facturacion" style="text-transform:uppercase" class="form-control" placeholder="Colonia...">
         </div>
         <div class="form-group">
             <label for="estado_facturacion">Estado: </label>
-            <input  type="text" name="estado_facturacion" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Estado...">
+            <input  type="text" name="estado_facturacion" style="text-transform:uppercase" class="form-control" placeholder="Estado...">
         </div>
         <div class="form-group">
             <label for="ciudad_facturacion">Ciudad: </label>
-            <input  type="text" name="ciudad_facturacion" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Ciudad...">
+            <input  type="text" name="ciudad_facturacion" style="text-transform:uppercase" class="form-control" placeholder="Ciudad...">
         </div>
         <div class="form-group">
             <label for="codigo_postal_facturacion">Codigo Postal: </label>
@@ -127,11 +127,11 @@
         </div>
         <div class="form-group">
             <label for="entre_calles_facturacion">Entre Calles: </label>
-            <input  type="text" name="entre_calles_facturacion" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Entre Calles...">
+            <input  type="text" name="entre_calles_facturacion" style="text-transform:uppercase" class="form-control" placeholder="Entre Calles...">
         </div>
         <div class="form-group">
             <label for="rfc">RFC: </label>
-            <input  type="text" name="rfc" class="form-control" onkeyup="this.value = this.value.toUpperCase();" placeholder="RFC..."><br>
+            <input  type="text" name="rfc" class="form-control" style="text-transform:uppercase" placeholder="RFC..."><br>
         </div>
     </div>
     <hr>
@@ -144,10 +144,10 @@
                         <button id="add_banco" class="btn-sm btn-success">Añadir</button>
 
                         <div id="basebanco" class="form-group" style="display: inline-flex; align-items: baseline">
-                            <input class="form-control" style="margin-bottom: 4px" type="text" name="banco1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Banco...">&nbsp;
+                            <input class="form-control" style="margin-bottom: 4px" type="text" name="banco1" style="text-transform:uppercase" placeholder="Banco...">&nbsp;
                             <input class="form-control" id="cc" type="text" onkeypress="return justNumbers(event)" name="cuenta1" placeholder="Cuenta...">&nbsp;
                             <input class="form-control" id="cc" type="text" maxlength="18" onkeypress="return justNumbers(event);" name="clabe1" placeholder="Clabe...">&nbsp;
-                            <input class="form-control" id="cc" type="text" name="nombre_titular1" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre del Titular...">
+                            <input class="form-control" id="cc" type="text" name="nombre_titular1" style="text-transform:uppercase" placeholder="Nombre del Titular...">
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
 
     <div class="formulario-dos">
         <label for="admon">Admon: </label>
-        <input  type="text" name="admon" onkeyup="this.value = this.value.toUpperCase();" class="form-control" placeholder="Admon..." required>
+        <input  type="text" name="admon" style="text-transform:uppercase" class="form-control" placeholder="Admon..." required>
     </div>
     <hr>
 

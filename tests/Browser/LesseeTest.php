@@ -18,7 +18,7 @@ class LesseeTest extends DuskTestCase
      * @issue 36 Al guardar un arrendatario no se guarda el Teléfono ni correo en la pantalla Arrendatario
      * @return void
      */
-    public function testGuardarArrendatarioWithTelefonoAndEmail()
+    public function testGuardarArrendatarioWithTelefonoAndEmail(): void
     {
 
         /** @var Lessee $lessee */

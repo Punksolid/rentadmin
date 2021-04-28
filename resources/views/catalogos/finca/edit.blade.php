@@ -21,7 +21,7 @@
             {{Form::token()}}
             <div class="form-group">
                 <label for="name">Inmueble</label>
-                <input type="text" name="name" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->name }}" placeholder="Inmueble..." required>
+                <input type="text" name="name" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->name }}" placeholder="Inmueble..." required>
             </div>
 
             <div class="form-group">
@@ -50,11 +50,11 @@
 
             <div class="form-group">
                 <label for="descripcion">Direccion</label>
-                <input type="text" name="address" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->address }}" placeholder="Direccion..." required>
+                <input type="text" name="address" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->address }}" placeholder="Direccion..." required>
             </div>
             <div class="form-group">
                 <label for="descripcion">Geolocalizacion</label>
-                <input type="text" name="geolocation" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
+                <input type="text" name="geolocation" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
             </div>
 
             <div class="form-group">
@@ -97,16 +97,16 @@
 
             <div class="form-group">
                 <label for="energy_fee">Servicio de Luz</label>
-                <input type="text" name="energy_fee" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->energy_fee }}" placeholder="XXXXXXXXXXXX" required>
+                <input type="text" name="energy_fee" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->energy_fee }}" placeholder="XXXXXXXXXXXX" required>
             </div>
             <div class="form-group">
                 <label for="cta_japac">Cuenta Japac</label>
-                <input type="text" name="water_account_number" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->water_account_number }}" placeholder="XXXXXXXXX" required>
+                <input type="text" name="water_account_number" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->water_account_number }}" placeholder="XXXXXXXXX" required>
             </div>
 
             <div class="form-group">
                 <label for="predial">Numero de Predial</label>
-                <input type="text" name="predial" class="form-control verificar" onkeyup="this.value = this.value.toUpperCase();" value="{{ $finca->predial }}" placeholder="XXX-XXX-XX-XXX" required>
+                <input type="text" name="predial" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->predial }}" placeholder="XXX-XXX-XX-XXX" required>
             </div>
             <div class="form-group">
                 <label for="predial">Foto</label>

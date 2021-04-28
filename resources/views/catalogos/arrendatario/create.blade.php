@@ -18,18 +18,18 @@
             {{Form::token()}}
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" class="form-control" onkeyup="this.value = this.value.toUpperCase();"
+                <input type="text" name="nombre" class="form-control" style="text-transform:uppercase"
                        placeholder="Nombre..." required>
             </div>
             <div class="form-group">
                 <label for="apellido_paterno">Apellido Paterno</label>
                 <input type="text" name="apellido_paterno" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno..." required>
+                       style="text-transform:uppercase" placeholder="Apellido Paterno..." required>
             </div>
             <div class="form-group">
                 <label for="apellido_materno">Apellido Materno</label>
                 <input type="text" name="apellido_materno" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno..." required>
+                       style="text-transform:uppercase" placeholder="Apellido Materno..." required>
             </div>
             <div class="form-group">
                 <label for="telefono">Telefono &nbsp;&nbsp;<button id="add_field" class="btn-sm btn-success">Añadir
@@ -63,33 +63,33 @@
             </div>
             <div class="form-group">
                 <label for="calle">Calle</label>
-                <input type="text" name="calle" class="form-control" onkeyup="this.value = this.value.toUpperCase();"
+                <input type="text" name="calle" class="form-control" style="text-transform:uppercase"
                        placeholder="Calle..." required>
             </div>
             <div class="form-group">
                 <label for="numero_ext">Numero Exterior</label>
                 <input type="text" name="numero_ext" onkeypress="return justNumbers(event)"
-                       onkeyup="this.value = this.value.toUpperCase();" class="form-control"
+                       style="text-transform:uppercase" class="form-control"
                        placeholder="Numero Exterior..." required>
             </div>
             <div class="form-group">
                 <label for="numero_int">Numero Interior</label>
-                <input type="text" name="numero_int" onkeyup="this.value = this.value.toUpperCase();"
+                <input type="text" name="numero_int" style="text-transform:uppercase"
                        class="form-control" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia">Colonia</label>
-                <input type="text" name="colonia" onkeyup="this.value = this.value.toUpperCase();" class="form-control"
+                <input type="text" name="colonia" style="text-transform:uppercase" class="form-control"
                        placeholder="Colonia..." required>
             </div>
             <div class="form-group">
                 <label for="estado">Estado</label>
-                <input type="text" name="estado" onkeyup="this.value = this.value.toUpperCase();" class="form-control"
+                <input type="text" name="estado" style="text-transform:uppercase" class="form-control"
                        placeholder="Estado..." required>
             </div>
             <div class="form-group">
                 <label for="ciudad">Ciudad</label>
-                <input type="text" name="ciudad" class="form-control" onkeyup="this.value = this.value.toUpperCase();"
+                <input type="text" name="ciudad" class="form-control" style="text-transform:uppercase"
                        placeholder="Ciudad..." required>
             </div>
             <div class="form-group">
@@ -99,7 +99,7 @@
             <div class="form-group">
                 <label for="entre_calles">Entre Calles</label>
                 <input type="text" name="entre_calles" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                       style="text-transform:uppercase" placeholder="Entre Calles...">
             </div>
 
             <div class="form-group">
@@ -108,46 +108,46 @@
             <div class="form-group">
                 <label for="calle_trabajo">Calle</label>
                 <input type="text" name="calle_trabajo" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle..." required>
+                       style="text-transform:uppercase" placeholder="Calle..." required>
             </div>
             <div class="form-group">
                 <label for="numero_ext_trabajo">Numero Exterior</label>
                 <input type="text" name="numero_ext_trabajo" onkeypress="return justNumbers(event)" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Exterior..." required>
+                       style="text-transform:uppercase" placeholder="Numero Exterior..." required>
             </div>
             <div class="form-group">
                 <label for="numero_int_trabajo">Numero Interior</label>
                 <input type="text" name="numero_int_trabajo" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                       style="text-transform:uppercase" placeholder="Numero Interior...">
             </div>
             <div class="form-group">
                 <label for="colonia_trabajo">Colonia</label>
                 <input type="text" name="colonia_trabajo" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia..." required>
+                       style="text-transform:uppercase" placeholder="Colonia..." required>
             </div>
             <div class="form-group">
                 <label for="estado_trabajo">Estado</label>
                 <input type="text" name="estado_trabajo" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado..." required>
+                       style="text-transform:uppercase" placeholder="Estado..." required>
             </div>
             <div class="form-group">
                 <label for="ciudad_trabajo">Ciudad</label>
                 <input type="text" name="ciudad_trabajo" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad..." required>
+                       style="text-transform:uppercase" placeholder="Ciudad..." required>
             </div>
             <div class="form-group">
                 <label for="codigo_postal_trabajo">Codigo Postal</label>
                 <input type="number" name="codigo_postal_trabajo" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Codigo Postal..." required>
+                       style="text-transform:uppercase" placeholder="Codigo Postal..." required>
             </div>
             <div class="form-group">
                 <label for="entre_calles_trabajo">Entre Calles</label>
                 <input type="text" name="entre_calles_trabajo" class="form-control"
-                       onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                       style="text-transform:uppercase" placeholder="Entre Calles...">
             </div>
             <div class="form-group">
                 <label for="puesto">Puesto</label>
-                <input type="text" name="puesto" class="form-control" onkeyup="this.value = this.value.toUpperCase();"
+                <input type="text" name="puesto" class="form-control" style="text-transform:uppercase"
                        placeholder="Puesto..." required>
             </div>
 
@@ -169,17 +169,17 @@
                 <div class="form-group">
                     <label for="guarantor[nombre]">Nombre</label>
                     <input type="text" name="guarantor[nombre]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre...">
+                           style="text-transform:uppercase" placeholder="Nombre...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[apellido_paterno]">Apellido Paterno</label>
                     <input type="text" name="guarantor[apellido_paterno]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Paterno...">
+                           style="text-transform:uppercase" placeholder="Apellido Paterno...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[apellido_materno]">Apellido Materno</label>
                     <input type="text" name="guarantor[apellido_materno]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Apellido Materno...">
+                           style="text-transform:uppercase" placeholder="Apellido Materno...">
                 </div>
                 <div class="form-group">
                     <label for="identity">Identificación</label>
@@ -212,43 +212,43 @@
                 <div class="form-group">
                     <label for="guarantor[calle]">Calle</label>
                     <input type="text" name="guarantor[calle]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle...">
+                           style="text-transform:uppercase" placeholder="Calle...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_ext]">Numero Exterior</label>
                     <input type="text" name="guarantor[numero_ext]" onkeypress="return justNumbers(event)"
-                           class="form-control" onkeyup="this.value = this.value.toUpperCase();"
+                           class="form-control" style="text-transform:uppercase"
                            placeholder="Numero Exterior...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_int]">Numero Interior</label>
                     <input type="text" name="guarantor[numero_int]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                           style="text-transform:uppercase" placeholder="Numero Interior...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[colonia]">Colonia</label>
                     <input type="text" name="guarantor[colonia]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia...">
+                           style="text-transform:uppercase" placeholder="Colonia...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[estado]">Estado</label>
                     <input type="text" name="guarantor[estado]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado...">
+                           style="text-transform:uppercase" placeholder="Estado...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[ciudad]">Ciudad</label>
                     <input type="text" name="guarantor[ciudad]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad...">
+                           style="text-transform:uppercase" placeholder="Ciudad...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[codigo_postal]">Codigo Postal</label>
                     <input type="number" name="guarantor[codigo_postal]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Codigo Postal...">
+                           style="text-transform:uppercase" placeholder="Codigo Postal...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[entre_calles]">Entre Calles</label>
                     <input type="text" name="guarantor[entre_calles]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                           style="text-transform:uppercase" placeholder="Entre Calles...">
                 </div>
 
                 <div class="form-group">
@@ -257,33 +257,33 @@
                 <div class="form-group">
                     <label for="guarantor[calle_trabajo]">Calle</label>
                     <input type="text" name="guarantor[calle_trabajo]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Calle...">
+                           style="text-transform:uppercase" placeholder="Calle...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_ext_trabajo]">Numero Exterior</label>
                     <input type="text" name="guarantor[numero_ext_trabajo]" onkeypress="return justNumbers(event)"
-                           class="form-control" onkeyup="this.value = this.value.toUpperCase();"
+                           class="form-control" style="text-transform:uppercase"
                            placeholder="Numero Exterior...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[numero_int_trabajo]">Numero Interior</label>
                     <input type="text" name="guarantor[numero_int_trabajo]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Numero Interior...">
+                           style="text-transform:uppercase" placeholder="Numero Interior...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[colonia_trabajo]">Colonia</label>
                     <input type="text" name="guarantor[colonia_trabajo]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Colonia...">
+                           style="text-transform:uppercase" placeholder="Colonia...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[estado_trabajo]">Estado</label>
                     <input type="text" name="guarantor[estado_trabajo]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Estado...">
+                           style="text-transform:uppercase" placeholder="Estado...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[ciudad_trabajo]">Ciudad</label>
                     <input type="text" name="guarantor[ciudad_trabajo]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Ciudad...">
+                           style="text-transform:uppercase" placeholder="Ciudad...">
                 </div>
                 <div class="form-group">
                     <label for="guarantor[codigo_postal_trabajo]">Codigo Postal</label>
@@ -293,7 +293,7 @@
                 <div class="form-group">
                     <label for="guarantor[entre_calles_trabajo]">Entre Calles</label>
                     <input type="text" name="guarantor[entre_calles_trabajo]" class="form-control"
-                           onkeyup="this.value = this.value.toUpperCase();" placeholder="Entre Calles...">
+                           style="text-transform:uppercase" placeholder="Entre Calles...">
                 </div>
             </div>
             <div class="form-group">
