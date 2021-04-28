@@ -21,5 +21,6 @@
     <server name="QUEUE_CONNECTION" value="sync"/>
     <server name="SESSION_DRIVER" value="array"/>
     <env name="TELESCOPE_ENABLED" value="false"/>
+    <env name="DEBUGBAR_ENABLED" value="false"/>
   </php>
 </phpunit>

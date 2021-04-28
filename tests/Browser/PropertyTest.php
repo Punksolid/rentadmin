@@ -24,13 +24,10 @@ class PropertyTest extends DuskTestCase
     public function testItCanSaveANewProperty()
     {
         $this->browse(function (Browser $browser){
-//            dd($browser->driver->manage()->window()->getSize());
             $browser->pause(100);
 
-//            $browser->loginAs(factory(User::class)->create());
             $property_type = factory(TipoPropiedad::class)->create(['estatus' => 1]);
             $lessor = factory(Lessor::class)->create(['estatus' => true]);
-//            $browser->visit(route('finca.create'));
             $browser->loginAs(factory(User::class)->create())
                 ->visit(route('finca.create'))
                 ->on(new CreatePropertyPage())
@@ -44,8 +41,9 @@ class PropertyTest extends DuskTestCase
             $browser->selectLessor($lessor->id);
 //            $browser->scrollTo('input[name=fiscal]');
 //            $browser->click('input[name=fiscal]');
-            $browser->pause(100);
+            $browser->pause(200);
             $browser->radio('fiscal', Property::RECIBO_STRING_NO_FISCAL_VALUE);
+
             $browser->select('property_type_id', (string) $property_type->id_tipo_propiedad);
 
 //            $browser->click('#search_lessor');
@@ -60,7 +58,7 @@ class PropertyTest extends DuskTestCase
             $browser->typeSlowly('water_fee', $this->faker->numerify('####'));
             $browser->typeSlowly('energy_fee', $this->faker->numerify('####'));
             $browser->typeSlowly('water_account_number', $this->faker->numerify('####'));
-            $browser->typeSlowly('predial', $this->faker->numerify('################'));
+            $browser->typeSlowly('predial', $this->faker->numerify('##################'));
 
             $browser->scrollTo('button[type=submit]');
             $browser->click('button[type=submit]');
@@ -81,6 +79,9 @@ class PropertyTest extends DuskTestCase
             $browser->assertInputValue('name', $property->name);
             $browser->assertInputValue('energy_fee', $property->energy_fee);
             $browser->assertInputValue('water_account_number', $property->water_account_number);
+            $predial_code = $this->faker->numerify('##################');
+            $browser->typeSlowly('predial', $predial_code);
+            $browser->assertInputValue('predial', rtrim(chunk_split($predial_code, 3, ' ')));
 //            $browser->assertInputValue('address', $property->address); // format detail difference
 //            $browser->assertInputValue('predial', $property->predial); // format detail difference
 //            $browser->assertInputValue('maintenance', $property->maintenance); // format detail

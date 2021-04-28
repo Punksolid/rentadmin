@@ -151,7 +151,7 @@
             $('.currency-field').mask("###,###,##0.00", {reverse: true});
             $('input[name="servicio_luz"]').mask('000 000 000 000');
             $('input[name="cta_japac"]').mask('000 000 000');
-            $('input[name="predial"]').mask('000 000 00 000');
+            $('input[name="predial"]').mask('000 000 000 000 000 000');
         });
     </script>
 @endsection
