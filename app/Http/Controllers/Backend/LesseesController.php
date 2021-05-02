@@ -38,24 +38,20 @@ class LesseesController extends Controller
 
     public function store(LesseeRequest $request)
     {
-        $data = $request->all(); // @todo Drop this thing
+        $guarantor = ''; // @todo discard this when relationship is fix
         if ($request->filled(['guarantor_block'] ) ) {
             $guarantor = $this->registerGuarantor($request);
-            $data['id_fiador'] = $guarantor['id_cat_fiadores'];
-            for ($k = 1; $k <= 10; $k++) {
-                $variable = isset($data['telefono_fiador' . $k]);
-                if ($variable == null) {
-                } else {
-                    $tel['id_fiador'] = $guarantor['id_cat_fiadores'];
-                    $tel['telefono'] = $data['telefono_fiador' . $k];
-                    $tel['descripcion'] = $data['descripcion_fiador' . $k];
-                    CatTelefono::create($tel);
+            if ($request->filled('guarantor.phones')) {
+                $phones_data = $request->input('guarantor.phones');
+                foreach($phones_data as $phone_data){
+                    $guarantor->addPhoneData((string)$phone_data['telefono'], $phone_data['descripcion']);
                 }
             }
         }
-
         /** @var Lessee $arrendatario */
-        $arrendatario = Lessee::create($data);
+        $arrendatario = Lessee::create(array_merge($request->all(), [
+            'id_fiador' => optional($guarantor)->id_cat_fiadores
+        ])); // @todo Use Proper Relationship $lessee->guarantor()->create();
         $lessee = &$arrendatario;
         if ($request->hasFile('identity')) {
             $arrendatario->addMediaFromRequest('identity')->toMediaCollection();
@@ -203,7 +199,7 @@ class LesseesController extends Controller
         return Redirect::back();
     }
 
-    public function registerGuarantor(Request $request)
+    public function registerGuarantor(Request $request): Guarantor
     {
         /** var $guarantor Guarantor */
         $guarantor = Guarantor::create($request->guarantor);

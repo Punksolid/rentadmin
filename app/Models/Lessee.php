@@ -47,12 +47,6 @@ class Lessee extends Model implements Phoneable, HasMedia
         'created_at', 'updated_at', 'deleted_at'
     ];
 
-    public function scopeJoinSubCat($query)
-    {
-        return $query->join('cat_telefono', 'lessees.id', '=', 'phone_numbers.id_arrendatario')
-            ->join('cat_email', 'lessees.id', '=', 'cat_email.id_arrendatario');
-    }
-
     public function scopeActive($query)
     {
         return $query->where('estatus', self::STATUS_ACTIVE);
@@ -89,7 +83,7 @@ class Lessee extends Model implements Phoneable, HasMedia
         return $this->emails()->first();
     }
 
-    public function guarantor()
+    public function guarantor(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Guarantor::class, 'id_fiador', 'id_cat_fiadores');
     }

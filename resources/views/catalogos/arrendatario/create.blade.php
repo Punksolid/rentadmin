@@ -184,7 +184,7 @@
                 <div class="form-group">
                     <label for="identity">Identificación</label>
                     <div id="appFiador">
-{{--                        <input type="file" name="identity" @change="onFileChange"/>--}}
+                        {{--                        <input type="file" name="identity" @change="onFileChange"/>--}}
                         <input type="file" name="guarantor[identity]" @change="onFileChangeFiador" class="form-control">
 
                         <div id="preview">
@@ -193,16 +193,17 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="guarantor[telefono]">Telefono &nbsp;&nbsp;<button id="field_add"
+                    <label for="guarantor[phones][0][telefono]">Telefono &nbsp;&nbsp;<button id="field_add"
                                                                                   class="btn-sm btn-success">Añadir
                         </button>
                     </label><br>
                     <div id="list">
                         <input type="text" id="masc-tel" data-mask="(000) 000 0000" class="mascara"
-                               name="guarantor[telefono1]" onkeypress="return justNumbers(event)"
-                               placeholder="Telefono...">&nbsp;<input id="desc" type="text"
-                                                                      name="guarantor[descripcion1]"
-                                                                      placeholder="Descripcion...">
+                               name="guarantor[phones][0][telefono]" onkeypress="return justNumbers(event)"
+                               placeholder="Telefono...">&nbsp;
+                        <input id="desc" type="text"
+                               name="guarantor[phones][0][descripcion]"
+                               placeholder="Descripcion...">
                     </div>
                 </div>
 
@@ -310,31 +311,31 @@
 @endsection
 @section('javascript')
     const vm = new Vue({
-        el: '#app',
-        data() {
-            return {
-                url: null,
-            }
-        },
-        methods: {
-            onFileChange(e) {
-                const file = e.target.files[0];
-                this.url = URL.createObjectURL(file);
-            }
-        }
+    el: '#app',
+    data() {
+    return {
+    url: null,
+    }
+    },
+    methods: {
+    onFileChange(e) {
+    const file = e.target.files[0];
+    this.url = URL.createObjectURL(file);
+    }
+    }
     })
     const vmFiador = new Vue({
-        el: '#appFiador',
-        data() {
-            return {
-                url: null,
-            }
-        },
-        methods: {
-            onFileChangeFiador(e) {
-                const file = e.target.files[0];
-                this.url = URL.createObjectURL(file);
-            }
-        }
+    el: '#appFiador',
+    data() {
+    return {
+    url: null,
+    }
+    },
+    methods: {
+    onFileChangeFiador(e) {
+    const file = e.target.files[0];
+    this.url = URL.createObjectURL(file);
+    }
+    }
     })
 @endsection
