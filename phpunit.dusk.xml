@@ -14,6 +14,7 @@
         </testsuite>
     </testsuites>
     <php>
+        <server name="DEBUGBAR_ENABLED" value="false"/>
         <env name="DEBUGBAR_ENABLED" value="false"/>
     </php>
 </phpunit>

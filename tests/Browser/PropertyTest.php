@@ -12,16 +12,19 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Dusk\Browser;
 use Tests\Browser\Pages\CreatePropertyPage;
 use Tests\DuskTestCase;
+use Throwable;
 
 class PropertyTest extends DuskTestCase
 {
     use WithFaker;
+
     /**
      * A Dusk test example.
      *
      * @return void
+     * @throws Throwable
      */
-    public function testItCanSaveANewProperty()
+    public function testItCanSaveANewProperty(): void
     {
         $this->browse(function (Browser $browser){
             $browser->pause(100);

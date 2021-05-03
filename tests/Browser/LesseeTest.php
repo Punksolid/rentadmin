@@ -13,10 +13,12 @@ use Tests\DuskTestCase;
 class LesseeTest extends DuskTestCase
 {
     use WithFaker;
+
     /**
      * A Dusk test example.
      * @issue 36 Al guardar un arrendatario no se guarda el Teléfono ni correo en la pantalla Arrendatario
      * @return void
+     * @throws \Throwable
      */
     public function testGuardarArrendatarioWithTelefonoAndEmail(): void
     {

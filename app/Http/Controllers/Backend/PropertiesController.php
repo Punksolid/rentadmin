@@ -41,7 +41,7 @@ class PropertiesController extends Controller
 
         return view('catalogos.finca.create', [
             "property_types" => $property_types,
-            "arrendador" => $lessors // @todo refactor key
+            "lessors" => $lessors
         ]);
     }
 
@@ -77,14 +77,14 @@ class PropertiesController extends Controller
 
         $tipo = TipoPropiedad::findOrFail($property->property_type_id);
         $arr = Lessor::findOrFail($property->lessor_id);
-        $arre = Lessor::orderBy('apellido_paterno', 'asc')->get();
+        $lessors = Lessor::orderBy('apellido_paterno', 'asc')->get();
 
         return view('catalogos.finca.edit', [
             "finca" => $property, // @todo Deprecar, eliminar
             "propiedad" => $property_types,
             "tipo" => $tipo,
             "arrendadores" => $arr,
-            "arrendador" => $arre,
+            "lessors" => $lessors,
             "property" => $property
         ]);
     }

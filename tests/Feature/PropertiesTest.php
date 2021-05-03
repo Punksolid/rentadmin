@@ -17,7 +17,7 @@ class PropertiesTest extends TestCase
      *
      * @return void
      */
-    public function testPropertiesPageCanBeSeen()
+    public function testPropertiesPageCanBeSeen(): void
     {
 
         $this->withoutExceptionHandling();
@@ -39,7 +39,7 @@ class PropertiesTest extends TestCase
             ->assertSee('Rentada');
     }
 
-    public function testLessorOfAPropertyIsShown()
+    public function testLessorOfAPropertyIsShown(): void
     {
         /** @var Property $property */
         $property = factory(Property::class)->create([
@@ -55,7 +55,7 @@ class PropertiesTest extends TestCase
     /**
      * @issue #1
      */
-    public function testShowOnlyPropertiesOfActiveLessors()
+    public function testShowOnlyPropertiesOfActiveLessors(): void
     {
         /** @var Property $property */
         $property = factory(Property::class)->create(['status' => 1]);
@@ -90,7 +90,7 @@ class PropertiesTest extends TestCase
         $call->assertDontSee($inactive_property->name);
     }
 
-    public function testSeeRegistryPropertyForm()
+    public function testSeeRegistryPropertyForm(): void
     {
         $this->withoutExceptionHandling();
         $inactive_lessor = factory(Lessor::class)->create(['estatus' => Lessor::INACTIVE_STATUS]);
@@ -100,10 +100,10 @@ class PropertiesTest extends TestCase
         $call->assertSuccessful()
             ->assertSee('Direccion');
 
-        $call->assertViewHas('arrendador', function ($lessors) use($active_lessor) {
+        $call->assertViewHas('lessors', function ($lessors) use($active_lessor) {
             return $lessors->contains($active_lessor);
         });
-        $call->assertViewHas('arrendador', function ($lessors) use($inactive_lessor) {
+        $call->assertViewHas('lessors', function ($lessors) use($inactive_lessor) {
             return !$lessors->contains($inactive_lessor);
         });
 

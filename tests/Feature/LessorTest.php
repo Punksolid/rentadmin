@@ -84,7 +84,7 @@ class LessorTest extends TestCase
         ];
     }
 
-    public function testListsLessorsActiveByDefault()
+    public function testListsLessorsActiveByDefault(): void
     {
         $lessor_active = factory(Lessor::class)->create(['estatus' => Lessor::ACTIVE_STATUS]);
         $lessor_inactive = factory(Lessor::class)->create(['estatus' => Lessor::INACTIVE_STATUS]);
@@ -98,7 +98,7 @@ class LessorTest extends TestCase
     }
 
     /** Unit test */
-    public function testCanHavePhones()
+    public function testCanHavePhones(): void
     {
         /** @var Lessor $lessor */
         $lessor = factory(Lessor::class)->create();
@@ -107,7 +107,7 @@ class LessorTest extends TestCase
         $this->assertEquals('789456123', $lessor->defaultPhoneNumber->telefono);
     }
 
-    public function testListInactiveLessors()
+    public function testListInactiveLessors(): void
     {
         $lessor_inactive = factory(Lessor::class)->create(['estatus' => Lessor::INACTIVE_STATUS]);
 
@@ -123,7 +123,7 @@ class LessorTest extends TestCase
         $call->assertSuccessful();
     }
 
-    public function testEditFormLoadsSuccessfulWithAllAttachedData()
+    public function testEditFormLoadsSuccessfulWithAllAttachedData(): void
     {
         $this->withoutExceptionHandling();
         /** @var Lessor $lessor */
@@ -144,7 +144,7 @@ class LessorTest extends TestCase
         $call->assertSuccessful();
     }
 
-    public function testEditFormLoadsSuccessfulWithoutAttachedData()
+    public function testEditFormLoadsSuccessfulWithoutAttachedData(): void
     {
         $this->withoutExceptionHandling();
         /** @var Lessor $lessor */
@@ -157,7 +157,7 @@ class LessorTest extends TestCase
         $call->assertSuccessful();
     }
 
-    public function testItCanUpdateLessor()
+    public function testItCanUpdateLessor(): void
     {
         $this->withoutExceptionHandling();
         /** @var Lessor $lessor */
