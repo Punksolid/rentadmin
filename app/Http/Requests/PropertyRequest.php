@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Property;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PropertyRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class PropertyRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,10 +23,17 @@ class PropertyRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'lessor_id' => 'required'
+            'lessor_id' => 'required',
+            'recibo' => [
+                'required',
+                Rule::in([
+                    Property::RECIBO_STRING_NO_FISCAL_VALUE,
+                    Property::RECIBO_STRING_FISCAL_VALUE
+                ])
+            ],
         ];
     }
 }

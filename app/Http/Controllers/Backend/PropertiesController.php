@@ -48,11 +48,6 @@ class PropertiesController extends Controller
     public function store(PropertyRequest $request){
         $data = $request->all();
         $data['state_id'] = 25;
-        if ($request->fiscal === Property::RECIBO_STRING_FISCAL_VALUE){
-            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE;
-        }else{
-            $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
-        }
 
         /** @var Property $property */
         $property = Property::make($data);
@@ -72,11 +67,9 @@ class PropertiesController extends Controller
     public function edit($id) {
 
         $property_types = TipoPropiedad::all();
-
         $property = Property::findOrFail($id);
-
         $tipo = TipoPropiedad::findOrFail($property->property_type_id);
-        $arr = Lessor::findOrFail($property->lessor_id);
+        $arr = Lessor::findOrFail($property->lessor_id); // @todo Refactor this, use relationship instead
         $lessors = Lessor::orderBy('apellido_paterno', 'asc')->get();
 
         return view('catalogos.finca.edit', [
@@ -91,11 +84,6 @@ class PropertiesController extends Controller
 
     public function update(PropertyRequest $request, $id){
         $data = $request->all();
-        if ($request->fiscal === Property::RECIBO_STRING_FISCAL_VALUE){
-            $data['recibo'] = Property::RECIBO_STRING_FISCAL_VALUE; // @todo refactor this field to match recibo in the database
-        }else{
-            $data['recibo'] = Property::RECIBO_STRING_NO_FISCAL_VALUE;
-        }
 
         if (isset($data['estatus_renta']) && $data['estatus_renta'] == 'on'){
             $data['rented'] = null;

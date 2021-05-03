@@ -85,16 +85,16 @@
                 <input
                     id="fiscal"
                     class="cb"
-                    type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_FISCAL_VALUE }}"
-                    @if(old('fiscal') === \App\Models\Property::RECIBO_STRING_FISCAL_VALUE) checked @endif
+                    type="radio" name="recibo" value="{{ \App\Models\Property::RECIBO_STRING_FISCAL_VALUE }}"
+                    @if(old('recibo') === \App\Models\Property::RECIBO_STRING_FISCAL_VALUE) checked @endif
                 >
 
                 <label for="no_fiscal">No Fiscal</label>
                 <input
                     id="no_fiscal"
                     class="cb"
-                    type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE }}"
-                    @if(old('fiscal') === \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE) checked @endif>
+                    type="radio" name="recibo" value="{{ \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE }}"
+                    @if(old('recibo') === \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE) checked @endif>
             </div>
 
             <div class="form-group">

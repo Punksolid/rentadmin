@@ -36,16 +36,14 @@ class PropertyTest extends DuskTestCase
                 ->on(new CreatePropertyPage())
                 ->assertSee('Nuevo Inmueble');
 
-            $browser->pause(100);
+            $browser->pause(50);
 
             $browser->type('name', $this->faker->name);
             $browser->type('geolocation', $this->faker->name);
-            $browser->pause(100);
+            $browser->pause(50);
             $browser->selectLessor($lessor->id);
-//            $browser->scrollTo('input[name=fiscal]');
-//            $browser->click('input[name=fiscal]');
-            $browser->pause(200);
-            $browser->radio('fiscal', Property::RECIBO_STRING_NO_FISCAL_VALUE);
+            $browser->pause(100);
+            $browser->radio('recibo', Property::RECIBO_STRING_NO_FISCAL_VALUE);
 
             $browser->select('property_type_id', (string) $property_type->id_tipo_propiedad);
 
@@ -70,7 +68,7 @@ class PropertyTest extends DuskTestCase
         });
     }
 
-    public function testItCanShowAFormOfEdit()
+    public function testItCanShowAFormOfEdit(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(factory(User::class)->create());
@@ -90,7 +88,7 @@ class PropertyTest extends DuskTestCase
 //            $browser->assertInputValue('maintenance', $property->maintenance); // format detail
             // recibo
             $browser->pause(200);
-            $browser->assertRadioSelected('input[name="fiscal"]',Property::RECIBO_STRING_FISCAL_VALUE);
+            $browser->assertRadioSelected('input[name="recibo"]',Property::RECIBO_STRING_FISCAL_VALUE);
             $browser->scrollTo('button[type=submit]');
             $this->assertEquals($property->water_fee, str_replace('.','', $browser->value('input[name=water_fee]')));
             $browser->assertInputValue('geolocation', $property->geolocation);

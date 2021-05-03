@@ -14,11 +14,11 @@ $factory->define(Property::class, function (Faker $faker) {
         'name' => $faker->words(4, true),
         'energy_fee' => $faker->word,
         'water_account_number' => $faker->word,
-        'status' => $faker->boolean,
+        'status' => $faker->randomElement([Property::STATUS_ACTIVE, Property::STATUS_INACTIVE]),
         'address' => $faker->address,
         'predial' => $faker->numerify('##########'),
         'maintenance' => $faker->numerify('####'),
-        'recibo' => $faker->boolean,
+        'recibo' => $faker->randomElement([Property::RECIBO_STRING_FISCAL_VALUE, Property::RECIBO_STRING_NO_FISCAL_VALUE]),
         'water_fee' => $faker->numerify('####'),
         'rented' => $faker->date(),
         'geolocation' => $faker->numerify('#######,######')

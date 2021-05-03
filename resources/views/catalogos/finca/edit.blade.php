@@ -63,9 +63,9 @@
                 <div style="display:block;">
                     <div style="display:block;">
                         <label>Fiscal</label>
-                        <input  style="margin-right: 20px" class="cb"  type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_FISCAL_VALUE }}" {!!  old('fiscal',$finca->recibo === \App\Models\Property::RECIBO_STRING_FISCAL_VALUE ? 'checked':'') !!} >
+                        <input  style="margin-right: 20px" class="cb"  type="radio" name="recibo" value="{{ \App\Models\Property::RECIBO_STRING_FISCAL_VALUE }}" {!!  old('recibo',$finca->recibo === \App\Models\Property::RECIBO_STRING_FISCAL_VALUE ? 'checked':'') !!} >
                         <label>No Fiscal</label>
-                        <input  style="margin-right: 20px" class="cb"  type="radio" name="fiscal" value="{{ \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE }}" {!!  old('fiscal',$finca->recibo === \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE ? 'checked':'') !!} >
+                        <input  style="margin-right: 20px" class="cb"  type="radio" name="recibo" value="{{ \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE }}" {!!  old('recibo',$finca->recibo === \App\Models\Property::RECIBO_STRING_NO_FISCAL_VALUE ? 'checked':'') !!} >
                     </div>
                 </div>
                 <div style="display: block; margin-left: 248px !important; margin-top: -38px;">
