@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        View::composer('layouts.notifications', function ($view) {
+            exec('git log -3 --pretty=format:"%s"', $notification_titles);
+            $view->with('notification_titles', $notification_titles);
+        });
     }
 }
