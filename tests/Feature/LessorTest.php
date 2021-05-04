@@ -18,7 +18,7 @@ class LessorTest extends TestCase
     use WithFaker;
     use DatabaseTransactions;
 
-    public function testALessorCanBeRegisteredWithoutInvoiceData()
+    public function testALessorCanBeRegisteredWithoutInvoiceData(): void
     {
         $this->withoutExceptionHandling();
         $lessor = factory(Lessor::class)->raw();

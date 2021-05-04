@@ -125,3 +125,7 @@ Route::get('mail/send', function (){
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
