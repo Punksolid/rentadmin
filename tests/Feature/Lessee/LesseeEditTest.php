@@ -144,6 +144,45 @@ class LesseeEditTest extends TestCase
         ]);
     }
 
+    public function testItCanUpdateABankAccount()
+    {
+        $this->withoutExceptionHandling();
+        /** @var Lessee $lessee */
+        $lessee = factory(Lessee::class)->create();
+        $new_lessee = factory(Lessee::class)->raw();
+        $new_lessee['nombre_fiador'] = $this->faker->name;
+        $new_lessee['apellido_paterno_fiador'] = $this->faker->name;
+        $new_lessee['apellido_materno_fiador'] = $this->faker->name;
+        $new_lessee['calle_fiador'] = $this->faker->name;
+        $new_lessee['colonia_fiador'] = $this->faker->name;
+        $new_lessee['numero_ext_fiador'] = $this->faker->numerify('####');
+        $new_lessee['numero_int_fiador'] = $this->faker->numerify('####');
+        $new_lessee['estado_fiador'] = $this->faker->numerify('####');
+        $new_lessee['ciudad_fiador'] = $this->faker->numerify('####');
+        $new_lessee['codigo_postal_fiador'] = $this->faker->numerify('####');
+        $new_lessee['entre_calles_fiador'] = $this->faker->numerify('####');
+
+        $new_lessee['calle_fiador_trabajo'] = $this->faker->name;
+        $new_lessee['colonia_fiador_trabajo'] = $this->faker->name;
+        $new_lessee['numero_ext_fiador_trabajo'] = $this->faker->numerify('####');
+        $new_lessee['numero_int_fiador_trabajo'] = $this->faker->numerify('####');
+        $new_lessee['estado_fiador_trabajo'] = $this->faker->numerify('####');
+        $new_lessee['ciudad_fiador_trabajo'] = $this->faker->numerify('####');
+        $new_lessee['codigo_postal_fiador_trabajo'] = $this->faker->numerify('####');
+        $new_lessee['entre_calles_fiador_trabajo'] = $this->faker->numerify('####');
+
+
+        $call = $this->put(
+            route('arrendatario.update', [$lessee->id]),
+            $new_lessee
+        );
+
+        $call->assertRedirect(route('arrendatario.index'));
+        $this->assertDatabaseHas('lessees', [
+            'nombre' => $new_lessee['nombre']
+        ]);
+    }
+
     public function testEditWithGuarantor()
     {
         $this->withoutExceptionHandling();
