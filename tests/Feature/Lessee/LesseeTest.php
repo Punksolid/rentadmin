@@ -118,7 +118,7 @@ class LesseeTest extends TestCase
         $call = $this->post(route('arrendatario.store'), $lessee);
 
         $call->assertRedirect(route('arrendatario.index'));
-        $this->assertDatabaseHas('cat_fiadores', [
+        $this->assertDatabaseHas('guarantors', [
             'nombre' => $lessee['guarantor']['nombre'],
             'apellido_paterno' => $lessee['guarantor']['apellido_paterno'],
             'apellido_materno' => $lessee['guarantor']['apellido_materno'],

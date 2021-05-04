@@ -50,7 +50,7 @@ class LesseesController extends Controller
         }
         /** @var Lessee $arrendatario */
         $arrendatario = Lessee::create(array_merge($request->all(), [
-            'id_fiador' => optional($guarantor)->id_cat_fiadores
+            'id_fiador' => optional($guarantor)->id
         ])); // @todo Use Proper Relationship $lessee->guarantor()->create();
         $lessee = &$arrendatario;
         if ($request->hasFile('identity')) {

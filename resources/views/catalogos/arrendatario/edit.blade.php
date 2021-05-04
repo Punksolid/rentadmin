@@ -176,12 +176,12 @@
 
 
                         <img src="{{ $fiador->getFirstMediaUrl() }}" alt="..." class="img-thumbnail" style="width: 200px; height: 200px;">
-                        <a class="btn-sm btn-danger" href="{{ route('guarantor.image.destroy', ['guarantor' => $guarantor->id_cat_fiadores]) }}">Eliminar Imagen</a>
+                        <a class="btn-sm btn-danger" href="{{ route('guarantor.image.destroy', ['guarantor' => $guarantor->id]) }}">Eliminar Imagen</a>
 
                     @endif
                 </div>
                 <div class="form-group">
-                       @include('partials.phones', ['type' => \App\Models\CatFiador::class,'id' =>  optional($fiador)->id_cat_fiadores, 'phones' =>  optional($fiador)->phones ?? []])
+                       @include('partials.phones', ['type' => \App\Models\CatFiador::class,'id' =>  optional($fiador)->id, 'phones' =>  optional($fiador)->phones ?? []])
                 </div>
 
                 <div class="form-group">

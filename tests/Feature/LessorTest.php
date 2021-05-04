@@ -31,7 +31,7 @@ class LessorTest extends TestCase
         ]);
     }
 
-    public function testRegisterBasicLessor()
+    public function testRegisterBasicLessor(): void
     {
         $this->withoutExceptionHandling();
         $lessor = factory(Lessor::class)->raw([

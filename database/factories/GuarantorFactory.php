@@ -10,7 +10,10 @@ $factory->define(Guarantor::class, function (Faker $faker) {
         'nombre' => $faker->firstName,
         'apellido_paterno' => $faker->lastName,
         'apellido_materno' => $faker->lastName,
-        'estatus' => $faker->boolean,
+        'estatus' => $faker->randomElement([
+            Guarantor::STATUS_ACTIVE,
+            Guarantor::STATUS_INACTIVE
+        ]),
         'calle' => $faker->streetName,
         'colonia' => $faker->word,
         'numero_ext' => $faker->randomNumber(5),

@@ -11,10 +11,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class Guarantor extends Model implements Phoneable, HasMedia
 {
     use SoftDeletes, HasPhones, InteractsWithMedia;
-
-    protected $table = 'cat_fiadores'; // @TODO @Punksolid use specific table guarantoor
-
-    protected $primaryKey = 'id_cat_fiadores';
+    public const STATUS_ACTIVE = true;
+    public const STATUS_INACTIVE = false;
 
     protected $fillable = [
         'nombre',
@@ -47,11 +45,11 @@ class Guarantor extends Model implements Phoneable, HasMedia
     {
         return $this
             ->morphMany(CatTelefono::class, 'phoneable')
-            ->orWhere('id_fiador',$this->id_cat_fiadores);
+            ->orWhere('id_fiador',$this->id);
     }
 
     public function lessee()
     {
-        return $this->belongsTo(Lessee::class, 'id_cat_fiadores', 'id_fiador');
+        return $this->belongsTo(Lessee::class, 'id', 'id_fiador');
     }
 }
