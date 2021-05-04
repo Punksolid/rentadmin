@@ -26,7 +26,7 @@
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
 {{--    <link rel="stylesheet" href="dist/css/skins/skin-red.min.css">--}}
-    <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-red.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/skins/skin-green-light.css') }}">
     <script src="https://kit.fontawesome.com/73137342dd.js" crossorigin="anonymous"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,7 +43,7 @@
 
 </head>
 
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-green-light sidebar-mini">
 <div class="wrapper">
 
     <!-- Main Header -->
