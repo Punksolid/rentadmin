@@ -134,6 +134,7 @@ return [
         'message'               => 'mensaje',
         'required'              => 'Requerido',
         // fields
-        'lessor_id'             => 'Arrendador'
+        'lessor_id'             => 'Arrendador',
+        'id_tipo_propiedad'             => 'Tipo de Propiedad',
     ],
 ];

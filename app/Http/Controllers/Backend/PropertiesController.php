@@ -52,10 +52,13 @@ class PropertiesController extends Controller
         /** @var Property $property */
         $property = Property::make($data);
         $property->lessor_id = (integer)$request->get('lessor_id');
-        $property->save();
+        if (!$property->save()) {
+            return back();
+        }
         if ($request->hasFile('photo')) {
             $property->addMediaFromRequest('photo')->toMediaCollection();
         }
+
         return Redirect::to('catalogos/finca');
     }
 
@@ -66,19 +69,20 @@ class PropertiesController extends Controller
 
     public function edit($id) {
 
-        $property_types = TipoPropiedad::all();
+        /** @var TipoPropiedad $property_types */
+        $property_types = TipoPropiedad::where('estatus', TipoPropiedad::STATUS_ACTIVE)->get();
+        /** @var Property $property */
         $property = Property::findOrFail($id);
-        $tipo = TipoPropiedad::findOrFail($property->property_type_id);
-        $arr = Lessor::findOrFail($property->lessor_id); // @todo Refactor this, use relationship instead
+        $arrendador = Lessor::findOrFail($property->lessor_id); // @todo Refactor this, use relationship instead
         $lessors = Lessor::orderBy('apellido_paterno', 'asc')->get();
 
         return view('catalogos.finca.edit', [
             "finca" => $property, // @todo Deprecar, eliminar
-            "propiedad" => $property_types,
-            "tipo" => $tipo,
-            "arrendadores" => $arr,
+            "tipo" => $property->type,
+            "arrendadores" => $arrendador,
             "lessors" => $lessors,
-            "property" => $property
+            "property" => $property,
+            'property_types' => $property_types
         ]);
     }
 

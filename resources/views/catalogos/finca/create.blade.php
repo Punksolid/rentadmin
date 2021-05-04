@@ -15,11 +15,11 @@
     @endif
 
     <div class="box-body">
-        <form action="{{ route('finca.store') }}" autocomplete="off" enctype="multipart/form-data">
+        <form action="{{ route('finca.store') }}" autocomplete="off" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="form-group">
                 <label for="finca_arrendada">Nombre</label>
-                <input class="verificar form-control" name="name" style="text-transform:uppercase"
+                <input class="form-control" name="name" style="text-transform:uppercase"
                        placeholder="Inmueble..."
                        required type="text" value="{{ old('name') }}">
             </div>
@@ -27,7 +27,7 @@
                 <label for="lessor_id">Arrendador</label>
                 <div class="input-group">
                     <input type="text"
-                           class="form-control verificar tipo-propiedad"
+                           class="form-control tipo-propiedad"
                            id="arrendadorname"
                            placeholder="Arrendador..." disabled>
                     <input type="hidden" id="id_arrendador" name="lessor_id" value="">
@@ -46,7 +46,7 @@
             <div class="form-group">
                 <label for="id_tipo_propiedad">Tipo de Propiedad</label><br>
                 <div class="input-group">
-                    <select class="form-control verificar tipo-propiedad"
+                    <select class="form-control tipo-propiedad"
                             name="property_type_id"
                             required>
                         <option name="property_type_id" value="">Seleccione el Tipo de Propiedad</option>
@@ -67,13 +67,13 @@
 
             <div class="form-group">
                 <label for="descripcion">Direccion</label>
-                <input type="text" value="{{ old('address') }}" name="address" class="form-control verificar"
+                <input type="text" value="{{ old('address') }}" name="address" class="form-control"
                        style="text-transform:uppercase" required placeholder="Direccion...">
             </div>
             <div class="form-group">
                 <label for="descripcion">Geolocalizacion</label>
                 <input type="text" value="{{ old("geolocation") }}" name="geolocation"
-                       class="form-control verificar"
+                       class="form-control"
                        style="text-transform:uppercase" required
                        placeholder="Geolocalizacion...">
             </div>
@@ -105,7 +105,7 @@
                     </div>
                     <input id="currency-field" type="text" name="maintenance"
                            value="{{ old('maintenance', '$0.00') }}"
-                           data-type="currency" required class="form-control verificar currency-field"
+                           data-type="currency" required class="form-control currency-field"
                            pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Mantenimiento...">
                 </div>
             </div>
@@ -117,27 +117,27 @@
                 </div>
                 <input id="currency-field" type="text" name="water_fee"
                        value="{{ old('water_fee', '$0.00') }}"
-                       data-type="currency" required class="form-control verificar currency-field"
+                       data-type="currency" required class="form-control currency-field"
                        pattern="^\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="Cuota de Agua...">
             </div>
             <div class="box-header with-border"><h3 class="box-title">Numeros de Cuenta/Cliente</h3></div>
             <label for="energy_fee">Servicio de Luz</label>
             <input type="text" name="energy_fee" value="{{ old('energy_fee') }}"
-                   class="form-control verificar"
+                   class="form-control"
                    placeholder="XXX XXX XXX XXX" required>
             <label for="water_account_number">Cuenta Japac</label>
             <input type="text" name="water_account_number" value="{{ old('water_account_number') }}"
-                   class="form-control verificar" placeholder="XXX XXX XXX" required>
+                   class="form-control" placeholder="XXX XXX XXX" required>
 
             <label for="predial">Numero de Predial</label>
-            <input type="text" name="predial" class="form-control verificar" value="{{ old('predial') }}"
+            <input type="text" name="predial" class="form-control" value="{{ old('predial') }}"
                    placeholder="XXX XXX XXX XXX XXX XXX" required>
             <div class="form-group">
                 <label for="predial">Foto</label>
-                <input type="file" name="photo" class="form-control verificar">
+                <input type="file" name="photo" class="form-control">
             </div>
 
-            <button id="verificar" class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-primary" type="submit">Guardar</button>
             <a class="btn btn-danger" href="./">Cancelar</a>
         </form>
     </div>

@@ -21,27 +21,24 @@
             {{Form::token()}}
             <div class="form-group">
                 <label for="name">Inmueble</label>
-                <input type="text" name="name" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->name }}" placeholder="Inmueble..." required>
+                <input type="text" name="name" class="form-control" style="text-transform:uppercase" value="{{ $finca->name }}" placeholder="Inmueble..." required>
             </div>
 
             <div class="form-group">
                 <label for="id_arrendador">Arrendador</label>
-                <input type="text" class="form-control verificar tipo-propiedad" id="arrendadorname" placeholder="Arrendador..." value="{{$arrendadores->id}}-. {{$arrendadores->nombre}} {{$arrendadores->apellido_paterno}}" disabled required>
+                <input type="text" class="form-control tipo-propiedad" id="arrendadorname" placeholder="Arrendador..." value="{{$arrendadores->id}}-. {{$arrendadores->nombre}} {{$arrendadores->apellido_paterno}}" disabled required>
                 <button class="btn buscar-btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#modal-arrendador"><i class="fa fa-search"></i></button>
                 <input type="hidden" id="id_arrendador" name="lessor_id" value="{{$arrendadores->id}}" required>
             </div>
 
             <div class="form-group">
-                <label for="id_tipo_propiedad">Tipo de Propiedad</label><br>
-                <select class="form-control tipo-propiedad verificar" name="id_tipo_propiedad" required>
-                    <option name="id_tipo_propiedad" value="{{$tipo->id_tipo_propiedad}}">{{$tipo->tipo_propiedad}}</option>
+                <label for="property_type_id">Tipo de Propiedad</label><br>
+                <select class="form-control tipo-propiedad" name="property_type_id" required>
+                    <option name="property_type_id" value="{{ $tipo->id_tipo_propiedad }}">{{$tipo->tipo_propiedad}}</option>
                     <optgroup label="---------------------------------------------------------------------------------------">
-                    <option name="id_tipo_propiedad" value="">Seleccione el Tipo de Propiedad</option>
-                    @foreach($propiedad as $p)
-                        @if($p->estatus == 0)
-                        @else
-                            <option name="id_tipo_propiedad" value="{{$p->id_tipo_propiedad}}">{{$p->tipo_propiedad}}</option>
-                        @endif
+                    <option name="property_type_id" value="">Seleccione el Tipo de Propiedad</option>
+                    @foreach($property_types as $property_type)
+                            <option name="property_type_id" value="{{ $property_type->id_tipo_propiedad }}">{{ $property_type->tipo_propiedad }}</option>
                     @endforeach
                     </optgroup>
                 </select>
@@ -50,11 +47,11 @@
 
             <div class="form-group">
                 <label for="descripcion">Direccion</label>
-                <input type="text" name="address" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->address }}" placeholder="Direccion..." required>
+                <input type="text" name="address" class="form-control" style="text-transform:uppercase" value="{{ $finca->address }}" placeholder="Direccion..." required>
             </div>
             <div class="form-group">
                 <label for="descripcion">Geolocalizacion</label>
-                <input type="text" name="geolocation" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
+                <input type="text" name="geolocation" class="form-control" style="text-transform:uppercase" value="{{ $finca->geolocation }}" placeholder="Geolocalizacion..." required>
             </div>
 
             <div class="form-group">
@@ -97,16 +94,16 @@
 
             <div class="form-group">
                 <label for="energy_fee">Servicio de Luz</label>
-                <input type="text" name="energy_fee" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->energy_fee }}" placeholder="XXXXXXXXXXXX" required>
+                <input type="text" name="energy_fee" class="form-control" style="text-transform:uppercase" value="{{ $finca->energy_fee }}" placeholder="XXXXXXXXXXXX" required>
             </div>
             <div class="form-group">
                 <label for="cta_japac">Cuenta Japac</label>
-                <input type="text" name="water_account_number" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->water_account_number }}" placeholder="XXXXXXXXX" required>
+                <input type="text" name="water_account_number" class="form-control" style="text-transform:uppercase" value="{{ $finca->water_account_number }}" placeholder="XXXXXXXXX" required>
             </div>
 
             <div class="form-group">
                 <label for="predial">Numero de Predial</label>
-                <input type="text" name="predial" class="form-control verificar" style="text-transform:uppercase" value="{{ $finca->predial }}" placeholder="XXX-XXX-XX-XXX" required>
+                <input type="text" name="predial" class="form-control" style="text-transform:uppercase" value="{{ $finca->predial }}" placeholder="XXX-XXX-XX-XXX" required>
             </div>
             <div class="form-group">
                 <label for="predial">Foto</label>
@@ -118,7 +115,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <button id="verificar" class="btn btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-primary" type="submit">Guardar</button>
                 <a class="btn btn-danger" href="../">Cancelar</a>
             </div>
 
@@ -131,22 +128,6 @@
 @endsection
 @section('javascript')
     <script>
-        $('#verificar').click(function () { // @todo Delete this block, too cumberstone
-            let i = 0;
-            let veri = $('.verificar');
-            $.each(veri, function (index, ver) {
-                if (ver.value == ''){
-                    i++;
-                }
-            })
-            if (i>=1){
-                alert('Llene todos los campos');
-                return false;
-            }else{
-                return true;
-            }
-        })
-
         jQuery(function ($) {
             $('.currency-field').mask("###,###,##0.00", {reverse: true});
             $('input[name="servicio_luz"]').mask('000 000 000 000');

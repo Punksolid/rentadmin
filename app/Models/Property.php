@@ -45,7 +45,7 @@ class Property extends Model implements HasMedia
         'created_at', 'updated_at', 'deleted_at'
     ];
 
-    public function getRentedAttribute($value)
+    public function getRentedAttribute($value): bool
     {
         return (bool)$value;
     }
@@ -57,6 +57,11 @@ class Property extends Model implements HasMedia
     public function lessor()
     {
         return $this->belongsTo(Lessor::class, 'lessor_id', 'id');
+    }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(TipoPropiedad::class,'property_type_id');
     }
 
     public function assignLessor(Lessor $lessor): bool

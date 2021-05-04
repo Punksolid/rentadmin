@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TipoPropiedad extends Model
 {
     use SoftDeletes;
-    const STATUS_INACTIVE = 0;
+    public const STATUS_INACTIVE = 0;
+    public const STATUS_ACTIVE = 1;
+
     protected $table = 'tipo_propiedad';
 
+    /**
+     * @deprecated Leave default id
+     */
     protected $primaryKey = 'id_tipo_propiedad';
 
     protected $fillable = [

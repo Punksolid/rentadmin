@@ -27,6 +27,13 @@ class PropertyRequest extends FormRequest
     {
         return [
             'lessor_id' => 'required',
+            'name' => 'required',
+            'property_type_id' => 'required',
+            'address' => 'required',
+            'geolocation' => 'required',
+            'energy_fee' => 'required',
+            'water_account_number' => 'required',
+            'predial' => 'required',
             'recibo' => [
                 'required',
                 Rule::in([
