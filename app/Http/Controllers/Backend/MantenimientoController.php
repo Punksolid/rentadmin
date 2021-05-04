@@ -79,7 +79,7 @@ class MantenimientoController extends Controller
         $mant->update();
         return Redirect::to('mantenimiento');
     }
-
+// do not send this to diazmeza
     public function tipoMantenimiento(Request $request){
         $data = $request->all();
         $tipo = TipoMantenimiento::all();
